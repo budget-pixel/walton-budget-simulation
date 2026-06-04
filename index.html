@@ -1,1 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walton County Budget Simulation</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Public Budget Planning Tool</p>
+        <h1>Walton County Budget Simulation</h1>
+      </div>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#builder">Build Budget</a>
+        <a href="#departments">Departments</a>
+        <a href="#assumptions">Assumptions</a>
+      </nav>
+    </div>
+  </header>
 
+  <main>
+    <section id="dashboard" class="page-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Executive Dashboard</p>
+          <h2>Projected Fiscal Outlook</h2>
+        </div>
+        <p class="section-summary">Planning estimates show the impact of property tax revenue reductions against projected operating and capital expenses.</p>
+      </div>
+
+      <div class="summary-grid" id="dashboardCards"></div>
+
+      <div class="chart-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Revenue vs Expense Trend</h3>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="trendChart"></canvas>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Budget Gap Trend</h3>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="gapChart"></canvas>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="builder" class="page-section section-band">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Build Your Own Budget</p>
+          <h2>Close the Projected Gap</h2>
+        </div>
+        <p class="section-summary">Adjust personnel, operating, and capital levers to see immediate financial consequences. The simulation does not recommend cuts.</p>
+      </div>
+
+      <div class="builder-layout">
+        <div class="builder-main">
+          <article class="panel gap-callout">
+            <p class="eyebrow">Starting Projected Budget Gap</p>
+            <div id="startingGap" class="callout-value"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Personnel Reductions</p>
+                <h3>Reduce FTE Positions</h3>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Department</th>
+                    <th>Current FTE</th>
+                    <th>Average Cost Per FTE</th>
+                    <th>Reduction</th>
+                    <th>Personnel Savings</th>
+                  </tr>
+                </thead>
+                <tbody id="personnelControls"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Operating Reductions</p>
+                <h3>Adjust Department Operating Budgets</h3>
+              </div>
+            </div>
+            <div id="operatingControls" class="control-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Capital Reductions</p>
+                <h3>Select Capital Projects to Keep</h3>
+              </div>
+            </div>
+            <div id="capitalControls" class="project-grid"></div>
+          </article>
+        </div>
+
+        <aside class="results-panel" aria-label="Real time budget results">
+          <div class="panel sticky-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Real Time Results</p>
+                <h3>Scenario Summary</h3>
+              </div>
+            </div>
+            <div id="budgetStatus" class="status-banner"></div>
+            <dl class="results-list">
+              <div>
+                <dt>Budget Gap</dt>
+                <dd id="resultBudgetGap"></dd>
+              </div>
+              <div>
+                <dt>Personnel Savings</dt>
+                <dd id="resultPersonnelSavings"></dd>
+              </div>
+              <div>
+                <dt>Operating Savings</dt>
+                <dd id="resultOperatingSavings"></dd>
+              </div>
+              <div>
+                <dt>Capital Savings</dt>
+                <dd id="resultCapitalSavings"></dd>
+              </div>
+              <div class="total-row">
+                <dt>Total Savings</dt>
+                <dd id="resultTotalSavings"></dd>
+              </div>
+              <div class="remaining-row">
+                <dt>Remaining Gap</dt>
+                <dd id="resultRemainingGap"></dd>
+              </div>
+            </dl>
+            <div class="progress-block">
+              <div class="progress-label">
+                <span>Gap Closed</span>
+                <strong id="gapClosedPercent"></strong>
+              </div>
+              <div class="progress-track">
+                <div id="gapProgress" class="progress-fill"></div>
+              </div>
+            </div>
+            <div class="chart-wrap compact-chart">
+              <canvas id="savingsChart"></canvas>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Visualization</p>
+            <h3>Department Impact Table</h3>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th>FTE Reduced</th>
+                <th>Operating Reduction</th>
+                <th>Personnel Savings</th>
+                <th>Operating Savings</th>
+                <th>Total Department Savings</th>
+              </tr>
+            </thead>
+            <tbody id="impactTable"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section id="departments" class="page-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Department Detail</p>
+          <h2>Budget Components by Department</h2>
+        </div>
+        <p class="section-summary">Each department record includes personnel, operating, capital, FTE count, and average personnel cost.</p>
+      </div>
+      <div id="departmentCards" class="department-grid"></div>
+    </section>
+
+    <section id="assumptions" class="page-section section-band">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Assumptions and Methodology</p>
+          <h2>How the Simulation Calculates Results</h2>
+        </div>
+      </div>
+      <div class="assumption-grid">
+        <article class="panel">
+          <h3>Revenue Assumptions</h3>
+          <ul id="revenueAssumptions"></ul>
+        </article>
+        <article class="panel">
+          <h3>Inflation Assumptions</h3>
+          <ul id="inflationAssumptions"></ul>
+        </article>
+        <article class="panel">
+          <h3>Methodology</h3>
+          <ul id="methodologyList"></ul>
+        </article>
+        <article class="panel">
+          <h3>Formula Definitions</h3>
+          <div id="formulaDefinitions" class="formula-list"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Walton County Budget Simulation is a browser-based planning model using sample data for public discussion.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="data/budgetData.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
