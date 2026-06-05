@@ -34,7 +34,9 @@ const state = {
   departmentFiscalYear: "FY2027 Budget",
   overviewFiscalYear: "FY2025",
   rankingTab: "support",
-  rankingSearch: ""
+  rankingSearch: "",
+  showAllTopServices: false,
+  showAllDepartmentCards: false
 };
 
 const historicalFundingData = window.historicalDepartmentFunding || [];
@@ -255,12 +257,46 @@ function createPersonnelControls() {
     .join("");
 }
 
+function isConstitutionalOrSheriff(department) {
+  return [
+    "tax-collector",
+    "supervisor-of-elections",
+    "clerk-of-court",
+    "sheriffs-office",
+    "property-appraiser"
+  ].includes(department.id);
+}
+
 function createOperatingControls() {
   const container = document.querySelector("#operatingControls");
   const departmentsWithOperatingBudget = budgetData.departments.filter((department) => department.operatingBudget > 0);
+  const protectedDepartments = departmentsWithOperatingBudget.filter(isConstitutionalOrSheriff);
+  const adjustableDepartments = departmentsWithOperatingBudget.filter((department) => !isConstitutionalOrSheriff(department));
+  const protectedOperatingTotal = protectedDepartments.reduce((total, department) => total + department.operatingBudget, 0);
 
-  container.innerHTML = departmentsWithOperatingBudget
-    .map((department) => {
+  container.innerHTML = `
+    ${protectedDepartments.length ? `
+      <section class="protected-operating-card" aria-label="Constitutional offices and Sheriff operating budgets">
+        <div class="protected-operating-header">
+          <div>
+            <p class="eyebrow">Read Only</p>
+            <h4>Constitutional Offices and Sheriff</h4>
+            <p>These operating budgets are shown for context and are not adjustable in this scenario tool.</p>
+          </div>
+          <strong>${formatCurrency(protectedOperatingTotal)}</strong>
+        </div>
+        <div class="protected-operating-list">
+          ${protectedDepartments.map((department) => `
+            <div>
+              <span>${department.name}</span>
+              <strong>${formatCurrency(department.operatingBudget)}</strong>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    ` : ""}
+
+    ${adjustableDepartments.map((department) => {
       state.operatingReductions[department.id] = Number(state.operatingReductions[department.id] || 0);
       return `
         <div class="slider-row">
@@ -272,8 +308,8 @@ function createOperatingControls() {
           <div class="percent-pill" id="operating-percent-${department.id}">0%</div>
         </div>
       `;
-    })
-    .join("");
+    }).join("")}
+  `;
 }
 
 function createCapitalControls() {
@@ -295,6 +331,167 @@ function createCapitalControls() {
       `;
     })
     .join("");
+}
+
+function createBuildScenarioCollapsibles() {
+  const builder = document.querySelector("#builder");
+  if (!builder) return;
+
+  if (!document.querySelector("#collapsibleScenarioStyles")) {
+    const style = document.createElement("style");
+    style.id = "collapsibleScenarioStyles";
+    style.textContent = `
+      .collapsible-panel .panel-header {
+        cursor: pointer;
+      }
+
+      .collapse-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        border: 1px solid rgba(0, 98, 49, 0.2);
+        border-radius: 999px;
+        background: #ffffff;
+        color: #006231;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .collapse-toggle:hover,
+      .collapse-toggle:focus {
+        background: rgba(0, 98, 49, 0.08);
+        outline: none;
+      }
+
+      .collapsible-content[hidden] {
+        display: none;
+      }
+
+      .protected-operating-card {
+        border: 1px solid rgba(0, 98, 49, 0.22);
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(0, 98, 49, 0.08) 0%, rgba(0, 98, 49, 0.03) 100%);
+        padding: 18px;
+        margin-bottom: 16px;
+      }
+
+      .protected-operating-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 14px;
+      }
+
+      .protected-operating-header h4 {
+        margin: 0 0 6px;
+        color: #006231;
+        font-size: 18px;
+      }
+
+      .protected-operating-header p {
+        margin: 0;
+        color: #4a5568;
+        line-height: 1.45;
+      }
+
+      .protected-operating-header > strong {
+        color: #006231;
+        font-size: 24px;
+        white-space: nowrap;
+      }
+
+      .protected-operating-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .protected-operating-list > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 0;
+        border-top: 1px solid rgba(0, 98, 49, 0.14);
+      }
+
+      .protected-operating-list span {
+        font-weight: 800;
+      }
+
+      .protected-operating-list strong {
+        color: #006231;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 640px) {
+        .protected-operating-header,
+        .protected-operating-list > div {
+          display: block;
+        }
+
+        .protected-operating-header > strong,
+        .protected-operating-list strong {
+          display: block;
+          margin-top: 6px;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const collapsibleTitles = [
+    "Reduce FTE Positions",
+    "Adjust Department Operating Budgets",
+    "Select Capital Projects to Keep"
+  ];
+
+  builder.querySelectorAll("article.panel").forEach((panel, index) => {
+    const title = panel.querySelector("h3")?.textContent?.trim();
+    if (!collapsibleTitles.includes(title) || panel.classList.contains("collapsible-panel")) {
+      return;
+    }
+
+    const header = panel.querySelector(".panel-header");
+    if (!header) return;
+
+    const content = document.createElement("div");
+    content.className = "collapsible-content";
+    content.id = `scenario-collapse-${index}`;
+    content.hidden = true;
+
+    Array.from(panel.children).forEach((child) => {
+      if (child !== header) {
+        content.appendChild(child);
+      }
+    });
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "collapse-toggle";
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", content.id);
+    button.setAttribute("aria-label", `Expand ${title}`);
+    button.textContent = "+";
+
+    header.appendChild(button);
+    panel.appendChild(content);
+    panel.classList.add("collapsible-panel");
+
+    header.addEventListener("click", (event) => {
+      if (event.target.closest("a, input, select, textarea")) return;
+
+      const isExpanded = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!isExpanded));
+      button.setAttribute("aria-label", `${isExpanded ? "Expand" : "Collapse"} ${title}`);
+      button.textContent = isExpanded ? "+" : "−";
+      content.hidden = isExpanded;
+    });
+  });
 }
 
 function getHistoricalRecord(departmentName, fiscalYear) {
@@ -324,15 +521,25 @@ function getRankingRows(fiscalYear = "FY2025") {
 
 function createTopServicesBars() {
   const container = document.querySelector("#topServicesBars");
-  const rows = getRankingRows(state.overviewFiscalYear).sort((a, b) => b.support - a.support);
+  const rows = getRankingRows(state.overviewFiscalYear)
+    .filter((row) => row.support > 0)
+    .sort((a, b) => b.support - a.support);
+  const visibleRows = state.showAllTopServices ? rows : rows.slice(0, 6);
   const max = Math.max(...rows.map((row) => row.support), 1);
 
-  container.innerHTML = rows.map((row, index) => `
-    <div class="rank-bar-row">
-      <div class="rank-label"><strong>${index + 1}. ${row.name}</strong><span>${formatCurrency(row.support)}</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:${(row.support / max) * 100}%"></div></div>
-    </div>
-  `).join("");
+  container.innerHTML = `
+    ${visibleRows.map((row, index) => `
+      <div class="rank-bar-row">
+        <div class="rank-label"><strong>${index + 1}. ${row.name}</strong><span>${formatCurrency(row.support)}</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${(row.support / max) * 100}%"></div></div>
+      </div>
+    `).join("")}
+    ${rows.length > 6 ? `
+      <button type="button" class="view-all-button" data-control="toggle-top-services">
+        ${state.showAllTopServices ? "Show Less" : "View All"}
+      </button>
+    ` : ""}
+  `;
 }
 
 function getRankingSortValue(row) {
@@ -380,27 +587,35 @@ function createDepartmentCards() {
   const names = budgetData.departments
     .map((department) => department.name)
     .sort((a, b) => a.localeCompare(b));
+  const visibleNames = state.showAllDepartmentCards ? names : names.slice(0, 2);
   const isBudgetYear = state.departmentFiscalYear === "FY2027 Budget";
 
-  container.innerHTML = names.map((name) => {
-    const department = departmentsByName.get(name);
-    const record = isBudgetYear ? null : getHistoricalRecord(name, state.departmentFiscalYear);
-    const primaryValue = isBudgetYear ? department?.totalBudget : record?.adValoremSupport;
-    return `
-      <article class="panel department-card">
-        <div>
-          <h3>${name}</h3>
-        </div>
-        <div class="department-primary-metric">
-          <span>${isBudgetYear ? "Total Budget" : "Ad Valorem Support"}</span>
-          <strong>${typeof primaryValue === "number" ? formatCurrency(primaryValue) : "Not available"}</strong>
-        </div>
-        <div class="detail-grid">
-          ${isBudgetYear ? (department ? budgetDetailItems(department) : "") : (record ? historicalDetailItems(record) : "")}
-        </div>
-      </article>
-    `;
-  }).join("");
+  container.innerHTML = `
+    ${visibleNames.map((name) => {
+      const department = departmentsByName.get(name);
+      const record = isBudgetYear ? null : getHistoricalRecord(name, state.departmentFiscalYear);
+      const primaryValue = isBudgetYear ? department?.totalBudget : record?.adValoremSupport;
+      return `
+        <article class="panel department-card">
+          <div>
+            <h3>${name}</h3>
+          </div>
+          <div class="department-primary-metric">
+            <span>${isBudgetYear ? "Total Budget" : "Ad Valorem Support"}</span>
+            <strong>${typeof primaryValue === "number" ? formatCurrency(primaryValue) : "Not available"}</strong>
+          </div>
+          <div class="detail-grid">
+            ${isBudgetYear ? (department ? budgetDetailItems(department) : "") : (record ? historicalDetailItems(record) : "")}
+          </div>
+        </article>
+      `;
+    }).join("")}
+    ${names.length > 2 ? `
+      <button type="button" class="view-all-button department-view-all-button" data-control="toggle-department-cards">
+        ${state.showAllDepartmentCards ? "Show Less" : "View All"}
+      </button>
+    ` : ""}
+  `;
 }
 
 function detailItem(label, value, formatter = formatCurrency) {
@@ -640,6 +855,7 @@ function init() {
   createPersonnelControls();
   createOperatingControls();
   createCapitalControls();
+  createBuildScenarioCollapsibles();
   createDepartmentCards();
   createRevenueAssumptionsPanel();
   createAssumptions();
