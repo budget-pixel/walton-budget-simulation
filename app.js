@@ -424,165 +424,6 @@ function setupScenarioAccordions() {
         justify-content: space-between;
         gap: 12px;
       }
-
-      .scenario-accordion-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 38px;
-        height: 38px;
-        border: 1px solid rgba(0, 98, 49, 0.24);
-        border-radius: 999px;
-        background: #ffffff;
-        color: #006231;
-        font-size: 20px;
-        font-weight: 900;
-        line-height: 1;
-        cursor: pointer;
-      }
-
-      .scenario-accordion-toggle:hover,
-      .scenario-accordion-toggle:focus {
-        background: rgba(0, 98, 49, 0.08);
-        outline: none;
-      }
-
-      .scenario-accordion-content[hidden] {
-        display: none;
-      }
-
-      .operating-slider {
-        cursor: grab;
-        min-height: 36px;
-        accent-color: #006231;
-      }
-
-      .operating-slider:active {
-        cursor: grabbing;
-      }
-
-      .operating-slider::-webkit-slider-thumb {
-        cursor: grab;
-        min-width: 24px;
-        min-height: 24px;
-      }
-
-      .operating-slider::-moz-range-thumb {
-        cursor: grab;
-        min-width: 24px;
-        min-height: 24px;
-      }
-
-      .percent-entry {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        justify-content: flex-end;
-        min-width: 92px;
-        color: #006231;
-        font-weight: 900;
-      }
-
-      .percent-entry input {
-        width: 68px;
-        min-height: 38px;
-        border: 1px solid rgba(0, 98, 49, 0.24);
-        border-radius: 999px;
-        padding: 6px 10px;
-        text-align: right;
-        font-weight: 900;
-        color: #006231;
-      }
-
-      .clear-section-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 40px;
-        margin: 0;
-        padding: 9px 16px;
-        border: 1px solid rgba(0, 98, 49, 0.24);
-        border-radius: 999px;
-        background: #ffffff;
-        color: #006231;
-        font-weight: 900;
-        cursor: pointer;
-      }
-
-      .clear-section-button:hover,
-      .clear-section-button:focus {
-        background: rgba(0, 98, 49, 0.08);
-        outline: none;
-      }
-
-      .section-clear-row {
-        display: grid;
-        gap: 8px;
-      }
-
-
-      .personnel-driver-inline {
-        border: 1px solid rgba(0, 98, 49, 0.18);
-        border-radius: 16px;
-        background: rgba(0, 98, 49, 0.04);
-        padding: 16px;
-        margin-bottom: 8px;
-      }
-
-      .personnel-driver-inline h4 {
-        margin: 0 0 4px;
-        color: #006231;
-      }
-
-      .personnel-driver-inline p {
-        margin: 0 0 12px;
-        color: #56635d;
-      }
-
-      .personnel-driver-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .personnel-driver-grid .driver-card {
-        background: #ffffff;
-      }
-
-      @media (max-width: 760px) {
-        .personnel-driver-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .department-explorer-controls {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-        margin-bottom: 0;
-      }
-
-      .department-explorer-controls label {
-        display: grid;
-        gap: 6px;
-        font-weight: 800;
-        color: #006231;
-      }
-
-      .department-explorer-controls select,
-      .department-explorer-controls input {
-        width: 100%;
-        min-height: 42px;
-        border: 1px solid rgba(0, 98, 49, 0.24);
-        border-radius: 12px;
-        padding: 8px 10px;
-      }
-
-      @media (max-width: 760px) {
-        .department-explorer-controls {
-          grid-template-columns: 1fr;
-        }
-      }
     `;
     document.head.appendChild(style);
   }
@@ -594,10 +435,8 @@ function setupScenarioAccordions() {
 
     if (panel.classList.contains('scenario-accordion-panel')) {
       const content = panel.querySelector('.scenario-accordion-content');
-      const button = panel.querySelector('.scenario-accordion-toggle');
-      if (content && button && button.getAttribute('aria-expanded') !== 'true') {
+      if (content && !panel.classList.contains('scenario-accordion-open')) {
         content.hidden = true;
-        button.textContent = '+';
       }
       return;
     }
@@ -614,25 +453,14 @@ function setupScenarioAccordions() {
       if (child !== header) content.appendChild(child);
     });
 
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'scenario-accordion-toggle';
-    button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-controls', content.id);
-    button.setAttribute('aria-label', `Expand ${title}`);
-    button.textContent = '+';
-
-    header.appendChild(button);
     panel.appendChild(content);
     panel.classList.add('scenario-accordion-panel');
 
     header.addEventListener('click', (event) => {
       if (event.target.closest('a, button, input, select, textarea, label')) return;
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      button.setAttribute('aria-expanded', String(!expanded));
-      button.setAttribute('aria-label', `${expanded ? 'Expand' : 'Collapse'} ${title}`);
-      button.textContent = expanded ? '+' : '−';
+      const expanded = !content.hidden;
       content.hidden = expanded;
+      panel.classList.toggle('scenario-accordion-open', !expanded);
     });
   });
 }
