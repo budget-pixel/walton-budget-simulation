@@ -855,6 +855,12 @@ document.addEventListener("click", (event) => {
 
 function init() {
   renderChrome();
+  const drawer = $("#scenarioToolsDrawer");
+  if (drawer) drawer.hidden = true;
+
+  const toggleButton = $('[data-control="toggle-tools"]');
+  if (toggleButton) toggleButton.setAttribute("aria-expanded", "false");
+
   syncScenarioFields();
   renderDrivers();
   renderLocks();
@@ -867,6 +873,7 @@ function init() {
   renderAssumptions();
   renderScenarioManager();
   setupScenarioAccordions();
+  if (drawer) drawer.hidden = true;
   renderCharts();
   searchParcels();
   updateResults();
