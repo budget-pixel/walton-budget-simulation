@@ -24,7 +24,8 @@ const historicalActualRevenues = [
 
 const state = {
   revenueAssumptions: {
-    expenseInflationRate: 0.03,
+    fy2028ExpenseInflationRate: 0.05,
+    futureExpenseInflationRate: 0.03,
     ...budgetData.revenueForecast.defaultAssumptions
   },
   fteReductions: {},
@@ -76,7 +77,8 @@ function getHistoricalSupportedExpense(year) {
 function getFiscalYears() {
   const baseRevenue = budgetData.revenueForecast.baseRevenue;
   const futureGrowth = Number(state.revenueAssumptions.futureRevenueGrowthRate || 0);
-  const expenseInflationRate = Number(state.revenueAssumptions.expenseInflationRate || 0);
+  const fy2028ExpenseInflationRate = Number(state.revenueAssumptions.fy2028ExpenseInflationRate || 0);
+  const futureExpenseInflationRate = Number(state.revenueAssumptions.futureExpenseInflationRate || 0);
   const fy2028Reduction = Number(state.revenueAssumptions.fy2028RevenueReduction || 0);
   const fy2029Reduction = Number(state.revenueAssumptions.fy2029RevenueReduction || 0);
   const projectedSupportedExpenseBaseline = budgetData.budgetBaselineTotals.adValoremSupportedExpenseBaseline || budgetData.budgetBaselineTotals.totalBudgetBaseline;
@@ -93,13 +95,13 @@ function getFiscalYears() {
   const fy2032Baseline = fy2031Baseline * (1 + futureGrowth);
   const fy2032 = fy2031 * (1 + futureGrowth);
 
-  // Projected supported expense with inflation rate
+  // Projected supported expense with separate first-year and future inflation rates
   const fy2027ProjectedSupportedExpense = projectedSupportedExpenseBaseline;
-  const fy2028ProjectedSupportedExpense = fy2027ProjectedSupportedExpense * (1 + expenseInflationRate);
-  const fy2029ProjectedSupportedExpense = fy2028ProjectedSupportedExpense * (1 + expenseInflationRate);
-  const fy2030ProjectedSupportedExpense = fy2029ProjectedSupportedExpense * (1 + expenseInflationRate);
-  const fy2031ProjectedSupportedExpense = fy2030ProjectedSupportedExpense * (1 + expenseInflationRate);
-  const fy2032ProjectedSupportedExpense = fy2031ProjectedSupportedExpense * (1 + expenseInflationRate);
+  const fy2028ProjectedSupportedExpense = fy2027ProjectedSupportedExpense * (1 + fy2028ExpenseInflationRate);
+  const fy2029ProjectedSupportedExpense = fy2028ProjectedSupportedExpense * (1 + futureExpenseInflationRate);
+  const fy2030ProjectedSupportedExpense = fy2029ProjectedSupportedExpense * (1 + futureExpenseInflationRate);
+  const fy2031ProjectedSupportedExpense = fy2030ProjectedSupportedExpense * (1 + futureExpenseInflationRate);
+  const fy2032ProjectedSupportedExpense = fy2031ProjectedSupportedExpense * (1 + futureExpenseInflationRate);
 
   const historicalYears = historicalActualRevenues.map((item) => ({
     year: item.year,
@@ -375,10 +377,9 @@ function createRankings() {
 function createDepartmentCards() {
   const container = document.querySelector("#departmentCards");
   const departmentsByName = new Map(budgetData.departments.map((department) => [department.name, department]));
-  const names = Array.from(new Set([
-    ...budgetData.departments.map((department) => department.name),
-    ...historicalFundingData.map((department) => department.department)
-  ])).sort((a, b) => a.localeCompare(b));
+  const names = budgetData.departments
+    .map((department) => department.name)
+    .sort((a, b) => a.localeCompare(b));
   const isBudgetYear = state.departmentFiscalYear === "FY2027 Budget";
 
   container.innerHTML = names.map((name) => {
@@ -389,7 +390,6 @@ function createDepartmentCards() {
       <article class="panel department-card">
         <div>
           <h3>${name}</h3>
-          ${!department ? '<p class="historical-note">Historical-only department; excluded from scenario reduction controls.</p>' : ""}
         </div>
         <div class="department-primary-metric">
           <span>${isBudgetYear ? "Total Budget" : "Ad Valorem Support"}</span>
@@ -431,7 +431,8 @@ function createRevenueAssumptionsPanel() {
   const container = document.querySelector("#revenueAssumptionControls");
   container.innerHTML = `
     <label class="assumption-control" for="futureRevenueGrowthRate"><span>Revenue Growth Rate</span><input id="futureRevenueGrowthRate" type="number" min="-10" max="10" step="0.1" value="${state.revenueAssumptions.futureRevenueGrowthRate * 100}" data-control="revenue-assumption" data-assumption="futureRevenueGrowthRate"></label>
-    <label class="assumption-control" for="expenseInflationRate"><span>Projected Expense Inflation Rate</span><input id="expenseInflationRate" type="number" min="-10" max="10" step="0.1" value="${state.revenueAssumptions.expenseInflationRate * 100}" data-control="revenue-assumption" data-assumption="expenseInflationRate"></label>
+    <label class="assumption-control" for="fy2028ExpenseInflationRate"><span>FY2028 Supported Expense Inflation Rate</span><input id="fy2028ExpenseInflationRate" type="number" min="-10" max="10" step="0.1" value="${state.revenueAssumptions.fy2028ExpenseInflationRate * 100}" data-control="revenue-assumption" data-assumption="fy2028ExpenseInflationRate"></label>
+    <label class="assumption-control" for="futureExpenseInflationRate"><span>FY2029+ Supported Expense Inflation Rate</span><input id="futureExpenseInflationRate" type="number" min="-10" max="10" step="0.1" value="${state.revenueAssumptions.futureExpenseInflationRate * 100}" data-control="revenue-assumption" data-assumption="futureExpenseInflationRate"></label>
     <label class="assumption-control" for="fy2028RevenueReduction"><span>FY2028 Revenue Reduction</span><input id="fy2028RevenueReduction" type="text" inputmode="decimal" value="${formatCurrencyInput(state.revenueAssumptions.fy2028RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2028RevenueReduction" data-format="currency"></label>
     <label class="assumption-control" for="fy2029RevenueReduction"><span>FY2029 Revenue Reduction</span><input id="fy2029RevenueReduction" type="text" inputmode="decimal" value="${formatCurrencyInput(state.revenueAssumptions.fy2029RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2029RevenueReduction" data-format="currency"></label>
     <div class="forecast-table-wrap"><table class="forecast-table"><thead><tr><th>Fiscal Year</th><th>Revenue</th><th>Supported Expense</th><th>Status</th><th>Revenue Shortfall</th></tr></thead><tbody id="forecastTable"></tbody></table></div>
@@ -457,7 +458,7 @@ function createAssumptions() {
   const expenditureAssumptions = [
     "The main trend chart uses ad valorem supported expense, not gross total county expenditures.",
     "Historical ad valorem supported expense reconciles to historical ad valorem revenue for FY2022 through FY2025.",
-    "FY2027 projected supported expense equals the FY2027 ad valorem-supported department budget baseline. FY2028 through FY2032 grow by the projected expense inflation rate.",
+    "FY2027 projected supported expense equals the FY2027 ad valorem-supported department budget baseline. FY2028 grows by the FY2028 supported expense inflation rate, and FY2029 through FY2032 grow by the FY2029+ supported expense inflation rate.",
     "Departments outside the property-tax simulation are not stored in the active scenario reduction model."
   ];
   const methodology = [
@@ -586,7 +587,7 @@ function bindEvents() {
     if (target.dataset.control === "revenue-assumption") {
       const assumption = target.dataset.assumption;
       const value = target.dataset.format === "currency" ? parseCurrencyInput(target.value) : Number(target.value || 0);
-      state.revenueAssumptions[assumption] = assumption === "futureRevenueGrowthRate" || assumption === "expenseInflationRate" ? value / 100 : value;
+      state.revenueAssumptions[assumption] = assumption === "futureRevenueGrowthRate" || assumption === "fy2028ExpenseInflationRate" || assumption === "futureExpenseInflationRate" ? value / 100 : value;
       updateScenario();
     }
     if (target.dataset.control === "ranking-search") {
