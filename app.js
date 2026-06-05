@@ -540,11 +540,17 @@ function chartOptions(bar = false, stacked = false) {
     maintainAspectRatio: false,
     scales: {
       x: { stacked },
-      y: { beginAtZero: bar, stacked, ticks: { callback: (value) => money(value) } }
+      y: {
+        beginAtZero: bar,
+        stacked,
+        ticks: {
+          callback: (value) => `$${(Number(value) / 1000000).toFixed(0)}M`
+        }
+      }
     },
     plugins: {
       legend: {
-        position: 'bottom',
+        position: 'top',
         labels: {
           usePointStyle: true,
           pointStyle: 'circle'
@@ -568,8 +574,19 @@ function renderCharts() {
     data: {
       labels: forecast.map((year) => year.year),
       datasets: [
-        { label: "Projected Revenue", data: forecast.map((year) => year.revenue), borderColor: "#006231", borderDash: [6, 6] },
-        { label: "Projected Expenses", data: forecast.map((year) => year.projectedSupportedExpense), borderColor: "#d1be78" }
+        {
+          label: "Projected Revenue",
+          data: forecast.map((year) => year.revenue),
+          borderColor: "#006231",
+          backgroundColor: "#006231",
+          borderDash: [6, 6]
+        },
+        {
+          label: "Projected Expenses",
+          data: forecast.map((year) => year.projectedSupportedExpense),
+          borderColor: "#d1be78",
+          backgroundColor: "#d1be78"
+        }
       ]
     },
     options: chartOptions()
