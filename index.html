@@ -131,6 +131,7 @@
         <a href="#rankings">Rankings</a>
         <a href="#departments">Departments</a>
         <a href="#builder">Build Scenario</a>
+        <a href="#tax-impact">Property Tax</a>
         <a href="#methodology">Methodology</a>
       </nav>
     </div>
@@ -148,6 +149,10 @@
           <article>
             <span>Projected Revenue Shortfall</span>
             <strong id="heroRevenueShortfall"></strong>
+          </article>
+          <article>
+            <span>Current Mode</span>
+            <strong id="modeLabel"></strong>
           </article>
         </div>
       </div>
@@ -201,7 +206,8 @@
               <option value="FY2022">FY2022</option>
               <option value="FY2023">FY2023</option>
               <option value="FY2024">FY2024</option>
-              <option value="FY2025" selected>FY2025</option>
+              <option value="FY2025">FY2025</option>
+              <option value="FY2027 Budget" selected>FY2027</option>
             </select>
           </label>
         </div>
@@ -215,26 +221,28 @@
           <p class="eyebrow">Department Rankings</p>
           <h2>Compare Ad Valorem Supported Services</h2>
         </div>
-        <p class="section-summary">Rank departments by support level, dependency, workforce, and budget structure.</p>
+        <p class="section-summary">Constitutional offices are grouped first, followed by remaining departments alphabetically.</p>
       </div>
       <article class="panel">
         <div class="ranking-toolbar">
           <div class="tabs" role="tablist" aria-label="Ranking sort options">
             <button type="button" class="tab-button active" data-control="ranking-tab" data-ranking="support">Largest Ad Valorem Support</button>
-            <button type="button" class="tab-button" data-control="ranking-tab" data-ranking="dependency">Highest Dependency</button>
             <button type="button" class="tab-button" data-control="ranking-tab" data-ranking="fte">Largest Workforce</button>
             <button type="button" class="tab-button" data-control="ranking-tab" data-ranking="budget">Largest Budget</button>
           </div>
           <input id="rankingSearch" class="search-input" type="search" placeholder="Search departments" data-control="ranking-search">
+          <button type="button" class="view-all-button" data-control="export-rankings">Export CSV</button>
         </div>
         <div id="rankingCards" class="ranking-list"></div>
-        <div class="table-scroll">
+        <div class="table-actions">
+          <button type="button" class="view-all-button" data-control="toggle-ranking-table">View All</button>
+        </div>
+        <div class="table-scroll collapsed-table" id="rankingTableWrap">
           <table class="ranking-table">
             <thead>
               <tr>
                 <th>Department</th>
                 <th>Ad Valorem Support</th>
-                <th>Dependency %</th>
                 <th>FTE</th>
                 <th>Budget</th>
               </tr>
@@ -261,7 +269,7 @@
             <option value="FY2023">FY2023</option>
             <option value="FY2024">FY2024</option>
             <option value="FY2025">FY2025</option>
-            <option value="FY2027 Budget" selected>FY2027 Budget</option>
+            <option value="FY2027 Budget" selected>FY2027</option>
           </select>
         </label>
       </div>
@@ -279,9 +287,52 @@
 
       <div class="builder-layout">
         <div class="builder-main">
+          <article class="panel scenario-tools-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Scenario Tools</p>
+                <h3>Save, Load, Export</h3>
+              </div>
+            </div>
+            <div class="scenario-meta-grid">
+              <label><span>Scenario Name</span><input id="scenarioName" type="text" data-control="scenario-meta" data-field="name" placeholder="FY2027 Planning Scenario"></label>
+              <label><span>Author</span><input id="scenarioAuthor" type="text" data-control="scenario-meta" data-field="author" placeholder="Name or team"></label>
+              <label class="wide-field"><span>Notes</span><textarea id="scenarioNotes" data-control="scenario-meta" data-field="notes" rows="3" placeholder="Optional assumptions or policy notes"></textarea></label>
+            </div>
+            <div class="button-row">
+              <button type="button" class="view-all-button" data-control="save-scenario">Save Scenario</button>
+              <button type="button" class="view-all-button" data-control="load-scenario">Load Scenario</button>
+              <button type="button" class="view-all-button" data-control="reset-scenario">Reset Scenario</button>
+              <button type="button" class="view-all-button" data-control="export-pdf">Export Scenario PDF</button>
+            </div>
+            <p id="scenarioMessage" class="small-status"></p>
+            <div id="scenarioComparison" class="comparison-grid"></div>
+          </article>
+
           <article class="panel gap-callout">
             <p class="eyebrow">Total Revenue Shortfall</p>
             <div id="startingShortfall" class="callout-value"></div>
+          </article>
+
+          <article class="panel staff-only-panel" data-staff-only>
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Budget Exercise Mode</p>
+                <h3>Department Locks</h3>
+              </div>
+            </div>
+            <div id="departmentLocks" class="lock-grid"></div>
+            <div id="validationWarnings" class="warning-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Personnel Assumptions</p>
+                <h3>Cost Driver Composition</h3>
+              </div>
+            </div>
+            <div id="personnelDriverControls" class="driver-grid"></div>
           </article>
 
           <article class="panel">
@@ -298,8 +349,11 @@
                     <th>Department</th>
                     <th>Current FTE</th>
                     <th>Average Cost Per FTE</th>
-                    <th>Reduction</th>
-                    <th>Personnel Reduction</th>
+                    <th>FTE Reduction</th>
+                    <th>Buy-Out Count</th>
+                    <th>One-Time Buy-Out Cost</th>
+                    <th>Recurring Reduction</th>
+                    <th>First-Year Net Impact</th>
                   </tr>
                 </thead>
                 <tbody id="personnelControls"></tbody>
@@ -321,7 +375,8 @@
             <div class="panel-header">
               <div>
                 <p class="eyebrow">Capital Reductions</p>
-                <h3>Select Capital Projects to Keep</h3>
+                <h3>Equipment and Capital Reductions</h3>
+                <p>Select Machinery &amp; Equipment and capital projects to keep.</p>
               </div>
             </div>
             <div id="capitalControls" class="project-grid"></div>
@@ -375,8 +430,12 @@
             <p class="eyebrow">Scenario Reductions</p>
             <h3>Department Impact Table</h3>
           </div>
+          <div class="button-row">
+            <button type="button" class="view-all-button" data-control="toggle-impact-table">View All</button>
+            <button type="button" class="view-all-button" data-control="export-impact">Export CSV</button>
+          </div>
         </div>
-        <div class="table-scroll">
+        <div class="table-scroll collapsed-table" id="impactTableWrap">
           <table>
             <thead>
               <tr>
@@ -392,6 +451,48 @@
           </table>
         </div>
       </article>
+    </section>
+
+
+    <section id="tax-impact" class="page-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Property Tax Integration</p>
+          <h2>Millage and Property Tax Impact</h2>
+        </div>
+        <p class="section-summary">Estimate countywide millage impacts and see how scenario reductions appear in a property tax bill breakdown.</p>
+      </div>
+      <div class="tax-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Millage Impact</p>
+              <h3>Countywide Millage Adjustment</h3>
+            </div>
+            <button type="button" class="view-all-button" data-control="reset-millage" data-staff-only>Reset</button>
+          </div>
+          <div class="millage-grid">
+            <div class="metric-box"><span>Current Millage</span><strong id="currentMillage"></strong></div>
+            <label class="metric-box editable-millage"><span>Proposed Millage</span><input id="proposedMillage" type="number" step="0.001" min="0" data-control="millage"></label>
+            <div class="metric-box"><span>Revenue Impact</span><strong id="millageRevenueImpact"></strong></div>
+            <div class="metric-box"><span>Resulting Shortfall</span><strong id="millageShortfallImpact"></strong></div>
+            <div class="metric-box"><span>Taxpayer Impact per $100k</span><strong id="taxpayerImpact"></strong></div>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Parcel Search</p>
+              <h3>Property Tax Breakdown</h3>
+            </div>
+          </div>
+          <input id="parcelSearch" type="search" placeholder="Search sample parcel or address" data-control="parcel-search">
+          <div id="parcelSuggestions" class="suggestions-list"></div>
+          <label class="check-row"><input id="useHomesteadExemption" type="checkbox" data-control="homestead" checked> Apply additional homestead exemption</label>
+          <div id="parcelResults" class="parcel-results"></div>
+          <div id="taxBreakdown" class="service-breakdown"></div>
+        </article>
+      </div>
     </section>
 
     <section id="methodology" class="page-section">
