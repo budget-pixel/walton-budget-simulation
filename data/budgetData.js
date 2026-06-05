@@ -108,6 +108,7 @@ const personnelBudgetTotal = activeDepartments.reduce((total, department) => tot
 const operatingBudgetTotal = activeDepartments.reduce((total, department) => total + department.operatingBudget, 0);
 const capitalBudgetTotal = activeDepartments.reduce((total, department) => total + department.capitalBudget, 0);
 const totalBudgetBaseline = activeDepartments.reduce((total, department) => total + department.totalBudget, 0);
+const adValoremSupportedExpenseBaseline = 163473140;
 
 const budgetData = {
   baselineYear: "FY2026-2027",
@@ -130,7 +131,8 @@ const budgetData = {
     personnelBudgetTotal,
     operatingBudgetTotal,
     capitalBudgetTotal,
-    totalBudgetBaseline
+    totalBudgetBaseline,
+    adValoremSupportedExpenseBaseline
   },
   assumptions: {
     baselineYear: "FY2026-2027",
