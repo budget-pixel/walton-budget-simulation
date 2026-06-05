@@ -607,7 +607,18 @@ function updateResults() {
   if (!totals.remainingShortfall && $("#publicCapMessage")?.textContent && !$("#publicCapMessage").textContent.includes("cannot exceed")) $("#publicCapMessage").textContent = "";
   const scenario = scenarioYear();
   const addressed = totals.revenueShortfall ? Math.min(totals.totalReductions / totals.revenueShortfall * 100, 100) : 100;
-  ["#heroRevenueShortfall", "#startingShortfall", "#resultRevenueShortfall"].forEach((selector) => {
+  const heroShortfall = $("#heroRevenueShortfall");
+  const heroNextShortfall = $("#heroRevenueShortfallNext");
+  const fy2028Forecast = forecastYears().find((year) => year.year === "FY2028");
+  const fy2029Forecast = forecastYears().find((year) => year.year === "FY2029");
+  if (heroShortfall && fy2028Forecast) {
+    heroShortfall.textContent = fy2028Forecast.revenueShortfall ? negativeMoney(fy2028Forecast.revenueShortfall) : "$0";
+    heroShortfall.classList.add("negative-value");
+  }
+  if (heroNextShortfall && fy2029Forecast) {
+    heroNextShortfall.textContent = `Projected Revenue Shortfall FY 2029: ${fy2029Forecast.revenueShortfall ? negativeMoney(fy2029Forecast.revenueShortfall) : "$0"}`;
+  }
+  ["#startingShortfall", "#resultRevenueShortfall"].forEach((selector) => {
     const element = $(selector);
     if (element) {
       element.textContent = negativeMoney(totals.revenueShortfall);
