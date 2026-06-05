@@ -616,7 +616,8 @@ function updateResults() {
     heroShortfall.classList.add("negative-value");
   }
   if (heroNextShortfall && fy2029Forecast) {
-    heroNextShortfall.textContent = `Projected Revenue Shortfall FY 2029: ${fy2029Forecast.revenueShortfall ? negativeMoney(fy2029Forecast.revenueShortfall) : "$0"}`;
+    heroNextShortfall.textContent = fy2029Forecast.revenueShortfall ? negativeMoney(fy2029Forecast.revenueShortfall) : "$0";
+    heroNextShortfall.classList.add("negative-value");
   }
   ["#startingShortfall", "#resultRevenueShortfall"].forEach((selector) => {
     const element = $(selector);
