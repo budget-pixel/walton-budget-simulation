@@ -155,7 +155,7 @@ function getScenarioTotals() {
   }, 0);
 
   const totalReductions = personnelReductions + operatingReductions + capitalReductions;
-  const remainingShortfall = revenueShortfall - totalReductions;
+  const remainingShortfall = Math.max(revenueShortfall - totalReductions, 0);
 
   return {
     revenueShortfall,
@@ -166,6 +166,42 @@ function getScenarioTotals() {
     remainingShortfall,
     departmentImpacts
   };
+}
+
+function getCurrentReductionForControl(controlType, id) {
+  if (controlType === "fte") {
+    const department = budgetData.departments.find((item) => item.id === id);
+    return department ? Number(state.fteReductions[id] || 0) * department.averageFteCost : 0;
+  }
+
+  if (controlType === "operating") {
+    const department = budgetData.departments.find((item) => item.id === id);
+    return department ? department.operatingBudget * (Number(state.operatingReductions[id] || 0) / 100) : 0;
+  }
+
+  if (controlType === "capital") {
+    const project = budgetData.capitalProjects.find((item) => item.id === id);
+    return project && !state.keptProjects[id] ? project.cost : 0;
+  }
+
+  return 0;
+}
+
+function getAvailableShortfallExcluding(controlType, id) {
+  const totals = getScenarioTotals();
+  return Math.max(totals.revenueShortfall - (totals.totalReductions - getCurrentReductionForControl(controlType, id)), 0);
+}
+
+function clampFteReduction(department, requestedFteReduction) {
+  const available = getAvailableShortfallExcluding("fte", department.id);
+  const maxFteByShortfall = department.averageFteCost > 0 ? Math.floor((available / department.averageFteCost) * 2) / 2 : 0;
+  return Math.min(Math.max(requestedFteReduction, 0), department.fteCount, maxFteByShortfall);
+}
+
+function clampOperatingReduction(department, requestedPercentReduction) {
+  const available = getAvailableShortfallExcluding("operating", department.id);
+  const maxPercentByShortfall = department.operatingBudget > 0 ? Math.floor((available / department.operatingBudget) * 100) : 0;
+  return Math.min(Math.max(requestedPercentReduction, 0), 100, maxPercentByShortfall);
 }
 
 function createSummaryCards() {
@@ -411,6 +447,7 @@ function createAssumptions() {
   const methodology = [
     "The projected revenue shortfall is calculated as the difference between the internal no-reduction revenue baseline and the reduced revenue scenario for the selected forecast year.",
     "Reductions are calculated only from user-selected personnel, operating, and capital changes and are not recommendations.",
+    "The application prevents total selected reductions from exceeding the projected revenue shortfall.",
     "The Building Department, Public Works, Solid Waste, Mosquito Control, Housing & Urban Development, Mossy Head Wastewater Treatment Facility, and Tourism departments are excluded from the active data model.",
     "Tax Collector, Supervisor of Elections, Clerk of Court, Sheriff's Office, and Property Appraiser remain visible but are not FTE-adjustable.",
     "Departments with zero FTE are visible when budgeted, but do not display FTE reduction controls."
@@ -423,7 +460,7 @@ function createAssumptions() {
     { name: "Personnel Reduction", formula: "FTE Reduction x Average Cost Per FTE" },
     { name: "Operating Reduction", formula: "Operating Budget x Reduction Percentage" },
     { name: "Capital Reduction", formula: "Sum of Removed Capital Project Costs" },
-    { name: "Remaining Revenue Shortfall", formula: "Revenue Shortfall - Total Reductions" }
+    { name: "Remaining Revenue Shortfall", formula: "Revenue Shortfall - Total Reductions, not less than zero" }
   ];
 
   const renderList = (selector, items) => {
@@ -622,7 +659,7 @@ function updateScenario() {
   document.querySelector("#resultOperatingSavings").textContent = formatCurrency(totals.operatingReductions);
   document.querySelector("#resultCapitalSavings").textContent = formatCurrency(totals.capitalReductions);
   document.querySelector("#resultTotalSavings").textContent = formatCurrency(totals.totalReductions);
-  document.querySelector("#resultRemainingGap").textContent = formatCurrency(Math.abs(totals.remainingShortfall));
+  document.querySelector("#resultRemainingGap").textContent = formatCurrency(totals.remainingShortfall);
   document.querySelector("#gapClosedPercent").textContent = formatPercent(shortfallAddressed);
   document.querySelector("#gapProgress").style.width = `${shortfallAddressed}%`;
 
@@ -632,12 +669,9 @@ function updateScenario() {
   if (totals.remainingShortfall > 0) {
     statusBanner.classList.add("status-deficit");
     statusBanner.textContent = `${formatCurrency(totals.remainingShortfall)} revenue shortfall remaining`;
-  } else if (totals.remainingShortfall === 0) {
+  } else {
     statusBanner.classList.add("status-balanced");
     statusBanner.textContent = "Revenue shortfall fully addressed";
-  } else {
-    statusBanner.classList.add("status-surplus");
-    statusBanner.textContent = `${formatCurrency(Math.abs(totals.remainingShortfall))} reduction amount exceeds revenue shortfall`;
   }
 
   totals.departmentImpacts.forEach((impact) => {
@@ -680,14 +714,19 @@ function bindEvents() {
 
     if (target.dataset.control === "fte") {
       const department = budgetData.departments.find((item) => item.id === target.dataset.department);
-      const value = Math.min(Math.max(Number(target.value || 0), 0), department.fteCount);
-      target.value = value;
-      state.fteReductions[department.id] = value;
+      const requestedValue = Math.min(Math.max(Number(target.value || 0), 0), department.fteCount);
+      const clampedValue = clampFteReduction(department, requestedValue);
+      target.value = clampedValue;
+      state.fteReductions[department.id] = clampedValue;
       updateScenario();
     }
 
     if (target.dataset.control === "operating") {
-      state.operatingReductions[target.dataset.department] = Number(target.value);
+      const department = budgetData.departments.find((item) => item.id === target.dataset.department);
+      const requestedValue = Number(target.value || 0);
+      const clampedValue = clampOperatingReduction(department, requestedValue);
+      target.value = clampedValue;
+      state.operatingReductions[target.dataset.department] = clampedValue;
       updateScenario();
     }
 
@@ -704,6 +743,13 @@ function bindEvents() {
 
     if (target.dataset.control === "capital") {
       state.keptProjects[target.dataset.project] = target.checked;
+      const totals = getScenarioTotals();
+
+      if (!target.checked && totals.totalReductions > totals.revenueShortfall) {
+        state.keptProjects[target.dataset.project] = true;
+        target.checked = true;
+      }
+
       updateScenario();
     }
 
