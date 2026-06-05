@@ -398,3 +398,189 @@ textarea {
 .comparison-item span { display: block; color: var(--color-text-muted); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; }
 .comparison-item strong { display: block; margin-top: 4px; color: var(--color-primary); }
 @media (max-width: 740px) { .comparison-grid { grid-template-columns: 1fr; } }
+
+.build-heading {
+  grid-template-columns: auto minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+}
+.settings-button,
+.icon-button,
+.info-button {
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--color-primary);
+  background: #ffffff;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-weight: 900;
+}
+.settings-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 1.15rem;
+}
+.settings-button:hover,
+.settings-button:focus,
+.icon-button:hover,
+.icon-button:focus,
+.info-button:hover,
+.info-button:focus {
+  background: var(--color-primary-soft);
+  outline: 2px solid rgba(209, 190, 120, 0.45);
+}
+.icon-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.info-button {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin-left: 4px;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  line-height: 1;
+  vertical-align: middle;
+}
+.info-button::after {
+  content: attr(data-tip);
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  width: min(280px, 72vw);
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: #ffffff;
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: none;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.info-button:hover::after,
+.info-button:focus::after {
+  opacity: 1;
+}
+.scenario-tools-drawer[hidden],
+.hidden-export-table[hidden] {
+  display: none !important;
+}
+.scenario-tools-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: flex-start;
+  padding: 18px;
+  background: rgba(18, 33, 25, 0.34);
+}
+.drawer-panel {
+  width: min(720px, 100%);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid rgba(0, 98, 49, 0.24);
+  border-radius: var(--radius-card);
+  background: #ffffff;
+  box-shadow: var(--shadow-card);
+}
+.drawer-panel hr {
+  margin: 18px 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+.compact-header {
+  margin-bottom: 10px;
+}
+.scenario-meta-grid select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: #ffffff;
+  font: inherit;
+}
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.comparison-item {
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: #fbfcfc;
+}
+.comparison-item span {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.comparison-item strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-primary);
+}
+.status-balanced {
+  background: rgba(0, 98, 49, 0.12);
+  color: var(--color-primary);
+}
+.status-deficit {
+  background: #f7efe0;
+  color: var(--color-warning);
+}
+.driver-card input,
+.editable-millage input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  font: inherit;
+}
+
+@media (max-width: 900px) {
+  .build-heading {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .build-heading .section-summary {
+    grid-column: 1 / -1;
+  }
+  .comparison-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .scenario-tools-drawer {
+    padding: 10px;
+  }
+  .drawer-panel {
+    max-height: calc(100vh - 20px);
+    padding: 14px;
+  }
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.cap-message {
+  min-height: 1.2em;
+  margin: 8px 0 0;
+  color: var(--color-warning);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
