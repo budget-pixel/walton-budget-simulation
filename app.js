@@ -35,10 +35,7 @@ const state = {
   showAllRankings: false,
   showImpactTable: false,
   proposedMillage: budgetData.millageAssumptions.adoptedMillage,
-  selectedScenarioName: "",
-  selectedParcel: budgetData.sampleParcels[0],
-  parcelQuery: "",
-  useHomesteadExemption: true
+  selectedScenarioName: ""
 };
 
 let trendChart;
@@ -531,21 +528,29 @@ function updateCharts() {
 }
 
 function renderTax() {
-  const parcel = state.selectedParcel;
-  const taxable = Math.max((parcel?.taxableValue || 0) - (state.useHomesteadExemption ? 150000 : 0), 0);
-  const originalTax = (parcel?.taxableValue || 0) * budgetData.millageAssumptions.adoptedMillage / 1000;
-  const tax = taxable * state.proposedMillage / 1000;
-  $("#useHomesteadExemption").checked = state.useHomesteadExemption;
-  $("#parcelResults").innerHTML = `<div class="metric-box"><span>Selected Parcel</span><strong>${parcel.address}</strong><small>${parcel.city}, FL ${parcel.zip}</small></div><div class="metric-box"><span>Taxable Value</span><strong>${money(parcel.taxableValue)}</strong></div><div class="metric-box"><span>Adjusted Taxable Value</span><strong>${money(taxable)}</strong></div><div class="metric-box"><span>Estimated County Tax</span><strong>${money(tax)}</strong><small>${money(tax - originalTax)} change from current millage</small></div>`;
-  const allocationTotal = budgetData.propertyTaxCategories.reduce((sum, item) => sum + item.allocation, 0);
-  const impacts = scenarioTotals().departmentImpacts;
-  $("#taxBreakdown").innerHTML = budgetData.propertyTaxCategories.map((item) => {
-    const impact = impacts.find((entry) => entry.department.id === item.departmentId);
-    const reductionRate = impact ? Math.min(impact.totalReduction / Math.max(impact.department.totalBudget, 1), 1) : 0;
-    const status = reductionRate >= 0.99 ? "eliminated" : reductionRate > 0 ? "reduced" : "active";
-    const label = status === "active" ? "Active service" : status === "reduced" ? `${percent(reductionRate * 100)} reduced in scenario` : "Eliminated in scenario";
-    return `<div class="service-row service-${status}"><div><strong>${item.name}</strong><small>${label}</small></div><span>${money(tax * item.allocation / allocationTotal)}</span></div>`;
-  }).join("");
+  if (!window.WaltonPropertyTaxCalculator) return;
+  window.WaltonPropertyTaxCalculator.update({
+    proposedMillage: state.proposedMillage,
+    serviceImpacts: scenarioTotals().departmentImpacts
+  });
+}
+
+function initPropertyTaxCalculator() {
+  const root = $("#propertyTaxCalculator");
+  if (!root || !window.WaltonPropertyTaxCalculator) return;
+  window.WaltonPropertyTaxCalculator.init({
+    root,
+    parcelCsvUrl: "data/walton-parcels.csv",
+    currentMillage: budgetData.millageAssumptions.adoptedMillage,
+    proposedMillage: state.proposedMillage,
+    additionalExemption: 150000,
+    additionalExemption2028: 250000,
+    categories: budgetData.propertyTaxCategories,
+    serviceImpacts: scenarioTotals().departmentImpacts,
+    money,
+    moneyWithCents: moneyInput,
+    percent
+  });
 }
 
 function renderImpact() {
@@ -814,10 +819,6 @@ function exportPdf() {
   report.print();
 }
 
-function searchParcels() {
-  const query = (state.parcelQuery || "").toUpperCase();
-  $("#parcelSuggestions").innerHTML = query ? budgetData.sampleParcels.filter((parcel) => `${parcel.address}${parcel.city}${parcel.parcel}`.toUpperCase().includes(query)).map((parcel) => `<button class="suggestion-button" data-control="select-parcel" data-parcel="${parcel.parcel}"><strong>${parcel.address}</strong><span>${parcel.city}, FL ${parcel.zip} | ${parcel.parcel}</span></button>`).join("") : "";
-}
 
 function rerender() {
   renderDrivers();
@@ -901,7 +902,6 @@ document.addEventListener("input", (event) => {
       updateResults();
     }
   }
-  if (control === "parcel-search") { state.parcelQuery = event.target.value; searchParcels(); }
 });
 
 document.addEventListener("change", (event) => {
@@ -922,7 +922,6 @@ document.addEventListener("change", (event) => {
   if (control === "department-sort") { state.departmentSort = event.target.value; state.showAllDepartmentCards = false; renderDepartments(); }
   if (control === "overview-year") { state.overviewFiscalYear = event.target.value; renderTopServices(); }
   if (control === "scenario-select") { state.selectedScenarioName = event.target.value; renderScenarioComparison(); }
-  if (control === "homestead") { state.useHomesteadExemption = event.target.checked; renderTax(); }
 });
 
 document.addEventListener("click", (event) => {
@@ -965,7 +964,6 @@ document.addEventListener("click", (event) => {
   if (control === "delete-scenario") deleteScenario();
   if (control === "reset-scenario") resetWorkingScenario();
   if (control === "reset-millage" && isStaffMode) { state.proposedMillage = budgetData.millageAssumptions.adoptedMillage; updateResults(); }
-  if (control === "select-parcel") { state.selectedParcel = budgetData.sampleParcels.find((parcel) => parcel.parcel === button.dataset.parcel); $("#parcelSearch").value = state.selectedParcel.address; $("#parcelSuggestions").innerHTML = ""; renderTax(); }
 });
 
 function init() {
@@ -991,7 +989,7 @@ function init() {
   setupScenarioAccordions();
   if (drawer) drawer.hidden = true;
   renderCharts();
-  searchParcels();
+  initPropertyTaxCalculator();
   updateResults();
 }
 

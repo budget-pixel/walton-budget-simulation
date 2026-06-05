@@ -463,11 +463,7 @@
               <h3>Property Tax Breakdown</h3>
             </div>
           </div>
-          <input id="parcelSearch" type="search" placeholder="Search sample parcel or address" data-control="parcel-search">
-          <div id="parcelSuggestions" class="suggestions-list"></div>
-          <label class="check-row"><input id="useHomesteadExemption" type="checkbox" data-control="homestead" checked> Apply additional homestead exemption</label>
-          <div id="parcelResults" class="parcel-results"></div>
-          <div id="taxBreakdown" class="service-breakdown"></div>
+          <div id="propertyTaxCalculator" class="property-tax-calculator"></div>
         </article>
       </div>
     </section>
@@ -501,8 +497,10 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="data/budgetData.js"></script>
   <script src="data/historicalDepartmentFunding.js"></script>
+  <script src="propertyTaxCalculator.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

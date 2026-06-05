@@ -394,14 +394,29 @@ textarea {
 .tax-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
 .millage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .editable-millage input { margin-top: 8px; max-width: none; }
+.property-tax-calculator { display: grid; gap: 12px; }
+.property-tax-calculator .calculator-title-row { display: flex; justify-content: flex-end; }
+.tax-calculator-note { margin: 0; color: var(--color-text-muted); line-height: 1.5; }
+.tax-search-label { font-weight: 800; color: var(--color-primary); }
+.tax-search-input { width: 100%; }
 .suggestions-list { display: grid; gap: 8px; margin: 10px 0; }
 .suggestion-button { width: 100%; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-small); background: #ffffff; color: var(--color-text); text-align: left; cursor: pointer; }
 .suggestion-button strong,
 .suggestion-button span { display: block; }
 .suggestion-button span { color: var(--color-text-muted); font-size: 0.84rem; }
+.calculator-message { padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-small); background: var(--color-surface-muted); color: var(--color-text-muted); }
 .check-row { display: flex; align-items: center; gap: 8px; margin: 12px 0; color: var(--color-text); font-weight: 800; }
 .check-row input { width: auto; }
 .parcel-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
+.calculator-results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.selected-parcel-box { grid-column: 1 / -1; }
+.exemption-card { border-color: rgba(209, 190, 120, 0.72); background: rgba(209, 190, 120, 0.18); }
+.exemption-card input { width: auto; margin: 0 6px 0 0; }
+.funding-loss-box { border-color: #d8aaa6; background: #fbf1f0; }
+.funding-loss-box strong { color: var(--color-danger); }
+.calculator-breakdown { display: grid; gap: 8px; }
+.calculator-breakdown-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+.calculator-breakdown-header h4 { margin: 0; color: var(--color-primary); }
 .service-breakdown { display: grid; gap: 8px; }
 .service-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-small); background: #ffffff; }
 .service-row small { display: block; color: var(--color-text-muted); }
@@ -423,6 +438,7 @@ textarea {
   .scenario-meta-grid,
   .millage-grid,
   .lock-grid,
+  .calculator-results,
   .parcel-results { grid-template-columns: 1fr; }
   .button-row { align-items: stretch; }
   .button-row .view-all-button { flex: 1 1 170px; }
