@@ -85,12 +85,12 @@ function getFiscalYears() {
   const futureExpenseInflationRate = Number(state.revenueAssumptions.futureExpenseInflationRate || 0);
   const fy2028Reduction = Number(state.revenueAssumptions.fy2028RevenueReduction || 0);
   const fy2029Reduction = Number(state.revenueAssumptions.fy2029RevenueReduction || 0);
-  const projectedSupportedExpenseBaseline = 146641086;
+  const projectedSupportedExpenseBaseline = baseRevenue;
 
   const fy2027Baseline = baseRevenue;
-  const fy2027 = fy2027Baseline - fy2028Reduction;
-  const fy2028Baseline = fy2027;
-  const fy2028 = fy2028Baseline - fy2029Reduction;
+  const fy2027 = baseRevenue;
+  const fy2028Baseline = baseRevenue;
+  const fy2028 = fy2028Baseline - fy2028Reduction - fy2029Reduction;
   const fy2029Baseline = fy2028;
   const fy2029 = fy2029Baseline * (1 + futureGrowth);
   const fy2030Baseline = fy2029Baseline * (1 + futureGrowth);
@@ -100,9 +100,9 @@ function getFiscalYears() {
   const fy2032Baseline = fy2031Baseline * (1 + futureGrowth);
   const fy2032 = fy2031 * (1 + futureGrowth);
 
-  // Projected supported expense with separate first-year and future inflation rates
+  // FY2027 starts at the base amount. FY2028 is adjusted for expected non-recurring FY2027 capital and then future years inflate from the FY2028 level.
   const fy2027ProjectedSupportedExpense = projectedSupportedExpenseBaseline;
-  const fy2028ProjectedSupportedExpense = fy2027ProjectedSupportedExpense * (1 + fy2028ExpenseInflationRate);
+  const fy2028ProjectedSupportedExpense = 154000000;
   const fy2029ProjectedSupportedExpense = fy2028ProjectedSupportedExpense * (1 + futureExpenseInflationRate);
   const fy2030ProjectedSupportedExpense = fy2029ProjectedSupportedExpense * (1 + futureExpenseInflationRate);
   const fy2031ProjectedSupportedExpense = fy2030ProjectedSupportedExpense * (1 + futureExpenseInflationRate);
@@ -121,7 +121,7 @@ function getFiscalYears() {
   }));
 
   const forecastYears = [
-    { year: "FY2027", revenue: fy2027, baselineRevenue: fy2027Baseline, revenueShortfall: Math.max(fy2027ProjectedSupportedExpense - fy2027, 0), historicalSupportedExpense: null, projectedSupportedExpense: fy2027ProjectedSupportedExpense, revenueReduction: fy2028Reduction, type: "Forecast", historical: false },
+    { year: "FY2027", revenue: fy2027, baselineRevenue: fy2027Baseline, revenueShortfall: Math.max(fy2027ProjectedSupportedExpense - fy2027, 0), historicalSupportedExpense: null, projectedSupportedExpense: fy2027ProjectedSupportedExpense, revenueReduction: 0, type: "Forecast", historical: false },
     { year: "FY2028", revenue: fy2028, baselineRevenue: fy2028Baseline, revenueShortfall: Math.max(fy2028ProjectedSupportedExpense - fy2028, 0), historicalSupportedExpense: null, projectedSupportedExpense: fy2028ProjectedSupportedExpense, revenueReduction: fy2029Reduction, type: "Forecast", historical: false },
     { year: "FY2029", revenue: fy2029, baselineRevenue: fy2029Baseline, revenueShortfall: Math.max(fy2029ProjectedSupportedExpense - fy2029, 0), historicalSupportedExpense: null, projectedSupportedExpense: fy2029ProjectedSupportedExpense, revenueReduction: 0, type: "Forecast", historical: false },
     { year: "FY2030", revenue: fy2030, baselineRevenue: fy2030Baseline, revenueShortfall: Math.max(fy2030ProjectedSupportedExpense - fy2030, 0), historicalSupportedExpense: null, projectedSupportedExpense: fy2030ProjectedSupportedExpense, revenueReduction: 0, type: "Forecast", historical: false },
@@ -711,15 +711,14 @@ function updateForecastTable() {
 function createAssumptions() {
   const revenueAssumptions = [
     "Historical ad valorem revenue is included for FY2022 through FY2026.",
-    "FY2026 base revenue is $163,473,140.",
-    "FY2027 revenue equals the FY2026 base amount minus the first revenue reduction, with no rate adjustment.",
-    "FY2028 revenue equals the reduced FY2027 amount minus the second revenue reduction, with no rate adjustment.",
+    "FY2027 revenue starts at the base amount of $163,473,140.",
+    "FY2028 revenue equals the FY2027 base amount minus the modeled revenue reductions, with no rate adjustment.",
     "FY2029 through FY2032 revenue uses the editable future revenue growth rate."
   ];
   const expenditureAssumptions = [
     "The main trend chart uses ad valorem supported expense, not gross total county expenditures.",
     "Historical ad valorem supported expense reconciles to historical ad valorem revenue for FY2022 through FY2025.",
-    "FY2027 projected supported expense equals the FY2027 ad valorem-supported department budget baseline. FY2028 grows by the FY2028 supported expense inflation rate, and FY2029 through FY2032 grow by the FY2029+ supported expense inflation rate.",
+    "FY2027 projected supported expense starts at the base amount of $163,473,140. FY2028 projected supported expense is adjusted to $154,000,000 to account for non-recurring FY2027 capital, and FY2029 through FY2032 grow by the FY2029+ supported expense inflation rate.",
     "Departments outside the property-tax simulation are not stored in the active scenario reduction model."
   ];
   const methodology = [
