@@ -361,7 +361,8 @@ textarea {
 .wide-field { grid-column: 1 / -1; }
 .small-status { margin: 10px 0 0; color: var(--color-text-muted); font-size: 0.9rem; }
 .staff-only-panel[hidden],
-[data-staff-only][hidden] { display: none !important; }
+[data-staff-only][hidden],
+body:not(.staff-mode) [data-staff-only] { display: none !important; }
 
 .driver-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .driver-card,
@@ -858,4 +859,59 @@ textarea {
   .detail-toolbar .department-explorer-controls .view-all-button {
     width: 100%;
   }
+}
+
+.department-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.department-table-panel { padding: 0; overflow: hidden; }
+.department-detail-table { margin: 0; }
+.department-detail-table th,
+.department-detail-table td { white-space: nowrap; }
+.department-detail-table td:first-child,
+.department-detail-table th:first-child { white-space: normal; min-width: 220px; }
+.table-link-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary-dark);
+  font: inherit;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+.table-link-button:hover,
+.table-link-button:focus { color: var(--color-primary); text-decoration: underline; outline: none; }
+.selected-row td { background: var(--color-primary-soft); }
+.department-side-detail { position: sticky; top: 96px; display: grid; gap: 14px; }
+.department-side-header { display: grid; gap: 6px; }
+.department-side-header h3 { font-size: 1.35rem; }
+.department-badge {
+  width: fit-content;
+  padding: 5px 8px;
+  border-radius: var(--radius-small);
+  background: rgba(209, 190, 120, 0.24);
+  color: var(--color-primary-dark);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.department-side-grid { grid-template-columns: 1fr; }
+.property-tax-embed {
+  display: block;
+  width: 100%;
+  min-height: 760px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .department-detail-layout { grid-template-columns: 1fr; }
+  .department-side-detail { position: static; }
+  .property-tax-embed { min-height: 840px; }
 }

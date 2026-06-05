@@ -30,8 +30,8 @@ const state = {
   rankingSearch: "",
   departmentSort: "support",
   departmentSearch: "",
+  selectedDepartmentId: "",
   showAllTopServices: false,
-  showAllDepartmentCards: false,
   showAllRankings: false,
   showImpactTable: false,
   proposedMillage: budgetData.millageAssumptions.adoptedMillage,
@@ -356,6 +356,11 @@ function renderRankings() {
   if (rankingTableWrap) rankingTableWrap.hidden = true;
 }
 
+function departmentBudgetForYear(department, fiscalYear) {
+  if (fiscalYear === "FY2027 Budget") return department.totalBudget;
+  return historicalFundingData.find((item) => item.department === department.name)?.history.find((record) => record.fiscalYear === fiscalYear)?.grossExpense || 0;
+}
+
 function departmentExplorerRows() {
   const query = state.departmentSearch.trim().toLowerCase();
   const rows = departments()
@@ -363,14 +368,17 @@ function departmentExplorerRows() {
 
   if (state.departmentSort === "support") return rows.sort((a, b) => departmentSupport(b, state.departmentFiscalYear) - departmentSupport(a, state.departmentFiscalYear) || sortDepartments(a, b));
   if (state.departmentSort === "fte") return rows.sort((a, b) => b.fteCount - a.fteCount || sortDepartments(a, b));
-  if (state.departmentSort === "budget") return rows.sort((a, b) => b.totalBudget - a.totalBudget || sortDepartments(a, b));
+  if (state.departmentSort === "budget") return rows.sort((a, b) => departmentBudgetForYear(b, state.departmentFiscalYear) - departmentBudgetForYear(a, state.departmentFiscalYear) || sortDepartments(a, b));
   return rows.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function renderDepartments() {
   const rows = departmentExplorerRows();
-  const visibleRows = state.showAllDepartmentCards ? rows : rows.slice(0, 4);
   const budgetYear = state.departmentFiscalYear === "FY2027 Budget";
+  if (!rows.some((department) => department.id === state.selectedDepartmentId)) {
+    state.selectedDepartmentId = rows[0]?.id || "";
+  }
+
   const controlsTarget = $("#departmentExplorerControls");
   if (controlsTarget) {
     controlsTarget.innerHTML = `
@@ -384,26 +392,55 @@ function renderDepartments() {
       <button type="button" class="view-all-button" data-control="export-rankings">Export Department Data</button>
     `;
   }
-  $("#departmentCards").innerHTML = visibleRows.map((department) => {
-    const record = historicalFundingData.find((item) => item.department === department.name)?.history.find((item) => item.fiscalYear === state.departmentFiscalYear);
-    return `<article class="panel department-card ${constitutional(department) ? "constitutional-card" : ""}"><h3>${department.name}</h3><div class="department-primary-metric"><span>${budgetYear ? "FY2027 Ad Valorem Support" : "Ad Valorem Support"}</span><strong>${money(budgetYear ? departmentSupport(department) : record?.adValoremSupport || 0)}</strong></div><div class="detail-grid">${
+
+  const budgetColumn = $("#departmentBudgetColumn");
+  if (budgetColumn) budgetColumn.textContent = budgetYear ? "Total Budget" : "Gross Expense";
+
+  const table = $("#departmentTable");
+  if (table) {
+    table.innerHTML = rows.map((department) => {
+      const record = historicalFundingData.find((item) => item.department === department.name)?.history.find((item) => item.fiscalYear === state.departmentFiscalYear);
+      const support = budgetYear ? departmentSupport(department) : record?.adValoremSupport || 0;
+      const budget = budgetYear ? department.totalBudget : record?.grossExpense || 0;
+      const selected = department.id === state.selectedDepartmentId;
+      return `<tr class="${constitutional(department) ? "constitutional-row" : ""} ${selected ? "selected-row" : ""}"><td><button type="button" class="table-link-button" data-control="select-department" data-department="${department.id}">${department.name}</button></td><td>${money(support)}</td><td>${money(budget)}</td><td>${number(department.fteCount)}</td></tr>`;
+    }).join("") || '<tr><td colspan="4">No departments match the current search.</td></tr>';
+  }
+
+  const selectedDepartment = rows.find((department) => department.id === state.selectedDepartmentId);
+  const panel = $("#departmentDetailPanel");
+  if (!panel) return;
+  if (!selectedDepartment) {
+    panel.innerHTML = '<p class="historical-note">Select a department to view funding details.</p>';
+    return;
+  }
+
+  const record = historicalFundingData.find((item) => item.department === selectedDepartment.name)?.history.find((item) => item.fiscalYear === state.departmentFiscalYear);
+  panel.innerHTML = `
+    <div class="department-side-header">
+      <p class="eyebrow">Selected Department</p>
+      <h3>${selectedDepartment.name}</h3>
+      ${constitutional(selectedDepartment) ? '<span class="department-badge">Constitutional Office</span>' : ''}
+    </div>
+    <div class="department-primary-metric"><span>${budgetYear ? "FY2027 Ad Valorem Support" : "Ad Valorem Support"}</span><strong>${money(budgetYear ? departmentSupport(selectedDepartment) : record?.adValoremSupport || 0)}</strong></div>
+    <div class="detail-grid department-side-grid">${
       budgetYear
-        ? detail("Personnel Budget", department.personnelBudget)
-          + detail("Operating Budget", department.operatingBudget)
-          + detail("Capital Budget", department.capitalBudget)
-          + detail("Total Budget", department.totalBudget)
-          + detail("FTE Count", department.fteCount, number)
-          + (!constitutional(department) && department.name !== "Board of County Commissioners"
-              ? detail("Average Personnel Cost", fteCost(department))
+        ? detail("Personnel Budget", selectedDepartment.personnelBudget)
+          + detail("Operating Budget", selectedDepartment.operatingBudget)
+          + detail("Capital Budget", selectedDepartment.capitalBudget)
+          + detail("Total Budget", selectedDepartment.totalBudget)
+          + detail("FTE Count", selectedDepartment.fteCount, number)
+          + (!constitutional(selectedDepartment) && selectedDepartment.name !== "Board of County Commissioners"
+              ? detail("Average Personnel Cost", fteCost(selectedDepartment))
               : "")
         : record
           ? detail("Gross Expense", record.grossExpense)
             + detail("Department Revenue", record.departmentRevenue)
             + detail("Net Expense", record.netExpense)
             + detail("Ad Valorem Support", record.adValoremSupport)
-          : '<p class="historical-note">No record available.</p>'
-    }</div></article>`;
-  }).join("") + (rows.length > 4 ? `<button class="view-all-button department-view-all-button" data-control="toggle-department-cards">${state.showAllDepartmentCards ? "Show Less" : "View All"}</button>` : "");
+          : '<p class="historical-note">No historical record is available for this department and fiscal year.</p>'
+    }</div>
+  `;
 }
 
 function detail(label, value, formatter = money) { return `<div class="detail-item"><span>${label}</span><strong>${formatter(value || 0)}</strong></div>`; }
@@ -543,31 +580,6 @@ function updateCharts() {
   shortfallChart.update();
 }
 
-function renderTax() {
-  if (!window.WaltonPropertyTaxCalculator) return;
-  window.WaltonPropertyTaxCalculator.update({
-    proposedMillage: state.proposedMillage,
-    serviceImpacts: scenarioTotals().departmentImpacts
-  });
-}
-
-function initPropertyTaxCalculator() {
-  const root = $("#propertyTaxCalculator");
-  if (!root || !window.WaltonPropertyTaxCalculator) return;
-  window.WaltonPropertyTaxCalculator.init({
-    root,
-    parcelCsvUrl: "data/walton-parcels.csv",
-    currentMillage: budgetData.millageAssumptions.adoptedMillage,
-    proposedMillage: state.proposedMillage,
-    additionalExemption: 150000,
-    additionalExemption2028: 250000,
-    categories: budgetData.propertyTaxCategories,
-    serviceImpacts: scenarioTotals().departmentImpacts,
-    money,
-    moneyWithCents: moneyInput,
-    percent
-  });
-}
 
 function renderImpact() {
   const rows = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments);
@@ -661,7 +673,6 @@ function updateResults() {
   updateCharts();
   renderForecast();
   renderMillage();
-  renderTax();
   renderImpact();
   renderScenarioComparison();
 }
@@ -903,7 +914,7 @@ document.addEventListener("input", (event) => {
     updateResults();
   }
   if (control === "ranking-search") { state.rankingSearch = event.target.value; renderRankings(); }
-  if (control === "department-search") { state.departmentSearch = event.target.value; state.showAllDepartmentCards = false; renderDepartments(); }
+  if (control === "department-search") { state.departmentSearch = event.target.value; renderDepartments(); }
   if (control === "scenario-meta") { state.scenarioMeta[event.target.dataset.field] = event.target.value; }
   if (control === "millage" && isStaffMode) {
     const cleanedMillage = String(event.target.value || "").replace(/[^0-9.]/g, "");
@@ -935,7 +946,7 @@ document.addEventListener("change", (event) => {
   }
   if (control === "department-lock") { state.lockedDepartments[event.target.dataset.department] = event.target.checked; rerender(); }
   if (control === "department-year") { state.departmentFiscalYear = event.target.value; renderDepartments(); }
-  if (control === "department-sort") { state.departmentSort = event.target.value; state.showAllDepartmentCards = false; renderDepartments(); }
+  if (control === "department-sort") { state.departmentSort = event.target.value; renderDepartments(); }
   if (control === "overview-year") { state.overviewFiscalYear = event.target.value; renderTopServices(); }
   if (control === "scenario-select") { state.selectedScenarioName = event.target.value; renderScenarioComparison(); }
 });
@@ -952,7 +963,6 @@ document.addEventListener("click", (event) => {
     renderRankings();
   }
   if (control === "toggle-top-services") { state.showAllTopServices = !state.showAllTopServices; renderTopServices(); }
-  if (control === "toggle-department-cards") { state.showAllDepartmentCards = !state.showAllDepartmentCards; renderDepartments(); }
   if (control === "toggle-rankings") { state.showAllRankings = !state.showAllRankings; renderRankings(); }
   if (control === "toggle-impact-table") { state.showImpactTable = !state.showImpactTable; renderImpact(); }
   if (control === "clear-personnel") {
@@ -980,6 +990,7 @@ document.addEventListener("click", (event) => {
   if (control === "delete-scenario") deleteScenario();
   if (control === "reset-scenario") resetWorkingScenario();
   if (control === "reset-millage" && isStaffMode) { state.proposedMillage = budgetData.millageAssumptions.adoptedMillage; updateResults(); }
+  if (control === "select-department") { state.selectedDepartmentId = button.dataset.department; renderDepartments(); }
 });
 
 function init() {
@@ -1005,7 +1016,6 @@ function init() {
   setupScenarioAccordions();
   if (drawer) drawer.hidden = true;
   renderCharts();
-  initPropertyTaxCalculator();
   updateResults();
 }
 

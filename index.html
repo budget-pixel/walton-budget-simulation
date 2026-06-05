@@ -129,19 +129,10 @@
       <nav class="primary-nav" aria-label="Primary navigation">
         <a href="#overview">Overview</a>
         <a href="#departments">Departments</a>
-        <a href="#builder">Build Scenario</a>
+        <a href="#builder" data-staff-only>Build Scenario</a>
         <a href="#tax-impact">Property Tax</a>
         <a href="#methodology">Methodology</a>
       </nav>
-      <script>
-(function(){
-  var isStaffMode = new URLSearchParams(window.location.search).get('mode') === 'staff';
-  var builderLink = document.querySelector('a[href="#builder"]');
-  if(!isStaffMode && builderLink){
-    builderLink.style.display = 'none';
-  }
-})();
-</script>
       <div class="header-actions">
         <button type="button" class="settings-button" data-control="toggle-tools" data-staff-only aria-label="Open scenario tools" aria-expanded="false">&#9881;</button>
       </div>
@@ -238,10 +229,27 @@
         </label>
         <div id="departmentExplorerControls" class="department-explorer-controls"></div>
       </div>
-      <div id="departmentCards" class="department-grid"></div>
+      <div class="department-detail-layout">
+        <div class="department-table-panel panel">
+          <div class="table-scroll">
+            <table class="department-detail-table">
+              <thead>
+                <tr>
+                  <th>Department</th>
+                  <th>Ad Valorem Support</th>
+                  <th id="departmentBudgetColumn">Total Budget</th>
+                  <th>FTE</th>
+                </tr>
+              </thead>
+              <tbody id="departmentTable"></tbody>
+            </table>
+          </div>
+        </div>
+        <aside id="departmentDetailPanel" class="panel department-side-detail" aria-live="polite"></aside>
+      </div>
     </section>
 
-    <section id="builder" class="page-section section-band">
+    <section id="builder" class="page-section section-band" data-staff-only>
       <div class="section-heading build-heading">
         <div>
           <p class="eyebrow">Build Scenario</p>
@@ -432,7 +440,7 @@
           <p class="eyebrow">Property Tax Integration</p>
           <h2>Millage and Property Tax Impact</h2>
         </div>
-        <p class="section-summary">Estimate countywide millage impacts and see how scenario reductions appear in a property tax bill breakdown.</p>
+        <p class="section-summary">Estimate countywide millage impacts and use the embedded Walton County property tax breakdown calculator.</p>
       </div>
     <section class="context-section">
       <div class="context-inner">
@@ -472,7 +480,7 @@
               <h3>Property Tax Breakdown</h3>
             </div>
           </div>
-          <div id="propertyTaxCalculator" class="property-tax-calculator"></div>
+          <iframe class="property-tax-embed" title="Walton County Property Tax Breakdown" src="https://budget-pixel.github.io/cal/" loading="lazy"></iframe>
         </article>
       </div>
     </section>
@@ -506,10 +514,8 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="data/budgetData.js"></script>
   <script src="data/historicalDepartmentFunding.js"></script>
-  <script src="propertyTaxCalculator.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
