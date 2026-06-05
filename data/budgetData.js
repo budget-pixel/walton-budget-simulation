@@ -303,6 +303,14 @@ const activeFteDepartments = [
   { id: "veteran-services", name: "Veteran Services", historicalFte: { fy2024: 3, fy2025: 3, fy2026: 3, fy2027: 3 }, fteCount: 3 }
 ];
 
+const historicalRevenue = [
+  { year: "FY2022", revenue: 89972682, type: "Actual" },
+  { year: "FY2023", revenue: 110875024, type: "Actual" },
+  { year: "FY2024", revenue: 131679989, type: "Actual" },
+  { year: "FY2025", revenue: 149437335, type: "Actual" },
+  { year: "FY2026", revenue: 152900634, type: "Budget" }
+];
+
 const nonFteAdjustableDepartmentIds = [
   "tax-collector",
   "supervisor-of-elections",
@@ -368,6 +376,7 @@ const budgetData = {
   revenueForecast: {
     baseYear: "FY2027",
     baseRevenue: 163473140,
+    historicalRevenue,
     defaultAssumptions: {
       futureRevenueGrowthRate: 0.01,
       fy2028RevenueReduction: 5700000,
@@ -377,7 +386,7 @@ const budgetData = {
       fy2028: 0.03,
       fy2029: 0.02
     },
-    forecastYears: ["FY2027", "FY2028", "FY2029", "FY2030", "FY2031", "FY2032"]
+    forecastYears: ["FY2022", "FY2023", "FY2024", "FY2025", "FY2026", "FY2027", "FY2028", "FY2029", "FY2030", "FY2031", "FY2032"]
   },
   budgetBaselineTotals: {
     personnelBudgetTotal,
@@ -390,6 +399,7 @@ const budgetData = {
     baselineYear: "FY2026-2027",
     scenarioYear: "FY2028",
     revenueAssumptions: [
+      "Historical ad valorem revenue is included for FY2022 through FY2026.",
       "FY2027 revenue forecast is $163,473,140.",
       "FY2028 revenue equals FY2027 x 1.03 minus the FY2028 revenue reduction.",
       "FY2029 revenue equals FY2028 x 1.02 minus the FY2029 revenue reduction.",
