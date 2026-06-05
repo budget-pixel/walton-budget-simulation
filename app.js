@@ -340,10 +340,12 @@ function sortedRankingRows() {
 }
 
 function renderTopServices() {
+  const target = $("#topServicesBars");
+  if (!target) return;
   const rows = rankingRows(state.overviewFiscalYear).filter((row) => row.support > 0).sort((a, b) => b.support - a.support);
   const visibleRows = state.showAllTopServices ? rows : rows.slice(0, 6);
   const max = Math.max(...rows.map((row) => row.support), 1);
-  $("#topServicesBars").innerHTML = visibleRows.map((row, index) => `<div class="rank-bar-row ${row.constitutional ? "constitutional-row" : ""}"><div class="rank-label"><strong>${index + 1}. ${row.name}</strong><span>${money(row.support)}</span></div><div class="bar-track"><div class="bar-fill" style="width:${row.support / max * 100}%"></div></div></div>`).join("") + (rows.length > 6 ? `<button class="view-all-button" data-control="toggle-top-services">${state.showAllTopServices ? "Show Less" : "View All"}</button>` : "");
+  target.innerHTML = visibleRows.map((row, index) => `<div class="rank-bar-row ${row.constitutional ? "constitutional-row" : ""}"><div class="rank-label"><strong>${index + 1}. ${row.name}</strong><span>${money(row.support)}</span></div><div class="bar-track"><div class="bar-fill" style="width:${row.support / max * 100}%"></div></div></div>`).join("") + (rows.length > 6 ? `<button class="view-all-button" data-control="toggle-top-services">${state.showAllTopServices ? "Show Less" : "View All"}</button>` : "");
 }
 
 function renderRankings() {
