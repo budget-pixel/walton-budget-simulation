@@ -24,9 +24,10 @@ const historicalActualRevenues = [
 
 const state = {
   revenueAssumptions: {
+    ...budgetData.revenueForecast.defaultAssumptions,
+    futureRevenueGrowthRate: 0.01,
     fy2028ExpenseInflationRate: 0.05,
-    futureExpenseInflationRate: 0.03,
-    ...budgetData.revenueForecast.defaultAssumptions
+    futureExpenseInflationRate: 0.05
   },
   fteReductions: {},
   operatingReductions: {},
@@ -36,7 +37,8 @@ const state = {
   rankingTab: "support",
   rankingSearch: "",
   showAllTopServices: false,
-  showAllDepartmentCards: false
+  showAllDepartmentCards: false,
+  showAllRankings: false
 };
 
 const historicalFundingData = window.historicalDepartmentFunding || [];
