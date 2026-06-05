@@ -23,6 +23,104 @@ function renderTop(){let rows=rankRows(S.svcYear).filter(r=>r.support>0).sort((a
 function renderRanks(){let rows=rankRows('FY2027 Budget').filter(r=>!S.q||r.name.toLowerCase().includes(S.q.toLowerCase())).sort(sortDisp),cards=S.allRank?rows:rows.slice(0,8);$('#rankingCards').innerHTML=cards.map((r,i)=>`<article class="ranking-card ${r.constitutional?'constitutional-card':''}"><div><span>${i+1}</span><strong>${r.name}</strong></div><dl><div><dt>Ad Valorem Support</dt><dd>${money(r.support)}</dd></div><div><dt>FTE</dt><dd>${n(r.fte)}</dd></div><div><dt>Budget</dt><dd>${money(r.budget)}</dd></div></dl></article>`).join('')+(rows.length>8?`<button class="view-all-button" data-control="toggle-rankings">${S.allRank?'Show Less':'View All'}</button>`:'');$('#rankingTable').innerHTML=rows.map(r=>`<tr class="${r.constitutional?'constitutional-row':''}"><td><strong>${r.name}</strong></td><td>${money(r.support)}</td><td>${n(r.fte)}</td><td>${money(r.budget)}</td></tr>`).join('');$('#rankingTableWrap').hidden=!S.showRank;$('[data-control="toggle-ranking-table"]').textContent=S.showRank?'Show Less':'View All'}
 function renderDept(){let rows=deps().sort(sortDisp),vis=S.allDept?rows:rows.slice(0,4),bud=S.deptYear==='FY2027 Budget';$('#departmentCards').innerHTML=vis.map(d=>{let rec=hfund.find(x=>x.department===d.name)?.history.find(r=>r.fiscalYear===S.deptYear),val=bud?support(d):rec?.adValoremSupport;return`<article class="panel department-card ${constitutional(d)?'constitutional-card':''}"><h3>${d.name}</h3><div class="department-primary-metric"><span>${bud?'FY2027 Ad Valorem Support':'Ad Valorem Support'}</span><strong>${money(val||0)}</strong></div><div class="detail-grid">${bud?detail('Personnel Budget',d.personnelBudget)+detail('Operating Budget',d.operatingBudget)+detail('Capital Budget',d.capitalBudget)+detail('Total Budget',d.totalBudget)+detail('FTE Count',d.fteCount,n)+detail('Average Personnel Cost',fteCost(d)):rec?detail('Gross Expense',rec.grossExpense)+detail('Department Revenue',rec.departmentRevenue)+detail('Net Expense',rec.netExpense)+detail('Ad Valorem Support',rec.adValoremSupport):'<p class="historical-note">No record available.</p>'}</div></article>`}).join('')+(rows.length>4?`<button class="view-all-button department-view-all-button" data-control="toggle-department-cards">${S.allDept?'Show Less':'View All'}</button>`:'')}
 function detail(l,v,f=money){return`<div class="detail-item"><span>${l}</span><strong>${f(v||0)}</strong></div>`}
+function setupScenarioAccordions(){
+  const titles=[
+    'Scenario Tools',
+    'Budget Exercise Mode',
+    'Personnel Reduction',
+    'Personnel Reductions',
+    'Reduce FTE Positions',
+    'Operating Reduction',
+    'Operating Reductions',
+    'Adjust Department Operating Budgets',
+    'Equipment and Capital Reductions',
+    'Capital Reduction',
+    'Capital Reductions'
+  ];
+
+  if(!$('#scenarioAccordionStyles')){
+    const style=document.createElement('style');
+    style.id='scenarioAccordionStyles';
+    style.textContent=`
+      .scenario-accordion-panel .panel-header{
+        cursor:pointer;
+      }
+
+      .scenario-accordion-panel .panel-header h3{
+        margin-bottom:0;
+      }
+
+      .scenario-accordion-toggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        min-width:38px;
+        height:38px;
+        border:1px solid rgba(0,98,49,.24);
+        border-radius:999px;
+        background:#fff;
+        color:#006231;
+        font-size:20px;
+        font-weight:900;
+        line-height:1;
+        cursor:pointer;
+      }
+
+      .scenario-accordion-toggle:hover,
+      .scenario-accordion-toggle:focus{
+        background:rgba(0,98,49,.08);
+        outline:none;
+      }
+
+      .scenario-accordion-content[hidden]{
+        display:none;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  $$('article.panel').forEach((panel,index)=>{
+    if(panel.classList.contains('scenario-accordion-panel')) return;
+
+    const heading=panel.querySelector('h3');
+    const title=heading?.textContent?.trim();
+    if(!title||!titles.includes(title)) return;
+
+    const header=panel.querySelector('.panel-header')||heading.parentElement;
+    if(!header) return;
+
+    const content=document.createElement('div');
+    content.className='scenario-accordion-content';
+    content.id=`scenario-accordion-${index}`;
+    content.hidden=true;
+
+    Array.from(panel.children).forEach(child=>{
+      if(child!==header) content.appendChild(child);
+    });
+
+    const button=document.createElement('button');
+    button.type='button';
+    button.className='scenario-accordion-toggle';
+    button.setAttribute('aria-expanded','false');
+    button.setAttribute('aria-controls',content.id);
+    button.setAttribute('aria-label',`Expand ${title}`);
+    button.textContent='+';
+
+    header.appendChild(button);
+    panel.appendChild(content);
+    panel.classList.add('scenario-accordion-panel');
+
+    header.addEventListener('click',event=>{
+      if(event.target.closest('a,input,select,textarea,label')) return;
+      const expanded=button.getAttribute('aria-expanded')==='true';
+      button.setAttribute('aria-expanded',String(!expanded));
+      button.setAttribute('aria-label',`${expanded?'Expand':'Collapse'} ${title}`);
+      button.textContent=expanded?'+':'−';
+      content.hidden=expanded;
+    });
+  });
+}
+
 function renderAssumptions(){$('#revenueAssumptionControls').innerHTML=`<label class="assumption-control"><span>Revenue Growth Rate</span><input type="number" step="0.1" value="${S.rev.futureRevenueGrowthRate*100}" data-control="revenue-assumption" data-assumption="futureRevenueGrowthRate" ${staff?'':'disabled'}></label><label class="assumption-control"><span>FY2029+ Supported Expense Inflation Rate</span><input type="number" step="0.1" value="${S.rev.futureExpenseInflationRate*100}" data-control="revenue-assumption" data-assumption="futureExpenseInflationRate" ${staff?'':'disabled'}></label><label class="assumption-control"><span>FY2028 Revenue Reduction</span><input type="text" value="${money2(S.rev.fy2028RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2028RevenueReduction" data-format="currency" ${staff?'':'disabled'}></label><label class="assumption-control"><span>FY2029 Revenue Reduction</span><input type="text" value="${money2(S.rev.fy2029RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2029RevenueReduction" data-format="currency" ${staff?'':'disabled'}></label><div class="forecast-table-wrap"><table class="forecast-table"><thead><tr><th>Fiscal Year</th><th>Revenue</th><th>Supported Expense</th><th>Status</th><th>Revenue Shortfall</th></tr></thead><tbody id="forecastTable"></tbody></table></div>`;$('#revenueAssumptions').innerHTML='<li>FY2027 revenue and supported expense are $163,473,140 before millage changes.</li><li>FY2028 supported expense is approximately $154,000,000.</li><li>Revenue shortfall equals projected supported expense minus projected revenue.</li>';$('#inflationAssumptions').innerHTML='<li>Personnel cost drivers are visible countywide.</li><li>Staff mode can edit assumptions and department locks.</li>';$('#methodologyList').innerHTML='<li>CSV exports include visible rows.</li><li>PDF export uses the browser print engine.</li><li>Property tax allocation follows the embedded calculator methodology.</li>';$('#formulaDefinitions').innerHTML=['Revenue Shortfall = Projected Supported Expense - Projected Revenue','Millage Revenue Impact = Taxable Value Base x Millage Change / 1,000','Buy-Out First-Year Net = Recurring Reduction - One-Time Cost'].map(x=>`<div class="formula-item"><code>${x}</code></div>`).join('')}
 function renderForecast(){$('#forecastTable').innerHTML=years().map(y=>`<tr><td><strong>${y.year}</strong></td><td>${money(y.revenue)}</td><td>${y.historicalSupportedExpense==null?money(y.projectedSupportedExpense):money(y.historicalSupportedExpense)}</td><td>${y.type}</td><td>${y.historical?'-':money(y.revenueShortfall)}</td></tr>`).join('')}
 function charts(){let f=forecast(),s=f.filter(y=>y.year!=='FY2027');Chart.defaults.font.family='Arial, Helvetica, sans-serif';trendChart=new Chart($('#trendChart'),{type:'line',data:{labels:f.map(y=>y.year),datasets:[{label:'Projected Revenue',data:f.map(y=>y.revenue),borderColor:'#006231',borderDash:[6,6]},{label:'Projected Ad Valorem Supported Expense',data:f.map(y=>y.projectedSupportedExpense),borderColor:'#d1be78'}]},options:chartOpt()});shortfallChart=new Chart($('#shortfallChart'),{type:'bar',data:{labels:s.map(y=>y.year),datasets:[{label:'Projected Revenue Shortfall',data:s.map(y=>y.revenueShortfall),backgroundColor:'rgba(0,98,49,.74)'}]},options:chartOpt(true)})}
@@ -43,4 +141,4 @@ function rerender(){renderDrivers();renderLocks();renderPersonnel();renderOperat
 document.addEventListener('input',e=>{let x=e.target,c=x.dataset.control;if(c==='fte'){S.fte[x.dataset.department]=+x.value||0;update()}if(c==='buyout-count'){S.buy[x.dataset.department]=+x.value||0;update()}if(c==='buyout-cost'){S.buyCost[x.dataset.department]=parseMoney(x.value);update()}if(c==='operating'){S.op[x.dataset.department]=+x.value||0;update()}if(c==='revenue-assumption'&&staff){let a=x.dataset.assumption,v=x.dataset.format==='currency'?parseMoney(x.value):+x.value||0;S.rev[a]=a.includes('Rate')?v/100:v;update()}if(c==='personnel-driver'&&staff){S.drv[x.dataset.driver]=(+x.value||0)/100;rerender()}if(c==='ranking-search'){S.q=x.value;renderRanks()}if(c==='scenario-meta'){S.meta[x.dataset.field]=x.value}if(c==='millage'&&staff){S.millage=+x.value||0;update()}if(c==='parcel-search'){S.parcelQ=x.value;searchParcels()}});
 document.addEventListener('change',e=>{let x=e.target,c=x.dataset.control;if(c==='capital'){S.keep[x.dataset.project]=x.checked;update()}if(c==='department-lock'){S.lock[x.dataset.department]=x.checked;rerender()}if(c==='department-year'){S.deptYear=x.value;renderDept()}if(c==='overview-year'){S.svcYear=x.value;renderTop()}if(c==='homestead'){S.homestead=x.checked;renderTax()}});
 document.addEventListener('click',e=>{let b=e.target.closest('[data-control]');if(!b)return;let c=b.dataset.control;if(c==='toggle-top-services'){S.allSvc=!S.allSvc;renderTop()}if(c==='toggle-department-cards'){S.allDept=!S.allDept;renderDept()}if(c==='toggle-rankings'){S.allRank=!S.allRank;renderRanks()}if(c==='toggle-ranking-table'){S.showRank=!S.showRank;renderRanks()}if(c==='toggle-impact-table'){S.showImpact=!S.showImpact;renderImpact()}if(c==='export-rankings'){S.showRank=true;renderRanks();csv('department-rankings.csv',['Department','Ad Valorem Support','FTE','Budget'],rows('#rankingTable'))}if(c==='export-impact'){S.showImpact=true;renderImpact();csv('scenario-impact.csv',['Department','FTE Reduced','Operating Reduction','Personnel Reduction','Operating Reduction Amount','Total Department Reduction'],rows('#impactTable'))}if(c==='export-pdf')pdf();if(c==='save-scenario')save();if(c==='load-scenario')load();if(c==='reset-scenario'){localStorage.removeItem(KEY);location.reload()}if(c==='reset-millage'&&staff){S.millage=budgetData.millageAssumptions.adoptedMillage;update()}if(c==='select-parcel'){S.parcel=budgetData.sampleParcels.find(p=>p.parcel===b.dataset.parcel);$('#parcelSearch').value=S.parcel.address;$('#parcelSuggestions').innerHTML='';renderTax()}});
-function init(){chrome();syncMeta();renderDrivers();renderLocks();renderPersonnel();renderOperating();renderCapital();renderTop();renderRanks();renderDept();renderAssumptions();charts();searchParcels();update()}init();
+function init(){chrome();syncMeta();renderDrivers();renderLocks();renderPersonnel();renderOperating();renderCapital();renderTop();renderRanks();renderDept();renderAssumptions();setupScenarioAccordions();charts();searchParcels();update()}init();
