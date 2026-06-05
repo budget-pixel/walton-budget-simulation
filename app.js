@@ -19,6 +19,13 @@ const percentFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 1
 });
 
+const historicalActualExpenditures = [
+  { year: "FY2022", expenditures: 124740883, type: "Actual" },
+  { year: "FY2023", expenditures: 150491078, type: "Actual" },
+  { year: "FY2024", expenditures: 171176162, type: "Actual" },
+  { year: "FY2025", expenditures: 198487013, type: "Actual" }
+];
+
 const state = {
   revenueAssumptions: { ...budgetData.revenueForecast.defaultAssumptions },
   fteReductions: {},
@@ -27,11 +34,11 @@ const state = {
 };
 
 let trendChart;
-let gapChart;
-let savingsChart;
+let shortfallChart;
+let reductionChart;
 
 function formatCurrency(value) {
-  return currencyFormatter.format(Math.round(value));
+  return currencyFormatter.format(Math.round(value || 0));
 }
 
 function formatCurrencyInput(value) {
@@ -43,11 +50,16 @@ function parseCurrencyInput(value) {
 }
 
 function formatNumber(value) {
-  return numberFormatter.format(value);
+  return numberFormatter.format(value || 0);
 }
 
 function formatPercent(value) {
-  return `${percentFormatter.format(value)}%`;
+  return `${percentFormatter.format(value || 0)}%`;
+}
+
+function getHistoricalExpenditure(year) {
+  const record = historicalActualExpenditures.find((item) => item.year === year);
+  return record ? record.expenditures : null;
 }
 
 function getFiscalYears() {
@@ -55,6 +67,7 @@ function getFiscalYears() {
   const futureGrowth = Number(state.revenueAssumptions.futureRevenueGrowthRate || 0);
   const fy2028Reduction = Number(state.revenueAssumptions.fy2028RevenueReduction || 0);
   const fy2029Reduction = Number(state.revenueAssumptions.fy2029RevenueReduction || 0);
+  const projectedExpenditureBaseline = budgetData.budgetBaselineTotals.totalBudgetBaseline;
 
   const fy2027 = baseRevenue;
   const fy2028Baseline = fy2027 * (1 + budgetData.revenueForecast.fixedGrowthRates.fy2028);
@@ -70,22 +83,23 @@ function getFiscalYears() {
 
   const historicalYears = (budgetData.revenueForecast.historicalRevenue || []).map((item) => ({
     year: item.year,
-    projectedRevenue: item.revenue,
+    revenue: item.revenue,
     baselineRevenue: item.revenue,
-    revenueLoss: 0,
-    projectedExpense: null,
+    revenueShortfall: 0,
+    actualExpenditures: getHistoricalExpenditure(item.year),
+    projectedExpenditures: null,
     revenueReduction: 0,
     type: item.type,
     historical: true
   }));
 
   const forecastYears = [
-    { year: "FY2027", projectedRevenue: fy2027, baselineRevenue: fy2027, revenueLoss: 0, projectedExpense: fy2027, revenueReduction: 0, type: "Forecast", historical: false },
-    { year: "FY2028", projectedRevenue: fy2028, baselineRevenue: fy2028Baseline, revenueLoss: fy2028Baseline - fy2028, projectedExpense: fy2028Baseline, revenueReduction: fy2028Reduction, type: "Forecast", historical: false },
-    { year: "FY2029", projectedRevenue: fy2029, baselineRevenue: fy2029Baseline, revenueLoss: fy2029Baseline - fy2029, projectedExpense: fy2029Baseline, revenueReduction: fy2029Reduction, type: "Forecast", historical: false },
-    { year: "FY2030", projectedRevenue: fy2030, baselineRevenue: fy2030Baseline, revenueLoss: fy2030Baseline - fy2030, projectedExpense: fy2030Baseline, revenueReduction: 0, type: "Forecast", historical: false },
-    { year: "FY2031", projectedRevenue: fy2031, baselineRevenue: fy2031Baseline, revenueLoss: fy2031Baseline - fy2031, projectedExpense: fy2031Baseline, revenueReduction: 0, type: "Forecast", historical: false },
-    { year: "FY2032", projectedRevenue: fy2032, baselineRevenue: fy2032Baseline, revenueLoss: fy2032Baseline - fy2032, projectedExpense: fy2032Baseline, revenueReduction: 0, type: "Forecast", historical: false }
+    { year: "FY2027", revenue: fy2027, baselineRevenue: fy2027, revenueShortfall: 0, actualExpenditures: null, projectedExpenditures: projectedExpenditureBaseline, revenueReduction: 0, type: "Forecast", historical: false },
+    { year: "FY2028", revenue: fy2028, baselineRevenue: fy2028Baseline, revenueShortfall: fy2028Baseline - fy2028, actualExpenditures: null, projectedExpenditures: projectedExpenditureBaseline, revenueReduction: fy2028Reduction, type: "Forecast", historical: false },
+    { year: "FY2029", revenue: fy2029, baselineRevenue: fy2029Baseline, revenueShortfall: fy2029Baseline - fy2029, actualExpenditures: null, projectedExpenditures: projectedExpenditureBaseline, revenueReduction: fy2029Reduction, type: "Forecast", historical: false },
+    { year: "FY2030", revenue: fy2030, baselineRevenue: fy2030Baseline, revenueShortfall: fy2030Baseline - fy2030, actualExpenditures: null, projectedExpenditures: projectedExpenditureBaseline, revenueReduction: 0, type: "Forecast", historical: false },
+    { year: "FY2031", revenue: fy2031, baselineRevenue: fy2031Baseline, revenueShortfall: fy2031Baseline - fy2031, actualExpenditures: null, projectedExpenditures: projectedExpenditureBaseline, revenueReduction: 0, type: "Forecast", historical: false },
+    { year: "FY2032", revenue: fy2032, baselineRevenue: fy2032Baseline, revenueShortfall: fy2032Baseline - fy2032, actualExpenditures: null, projectedExpenditures: projectedExpenditureBaseline, revenueReduction: 0, type: "Forecast", historical: false }
   ];
 
   return [...historicalYears, ...forecastYears];
@@ -99,8 +113,8 @@ function getScenario() {
   return getForecastYears().find((year) => year.year === budgetData.scenarioYear);
 }
 
-function getBudgetGap() {
-  return getScenario().revenueLoss;
+function getRevenueShortfall() {
+  return getScenario().revenueShortfall;
 }
 
 function isFteAdjustable(department) {
@@ -113,43 +127,43 @@ function getDepartmentName(departmentId) {
 }
 
 function getScenarioTotals() {
-  const budgetGap = getBudgetGap();
-  let personnelSavings = 0;
-  let operatingSavings = 0;
+  const revenueShortfall = getRevenueShortfall();
+  let personnelReductions = 0;
+  let operatingReductions = 0;
 
   const departmentImpacts = budgetData.departments.map((department) => {
     const fteReduction = isFteAdjustable(department) ? Number(state.fteReductions[department.id] || 0) : 0;
     const operatingReduction = Number(state.operatingReductions[department.id] || 0);
-    const departmentPersonnelSavings = fteReduction * department.averageFteCost;
-    const departmentOperatingSavings = department.operatingBudget * (operatingReduction / 100);
+    const departmentPersonnelReduction = fteReduction * department.averageFteCost;
+    const departmentOperatingReduction = department.operatingBudget * (operatingReduction / 100);
 
-    personnelSavings += departmentPersonnelSavings;
-    operatingSavings += departmentOperatingSavings;
+    personnelReductions += departmentPersonnelReduction;
+    operatingReductions += departmentOperatingReduction;
 
     return {
       department,
       fteReduction,
       operatingReduction,
-      personnelSavings: departmentPersonnelSavings,
-      operatingSavings: departmentOperatingSavings,
-      totalSavings: departmentPersonnelSavings + departmentOperatingSavings
+      personnelReduction: departmentPersonnelReduction,
+      operatingReductionAmount: departmentOperatingReduction,
+      totalReduction: departmentPersonnelReduction + departmentOperatingReduction
     };
   });
 
-  const capitalSavings = budgetData.capitalProjects.reduce((total, project) => {
+  const capitalReductions = budgetData.capitalProjects.reduce((total, project) => {
     return state.keptProjects[project.id] ? total : total + project.cost;
   }, 0);
 
-  const totalSavings = personnelSavings + operatingSavings + capitalSavings;
-  const remainingGap = budgetGap - totalSavings;
+  const totalReductions = personnelReductions + operatingReductions + capitalReductions;
+  const remainingShortfall = revenueShortfall - totalReductions;
 
   return {
-    budgetGap,
-    personnelSavings,
-    operatingSavings,
-    capitalSavings,
-    totalSavings,
-    remainingGap,
+    revenueShortfall,
+    personnelReductions,
+    operatingReductions,
+    capitalReductions,
+    totalReductions,
+    remainingShortfall,
     departmentImpacts
   };
 }
@@ -160,11 +174,11 @@ function createSummaryCards() {
   const fy2027 = getFiscalYears().find((year) => year.year === "FY2027");
 
   const cards = [
-    ["FY2027 Revenue Forecast", formatCurrency(fy2027.projectedRevenue)],
+    ["FY2027 Revenue Forecast", formatCurrency(fy2027.revenue)],
     ["FY2028 Revenue Reduction", formatCurrency(state.revenueAssumptions.fy2028RevenueReduction)],
-    ["No-Reduction Revenue Baseline", formatCurrency(scenario.baselineRevenue)],
-    ["Projected Revenues", formatCurrency(scenario.projectedRevenue)],
-    ["Projected Budget Gap", formatCurrency(getBudgetGap())]
+    ["Projected Revenue", formatCurrency(scenario.revenue)],
+    ["Projected Expenditures", formatCurrency(scenario.projectedExpenditures)],
+    ["Projected Revenue Shortfall", formatCurrency(getRevenueShortfall())]
   ];
 
   dashboardCards.innerHTML = cards
@@ -266,16 +280,17 @@ function createCapitalControls() {
     .join("");
 }
 
-function getFteAdjustmentLabel(department) {
-  if (department.fteCount === 0) {
-    return "No FTE baseline";
+function detailItem(label, value, shouldShow = true) {
+  if (!shouldShow) {
+    return "";
   }
 
-  if (department.nonFteAdjustable) {
-    return "Not FTE-adjustable";
-  }
-
-  return "FTE-adjustable";
+  return `
+    <div class="detail-item">
+      <span>${label}</span>
+      <strong>${value}</strong>
+    </div>
+  `;
 }
 
 function createDepartmentCards() {
@@ -286,50 +301,16 @@ function createDepartmentCards() {
       <article class="panel department-card">
         <h3>${department.name}</h3>
         <div class="detail-grid">
-          <div class="detail-item">
-            <span>Personnel Budget</span>
-            <strong>${formatCurrency(department.personnelBudget)}</strong>
-          </div>
-          <div class="detail-item">
-            <span>Operating Budget</span>
-            <strong>${formatCurrency(department.operatingBudget)}</strong>
-          </div>
-          <div class="detail-item">
-            <span>Capital Budget</span>
-            <strong>${formatCurrency(department.capitalBudget)}</strong>
-          </div>
-          <div class="detail-item">
-            <span>Total Budget</span>
-            <strong>${formatCurrency(department.totalBudget)}</strong>
-          </div>
-          <div class="detail-item">
-            <span>FTE Count</span>
-            <strong>${formatNumber(department.fteCount)}</strong>
-          </div>
-          <div class="detail-item">
-            <span>Average Personnel Cost</span>
-            <strong>${formatCurrency(department.averageFteCost)}</strong>
-          </div>
-          <div class="detail-item">
-            <span>FTE Modeling</span>
-            <strong>${getFteAdjustmentLabel(department)}</strong>
-          </div>
-          <div class="detail-item">
-            <span>Historical FTE</span>
-            <strong>${formatHistoricalFte(department)}</strong>
-          </div>
+          ${detailItem("Personnel Budget", formatCurrency(department.personnelBudget), department.personnelBudget > 0)}
+          ${detailItem("Operating Budget", formatCurrency(department.operatingBudget), department.operatingBudget > 0)}
+          ${detailItem("Capital Budget", formatCurrency(department.capitalBudget), department.capitalBudget > 0)}
+          ${detailItem("Total Budget", formatCurrency(department.totalBudget), department.totalBudget > 0)}
+          ${detailItem("FTE Count", formatNumber(department.fteCount), department.fteCount > 0)}
+          ${detailItem("Average Personnel Cost", formatCurrency(department.averageFteCost), department.averageFteCost > 0)}
         </div>
       </article>
     `)
     .join("");
-}
-
-function formatHistoricalFte(department) {
-  if (!department.historicalFte) {
-    return "Not available";
-  }
-
-  return `FY2024 ${formatNumber(department.historicalFte.fy2024)} / FY2025 ${formatNumber(department.historicalFte.fy2025)} / FY2026 ${formatNumber(department.historicalFte.fy2026)} / FY2027 ${formatNumber(department.historicalFte.fy2027)}`;
 }
 
 function createRevenueAssumptionsPanel() {
@@ -378,10 +359,11 @@ function createRevenueAssumptionsPanel() {
         <thead>
           <tr>
             <th>Fiscal Year</th>
-            <th>Reduced Revenue</th>
-            <th>No-Reduction Baseline</th>
+            <th>Revenue</th>
+            <th>Actual Expenditures</th>
+            <th>Projected Expenditures</th>
             <th>Status</th>
-            <th>Budget Gap</th>
+            <th>Revenue Shortfall</th>
           </tr>
         </thead>
         <tbody id="forecastTable"></tbody>
@@ -393,15 +375,17 @@ function createRevenueAssumptionsPanel() {
 function updateForecastTable() {
   document.querySelector("#forecastTable").innerHTML = getFiscalYears()
     .map((year) => {
-      const baseline = year.historical ? "—" : formatCurrency(year.baselineRevenue);
-      const gap = year.historical ? "—" : formatCurrency(year.revenueLoss);
+      const actualExpenditures = year.actualExpenditures === null ? "—" : formatCurrency(year.actualExpenditures);
+      const projectedExpenditures = year.projectedExpenditures === null ? "—" : formatCurrency(year.projectedExpenditures);
+      const shortfall = year.historical ? "—" : formatCurrency(year.revenueShortfall);
       return `
         <tr>
           <td><strong>${year.year}</strong></td>
-          <td>${formatCurrency(year.projectedRevenue)}</td>
-          <td>${baseline}</td>
+          <td>${formatCurrency(year.revenue)}</td>
+          <td>${actualExpenditures}</td>
+          <td>${projectedExpenditures}</td>
           <td>${year.type}</td>
-          <td>${gap}</td>
+          <td>${shortfall}</td>
         </tr>
       `;
     })
@@ -409,15 +393,48 @@ function updateForecastTable() {
 }
 
 function createAssumptions() {
+  const revenueAssumptions = [
+    "Historical ad valorem revenue is included for FY2022 through FY2026.",
+    "FY2027 revenue forecast is $163,473,140.",
+    "FY2028 revenue equals FY2027 x 1.03 minus the FY2028 revenue reduction.",
+    "FY2029 revenue equals the reduced FY2028 revenue x 1.02 minus the FY2029 revenue reduction.",
+    "FY2030 through FY2032 revenue uses the editable future revenue growth rate."
+  ];
+
+  const expenditureAssumptions = [
+    "FY2022 through FY2025 expenditure values are actual expenditures from the provided expense dataset.",
+    "FY2027 projected expenditures equal the current included-department budget baseline used in the simulation.",
+    "FY2028 through FY2032 projected expenditures currently hold the FY2027 included-department baseline constant until future expenditure growth assumptions are added.",
+    "Departments outside the property-tax simulation are not stored in the active data model."
+  ];
+
+  const methodology = [
+    "The projected revenue shortfall is calculated as the difference between the internal no-reduction revenue baseline and the reduced revenue scenario for the selected forecast year.",
+    "Reductions are calculated only from user-selected personnel, operating, and capital changes and are not recommendations.",
+    "The Building Department, Public Works, Solid Waste, Mosquito Control, Housing & Urban Development, Mossy Head Wastewater Treatment Facility, and Tourism departments are excluded from the active data model.",
+    "Tax Collector, Supervisor of Elections, Clerk of Court, Sheriff's Office, and Property Appraiser remain visible but are not FTE-adjustable.",
+    "Departments with zero FTE are visible when budgeted, but do not display FTE reduction controls."
+  ];
+
+  const formulas = [
+    { name: "Total Budget", formula: "Personnel Budget + Operating Budget + Capital Budget" },
+    { name: "Average FTE Cost", formula: "Personnel Budget / FTE Count; zero when FTE Count is zero" },
+    { name: "Revenue Shortfall", formula: "Internal No-Reduction Revenue Baseline - Revenue" },
+    { name: "Personnel Reduction", formula: "FTE Reduction x Average Cost Per FTE" },
+    { name: "Operating Reduction", formula: "Operating Budget x Reduction Percentage" },
+    { name: "Capital Reduction", formula: "Sum of Removed Capital Project Costs" },
+    { name: "Remaining Revenue Shortfall", formula: "Revenue Shortfall - Total Reductions" }
+  ];
+
   const renderList = (selector, items) => {
     document.querySelector(selector).innerHTML = items.map((item) => `<li>${item}</li>`).join("");
   };
 
-  renderList("#revenueAssumptions", budgetData.assumptions.revenueAssumptions);
-  renderList("#inflationAssumptions", budgetData.assumptions.inflationAssumptions);
-  renderList("#methodologyList", budgetData.assumptions.methodology);
+  renderList("#revenueAssumptions", revenueAssumptions);
+  renderList("#inflationAssumptions", expenditureAssumptions);
+  renderList("#methodologyList", methodology);
 
-  document.querySelector("#formulaDefinitions").innerHTML = budgetData.assumptions.formulas
+  document.querySelector("#formulaDefinitions").innerHTML = formulas
     .map((item) => `
       <div class="formula-item">
         <strong>${item.name}</strong>
@@ -430,9 +447,10 @@ function createAssumptions() {
 function createCharts() {
   const fiscalYears = getFiscalYears();
   const years = fiscalYears.map((year) => year.year);
-  const revenues = fiscalYears.map((year) => year.projectedRevenue);
-  const baselineRevenues = fiscalYears.map((year) => year.historical ? null : year.baselineRevenue);
-  const gaps = fiscalYears.map((year) => year.historical ? null : year.revenueLoss);
+  const revenues = fiscalYears.map((year) => year.revenue);
+  const actualExpenditures = fiscalYears.map((year) => year.actualExpenditures);
+  const projectedExpenditures = fiscalYears.map((year) => year.projectedExpenditures);
+  const shortfalls = fiscalYears.map((year) => year.historical ? null : year.revenueShortfall);
 
   Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
   Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue("--color-text-muted").trim();
@@ -443,16 +461,25 @@ function createCharts() {
       labels: years,
       datasets: [
         {
-          label: "Actual / Reduced Revenue",
+          label: "Ad Valorem Revenue",
           data: revenues,
           borderColor: "rgb(56, 106, 125)",
           backgroundColor: "rgba(56, 106, 125, 0.14)",
           tension: 0.25,
-          fill: true
+          fill: false
         },
         {
-          label: "No-Reduction Revenue Baseline",
-          data: baselineRevenues,
+          label: "Actual Expenditures",
+          data: actualExpenditures,
+          borderColor: "rgb(111, 127, 112)",
+          backgroundColor: "rgba(111, 127, 112, 0.12)",
+          tension: 0.25,
+          fill: false,
+          spanGaps: false
+        },
+        {
+          label: "Projected Expenditures",
+          data: projectedExpenditures,
           borderColor: "rgb(138, 109, 59)",
           backgroundColor: "rgba(138, 109, 59, 0.12)",
           tension: 0.25,
@@ -464,14 +491,14 @@ function createCharts() {
     options: getLineChartOptions()
   });
 
-  gapChart = new Chart(document.querySelector("#gapChart"), {
+  shortfallChart = new Chart(document.querySelector("#gapChart"), {
     type: "bar",
     data: {
       labels: years,
       datasets: [
         {
-          label: "Projected Budget Gap",
-          data: gaps,
+          label: "Projected Revenue Shortfall",
+          data: shortfalls,
           backgroundColor: "rgba(139, 61, 61, 0.72)",
           borderColor: "rgb(139, 61, 61)",
           borderWidth: 1
@@ -481,7 +508,7 @@ function createCharts() {
     options: getBarChartOptions()
   });
 
-  savingsChart = new Chart(document.querySelector("#savingsChart"), {
+  reductionChart = new Chart(document.querySelector("#savingsChart"), {
     type: "doughnut",
     data: {
       labels: ["Personnel", "Operating", "Capital"],
@@ -502,6 +529,10 @@ function createCharts() {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
+        title: {
+          display: true,
+          text: "Reduction Breakdown"
+        },
         tooltip: {
           callbacks: {
             label: (context) => `${context.label}: ${formatCurrency(context.raw)}`
@@ -561,58 +592,60 @@ function getBarChartOptions() {
 function updateCharts() {
   const fiscalYears = getFiscalYears();
   const years = fiscalYears.map((year) => year.year);
-  const revenues = fiscalYears.map((year) => year.projectedRevenue);
-  const baselineRevenues = fiscalYears.map((year) => year.historical ? null : year.baselineRevenue);
-  const gaps = fiscalYears.map((year) => year.historical ? null : year.revenueLoss);
+  const revenues = fiscalYears.map((year) => year.revenue);
+  const actualExpenditures = fiscalYears.map((year) => year.actualExpenditures);
+  const projectedExpenditures = fiscalYears.map((year) => year.projectedExpenditures);
+  const shortfalls = fiscalYears.map((year) => year.historical ? null : year.revenueShortfall);
 
   trendChart.data.labels = years;
   trendChart.data.datasets[0].data = revenues;
-  trendChart.data.datasets[1].data = baselineRevenues;
+  trendChart.data.datasets[1].data = actualExpenditures;
+  trendChart.data.datasets[2].data = projectedExpenditures;
   trendChart.update();
 
-  gapChart.data.labels = years;
-  gapChart.data.datasets[0].data = gaps;
-  gapChart.update();
+  shortfallChart.data.labels = years;
+  shortfallChart.data.datasets[0].data = shortfalls;
+  shortfallChart.update();
 }
 
 function updateScenario() {
   const totals = getScenarioTotals();
-  const gapClosed = totals.budgetGap > 0 ? Math.min(Math.max((totals.totalSavings / totals.budgetGap) * 100, 0), 100) : 100;
+  const shortfallAddressed = totals.revenueShortfall > 0 ? Math.min(Math.max((totals.totalReductions / totals.revenueShortfall) * 100, 0), 100) : 100;
 
   createSummaryCards();
   updateCharts();
   updateForecastTable();
 
-  document.querySelector("#startingGap").textContent = formatCurrency(totals.budgetGap);
-  document.querySelector("#resultBudgetGap").textContent = formatCurrency(totals.budgetGap);
-  document.querySelector("#resultPersonnelSavings").textContent = formatCurrency(totals.personnelSavings);
-  document.querySelector("#resultOperatingSavings").textContent = formatCurrency(totals.operatingSavings);
-  document.querySelector("#resultCapitalSavings").textContent = formatCurrency(totals.capitalSavings);
-  document.querySelector("#resultTotalSavings").textContent = formatCurrency(totals.totalSavings);
-  document.querySelector("#resultRemainingGap").textContent = formatCurrency(Math.abs(totals.remainingGap));
-  document.querySelector("#gapClosedPercent").textContent = formatPercent(gapClosed);
-  document.querySelector("#gapProgress").style.width = `${gapClosed}%`;
+  document.querySelector("#startingGap").textContent = formatCurrency(totals.revenueShortfall);
+  document.querySelector("#resultBudgetGap").textContent = formatCurrency(totals.revenueShortfall);
+  document.querySelector("#resultPersonnelSavings").textContent = formatCurrency(totals.personnelReductions);
+  document.querySelector("#resultOperatingSavings").textContent = formatCurrency(totals.operatingReductions);
+  document.querySelector("#resultCapitalSavings").textContent = formatCurrency(totals.capitalReductions);
+  document.querySelector("#resultTotalSavings").textContent = formatCurrency(totals.totalReductions);
+  document.querySelector("#resultRemainingGap").textContent = formatCurrency(Math.abs(totals.remainingShortfall));
+  document.querySelector("#gapClosedPercent").textContent = formatPercent(shortfallAddressed);
+  document.querySelector("#gapProgress").style.width = `${shortfallAddressed}%`;
 
   const statusBanner = document.querySelector("#budgetStatus");
   statusBanner.className = "status-banner";
 
-  if (totals.remainingGap > 0) {
+  if (totals.remainingShortfall > 0) {
     statusBanner.classList.add("status-deficit");
-    statusBanner.textContent = `${formatCurrency(totals.remainingGap)} deficit remaining`;
-  } else if (totals.remainingGap === 0) {
+    statusBanner.textContent = `${formatCurrency(totals.remainingShortfall)} revenue shortfall remaining`;
+  } else if (totals.remainingShortfall === 0) {
     statusBanner.classList.add("status-balanced");
-    statusBanner.textContent = "Balanced budget";
+    statusBanner.textContent = "Revenue shortfall fully addressed";
   } else {
     statusBanner.classList.add("status-surplus");
-    statusBanner.textContent = `${formatCurrency(Math.abs(totals.remainingGap))} surplus`;
+    statusBanner.textContent = `${formatCurrency(Math.abs(totals.remainingShortfall))} reduction amount exceeds revenue shortfall`;
   }
 
   totals.departmentImpacts.forEach((impact) => {
-    const savingsCell = document.querySelector(`#personnel-savings-${impact.department.id}`);
+    const personnelReductionCell = document.querySelector(`#personnel-savings-${impact.department.id}`);
     const operatingPercent = document.querySelector(`#operating-percent-${impact.department.id}`);
 
-    if (savingsCell) {
-      savingsCell.textContent = formatCurrency(impact.personnelSavings);
+    if (personnelReductionCell) {
+      personnelReductionCell.textContent = formatCurrency(impact.personnelReduction);
     }
 
     if (operatingPercent) {
@@ -626,19 +659,19 @@ function updateScenario() {
         <td><strong>${impact.department.name}</strong></td>
         <td>${formatNumber(impact.fteReduction)}</td>
         <td>${formatPercent(impact.operatingReduction)}</td>
-        <td>${formatCurrency(impact.personnelSavings)}</td>
-        <td>${formatCurrency(impact.operatingSavings)}</td>
-        <td>${formatCurrency(impact.totalSavings)}</td>
+        <td>${formatCurrency(impact.personnelReduction)}</td>
+        <td>${formatCurrency(impact.operatingReductionAmount)}</td>
+        <td>${formatCurrency(impact.totalReduction)}</td>
       </tr>
     `)
     .join("");
 
-  savingsChart.data.datasets[0].data = [
-    totals.personnelSavings,
-    totals.operatingSavings,
-    totals.capitalSavings
+  reductionChart.data.datasets[0].data = [
+    totals.personnelReductions,
+    totals.operatingReductions,
+    totals.capitalReductions
   ];
-  savingsChart.update();
+  reductionChart.update();
 }
 
 function bindEvents() {
