@@ -128,18 +128,60 @@ const excludedScenarioDepartmentIds = [
   "human-services"
 ];
 
-const personnelCostDrivers = {
-  baseSalary: 0.62,
-  cola: 0.03,
-  frs: 0.13,
-  insurance: 0.14,
-  fica: 0.062,
-  otherBenefits: 0.018
-};
+const personnelCostFactors = [
+  {
+    id: "baseSalary",
+    label: "Base Wage / Salaries",
+    amount: 19957791.98,
+    percentOfTotal: 66.10,
+    note: "Base wage and salary cost is shown as a share of total personnel cost."
+  },
+  {
+    id: "cola",
+    label: "Wage Adjustment / COLA-type adjustment",
+    amount: 598733.76,
+    percentOfTotal: 1.98,
+    baseWagePercent: 3.00,
+    note: "The COLA is effectively 3.00% of base wage/salary cost: $598,733.76 / $19,957,791.98 = 3.00%. When expressed as a share of total personnel cost, the denominator includes salaries, COLA, FICA/Medicare taxes, retirement, insurance, allowances, and other personnel costs. Therefore, $598,733.76 / $30,191,784.22 = 1.98%. In plain language: the COLA is a 3% increase to salaries, but it represents only 1.98% of total personnel cost because total personnel cost includes benefits and taxes in addition to salaries."
+  },
+  {
+    id: "ficaMedicare",
+    label: "Taxes / FICA-Medicare-type costs",
+    amount: 1568650.24,
+    percentOfTotal: 5.20,
+    note: "Taxes / FICA-Medicare-type costs are calculated on wage-related compensation but are shown here as a share of total personnel cost. The total personnel cost denominator includes wages, wage adjustments, taxes, retirement, insurance, and other benefits."
+  },
+  {
+    id: "retirement",
+    label: "Retirement",
+    amount: 3203324.21,
+    percentOfTotal: 10.61,
+    note: "Retirement reflects employer retirement contribution costs. It is shown as a share of total personnel cost, not as a rate applied only to wages."
+  },
+  {
+    id: "insurance",
+    label: "Insurance",
+    amount: 4721059.02,
+    percentOfTotal: 15.64,
+    note: "Insurance reflects employer health insurance and related benefit costs. It is shown as a share of total personnel cost."
+  },
+  {
+    id: "other",
+    label: "Other",
+    amount: 64725.00,
+    percentOfTotal: 0.21,
+    note: "Other includes smaller personnel-related costs or allowances that are part of total personnel cost but are not separately categorized above."
+  }
+];
+
+const personnelCostDrivers = Object.fromEntries(
+  personnelCostFactors.map((factor) => [factor.id, factor.percentOfTotal / 100])
+);
 
 const millageAssumptions = {
   adoptedMillage: 3.519,
-  taxableValueBase: 43097409207
+  taxableValueBase: 46454430401,
+  fy2026BudgetedAdValoremRevenue: 155766296
 };
 
 const propertyTaxCategories = [
@@ -233,6 +275,7 @@ const budgetData = {
   excludedScenarioDepartmentIds,
   personnelCostDrivers,
   millageAssumptions,
+  personnelCostFactors,
   propertyTaxCategories,
   sampleParcels,
   capitalProjects: itemizedCapitalProjects
