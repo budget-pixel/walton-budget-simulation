@@ -542,7 +542,20 @@ function chartOptions(bar = false, stacked = false) {
       x: { stacked },
       y: { beginAtZero: bar, stacked, ticks: { callback: (value) => money(value) } }
     },
-    plugins: { tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${money(context.raw)}` } } }
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          pointStyle: 'circle'
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => `${context.dataset.label}: ${money(context.raw)}`
+        }
+      }
+    }
   };
 }
 
@@ -550,7 +563,17 @@ function renderCharts() {
   const forecast = forecastYears();
   const components = shortfallComponents();
   Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
-  trendChart = new Chart($("#trendChart"), { type: "line", data: { labels: forecast.map((year) => year.year), datasets: [{ label: "Projected Revenue", data: forecast.map((year) => year.revenue), borderColor: "#006231", borderDash: [6, 6] }, { label: "Projected Ad Valorem Supported Expense", data: forecast.map((year) => year.projectedSupportedExpense), borderColor: "#d1be78" }] }, options: chartOptions() });
+  trendChart = new Chart($("#trendChart"), {
+    type: "line",
+    data: {
+      labels: forecast.map((year) => year.year),
+      datasets: [
+        { label: "Projected Revenue", data: forecast.map((year) => year.revenue), borderColor: "#006231", borderDash: [6, 6] },
+        { label: "Projected Expenses", data: forecast.map((year) => year.projectedSupportedExpense), borderColor: "#d1be78" }
+      ]
+    },
+    options: chartOptions()
+  });
   shortfallChart = new Chart($("#shortfallChart"), { type: "bar", data: { labels: components.map((year) => year.year), datasets: [{ label: "Direct Revenue Reduction", data: components.map((year) => year.directRevenueReduction), backgroundColor: "rgba(0, 98, 49, 0.78)", stack: "shortfall" }, { label: "Structural Budget Gap", data: components.map((year) => year.expenseInflationPressure), backgroundColor: "rgba(0, 98, 49, 0.28)", stack: "shortfall" }] }, options: chartOptions(true, true) });
 }
 
