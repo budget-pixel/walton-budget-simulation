@@ -783,10 +783,11 @@ function renderResultingShortfallForecast(totals) {
     anchor.insertAdjacentElement("afterend", forecastBox);
   }
 
-  forecastBox.innerHTML = forecastYears()
+  forecastBox.innerHTML = shortfallComponents()
     .filter((year) => ["FY2028", "FY2029", "FY2030", "FY2031", "FY2032"].includes(year.year))
     .map((year) => {
-      const resultingShortfall = Math.max(year.revenueShortfall - totals.totalReductions, 0);
+      const forecastShortfall = year.directRevenueReduction + year.expenseInflationPressure;
+      const resultingShortfall = Math.max(forecastShortfall - totals.totalReductions, 0);
       return `<div><span>${year.year}</span><strong class="${resultingShortfall ? "negative-value" : ""}">${resultingShortfall ? negativeMoney(resultingShortfall) : "$0"}</strong></div>`;
     })
     .join("");
