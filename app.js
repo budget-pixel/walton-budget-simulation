@@ -897,13 +897,18 @@ function renderResultingShortfallForecast(totals) {
     anchor.insertAdjacentElement("afterend", forecastBox);
   }
 
-  forecastBox.innerHTML = shortfallComponents()
-    .filter((year) => ["FY2028", "FY2029", "FY2030", "FY2031", "FY2032"].includes(year.year))
-    .map((year) => {
-      const forecastShortfall = year.directRevenueReduction + year.expenseInflationPressure;
-      const resultingShortfall = Math.max(forecastShortfall - totals.totalReductions, 0);
-      return `<div><span>${year.year}</span><strong class="${resultingShortfall ? "negative-value" : ""}">${resultingShortfall ? negativeMoney(resultingShortfall) : "$0"}</strong></div>`;
-    })
+  const fy2027MillageShortfall = Math.max(currentMillageRevenue() - estimatedMillageRevenue(), 0);
+
+  forecastBox.innerHTML = [
+    `<div class="resulting-shortfall-year-card"><span>Fiscal Year</span><strong>FY2027</strong><em class="${fy2027MillageShortfall ? "negative-value" : ""}">${fy2027MillageShortfall ? negativeMoney(fy2027MillageShortfall) : "$0"}</em></div>`,
+    ...shortfallComponents()
+      .filter((year) => ["FY2028", "FY2029", "FY2030", "FY2031", "FY2032"].includes(year.year))
+      .map((year) => {
+        const forecastShortfall = year.directRevenueReduction + year.expenseInflationPressure;
+        const resultingShortfall = Math.max(forecastShortfall - totals.totalReductions, 0);
+        return `<div class="resulting-shortfall-year-card"><span>Fiscal Year</span><strong>${year.year}</strong><em class="${resultingShortfall ? "negative-value" : ""}">${resultingShortfall ? negativeMoney(resultingShortfall) : "$0"}</em></div>`;
+      })
+  ]
     .join("");
 }
 
