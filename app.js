@@ -246,6 +246,61 @@ function renderChrome() {
     $("#brandMount").innerHTML = window.WaltonSplitLogo.getHtml();
     window.WaltonSplitLogo.injectStyles?.();
   }
+
+  if (!$("#departmentDetailCompactStyles")) {
+    const style = document.createElement("style");
+    style.id = "departmentDetailCompactStyles";
+    style.textContent = `
+      .department-side-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .department-side-grid .detail-item {
+        padding: 10px 12px;
+        min-height: auto;
+      }
+
+      .department-side-grid .detail-item span {
+        font-size: 0.72rem;
+        line-height: 1.15;
+      }
+
+      .department-side-grid .detail-item strong {
+        font-size: 1rem;
+        line-height: 1.2;
+      }
+
+      #departmentTable thead,
+      #departmentTable th,
+      .department-table thead,
+      .department-table th {
+        background: #ffffff;
+        position: relative;
+        z-index: 2;
+      }
+
+      #departmentTable th,
+      .department-table th {
+        box-shadow: 0 1px 0 rgba(0, 98, 49, 0.16);
+      }
+
+      @media (max-width: 780px) {
+        .department-side-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 520px) {
+        .department-side-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   document.body.classList.toggle("staff-mode", isStaffMode);
   $$('[data-staff-only]').forEach((element) => { element.hidden = !isStaffMode; });
 }
