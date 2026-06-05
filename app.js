@@ -249,7 +249,8 @@ function renderChrome() {
     $("#brandMount").innerHTML = window.WaltonSplitLogo.getHtml();
     window.WaltonSplitLogo.injectStyles?.();
   }
-  $("#modeLabel").textContent = isStaffMode ? "Staff Exercise" : "Public View";
+  const modeLabel = $("#modeLabel");
+  if (modeLabel) modeLabel.hidden = true;
   document.body.classList.toggle("staff-mode", isStaffMode);
   $$('[data-staff-only]').forEach((element) => { element.hidden = !isStaffMode; });
 }
@@ -313,7 +314,7 @@ function renderPersonnel() {
 function renderOperating() {
   const protectedDepartments = departments().filter((department) => department.operatingBudget > 0 && constitutional(department));
   const adjustableDepartments = departments().filter((department) => department.operatingBudget > 0 && !constitutional(department)).sort(sortDepartments);
-  $("#operatingControls").innerHTML = `<section class="protected-operating-card"><div class="protected-operating-header"><div><h4>Constitutional Office Operating Budgets</h4><p>Shown for context and not adjustable.</p></div><strong>${money(protectedDepartments.reduce((total, department) => total + department.operatingBudget, 0))}</strong></div><div class="protected-operating-list">${protectedDepartments.map((department) => `<div><span>${department.name}</span><strong>${money(department.operatingBudget)}</strong></div>`).join("")}</div></section>` + adjustableDepartments.map((department) => {
+  $("#operatingControls").innerHTML = `<section class="protected-operating-card"><div class="protected-operating-header"><div><h4>Constitutional Office Operating Budgets</h4></div><strong>${money(protectedDepartments.reduce((total, department) => total + department.operatingBudget, 0))}</strong></div><div class="protected-operating-list">${protectedDepartments.map((department) => `<div><span>${department.name}</span><strong>${money(department.operatingBudget)}</strong></div>`).join("")}</div></section>` + adjustableDepartments.map((department) => {
     const isLocked = locked(department.id);
     if (isLocked) state.operatingReductions[department.id] = 0;
     const reductionPercent = Number(state.operatingReductions[department.id] || 0);
@@ -551,7 +552,7 @@ function renderTax() {
 
 function renderImpact() {
   const rows = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments);
-  $("#impactTable").innerHTML = rows.map((impact) => `<tr class="${constitutional(impact.department) ? "constitutional-row" : ""} ${impact.locked ? "locked-row" : ""}"><td><strong>${impact.department.name}</strong>${impact.locked ? "<small>Locked/Protected</small>" : ""}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "Protected" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.totalReduction)}</td></tr>`).join("");
+  $("#impactTable").innerHTML = rows.map((impact) => `<tr class="${constitutional(impact.department) ? "constitutional-row" : ""} ${impact.locked ? "locked-row" : ""}"><td><strong>${impact.department.name}</strong>${impact.locked ? "<small>Locked</small>" : ""}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.totalReduction)}</td></tr>`).join("");
   $("#impactTableWrap").hidden = !state.showImpactTable;
   $('[data-control="toggle-impact-table"]').textContent = state.showImpactTable ? "Show Less" : "View All";
   $("#validationWarnings").innerHTML = isStaffMode ? `<p>${Object.values(state.lockedDepartments).filter(Boolean).length} departments locked. Staff mode can exceed the shortfall and will label any surplus as Modeled Surplus.</p>` : "";
@@ -591,6 +592,7 @@ function renderMillage() {
   const millageShortfallImpactElement = $("#millageShortfallImpact");
   millageShortfallImpactElement.textContent = totals.remainingShortfall ? negativeMoney(totals.remainingShortfall) : isStaffMode && totals.surplus ? `${money(totals.surplus)} Modeled Surplus` : "$0";
   millageShortfallImpactElement.classList.toggle("negative-value", totals.remainingShortfall > 0);
+  renderResultingShortfallForecast(totals);
   $("#taxpayerImpact").textContent = money((state.proposedMillage - budgetData.millageAssumptions.adoptedMillage) * 100);
 }
 
@@ -618,7 +620,6 @@ function updateResults() {
   const remainingShortfallElement = $("#resultRemainingShortfall");
   remainingShortfallElement.textContent = totals.remainingShortfall ? negativeMoney(totals.remainingShortfall) : "$0";
   remainingShortfallElement.classList.toggle("negative-value", totals.remainingShortfall > 0);
-  renderResultingShortfallForecast(totals);
   $("#resultPersonnelReductions").textContent = money(totals.personnelReductions);
   $("#resultOperatingReductions").textContent = money(totals.operatingReductions);
   $("#resultCapitalReductions").textContent = money(totals.capitalReductions);
@@ -761,7 +762,7 @@ function renderScenarioComparison() {
 }
 
 function renderResultingShortfallForecast(totals) {
-  const anchor = $("#resultRemainingShortfall");
+  const anchor = $("#millageShortfallImpact");
   if (!anchor) return;
 
   let forecastBox = $("#resultingShortfallForecast");
@@ -786,7 +787,7 @@ function reductionRowsForPdf() {
   const capitalRows = budgetData.capitalProjects.filter((project) => !state.keptProjects[project.id]).map((project) => `<tr><td>${departmentName(project.departmentId)}</td><td>${project.name}</td><td>${money(project.cost)}</td></tr>`).join("") || '<tr><td colspan="3">No capital or equipment projects removed.</td></tr>';
   const personnelRows = impacts.filter((impact) => impact.fteReduction || impact.buyoutCount).map((impact) => `<tr><td>${impact.department.name}</td><td>${number(impact.fteReduction)}</td><td>${number(impact.buyoutCount)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.buyoutOneTimeCost)}</td></tr>`).join("") || '<tr><td colspan="5">No personnel reductions selected.</td></tr>';
   const operatingRows = impacts.filter((impact) => impact.operatingReductionAmount).map((impact) => `<tr><td>${impact.department.name}</td><td>${percent(impact.operatingReduction)}</td><td>${money(impact.operatingReductionAmount)}</td></tr>`).join("") || '<tr><td colspan="3">No operating reductions selected.</td></tr>';
-  const impactRows = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => `<tr><td>${impact.department.name}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "Protected" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.totalReduction)}</td><td>${impact.locked || constitutional(impact.department) ? "Locked/Protected" : "Adjustable"}</td></tr>`).join("");
+  const impactRows = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => `<tr><td>${impact.department.name}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.totalReduction)}</td><td>${impact.locked || constitutional(impact.department) ? "Locked" : "Adjustable"}</td></tr>`).join("");
   return { personnelRows, operatingRows, capitalRows, impactRows };
 }
 
@@ -946,7 +947,7 @@ document.addEventListener("click", (event) => {
     updateResults();
   }
   if (control === "export-rankings") csv("department-rankings.csv", ["Department", "Ad Valorem Support", "FTE", "Budget"], sortedRankingRows().map((row) => [row.name, money(row.support), number(row.fte), money(row.budget)]));
-  if (control === "export-impact") csv("scenario-impact.csv", ["Department", "FTE Reduced", "Operating Reduction", "Personnel Reduction", "Operating Reduction Amount", "Total Department Reduction"], scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => [impact.department.name, number(impact.fteReduction), constitutional(impact.department) ? "Protected" : percent(impact.operatingReduction), money(impact.personnelReduction), money(impact.operatingReductionAmount), money(impact.totalReduction)]));
+  if (control === "export-impact") csv("scenario-impact.csv", ["Department", "FTE Reduced", "Operating Reduction", "Personnel Reduction", "Operating Reduction Amount", "Total Department Reduction"], scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => [impact.department.name, number(impact.fteReduction), constitutional(impact.department) ? "" : percent(impact.operatingReduction), money(impact.personnelReduction), money(impact.operatingReductionAmount), money(impact.totalReduction)]));
   if (control === "export-pdf") exportPdf();
   if (control === "save-scenario") saveScenario();
   if (control === "load-scenario") loadScenario();
