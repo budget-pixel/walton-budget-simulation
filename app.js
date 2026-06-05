@@ -4,13 +4,16 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-const numberFormatter = new Intl.NumberFormat("en-US");
+const numberFormatter = new Intl.NumberFormat("en-US", {
+  maximumFractionDigits: 1
+});
 
-const scenarioYear = budgetData.assumptions.scenarioYear;
-const scenario = budgetData.fiscalYears.find((year) => year.year === scenarioYear);
-const budgetGap = scenario.projectedExpense - scenario.projectedRevenue;
+const percentFormatter = new Intl.NumberFormat("en-US", {
+  maximumFractionDigits: 1
+});
 
 const state = {
+  revenueAssumptions: { ...budgetData.revenueForecast.defaultAssumptions },
   fteReductions: {},
   operatingReductions: {},
   keptProjects: {}
@@ -21,11 +24,52 @@ let gapChart;
 let savingsChart;
 
 function formatCurrency(value) {
-  return currencyFormatter.format(value);
+  return currencyFormatter.format(Math.round(value));
+}
+
+function formatNumber(value) {
+  return numberFormatter.format(value);
 }
 
 function formatPercent(value) {
-  return `${Math.round(value)}%`;
+  return `${percentFormatter.format(value)}%`;
+}
+
+function getFiscalYears() {
+  const baseRevenue = budgetData.revenueForecast.baseRevenue;
+  const futureGrowth = Number(state.revenueAssumptions.futureRevenueGrowthRate || 0);
+  const fy2028Reduction = Number(state.revenueAssumptions.fy2028RevenueReduction || 0);
+  const fy2029Reduction = Number(state.revenueAssumptions.fy2029RevenueReduction || 0);
+
+  const fy2027 = baseRevenue;
+  const fy2028 = fy2027 * (1 + budgetData.revenueForecast.fixedGrowthRates.fy2028) - fy2028Reduction;
+  const fy2029 = fy2028 * (1 + budgetData.revenueForecast.fixedGrowthRates.fy2029) - fy2029Reduction;
+  const fy2030 = fy2029 * (1 + futureGrowth);
+  const fy2031 = fy2030 * (1 + futureGrowth);
+  const fy2032 = fy2031 * (1 + futureGrowth);
+  const expenseBaseline = budgetData.budgetBaselineTotals.totalBudgetBaseline;
+
+  return [
+    { year: "FY2027", projectedRevenue: fy2027, projectedExpense: expenseBaseline, revenueReduction: 0 },
+    { year: "FY2028", projectedRevenue: fy2028, projectedExpense: expenseBaseline, revenueReduction: fy2028Reduction },
+    { year: "FY2029", projectedRevenue: fy2029, projectedExpense: expenseBaseline, revenueReduction: fy2029Reduction },
+    { year: "FY2030", projectedRevenue: fy2030, projectedExpense: expenseBaseline, revenueReduction: 0 },
+    { year: "FY2031", projectedRevenue: fy2031, projectedExpense: expenseBaseline, revenueReduction: 0 },
+    { year: "FY2032", projectedRevenue: fy2032, projectedExpense: expenseBaseline, revenueReduction: 0 }
+  ];
+}
+
+function getScenario() {
+  return getFiscalYears().find((year) => year.year === budgetData.scenarioYear);
+}
+
+function getBudgetGap() {
+  const scenario = getScenario();
+  return scenario.projectedExpense - scenario.projectedRevenue;
+}
+
+function isFteAdjustable(department) {
+  return department.fteCount > 0 && !department.nonFteAdjustable;
 }
 
 function getDepartmentName(departmentId) {
@@ -34,11 +78,12 @@ function getDepartmentName(departmentId) {
 }
 
 function getScenarioTotals() {
+  const budgetGap = getBudgetGap();
   let personnelSavings = 0;
   let operatingSavings = 0;
 
   const departmentImpacts = budgetData.departments.map((department) => {
-    const fteReduction = Number(state.fteReductions[department.id] || 0);
+    const fteReduction = isFteAdjustable(department) ? Number(state.fteReductions[department.id] || 0) : 0;
     const operatingReduction = Number(state.operatingReductions[department.id] || 0);
     const departmentPersonnelSavings = fteReduction * department.averageFteCost;
     const departmentOperatingSavings = department.operatingBudget * (operatingReduction / 100);
@@ -64,6 +109,7 @@ function getScenarioTotals() {
   const remainingGap = budgetGap - totalSavings;
 
   return {
+    budgetGap,
     personnelSavings,
     operatingSavings,
     capitalSavings,
@@ -75,15 +121,15 @@ function getScenarioTotals() {
 
 function createSummaryCards() {
   const dashboardCards = document.querySelector("#dashboardCards");
-  const fy2027 = budgetData.fiscalYears.find((year) => year.year === "FY2027");
-  const fy2028 = budgetData.fiscalYears.find((year) => year.year === "FY2028");
+  const scenario = getScenario();
+  const fy2027 = getFiscalYears().find((year) => year.year === "FY2027");
 
   const cards = [
-    ["FY2027 Revenue Loss", formatCurrency(fy2027.revenueLoss)],
-    ["FY2028 Revenue Loss", formatCurrency(fy2028.revenueLoss)],
+    ["FY2027 Revenue Forecast", formatCurrency(fy2027.projectedRevenue)],
+    ["FY2028 Revenue Reduction", formatCurrency(state.revenueAssumptions.fy2028RevenueReduction)],
     ["Projected Expenses", formatCurrency(scenario.projectedExpense)],
     ["Projected Revenues", formatCurrency(scenario.projectedRevenue)],
-    ["Projected Budget Gap", formatCurrency(budgetGap)]
+    ["Projected Budget Gap", formatCurrency(getBudgetGap())]
   ];
 
   dashboardCards.innerHTML = cards
@@ -98,22 +144,23 @@ function createSummaryCards() {
 
 function createPersonnelControls() {
   const container = document.querySelector("#personnelControls");
+  const adjustableDepartments = budgetData.departments.filter(isFteAdjustable);
 
-  container.innerHTML = budgetData.departments
+  container.innerHTML = adjustableDepartments
     .map((department) => {
       state.fteReductions[department.id] = 0;
 
       return `
         <tr>
           <td><strong>${department.name}</strong></td>
-          <td>${numberFormatter.format(department.fteCount)}</td>
+          <td>${formatNumber(department.fteCount)}</td>
           <td>${formatCurrency(department.averageFteCost)}</td>
           <td>
             <input
               type="number"
               min="0"
               max="${department.fteCount}"
-              step="1"
+              step="0.5"
               value="0"
               data-control="fte"
               data-department="${department.id}"
@@ -129,8 +176,9 @@ function createPersonnelControls() {
 
 function createOperatingControls() {
   const container = document.querySelector("#operatingControls");
+  const departmentsWithOperatingBudget = budgetData.departments.filter((department) => department.operatingBudget > 0);
 
-  container.innerHTML = budgetData.departments
+  container.innerHTML = departmentsWithOperatingBudget
     .map((department) => {
       state.operatingReductions[department.id] = 0;
 
@@ -183,6 +231,18 @@ function createCapitalControls() {
     .join("");
 }
 
+function getFteAdjustmentLabel(department) {
+  if (department.nonFteAdjustable) {
+    return "Not FTE-adjustable";
+  }
+
+  if (department.fteCount === 0) {
+    return "No FTE baseline";
+  }
+
+  return "FTE-adjustable";
+}
+
 function createDepartmentCards() {
   const container = document.querySelector("#departmentCards");
 
@@ -209,14 +269,98 @@ function createDepartmentCards() {
           </div>
           <div class="detail-item">
             <span>FTE Count</span>
-            <strong>${numberFormatter.format(department.fteCount)}</strong>
+            <strong>${formatNumber(department.fteCount)}</strong>
           </div>
           <div class="detail-item">
             <span>Average Personnel Cost</span>
             <strong>${formatCurrency(department.averageFteCost)}</strong>
           </div>
+          <div class="detail-item">
+            <span>FTE Modeling</span>
+            <strong>${getFteAdjustmentLabel(department)}</strong>
+          </div>
+          <div class="detail-item">
+            <span>Historical FTE</span>
+            <strong>${formatHistoricalFte(department)}</strong>
+          </div>
         </div>
       </article>
+    `)
+    .join("");
+}
+
+function formatHistoricalFte(department) {
+  if (!department.historicalFte) {
+    return "Not available";
+  }
+
+  return `FY2024 ${formatNumber(department.historicalFte.fy2024)} / FY2025 ${formatNumber(department.historicalFte.fy2025)} / FY2026 ${formatNumber(department.historicalFte.fy2026)} / FY2027 ${formatNumber(department.historicalFte.fy2027)}`;
+}
+
+function createRevenueAssumptionsPanel() {
+  const container = document.querySelector("#revenueAssumptionControls");
+
+  container.innerHTML = `
+    <label class="assumption-control" for="futureRevenueGrowthRate">
+      <span>Revenue Growth Rate</span>
+      <input
+        id="futureRevenueGrowthRate"
+        type="number"
+        min="-10"
+        max="10"
+        step="0.1"
+        value="${state.revenueAssumptions.futureRevenueGrowthRate * 100}"
+        data-control="revenue-assumption"
+        data-assumption="futureRevenueGrowthRate"
+      >
+    </label>
+    <label class="assumption-control" for="fy2028RevenueReduction">
+      <span>FY2028 Revenue Reduction</span>
+      <input
+        id="fy2028RevenueReduction"
+        type="number"
+        min="0"
+        step="100000"
+        value="${state.revenueAssumptions.fy2028RevenueReduction}"
+        data-control="revenue-assumption"
+        data-assumption="fy2028RevenueReduction"
+      >
+    </label>
+    <label class="assumption-control" for="fy2029RevenueReduction">
+      <span>FY2029 Revenue Reduction</span>
+      <input
+        id="fy2029RevenueReduction"
+        type="number"
+        min="0"
+        step="100000"
+        value="${state.revenueAssumptions.fy2029RevenueReduction}"
+        data-control="revenue-assumption"
+        data-assumption="fy2029RevenueReduction"
+      >
+    </label>
+    <div class="forecast-table-wrap">
+      <table class="forecast-table">
+        <thead>
+          <tr>
+            <th>Fiscal Year</th>
+            <th>Forecast Revenue</th>
+            <th>Projected Gap</th>
+          </tr>
+        </thead>
+        <tbody id="forecastTable"></tbody>
+      </table>
+    </div>
+  `;
+}
+
+function updateForecastTable() {
+  document.querySelector("#forecastTable").innerHTML = getFiscalYears()
+    .map((year) => `
+      <tr>
+        <td><strong>${year.year}</strong></td>
+        <td>${formatCurrency(year.projectedRevenue)}</td>
+        <td>${formatCurrency(Math.max(year.projectedExpense - year.projectedRevenue, 0))}</td>
+      </tr>
     `)
     .join("");
 }
@@ -241,10 +385,11 @@ function createAssumptions() {
 }
 
 function createCharts() {
-  const years = budgetData.fiscalYears.map((year) => year.year);
-  const revenues = budgetData.fiscalYears.map((year) => year.projectedRevenue);
-  const expenses = budgetData.fiscalYears.map((year) => year.projectedExpense);
-  const gaps = budgetData.fiscalYears.map((year) => Math.max(year.projectedExpense - year.projectedRevenue, 0));
+  const fiscalYears = getFiscalYears();
+  const years = fiscalYears.map((year) => year.year);
+  const revenues = fiscalYears.map((year) => year.projectedRevenue);
+  const expenses = fiscalYears.map((year) => year.projectedExpense);
+  const gaps = fiscalYears.map((year) => Math.max(year.projectedExpense - year.projectedRevenue, 0));
 
   Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
   Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue("--color-text-muted").trim();
@@ -272,24 +417,7 @@ function createCharts() {
         }
       ]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: (context) => `${context.dataset.label}: ${formatCurrency(context.raw)}`
-          }
-        }
-      },
-      scales: {
-        y: {
-          ticks: {
-            callback: (value) => formatCurrency(value)
-          }
-        }
-      }
-    }
+    options: getLineChartOptions()
   });
 
   gapChart = new Chart(document.querySelector("#gapChart"), {
@@ -306,25 +434,7 @@ function createCharts() {
         }
       ]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        tooltip: {
-          callbacks: {
-            label: (context) => `${context.dataset.label}: ${formatCurrency(context.raw)}`
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: (value) => formatCurrency(value)
-          }
-        }
-      }
-    }
+    options: getBarChartOptions()
   });
 
   savingsChart = new Chart(document.querySelector("#savingsChart"), {
@@ -361,12 +471,76 @@ function createCharts() {
   });
 }
 
+function getLineChartOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => `${context.dataset.label}: ${formatCurrency(context.raw)}`
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: (value) => formatCurrency(value)
+        }
+      }
+    }
+  };
+}
+
+function getBarChartOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => `${context.dataset.label}: ${formatCurrency(context.raw)}`
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: (value) => formatCurrency(value)
+        }
+      }
+    }
+  };
+}
+
+function updateCharts() {
+  const fiscalYears = getFiscalYears();
+  const years = fiscalYears.map((year) => year.year);
+  const revenues = fiscalYears.map((year) => year.projectedRevenue);
+  const expenses = fiscalYears.map((year) => year.projectedExpense);
+  const gaps = fiscalYears.map((year) => Math.max(year.projectedExpense - year.projectedRevenue, 0));
+
+  trendChart.data.labels = years;
+  trendChart.data.datasets[0].data = revenues;
+  trendChart.data.datasets[1].data = expenses;
+  trendChart.update();
+
+  gapChart.data.labels = years;
+  gapChart.data.datasets[0].data = gaps;
+  gapChart.update();
+}
+
 function updateScenario() {
   const totals = getScenarioTotals();
-  const gapClosed = Math.min(Math.max((totals.totalSavings / budgetGap) * 100, 0), 100);
+  const gapClosed = Math.min(Math.max((totals.totalSavings / totals.budgetGap) * 100, 0), 100);
 
-  document.querySelector("#startingGap").textContent = formatCurrency(budgetGap);
-  document.querySelector("#resultBudgetGap").textContent = formatCurrency(budgetGap);
+  createSummaryCards();
+  updateCharts();
+  updateForecastTable();
+
+  document.querySelector("#startingGap").textContent = formatCurrency(totals.budgetGap);
+  document.querySelector("#resultBudgetGap").textContent = formatCurrency(totals.budgetGap);
   document.querySelector("#resultPersonnelSavings").textContent = formatCurrency(totals.personnelSavings);
   document.querySelector("#resultOperatingSavings").textContent = formatCurrency(totals.operatingSavings);
   document.querySelector("#resultCapitalSavings").textContent = formatCurrency(totals.capitalSavings);
@@ -406,7 +580,7 @@ function updateScenario() {
     .map((impact) => `
       <tr>
         <td><strong>${impact.department.name}</strong></td>
-        <td>${impact.fteReduction}</td>
+        <td>${formatNumber(impact.fteReduction)}</td>
         <td>${formatPercent(impact.operatingReduction)}</td>
         <td>${formatCurrency(impact.personnelSavings)}</td>
         <td>${formatCurrency(impact.operatingSavings)}</td>
@@ -439,6 +613,13 @@ function bindEvents() {
       state.operatingReductions[target.dataset.department] = Number(target.value);
       updateScenario();
     }
+
+    if (target.dataset.control === "revenue-assumption") {
+      const assumption = target.dataset.assumption;
+      const value = Number(target.value || 0);
+      state.revenueAssumptions[assumption] = assumption === "futureRevenueGrowthRate" ? value / 100 : value;
+      updateScenario();
+    }
   });
 
   document.addEventListener("change", (event) => {
@@ -457,6 +638,7 @@ function init() {
   createOperatingControls();
   createCapitalControls();
   createDepartmentCards();
+  createRevenueAssumptionsPanel();
   createAssumptions();
   createCharts();
   bindEvents();
