@@ -110,6 +110,72 @@ const capitalBudgetTotal = activeDepartments.reduce((total, department) => total
 const totalBudgetBaseline = activeDepartments.reduce((total, department) => total + department.totalBudget, 0);
 const adValoremSupportedExpenseBaseline = 163473140;
 
+const constitutionalOfficeIds = [
+  "sheriffs-office",
+  "clerk-of-court",
+  "tax-collector",
+  "property-appraiser",
+  "supervisor-of-elections"
+];
+
+const excludedScenarioDepartmentIds = [
+  "medical-examiner",
+  "state-attorney",
+  "public-defender",
+  "county-court",
+  "circuit-court",
+  "guardian-ad-litem",
+  "human-services"
+];
+
+const personnelCostDrivers = {
+  baseSalary: 0.62,
+  cola: 0.03,
+  frs: 0.13,
+  insurance: 0.14,
+  fica: 0.062,
+  otherBenefits: 0.018
+};
+
+const millageAssumptions = {
+  adoptedMillage: 3.519,
+  taxableValueBase: 43097409207
+};
+
+const propertyTaxCategories = [
+  { name: "Sheriff Operations", departmentId: "sheriffs-office", allocation: 90922236, fundingType: "full" },
+  { name: "Capital Infrastructure", departmentId: "board-of-county-commissioners", allocation: 13425788, fundingType: "full" },
+  { name: "Board of County Commissioners", departmentId: "board-of-county-commissioners", allocation: 12545354, fundingType: "full" },
+  { name: "Sheriff Infrastructure", departmentId: "sheriffs-office", allocation: 6494163, fundingType: "full" },
+  { name: "Clerk of Court", departmentId: "clerk-of-court", allocation: 5725231, fundingType: "full" },
+  { name: "Property Appraiser", departmentId: "property-appraiser", allocation: 4918865, fundingType: "full" },
+  { name: "Tax Collector", departmentId: "tax-collector", allocation: 4313423, fundingType: "full" },
+  { name: "Supervisor of Elections", departmentId: "supervisor-of-elections", allocation: 1543630, fundingType: "full" },
+  { name: "Building Construction and Maintenance", departmentId: "building-construction-and-maintenance", allocation: 1013592, fundingType: "partial" },
+  { name: "Planning", departmentId: "planning", allocation: 462240, fundingType: "partial" },
+  { name: "Libraries", departmentId: "libraries", allocation: 213107, fundingType: "partial" },
+  { name: "Engineering Services", departmentId: "engineering-services", allocation: 190138, fundingType: "partial" },
+  { name: "County Administration", departmentId: "county-administration", allocation: 216347, fundingType: "partial" },
+  { name: "Human Resources", departmentId: "human-resources", allocation: 136289, fundingType: "partial" },
+  { name: "Office of Management and Budget", departmentId: "office-of-management-and-budget", allocation: 123423, fundingType: "partial" },
+  { name: "Emergency Management", departmentId: "emergency-management", allocation: 87682, fundingType: "partial" },
+  { name: "Environmental Services", departmentId: "environmental-services", allocation: 81011, fundingType: "partial" },
+  { name: "Recreation", departmentId: "recreation", allocation: 65572, fundingType: "partial" },
+  { name: "Code Compliance", departmentId: "code-compliance", allocation: 43697, fundingType: "partial" },
+  { name: "Eagle Springs Golf", departmentId: "eagle-springs-golf-and-recreation-center", allocation: 77389, fundingType: "partial" },
+  { name: "Veteran Services", departmentId: "veteran-services", allocation: 318000, fundingType: "partial" },
+  { name: "Extension Office", departmentId: "extension-office", allocation: 554787, fundingType: "full" },
+  { name: "Probation Services", departmentId: "probation-services", allocation: 157000, fundingType: "full" },
+  { name: "Soil Conservation", departmentId: "soil-conservation", allocation: 150000, fundingType: "full" }
+];
+
+const sampleParcels = [
+  { parcel: "00-2S-19-24000-001-0000", address: "176 Montgomery Cir", city: "DeFuniak Springs", zip: "32435", homestead: "HX", justValue: 475000, taxableValue: 295000 },
+  { parcel: "24-3S-19-25000-004-0120", address: "123 Seaside Ave", city: "Santa Rosa Beach", zip: "32459", homestead: "HX", justValue: 925000, taxableValue: 525000 },
+  { parcel: "31-2S-20-33000-010-0010", address: "88 Bay Grove Rd", city: "Freeport", zip: "32439", homestead: "HX", justValue: 385000, taxableValue: 245000 },
+  { parcel: "16-3N-21-37000-005-0020", address: "450 Lakeview Dr", city: "Paxton", zip: "32538", homestead: "HX", justValue: 310000, taxableValue: 198000 }
+];
+
 const budgetData = {
   baselineYear: "FY2026-2027",
   scenarioYear: "FY2028",
@@ -163,5 +229,11 @@ const budgetData = {
   activeFteDepartments,
   excludedFteDepartments,
   nonFteAdjustableDepartmentIds,
+  constitutionalOfficeIds,
+  excludedScenarioDepartmentIds,
+  personnelCostDrivers,
+  millageAssumptions,
+  propertyTaxCategories,
+  sampleParcels,
   capitalProjects: itemizedCapitalProjects
 };
