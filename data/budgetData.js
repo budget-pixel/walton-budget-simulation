@@ -276,7 +276,6 @@ const departmentBudgetBaseline = [
 const activeFteDepartments = [
   { id: "board-of-county-commissioners", name: "Board of County Commissioners", historicalFte: { fy2024: 10, fy2025: 10.5, fy2026: 10.5, fy2027: 10.5 }, fteCount: 10.5 },
   { id: "building-construction-and-maintenance", name: "Building Construction and Maintenance", historicalFte: { fy2024: 58, fy2025: 59, fy2026: 68, fy2027: 68 }, fteCount: 68 },
-  { id: "building-department", name: "Building Department", historicalFte: { fy2024: 24, fy2025: 24, fy2026: 21, fy2027: 21 }, fteCount: 21 },
   { id: "circuit-court", name: "Circuit Court", historicalFte: { fy2024: 1, fy2025: 1, fy2026: 1, fy2027: 1 }, fteCount: 1 },
   { id: "clerk-of-court", name: "Clerk of Court", historicalFte: { fy2024: 74, fy2025: 72, fy2026: 77, fy2027: 80 }, fteCount: 80 },
   { id: "code-compliance", name: "Code Compliance", historicalFte: { fy2024: 41, fy2025: 42, fy2026: 43, fy2027: 43 }, fteCount: 43 },
@@ -304,26 +303,41 @@ const activeFteDepartments = [
   { id: "veteran-services", name: "Veteran Services", historicalFte: { fy2024: 3, fy2025: 3, fy2026: 3, fy2027: 3 }, fteCount: 3 }
 ];
 
-const excludedFteDepartments = [
-  { id: "housing-and-urban-development", name: "Housing & Urban Development", historicalFte: { fy2024: 3, fy2025: 3, fy2026: 3, fy2027: 3 }, fteCount: 3 },
-  { id: "mosquito-control", name: "Mosquito Control", historicalFte: { fy2024: 9, fy2025: 9, fy2026: 9, fy2027: 9 }, fteCount: 9 },
-  { id: "mossy-head-wastewater-treatment-facility", name: "Mossy Head Wastewater Treatment Facility", historicalFte: { fy2024: 0, fy2025: 1, fy2026: 1, fy2027: 1 }, fteCount: 1 },
-  { id: "public-works", name: "Public Works", historicalFte: { fy2024: 142, fy2025: 142, fy2026: 148, fy2027: 148 }, fteCount: 148 },
-  { id: "solid-waste", name: "Solid Waste", historicalFte: { fy2024: 26, fy2025: 27, fy2026: 27, fy2027: 27 }, fteCount: 27 },
-  { id: "tourism-administration", name: "Tourism Administration", historicalFte: { fy2024: 4, fy2025: 4, fy2026: 4, fy2027: 4 }, fteCount: 4 },
-  { id: "tourism-beach-operations", name: "Tourism Beach Operations", historicalFte: { fy2024: 56, fy2025: 60, fy2026: 60, fy2027: 67 }, fteCount: 67 },
-  { id: "tourism-beach-tram", name: "Tourism Beach Tram", historicalFte: { fy2024: 74, fy2025: 54, fy2026: 54, fy2027: 60 }, fteCount: 60 },
-  { id: "tourism-communications", name: "Tourism Communications", historicalFte: { fy2024: 5, fy2025: 5, fy2026: 5, fy2027: 5 }, fteCount: 5 },
-  { id: "tourism-marketing", name: "Tourism Marketing", historicalFte: { fy2024: 5, fy2025: 4, fy2026: 4, fy2027: 4 }, fteCount: 4 },
-  { id: "tourism-sales-and-visitors-center", name: "Tourism Sales and Visitors Center", historicalFte: { fy2024: 8, fy2025: 9, fy2026: 9, fy2027: 9 }, fteCount: 9 }
-];
-
 const nonFteAdjustableDepartmentIds = [
   "tax-collector",
   "supervisor-of-elections",
   "clerk-of-court",
   "sheriffs-office",
   "property-appraiser"
+];
+
+const capitalProjects = [
+  { id: "bcc-suv", name: "SUV", departmentId: "board-of-county-commissioners", cost: 50000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "bcm-crew-cab-truck-1", name: "Crew Cab Truck", departmentId: "building-construction-and-maintenance", cost: 68000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "bcm-crew-cab-truck-2", name: "Crew Cab Truck", departmentId: "building-construction-and-maintenance", cost: 68000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "bcm-van-1", name: "Van", departmentId: "building-construction-and-maintenance", cost: 45000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "bcm-van-2", name: "Van", departmentId: "building-construction-and-maintenance", cost: 45000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "bcm-lawn-mower-1", name: "52\" Lawn Mower", departmentId: "building-construction-and-maintenance", cost: 11000, category: "Equipment", discretionary: true, selected: true },
+  { id: "bcm-lawn-mower-2", name: "52\" Lawn Mower", departmentId: "building-construction-and-maintenance", cost: 11000, category: "Equipment", discretionary: true, selected: true },
+  { id: "bcm-crew-cab-truck-3", name: "Crew Cab Truck", departmentId: "building-construction-and-maintenance", cost: 68000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "code-crew-cab-truck-1", name: "4x4 Crew Cab Truck", departmentId: "code-compliance", cost: 36000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "code-crew-cab-truck-2", name: "4x4 Crew Cab Truck", departmentId: "code-compliance", cost: 36000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "code-utv-1", name: "UTV", departmentId: "code-compliance", cost: 19200, category: "Equipment", discretionary: true, selected: true },
+  { id: "code-utv-2", name: "UTV", departmentId: "code-compliance", cost: 19200, category: "Equipment", discretionary: true, selected: true },
+  { id: "code-utv-3", name: "UTV", departmentId: "code-compliance", cost: 19200, category: "Equipment", discretionary: true, selected: true },
+  { id: "code-utv-4", name: "UTV", departmentId: "code-compliance", cost: 19200, category: "Equipment", discretionary: true, selected: true },
+  { id: "county-administration-suv", name: "SUV", departmentId: "county-administration", cost: 65000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "eagle-springs-reel-grinder", name: "Reel Grinder", departmentId: "eagle-springs-golf-and-recreation-center", cost: 68000, category: "Equipment", discretionary: true, selected: true },
+  { id: "eagle-springs-golf-lift", name: "Golf Lift", departmentId: "eagle-springs-golf-and-recreation-center", cost: 13000, category: "Equipment", discretionary: true, selected: true },
+  { id: "emergency-management-equipment", name: "Emergency Management Equipment", departmentId: "emergency-management", cost: 30000, category: "Equipment", discretionary: true, selected: true },
+  { id: "engineering-crew-cab-truck", name: "4x4 Crew Cab Truck", departmentId: "engineering-services", cost: 45000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "environmental-atv-trailer", name: "ATV Trailer", departmentId: "environmental-services", cost: 2500, category: "Equipment", discretionary: true, selected: true },
+  { id: "environmental-atv-side-by-side", name: "ATV Side-by-side", departmentId: "environmental-services", cost: 17500, category: "Equipment", discretionary: true, selected: true },
+  { id: "environmental-vessel-trailer", name: "Vessel and Associated Trailer", departmentId: "environmental-services", cost: 175000, category: "Equipment", discretionary: true, selected: true },
+  { id: "extension-crew-cab-truck", name: "4x4 Crew Cab Truck", departmentId: "extension-office", cost: 40000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "human-resources-suv", name: "SUV", departmentId: "human-resources", cost: 31000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "planning-suv-1", name: "SUV", departmentId: "planning", cost: 49000, category: "Vehicle", discretionary: true, selected: true },
+  { id: "planning-suv-2", name: "SUV", departmentId: "planning", cost: 60000, category: "Vehicle", discretionary: true, selected: true }
 ];
 
 const enrichDepartment = (department) => {
@@ -336,8 +350,7 @@ const enrichDepartment = (department) => {
     totalBudget,
     averageFteCost,
     historicalFte: fteProfile ? fteProfile.historicalFte : null,
-    nonFteAdjustable: nonFteAdjustableDepartmentIds.includes(department.id),
-    excludedFromActiveSimulation: false
+    nonFteAdjustable: department.fteCount === 0 || nonFteAdjustableDepartmentIds.includes(department.id)
   };
 };
 
@@ -347,6 +360,7 @@ const totalBudgetBaseline = activeDepartments.reduce((total, department) => tota
 const personnelBudgetTotal = activeDepartments.reduce((total, department) => total + department.personnelBudget, 0);
 const operatingBudgetTotal = activeDepartments.reduce((total, department) => total + department.operatingBudget, 0);
 const capitalBudgetTotal = activeDepartments.reduce((total, department) => total + department.capitalBudget, 0);
+const capitalProjectsTotal = capitalProjects.reduce((total, project) => total + project.cost, 0);
 
 const budgetData = {
   baselineYear: "FY2026-2027",
@@ -369,7 +383,8 @@ const budgetData = {
     personnelBudgetTotal,
     operatingBudgetTotal,
     capitalBudgetTotal,
-    totalBudgetBaseline
+    totalBudgetBaseline,
+    capitalProjectsTotal
   },
   assumptions: {
     baselineYear: "FY2026-2027",
@@ -381,15 +396,16 @@ const budgetData = {
       "FY2030 through FY2032 revenue uses the editable future revenue growth rate."
     ],
     inflationAssumptions: [
-      "The FY2026-2027 department budget baseline is used as the active expense baseline.",
-      "Personnel, operating, and capital budget values are modeled from the department baseline.",
-      "Blank values, dashes, and en-dashes are treated as zero in the source baseline."
+      "FY2027 projected expenses equal the sum of all active included department budgets.",
+      "Personnel, operating, and capital budget values are modeled from the included department baseline.",
+      "Departments outside the property-tax simulation are not stored in the active data model."
     ],
     methodology: [
       "The projected budget gap is calculated as projected expenses minus projected revenues for the selected scenario year.",
       "Savings are calculated only from user-selected reductions and are not recommendations.",
-      "Excluded FTE departments are stored as context only and are not displayed in Build Your Own Budget controls.",
-      "Constitutional officer departments remain visible but are not FTE-adjustable."
+      "The Building Department, Public Works, Solid Waste, Mosquito Control, Housing & Urban Development, Mossy Head Wastewater Treatment Facility, and Tourism departments are excluded from the active data model.",
+      "Tax Collector, Supervisor of Elections, Clerk of Court, Sheriff's Office, and Property Appraiser remain visible but are not FTE-adjustable.",
+      "Departments with zero FTE are visible when budgeted, but do not display FTE reduction controls."
     ],
     formulas: [
       {
@@ -424,14 +440,6 @@ const budgetData = {
   },
   departments: activeDepartments,
   activeFteDepartments,
-  excludedFteDepartments,
   nonFteAdjustableDepartmentIds,
-  capitalProjects: activeDepartments
-    .filter((department) => department.capitalBudget > 0)
-    .map((department) => ({
-      id: `${department.id}-capital-budget`,
-      name: `${department.name} Capital Budget`,
-      departmentId: department.id,
-      cost: department.capitalBudget
-    }))
+  capitalProjects
 };
