@@ -85,7 +85,7 @@ function getFiscalYears() {
   const futureExpenseInflationRate = Number(state.revenueAssumptions.futureExpenseInflationRate || 0);
   const fy2028Reduction = Number(state.revenueAssumptions.fy2028RevenueReduction || 0);
   const fy2029Reduction = Number(state.revenueAssumptions.fy2029RevenueReduction || 0);
-  const projectedSupportedExpenseBaseline = budgetData.budgetBaselineTotals.adValoremSupportedExpenseBaseline || budgetData.budgetBaselineTotals.totalBudgetBaseline;
+  const projectedSupportedExpenseBaseline = 146641086;
 
   const fy2027Baseline = baseRevenue;
   const fy2027 = fy2027Baseline - fy2028Reduction;
@@ -747,7 +747,7 @@ function createAssumptions() {
 }
 
 function createCharts() {
-  const fiscalYears = getFiscalYears();
+  const fiscalYears = getFiscalYears().filter((year) => !year.historical);
   const shortfallYears = getProjectedShortfallYears();
   Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
   Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue("--color-text-muted").trim();
@@ -756,9 +756,7 @@ function createCharts() {
     data: {
       labels: fiscalYears.map((year) => year.year),
       datasets: [
-        { label: "Historical Ad Valorem Revenue", data: fiscalYears.map((year) => year.historical ? year.revenue : null), borderColor: "#006231", backgroundColor: "rgba(0, 98, 49, 0.12)", tension: 0.25, fill: false, spanGaps: false },
-        { label: "Projected Revenue", data: fiscalYears.map((year) => year.historical ? null : year.revenue), borderColor: "#006231", backgroundColor: "rgba(0, 98, 49, 0.08)", borderDash: [6, 6], tension: 0.25, fill: false, spanGaps: false },
-        { label: "Historical Ad Valorem Supported Expense", data: fiscalYears.map((year) => year.historicalSupportedExpense), borderColor: "#24445a", backgroundColor: "rgba(36, 68, 90, 0.12)", tension: 0.25, fill: false, spanGaps: false },
+        { label: "Projected Revenue", data: fiscalYears.map((year) => year.revenue), borderColor: "#006231", backgroundColor: "rgba(0, 98, 49, 0.08)", borderDash: [6, 6], tension: 0.25, fill: false, spanGaps: false },
         { label: "Projected Ad Valorem Supported Expense", data: fiscalYears.map((year) => year.projectedSupportedExpense), borderColor: "#d1be78", backgroundColor: "rgba(209, 190, 120, 0.16)", tension: 0.25, fill: false, spanGaps: false }
       ]
     },
@@ -780,13 +778,11 @@ function getBarChartOptions() {
 }
 
 function updateCharts() {
-  const fiscalYears = getFiscalYears();
+  const fiscalYears = getFiscalYears().filter((year) => !year.historical);
   const shortfallYears = getProjectedShortfallYears();
   trendChart.data.labels = fiscalYears.map((year) => year.year);
-  trendChart.data.datasets[0].data = fiscalYears.map((year) => year.historical ? year.revenue : null);
-  trendChart.data.datasets[1].data = fiscalYears.map((year) => year.historical ? null : year.revenue);
-  trendChart.data.datasets[2].data = fiscalYears.map((year) => year.historicalSupportedExpense);
-  trendChart.data.datasets[3].data = fiscalYears.map((year) => year.projectedSupportedExpense);
+  trendChart.data.datasets[0].data = fiscalYears.map((year) => year.revenue);
+  trendChart.data.datasets[1].data = fiscalYears.map((year) => year.projectedSupportedExpense);
   trendChart.update();
   shortfallChart.data.labels = shortfallYears.map((year) => year.year);
   shortfallChart.data.datasets[0].data = shortfallYears.map((year) => year.revenueShortfall);
