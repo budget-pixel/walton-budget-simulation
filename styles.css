@@ -185,6 +185,22 @@ input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-pr
 .results-list dt { color: var(--color-text-muted); font-weight: 800; }
 .results-list dd { margin: 0; font-weight: 800; }
 .remaining-row dd { color: var(--color-primary); font-size: 1.15rem; }
+
+.negative-value {
+  color: #b42318 !important;
+  font-weight: 800;
+}
+
+.positive-value {
+  color: var(--color-primary) !important;
+  font-weight: 800;
+}
+
+.slider-meta-secondary {
+  margin-top: 2px;
+  color: var(--color-primary);
+  font-weight: 800;
+}
 .progress-block { margin-top: 18px; }
 .progress-label { margin-bottom: 8px; display: flex; justify-content: space-between; gap: 12px; color: var(--color-text-muted); }
 .progress-track, .bar-track { height: 14px; overflow: hidden; border-radius: 999px; background: var(--color-surface-muted); }
