@@ -57,16 +57,22 @@ function getFiscalYears() {
   const fy2029Reduction = Number(state.revenueAssumptions.fy2029RevenueReduction || 0);
 
   const fy2027 = baseRevenue;
-  const fy2028 = fy2027 * (1 + budgetData.revenueForecast.fixedGrowthRates.fy2028) - fy2028Reduction;
+  const fy2028Baseline = fy2027 * (1 + budgetData.revenueForecast.fixedGrowthRates.fy2028);
+  const fy2028 = fy2028Baseline - fy2028Reduction;
+  const fy2029Baseline = fy2028Baseline * (1 + budgetData.revenueForecast.fixedGrowthRates.fy2029);
   const fy2029 = fy2028 * (1 + budgetData.revenueForecast.fixedGrowthRates.fy2029) - fy2029Reduction;
+  const fy2030Baseline = fy2029Baseline * (1 + futureGrowth);
   const fy2030 = fy2029 * (1 + futureGrowth);
+  const fy2031Baseline = fy2030Baseline * (1 + futureGrowth);
   const fy2031 = fy2030 * (1 + futureGrowth);
+  const fy2032Baseline = fy2031Baseline * (1 + futureGrowth);
   const fy2032 = fy2031 * (1 + futureGrowth);
-  const expenseBaseline = budgetData.budgetBaselineTotals.totalBudgetBaseline;
 
   const historicalYears = (budgetData.revenueForecast.historicalRevenue || []).map((item) => ({
     year: item.year,
     projectedRevenue: item.revenue,
+    baselineRevenue: item.revenue,
+    revenueLoss: 0,
     projectedExpense: null,
     revenueReduction: 0,
     type: item.type,
@@ -74,12 +80,12 @@ function getFiscalYears() {
   }));
 
   const forecastYears = [
-    { year: "FY2027", projectedRevenue: fy2027, projectedExpense: expenseBaseline, revenueReduction: 0, type: "Forecast", historical: false },
-    { year: "FY2028", projectedRevenue: fy2028, projectedExpense: expenseBaseline, revenueReduction: fy2028Reduction, type: "Forecast", historical: false },
-    { year: "FY2029", projectedRevenue: fy2029, projectedExpense: expenseBaseline, revenueReduction: fy2029Reduction, type: "Forecast", historical: false },
-    { year: "FY2030", projectedRevenue: fy2030, projectedExpense: expenseBaseline, revenueReduction: 0, type: "Forecast", historical: false },
-    { year: "FY2031", projectedRevenue: fy2031, projectedExpense: expenseBaseline, revenueReduction: 0, type: "Forecast", historical: false },
-    { year: "FY2032", projectedRevenue: fy2032, projectedExpense: expenseBaseline, revenueReduction: 0, type: "Forecast", historical: false }
+    { year: "FY2027", projectedRevenue: fy2027, baselineRevenue: fy2027, revenueLoss: 0, projectedExpense: fy2027, revenueReduction: 0, type: "Forecast", historical: false },
+    { year: "FY2028", projectedRevenue: fy2028, baselineRevenue: fy2028Baseline, revenueLoss: fy2028Baseline - fy2028, projectedExpense: fy2028Baseline, revenueReduction: fy2028Reduction, type: "Forecast", historical: false },
+    { year: "FY2029", projectedRevenue: fy2029, baselineRevenue: fy2029Baseline, revenueLoss: fy2029Baseline - fy2029, projectedExpense: fy2029Baseline, revenueReduction: fy2029Reduction, type: "Forecast", historical: false },
+    { year: "FY2030", projectedRevenue: fy2030, baselineRevenue: fy2030Baseline, revenueLoss: fy2030Baseline - fy2030, projectedExpense: fy2030Baseline, revenueReduction: 0, type: "Forecast", historical: false },
+    { year: "FY2031", projectedRevenue: fy2031, baselineRevenue: fy2031Baseline, revenueLoss: fy2031Baseline - fy2031, projectedExpense: fy2031Baseline, revenueReduction: 0, type: "Forecast", historical: false },
+    { year: "FY2032", projectedRevenue: fy2032, baselineRevenue: fy2032Baseline, revenueLoss: fy2032Baseline - fy2032, projectedExpense: fy2032Baseline, revenueReduction: 0, type: "Forecast", historical: false }
   ];
 
   return [...historicalYears, ...forecastYears];
@@ -94,8 +100,7 @@ function getScenario() {
 }
 
 function getBudgetGap() {
-  const scenario = getScenario();
-  return scenario.projectedExpense - scenario.projectedRevenue;
+  return getScenario().revenueLoss;
 }
 
 function isFteAdjustable(department) {
@@ -157,7 +162,7 @@ function createSummaryCards() {
   const cards = [
     ["FY2027 Revenue Forecast", formatCurrency(fy2027.projectedRevenue)],
     ["FY2028 Revenue Reduction", formatCurrency(state.revenueAssumptions.fy2028RevenueReduction)],
-    ["Projected Expenses", formatCurrency(scenario.projectedExpense)],
+    ["No-Reduction Revenue Baseline", formatCurrency(scenario.baselineRevenue)],
     ["Projected Revenues", formatCurrency(scenario.projectedRevenue)],
     ["Projected Budget Gap", formatCurrency(getBudgetGap())]
   ];
@@ -373,9 +378,10 @@ function createRevenueAssumptionsPanel() {
         <thead>
           <tr>
             <th>Fiscal Year</th>
-            <th>Revenue</th>
+            <th>Reduced Revenue</th>
+            <th>No-Reduction Baseline</th>
             <th>Status</th>
-            <th>Projected Gap</th>
+            <th>Budget Gap</th>
           </tr>
         </thead>
         <tbody id="forecastTable"></tbody>
@@ -387,11 +393,13 @@ function createRevenueAssumptionsPanel() {
 function updateForecastTable() {
   document.querySelector("#forecastTable").innerHTML = getFiscalYears()
     .map((year) => {
-      const gap = year.projectedExpense === null ? "—" : formatCurrency(Math.max(year.projectedExpense - year.projectedRevenue, 0));
+      const baseline = year.historical ? "—" : formatCurrency(year.baselineRevenue);
+      const gap = year.historical ? "—" : formatCurrency(year.revenueLoss);
       return `
         <tr>
           <td><strong>${year.year}</strong></td>
           <td>${formatCurrency(year.projectedRevenue)}</td>
+          <td>${baseline}</td>
           <td>${year.type}</td>
           <td>${gap}</td>
         </tr>
@@ -423,8 +431,8 @@ function createCharts() {
   const fiscalYears = getFiscalYears();
   const years = fiscalYears.map((year) => year.year);
   const revenues = fiscalYears.map((year) => year.projectedRevenue);
-  const expenses = fiscalYears.map((year) => year.projectedExpense);
-  const gaps = fiscalYears.map((year) => year.projectedExpense === null ? null : Math.max(year.projectedExpense - year.projectedRevenue, 0));
+  const baselineRevenues = fiscalYears.map((year) => year.historical ? null : year.baselineRevenue);
+  const gaps = fiscalYears.map((year) => year.historical ? null : year.revenueLoss);
 
   Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
   Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue("--color-text-muted").trim();
@@ -435,7 +443,7 @@ function createCharts() {
       labels: years,
       datasets: [
         {
-          label: "Ad Valorem Revenue",
+          label: "Actual / Reduced Revenue",
           data: revenues,
           borderColor: "rgb(56, 106, 125)",
           backgroundColor: "rgba(56, 106, 125, 0.14)",
@@ -443,12 +451,12 @@ function createCharts() {
           fill: true
         },
         {
-          label: "Projected Expenses",
-          data: expenses,
+          label: "No-Reduction Revenue Baseline",
+          data: baselineRevenues,
           borderColor: "rgb(138, 109, 59)",
           backgroundColor: "rgba(138, 109, 59, 0.12)",
           tension: 0.25,
-          fill: true,
+          fill: false,
           spanGaps: false
         }
       ]
@@ -514,7 +522,7 @@ function getLineChartOptions() {
     plugins: {
       tooltip: {
         callbacks: {
-          label: (context) => `${context.dataset.label}: ${formatCurrency(context.raw)}`
+          label: (context) => `${context.dataset.label}: ${context.raw === null ? "N/A" : formatCurrency(context.raw)}`
         }
       }
     },
@@ -554,12 +562,12 @@ function updateCharts() {
   const fiscalYears = getFiscalYears();
   const years = fiscalYears.map((year) => year.year);
   const revenues = fiscalYears.map((year) => year.projectedRevenue);
-  const expenses = fiscalYears.map((year) => year.projectedExpense);
-  const gaps = fiscalYears.map((year) => year.projectedExpense === null ? null : Math.max(year.projectedExpense - year.projectedRevenue, 0));
+  const baselineRevenues = fiscalYears.map((year) => year.historical ? null : year.baselineRevenue);
+  const gaps = fiscalYears.map((year) => year.historical ? null : year.revenueLoss);
 
   trendChart.data.labels = years;
   trendChart.data.datasets[0].data = revenues;
-  trendChart.data.datasets[1].data = expenses;
+  trendChart.data.datasets[1].data = baselineRevenues;
   trendChart.update();
 
   gapChart.data.labels = years;
@@ -569,7 +577,7 @@ function updateCharts() {
 
 function updateScenario() {
   const totals = getScenarioTotals();
-  const gapClosed = Math.min(Math.max((totals.totalSavings / totals.budgetGap) * 100, 0), 100);
+  const gapClosed = totals.budgetGap > 0 ? Math.min(Math.max((totals.totalSavings / totals.budgetGap) * 100, 0), 100) : 100;
 
   createSummaryCards();
   updateCharts();
