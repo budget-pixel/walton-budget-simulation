@@ -964,10 +964,6 @@ function renderResultingShortfallForecast(totals) {
 
   forecastBox.innerHTML = `
     <div class="resulting-shortfall-table">
-      <div class="resulting-shortfall-table-header">
-        <span>Fiscal Year</span>
-        <span>Resulting Shortfall</span>
-      </div>
       ${rows.map((row) => `
         <div class="resulting-shortfall-table-row">
           <strong>${row.year}</strong>
