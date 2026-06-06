@@ -51,7 +51,7 @@ a { color: inherit; }
   justify-content: space-between;
   gap: 24px;
 }
-.brand-mount { min-width: max-content; }
+.brand-mount { min-width: max-content; transform: translateX(calc(16px - max(16px, calc((100vw - 1180px) / 2)))); }
 .primary-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
 .primary-nav a {
   padding: 8px 10px;
