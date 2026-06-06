@@ -957,7 +957,7 @@ function renderResultingShortfallForecast(totals) {
         const forecastShortfall = year.directRevenueReduction + year.expenseInflationPressure;
         return {
           year: year.year,
-          amount: Math.max(forecastShortfall - totals.totalReductions, 0)
+          amount: Math.max(forecastShortfall + fy2027MillageShortfall - totals.totalReductions, 0)
         };
       })
   ];
