@@ -286,6 +286,56 @@ function renderChrome() {
         box-shadow: 0 1px 0 rgba(0, 98, 49, 0.16);
       }
 
+      /* --- Begin resulting-shortfall-forecast styles --- */
+
+      .resulting-shortfall-forecast {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .resulting-shortfall-table {
+        display: grid;
+        width: 100%;
+        margin-top: 4px;
+        border-top: 1px solid rgba(0, 98, 49, 0.14);
+      }
+
+      .resulting-shortfall-table-header,
+      .resulting-shortfall-table-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 12px;
+        padding: 7px 0;
+      }
+
+      .resulting-shortfall-table-header {
+        color: var(--color-muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .resulting-shortfall-table-row {
+        border-top: 1px solid rgba(0, 98, 49, 0.08);
+      }
+
+      .resulting-shortfall-table-row strong {
+        color: #006231;
+        font-size: 0.95rem;
+        line-height: 1.1;
+      }
+
+      .resulting-shortfall-table-row em {
+        font-style: normal;
+        font-size: 0.95rem;
+        font-weight: 800;
+        text-align: right;
+      }
+
+      /* --- End resulting-shortfall-forecast styles --- */
+
       @media (max-width: 780px) {
         .department-side-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -706,7 +756,7 @@ function renderMillage() {
   millageShortfallImpactElement.textContent = totals.remainingShortfall ? negativeMoney(totals.remainingShortfall) : isStaffMode && totals.surplus ? `${money(totals.surplus)} Modeled Surplus` : "$0";
   millageShortfallImpactElement.classList.toggle("negative-value", totals.remainingShortfall > 0);
   renderResultingShortfallForecast(totals);
-  $("#taxpayerImpact").textContent = money((state.proposedMillage - budgetData.millageAssumptions.adoptedMillage) * 100);
+  $("#taxpayerImpact").textContent = money((budgetData.millageAssumptions.adoptedMillage - state.proposedMillage) * 250);
 }
 
 function renderScenarioManager() {
@@ -899,17 +949,33 @@ function renderResultingShortfallForecast(totals) {
 
   const fy2027MillageShortfall = Math.max(currentMillageRevenue() - estimatedMillageRevenue(), 0);
 
-  forecastBox.innerHTML = [
-    `<div class="resulting-shortfall-year-card"><span>Fiscal Year</span><strong>FY2027</strong><em class="${fy2027MillageShortfall ? "negative-value" : ""}">${fy2027MillageShortfall ? negativeMoney(fy2027MillageShortfall) : "$0"}</em></div>`,
+  const rows = [
+    { year: "FY2027", amount: fy2027MillageShortfall },
     ...shortfallComponents()
       .filter((year) => ["FY2028", "FY2029", "FY2030", "FY2031", "FY2032"].includes(year.year))
       .map((year) => {
         const forecastShortfall = year.directRevenueReduction + year.expenseInflationPressure;
-        const resultingShortfall = Math.max(forecastShortfall - totals.totalReductions, 0);
-        return `<div class="resulting-shortfall-year-card"><span>Fiscal Year</span><strong>${year.year}</strong><em class="${resultingShortfall ? "negative-value" : ""}">${resultingShortfall ? negativeMoney(resultingShortfall) : "$0"}</em></div>`;
+        return {
+          year: year.year,
+          amount: Math.max(forecastShortfall - totals.totalReductions, 0)
+        };
       })
-  ]
-    .join("");
+  ];
+
+  forecastBox.innerHTML = `
+    <div class="resulting-shortfall-table">
+      <div class="resulting-shortfall-table-header">
+        <span>Fiscal Year</span>
+        <span>Resulting Shortfall</span>
+      </div>
+      ${rows.map((row) => `
+        <div class="resulting-shortfall-table-row">
+          <strong>${row.year}</strong>
+          <em class="${row.amount ? "negative-value" : ""}">${row.amount ? negativeMoney(row.amount) : "$0"}</em>
+        </div>
+      `).join("")}
+    </div>
+  `;
 }
 
 function reductionRowsForPdf() {
