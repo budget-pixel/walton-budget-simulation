@@ -484,6 +484,41 @@ function departmentExplorerRows() {
   return rows.sort((a, b) => departmentSupport(b, state.departmentFiscalYear) - departmentSupport(a, state.departmentFiscalYear) || sortDepartments(a, b));
 }
 
+function departmentServiceRows(departmentId) {
+  return (window.departmentServiceAreas?.serviceAreas || []).filter((row) => row.departmentId === departmentId);
+}
+
+function serviceFieldList(title, value) {
+  if (!value) return "";
+  const items = Array.isArray(value)
+    ? value
+    : String(value).split(/\n|;|\|/).map((item) => item.trim()).filter(Boolean);
+  if (!items.length) return "";
+  return `<div class="department-service-block"><h4>${title}</h4><ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>`;
+}
+
+function renderDepartmentServices(departmentId) {
+  const rows = departmentServiceRows(departmentId);
+  if (!rows.length) return "";
+  const descriptions = rows.map((row) => row.description).filter(Boolean);
+  const programs = rows.map((row) => row.programName || row.services).filter(Boolean);
+  const capitalProjects = rows.map((row) => row.capitalProjects).filter(Boolean);
+  const performanceMeasures = rows.map((row) => row.performanceMeasures).filter(Boolean);
+  const description = descriptions[0] || "";
+  return `
+    <section class="department-service-section" aria-label="Department service and program information">
+      <div class="department-service-heading">
+        <p class="eyebrow">Services & Programs</p>
+        <h4>${escapeHtml(rows[0].serviceArea || "Department Services")}</h4>
+      </div>
+      ${description ? `<p class="department-service-description">${escapeHtml(description)}</p>` : ""}
+      ${serviceFieldList("Top services / programs / functions", programs)}
+      ${serviceFieldList("Capital projects", capitalProjects)}
+      ${serviceFieldList("Performance measures", performanceMeasures)}
+    </section>
+  `;
+}
+
 function renderDepartments() {
   const rows = departmentExplorerRows();
   const budgetYear = state.departmentFiscalYear === "FY2027 Budget";
@@ -546,6 +581,7 @@ function renderDepartments() {
             + detail("Ad Valorem Support", record.adValoremSupport)
           : '<p class="historical-note">No historical record is available for this department and fiscal year.</p>'
     }</div>
+    ${renderDepartmentServices(selectedDepartment.id)}
   `;
 }
 

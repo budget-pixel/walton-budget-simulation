@@ -1061,3 +1061,39 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
     grid-template-columns: 1fr;
   }
 }
+
+.department-service-section {
+  display: grid;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.department-service-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.department-service-heading h4 {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: 1rem;
+}
+
+.department-service-description {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.department-service-block h4 {
+  margin: 0 0 6px;
+  color: var(--color-primary);
+  font-size: 0.86rem;
+}
+
+.department-service-block ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-text-muted);
+}
