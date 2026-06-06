@@ -753,8 +753,8 @@ function renderMillage() {
   rollbackImpactElement.className = toneClass(rollbackImpact);
   const totals = scenarioTotals();
   const millageShortfallImpactElement = $("#millageShortfallImpact");
-  millageShortfallImpactElement.textContent = totals.remainingShortfall ? negativeMoney(totals.remainingShortfall) : isStaffMode && totals.surplus ? `${money(totals.surplus)} Modeled Surplus` : "$0";
-  millageShortfallImpactElement.classList.toggle("negative-value", totals.remainingShortfall > 0);
+  millageShortfallImpactElement.textContent = "";
+  millageShortfallImpactElement.classList.remove("negative-value");
   renderResultingShortfallForecast(totals);
   $("#taxpayerImpact").textContent = money((budgetData.millageAssumptions.adoptedMillage - state.proposedMillage) * 250);
 }
