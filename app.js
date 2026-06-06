@@ -277,17 +277,26 @@ function renderChrome() {
       }
 
       #departmentTable thead,
+      .department-table thead {
+        background: #ffffff;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+
+      #departmentTable thead tr,
+      .department-table thead tr,
       #departmentTable th,
-      .department-table thead,
       .department-table th {
         background: #ffffff;
         position: relative;
-        z-index: 2;
+        z-index: 6;
       }
 
       #departmentTable th,
       .department-table th {
         box-shadow: 0 1px 0 rgba(0, 98, 49, 0.16);
+        background-clip: padding-box;
       }
 
       /* --- Begin resulting-shortfall-forecast styles --- */
