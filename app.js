@@ -653,6 +653,7 @@ function chartOptions(bar = false, stacked = false) {
         beginAtZero: bar,
         stacked,
         ticks: {
+          stepSize: bar ? 4000000 : undefined,
           callback: (value) => `$${(Number(value) / 1000000).toFixed(0)}M`
         }
       }
