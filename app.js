@@ -2012,6 +2012,12 @@ document.addEventListener("click", (event) => {
   if (control === "open-expense-converter") {
     window.open("expense-detail-converter.html", "_blank", "noopener");
   }
+  if (control === "open-fte-converter") {
+    window.open("fte-converter.html", "_blank", "noopener");
+  }
+  if (control === "open-ad-valorem-converter") {
+    window.open("ad-valorem-support-converter.html", "_blank", "noopener");
+  }
   if (control === "save-scenario") saveScenario();
   if (control === "load-scenario") loadScenario();
   if (control === "delete-scenario") deleteScenario();

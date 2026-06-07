@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTE Converter</title>
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px;background:#f4f6f7}textarea{width:100%;min-height:360px;font-family:ui-monospace,monospace}</style>
+</head>
+<body>
+  <h1>Department FTE Converter</h1>
+  <p>Upload a CSV or Excel file with department FTE counts. Expects a header with <strong>department</strong> and <strong>fte</strong>.</p>
+  <input id="fileInput" type="file" accept=".csv,text/csv,.xlsx,.xls,.xlsm">
+  <button id="downloadButton" disabled>Download departmentFte.js</button>
+  <p id="status">Waiting for a file.</p>
+  <textarea id="output" readonly></textarea>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="converter-utils.js"></script>
+  <script>
+    const requiredColumns = { department: ['department'], fte: ['fte', 'full time equivalent'] };
+    const { mapFields, jsAssign } = window.converterUtils;
+
+    async function rowsFromFile(file){ const buffer = await file.arrayBuffer(); return await window.converterUtils.rowsFromFile(buffer); }
+
+    function convertRows(rows){
+      const fields = mapFields(rows[0], requiredColumns);
+      const missing = Object.entries(fields).filter(([,c])=>c<0).map(([f])=>f);
+      if(missing.length) throw new Error('Missing required columns: ' + missing.join(', '));
+      const departments = {};
+      rows.slice(1).forEach((row)=>{
+        const name = String(row[fields.department]||'').trim();
+        const fte = Number(String(row[fields.fte]||'').replace(/[,]/g,'').trim()) || 0;
+        if(!name) return;
+        departments[window.converterUtils.slug(name)] = { department: name, fte };
+      });
+      return { version:1, generatedAt: new Date().toISOString(), departments };
+    }
+
+    document.getElementById('fileInput').addEventListener('change', async (e)=>{
+      const file = e.target.files && e.target.files[0]; if(!file) return;
+      document.getElementById('status').textContent = 'Reading file...';
+      try{
+        const rows = await rowsFromFile(file);
+        const payload = convertRows(rows);
+        const out = jsAssign('departmentFte', payload);
+        document.getElementById('output').value = out;
+        document.getElementById('downloadButton').disabled = false;
+        document.getElementById('status').textContent = 'Converted ' + Object.keys(payload.departments).length + ' departments.';
+      }catch(err){ document.getElementById('status').textContent = err.message || 'Conversion failed.'; document.getElementById('output').value = ''; document.getElementById('downloadButton').disabled = true; }
+    });
+
+    document.getElementById('downloadButton').addEventListener('click', ()=>{
+      const txt = document.getElementById('output').value; if(!txt) return;
+      const blob = new Blob([txt], { type: 'text/javascript' });
+      const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'departmentFte.js'; link.click(); URL.revokeObjectURL(link.href);
+    });
+  </script>
+</body>
+</html>

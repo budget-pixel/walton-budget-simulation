@@ -58,9 +58,11 @@
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <script>
-    const categoryMap = {
+      <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+      <script src="converter-utils.js"></script>
+      <script>
+        const { mapFields, parseMoney, jsAssign, rowsFromFile: rowsFromBuffer } = window.converterUtils;
+        const categoryMap = {
       "Personnel & Benefits": ["511000", "512000", "512007", "513000", "514000", "521000", "522000", "523000", "524000", "525000"],
       "Professional Services": ["531000", "532000", "533000", "534000"],
       "Communications & Technology": ["541000", "547000", "554000"],
@@ -83,69 +85,16 @@
       description: ["description"],
       amount: ["2027 proposed budget", "proposed budget", "amount"]
     };
-
-    const normalizeHeader = (value) => String(value || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-    const parseAmount = (value) => Number(String(value || "").replace(/[$,]/g, "").trim()) || 0;
     const categoryForCode = (code) => codeToCategory[String(code || "").trim()] || "Uncategorized";
 
-    function parseCsv(text) {
-      const rows = [];
-      let row = [];
-      let field = "";
-      let inQuotes = false;
-      const source = String(text || "").replace(/^\uFEFF/, "");
-      for (let index = 0; index < source.length; index += 1) {
-        const char = source[index];
-        const next = source[index + 1];
-        if (char === '"') {
-          if (inQuotes && next === '"') { field += '"'; index += 1; } else { inQuotes = !inQuotes; }
-        } else if (char === "," && !inQuotes) {
-          row.push(field); field = "";
-        } else if ((char === "\n" || char === "\r") && !inQuotes) {
-          if (char === "\r" && next === "\n") index += 1;
-          row.push(field);
-          if (row.some((value) => String(value).trim())) rows.push(row);
-          row = []; field = "";
-        } else {
-          field += char;
-        }
-      }
-      row.push(field);
-      if (row.some((value) => String(value).trim())) rows.push(row);
-      return rows;
-    }
-
-    function fieldMap(headers) {
-      return Object.fromEntries(Object.entries(requiredColumns).map(([field, aliases]) => [
-        field,
-        headers.findIndex((header) => aliases.some((alias) => normalizeHeader(alias) === normalizeHeader(header)))
-      ]));
-    }
-
-    function rowsFromWorkbook(buffer) {
-      const workbook = XLSX.read(buffer, { type: "array" });
-      let bestRows = [];
-      let bestScore = 0;
-      workbook.SheetNames.forEach((sheetName) => {
-        const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: "", blankrows: false });
-        rows.forEach((row, index) => {
-          const score = Object.values(fieldMap(row)).filter((column) => column >= 0).length;
-          if (score > bestScore) { bestScore = score; bestRows = rows.slice(index); }
-        });
-      });
-      return bestRows;
-    }
-
-    async function rowsFromFile(file) {
+    async function rowsFromFile(file){
       const buffer = await file.arrayBuffer();
-      const bytes = new Uint8Array(buffer.slice(0, 4));
-      if (bytes[0] === 0x50 && bytes[1] === 0x4b) return rowsFromWorkbook(buffer);
-      return parseCsv(new TextDecoder().decode(buffer));
+      return await rowsFromBuffer(buffer);
     }
 
     function convertRows(rows) {
       if (rows.length < 2) throw new Error("The file must include a header row and at least one data row.");
-      const fields = fieldMap(rows[0]);
+      const fields = mapFields(rows[0], requiredColumns);
       const missing = Object.entries(fields).filter(([, column]) => column < 0).map(([field]) => field);
       if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
       const departments = new Map();
@@ -163,7 +112,7 @@
           accountCode,
           accountName: String(row[fields.accountName] || "").trim(),
           description: String(row[fields.description] || "").trim(),
-          amount: parseAmount(row[fields.amount]),
+          amount: parseMoney(row[fields.amount]),
           category
         };
         if (!departments.has(proposal)) departments.set(proposal, { department: proposal, total: 0, categories: new Map(), items: [] });
@@ -191,7 +140,7 @@
       try {
         const rows = await rowsFromFile(file);
         const result = convertRows(rows);
-        document.getElementById("output").value = `window.wcExpenseDetail = ${JSON.stringify(result.output, null, 2)};\n`;
+        document.getElementById("output").value = jsAssign('wcExpenseDetail', result.output);
         document.getElementById("status").textContent = `Converted ${result.output.length} departments from ${file.name}.`;
         document.getElementById("summary").innerHTML = result.output.slice(0, 8).map((department) => `<div><span>${department.department}</span><strong>${department.total.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}</strong></div>`).join("");
         document.getElementById("unmatched").innerHTML = result.unmatchedCodes.length ? `<span class="warning">Unmatched account codes:</span> ${result.unmatchedCodes.join(", ")}` : "No unmatched account codes found.";
