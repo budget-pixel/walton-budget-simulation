@@ -584,11 +584,6 @@ function getDepartmentServicePrograms(departmentId) {
   return uniqueItems(rows.flatMap((row) => splitServiceItems(row.services)));
 }
 
-function getDepartmentProjects(departmentId) {
-  const rows = getDepartmentServices(departmentId);
-  return uniqueItems(rows.flatMap((row) => splitServiceItems(row.capitalProjects)));
-}
-
 function getDepartmentPerformanceMeasures(departmentId) {
   const rows = getDepartmentServices(departmentId);
   return uniqueItems(rows.flatMap((row) => splitServiceItems(row.performanceMeasures)));
@@ -599,15 +594,6 @@ function serviceFieldList(title, items) {
   return `<div class="department-service-block"><h4>${title}</h4><ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>`;
 }
 
-function serviceCountMarkup(programs, projects, measures) {
-  const counts = [
-    programs.length ? `${programs.length} ${programs.length === 1 ? "Service" : "Services"}` : "",
-    projects.length ? `${projects.length} ${projects.length === 1 ? "Capital Project" : "Capital Projects"}` : "",
-    measures.length ? `${measures.length} ${measures.length === 1 ? "Performance Measure" : "Performance Measures"}` : ""
-  ].filter(Boolean);
-  return counts.length ? `<p class="department-service-counts">${counts.map(escapeHtml).join(" <span>|</span> ")}</p>` : "";
-}
-
 function departmentServiceAreaName(departmentId, rows = getDepartmentServices(departmentId)) {
   const mappedAreaId = window.serviceAreaMappings?.departmentMappings?.[departmentId];
   const mappedArea = window.serviceAreaMappings?.serviceAreas?.find((area) => area.id === mappedAreaId)?.name;
@@ -616,26 +602,18 @@ function departmentServiceAreaName(departmentId, rows = getDepartmentServices(de
 
 function renderDepartmentServices(departmentId) {
   const rows = getDepartmentServices(departmentId);
+  const department = budgetData.departments.find((dept) => dept.id === departmentId);
   if (!rows.length) {
-    return isStaffMode
+    return isStaffMode && department && !constitutional(department)
       ? `<section class="department-service-section department-service-fallback" aria-label="Department service and program information"><p>Service information is currently being developed for this department.</p></section>`
       : "";
   }
   const description = getDepartmentDescription(departmentId);
   const programs = getDepartmentServicePrograms(departmentId);
-  const capitalProjects = getDepartmentProjects(departmentId);
-  const performanceMeasures = getDepartmentPerformanceMeasures(departmentId);
   return `
     <section class="department-service-section" aria-label="Department service and program information">
-      <div class="department-service-heading">
-        <p class="eyebrow">Service Area</p>
-        <h4>${escapeHtml(departmentServiceAreaName(departmentId, rows))}</h4>
-      </div>
-      ${serviceCountMarkup(programs, capitalProjects, performanceMeasures)}
       ${description ? `<div class="department-service-block"><h4>Description</h4><p class="department-service-description">${escapeHtml(description)}</p></div>` : ""}
       ${serviceFieldList("Services & Programs", programs)}
-      ${serviceFieldList("Capital Projects", capitalProjects)}
-      ${serviceFieldList("Performance Measures", performanceMeasures)}
     </section>
   `;
 }
@@ -752,7 +730,6 @@ function renderDepartments() {
   const record = historicalFundingData.find((item) => item.department === selectedDepartment.name)?.history.find((item) => item.fiscalYear === state.departmentFiscalYear);
   panel.innerHTML = `
     <div class="department-side-header">
-      <p class="eyebrow">Selected Department</p>
       <h3>${selectedDepartment.name}</h3>
       ${constitutional(selectedDepartment) ? '<span class="department-badge">Constitutional Office</span>' : ''}
     </div>

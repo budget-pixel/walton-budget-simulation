@@ -946,7 +946,19 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 .table-link-button:hover,
 .table-link-button:focus { color: var(--color-primary); text-decoration: underline; outline: none; }
 .selected-row td { background: var(--color-primary-soft); }
-.department-side-detail { position: sticky; top: 96px; display: grid; gap: 14px; margin-top: 18px; margin-bottom: 18px; padding-top: 18px; }
+.department-side-detail {
+  position: sticky;
+  top: 96px;
+  display: grid;
+  gap: 14px;
+  align-self: start;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
 .department-side-header { display: grid; gap: 6px; }
 .department-side-header h3 { font-size: 1.35rem; }
 .department-badge {
@@ -1028,7 +1040,7 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 }
 
 .department-list-scroll {
-  max-height: 342px;
+  max-height: 520px;
   overflow-y: auto;
   overflow-x: auto;
 }
