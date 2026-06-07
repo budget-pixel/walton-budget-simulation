@@ -618,7 +618,7 @@ function renderDepartmentServices(departmentId) {
   return `
     <section class="department-service-section" aria-label="Department service and program information">
       <div class="department-service-heading">
-        <p class="eyebrow">Services & Programs</p>
+        <p class="eyebrow">Service Area</p>
         <h4>${escapeHtml(departmentServiceAreaName(departmentId, rows))}</h4>
       </div>
       ${serviceCountMarkup(programs, capitalProjects, performanceMeasures)}
