@@ -641,12 +641,21 @@ function normalizeExpenseDepartmentName(value) {
     .trim();
 }
 
+function expenseDepartmentAliases(value) {
+  const normalized = normalizeExpenseDepartmentName(value);
+  const aliases = {
+    procurement: ["purchasing"],
+    purchasing: ["procurement"]
+  };
+  return [normalized, ...(aliases[normalized] || [])];
+}
+
 function expenseDetailForDepartment(department) {
   if (!department || !Array.isArray(expenseDetailData)) return null;
   const departmentNames = new Set([
-    normalizeExpenseDepartmentName(department.name),
-    normalizeExpenseDepartmentName(department.id),
-    normalizeExpenseDepartmentName(slug(department.name))
+    ...expenseDepartmentAliases(department.name),
+    ...expenseDepartmentAliases(department.id),
+    ...expenseDepartmentAliases(slug(department.name))
   ]);
   return expenseDetailData.find((detail) => {
     const names = [detail.department, detail.departmentId, detail.proposal, detail.id].map(normalizeExpenseDepartmentName);
