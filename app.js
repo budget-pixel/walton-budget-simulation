@@ -900,10 +900,10 @@ function renderExpenseDetail(department) {
           return `
             <div class="expense-bar-row">
               <div class="expense-bar-label">
-                <strong>${escapeHtml(category.category)}</strong>
-                <span>${money(category.amount)}</span>
-                <em>${percent(category.percent)}</em>
-              </div>
+                    <strong>${escapeHtml(category.category)} ${infoButton(expenseCategoryTip(category.category))}</strong>
+                    <span>${money(category.amount)}</span>
+                    <em>${percent(category.percent)}</em>
+                  </div>
               <div class="expense-bar-track" aria-hidden="true"><div class="expense-bar-fill" style="width:${categoryPercent}%"></div></div>
             </div>
           `;
