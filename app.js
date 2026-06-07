@@ -26,6 +26,7 @@ const state = {
   buyoutCosts: {},
   operatingReductions: {},
   removedOperatingItems: {},
+  operatingDetailOpen: {},
   keptProjects: {},
   keptExpenseCapitalItems: {},
   lockedDepartments: {},
@@ -832,7 +833,7 @@ function renderOperatingLineItems(department, isLocked) {
   const groups = groupedExpenseItems(operatingExpenseItemsForDepartment(department));
   if (!groups.length) return "";
   return `
-    <details class="operating-line-detail">
+    <details class="operating-line-detail" data-department="${department.id}" ${state.operatingDetailOpen[department.id] ? "open" : ""}>
       <summary>Operating budget accounts and line items</summary>
       <div class="operating-account-list">
         ${groups.map((group) => `
@@ -2010,6 +2011,8 @@ document.addEventListener("click", (event) => {
   if (control === "toggle-operating-item") {
     const item = expenseItemByKey(button.dataset.item);
     if (!item) return;
+    const openDetail = button.closest(".operating-line-detail");
+    if (openDetail?.dataset.department) state.operatingDetailOpen[openDetail.dataset.department] = openDetail.open;
     const removing = !state.removedOperatingItems[item.expenseKey];
     if (!isStaffMode && removing && Number(item.amount || 0) > availableShortfallExcluding("operating-item", item.expenseKey)) {
       showMessage("Selected reductions cannot exceed the projected revenue shortfall.");
@@ -2021,6 +2024,11 @@ document.addEventListener("click", (event) => {
   }
   if (control === "select-department") { state.selectedDepartmentId = button.dataset.department; renderDepartments(); }
 });
+
+document.addEventListener("toggle", (event) => {
+  const detail = event.target.closest?.(".operating-line-detail");
+  if (detail?.dataset.department) state.operatingDetailOpen[detail.dataset.department] = detail.open;
+}, true);
 
 function init() {
   renderChrome();
