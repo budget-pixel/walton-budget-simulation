@@ -61,18 +61,17 @@
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script>
     const categoryMap = {
-      "Personnel": ["511000", "512000", "512007", "513000", "514000"],
-      "Benefits": ["521000", "522000", "523000", "524000", "525000"],
+      "Personnel & Benefits": ["511000", "512000", "512007", "513000", "514000", "521000", "522000", "523000", "524000", "525000"],
       "Professional Services": ["531000", "532000", "533000", "534000"],
       "Communications & Technology": ["541000", "547000", "554000"],
       "Travel & Training": ["540000", "555000", "555001"],
       "Facilities, Utilities & Maintenance": ["543000", "544000", "545000", "546000", "546001"],
-      "Supplies & Fuel": ["551000", "552000", "552002"],
+      "Supplies & Fuel": ["551000", "552000", "552002", "548000"],
       "Buildings & Infrastructure": ["562000", "563000"],
       "Vehicles & Equipment": ["564000"],
       "Grants, Aid & Transfers": ["581000", "581001", "582000", "583000", "591000"],
       "Debt Service": ["571000", "572000"],
-      "Contingency & Other": ["530000", "548000", "549000", "599000"]
+      "Contingency & Other": ["530000", "549000", "599000"]
     };
     const codeToCategory = Object.fromEntries(Object.entries(categoryMap).flatMap(([category, codes]) => codes.map((code) => [code, category])));
     const requiredColumns = {

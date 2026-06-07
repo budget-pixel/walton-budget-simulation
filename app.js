@@ -692,6 +692,22 @@ function expenseCategoriesForDetail(detail) {
     .sort((a, b) => b.amount - a.amount || a.category.localeCompare(b.category));
 }
 
+function normalizeAndCombineCategories(categories) {
+  const map = new Map();
+  categories.forEach((cat) => {
+    let key = String(cat.category || "");
+    if (/^\s*(personnel|benefits)\s*$/i.test(key) || /^Personnel & Benefits$/i.test(key)) key = "Personnel & Benefits";
+    if (/freight|postage/i.test(key)) key = "Supplies & Fuel";
+    const existing = map.get(key) || { category: key, amount: 0, percent: 0, items: [] };
+    existing.amount += Number(cat.amount || 0);
+    existing.items = existing.items.concat(cat.items || []);
+    map.set(key, existing);
+  });
+  const total = [...map.values()].reduce((s, c) => s + Number(c.amount || 0), 0) || 1;
+  const out = [...map.values()].map((c) => ({ ...c, percent: total ? c.amount / total * 100 : 0 }));
+  return out.sort((a, b) => b.amount - a.amount || a.category.localeCompare(b.category));
+}
+
 function expenseItemsForDetail(detail, categories) {
   if (Array.isArray(detail?.items) && detail.items.length) return detail.items;
   return categories.flatMap((category) => category.items || []);
@@ -844,8 +860,13 @@ function renderExpenseDetail(department) {
   const detail = expenseDetailForDepartment(department);
   if (!detail) return "";
   const total = Number(detail.total || 0);
-  const categories = expenseCategoriesForDetail(detail);
+  let categories = expenseCategoriesForDetail(detail);
   if (!categories.length) return "";
+  categories = normalizeAndCombineCategories(categories);
+
+  const showAll = Boolean(state.expenseDetailShowAll && state.expenseDetailShowAll[department.id]);
+  const visibleCategories = showAll ? categories : categories.slice(0, 3);
+
   return `
     <section class="department-expense-section" aria-label="Where the money goes">
       <div class="department-expense-heading">
@@ -854,7 +875,7 @@ function renderExpenseDetail(department) {
         <p class="department-expense-total"><span>${escapeHtml(detail.department || department.name)}</span><strong>${compactMoney(total)}</strong></p>
       </div>
       <div class="expense-bars">
-        ${categories.map((category) => {
+        ${visibleCategories.map((category) => {
           const categoryPercent = Math.max(0, Math.min(100, Number(category.percent || 0)));
           return `
             <div class="expense-bar-row">
@@ -868,6 +889,8 @@ function renderExpenseDetail(department) {
           `;
         }).join("")}
       </div>
+      ${renderExpenseLineItems(expenseItemsForDetail(detail, categories))}
+      ${categories.length > 3 ? `<div class="expense-show-toggle"><button type="button" class="view-all-button" data-control="toggle-expense-categories" data-department="${department.id}">${showAll ? "Show Less" : "Show All"}</button></div>` : ""}
     </section>
   `;
 }
@@ -1947,6 +1970,12 @@ document.addEventListener("click", (event) => {
   if (control === "export-impact") csv("scenario-impact.csv", ["Department", "FTE Reduced", "Operating Reduction", "Personnel Reduction", "Operating Reduction Amount", "Total Department Reduction"], scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => [impact.department.name, number(impact.fteReduction), constitutional(impact.department) ? "" : percent(impact.operatingReduction), money(impact.personnelReduction), money(impact.operatingReductionAmount), money(impact.totalReduction)]));
   if (control === "export-pdf") exportPdf();
   if (control === "export-service-areas") exportServiceAreaDraft();
+  if (control === "toggle-expense-categories") {
+    const dept = button.dataset.department;
+    state.expenseDetailShowAll ??= {};
+    state.expenseDetailShowAll[dept] = !state.expenseDetailShowAll[dept];
+    renderDepartments();
+  }
   if (control === "open-service-converter") {
     window.open("service-data-converter.html", "_blank", "noopener");
   }
