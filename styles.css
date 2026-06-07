@@ -497,15 +497,6 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 .protected-operating-list { display: grid; gap: 6px; }
 .protected-operating-list div { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(209, 190, 120, 0.6); padding-top: 6px; }
 
-.itemized-list { grid-column: 1 / -1; display: grid; gap: 10px; margin-top: 18px; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px; }
-.itemized-list h4 { margin: 0 0 10px; color: var(--color-primary); }
-.item-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.03); }
-.item-row .item-meta small { display: block; color: var(--color-text-muted); font-size: 0.82rem; }
-.item-actions { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
-.item-amount-input { width: 160px; min-height: 36px; padding: 6px 8px; text-align: right; }
-.remove-item-button { background: transparent; border: 1px solid var(--color-border); padding: 8px 10px; border-radius: 6px; cursor: pointer; }
-.item-row.item-removed { opacity: 0.6; text-decoration: line-through; }
-
 @media (max-width: 900px) {
   .tax-grid,
   .driver-grid,
@@ -1184,6 +1175,116 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   gap: 12px;
   padding-top: 14px;
   border-top: 1px solid var(--color-border);
+}
+
+.department-expense-section {
+  display: grid;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.department-expense-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.department-expense-heading h4 {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: 1rem;
+}
+
+.department-expense-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.department-expense-total strong {
+  color: var(--color-text);
+}
+
+.expense-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.expense-bar-row {
+  display: grid;
+  gap: 6px;
+}
+
+.expense-bar-label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+}
+
+.expense-bar-label strong {
+  min-width: 0;
+  color: var(--color-text);
+}
+
+.expense-bar-label em {
+  color: var(--color-primary-dark);
+  font-style: normal;
+  font-weight: 800;
+}
+
+.expense-bar-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+}
+
+.expense-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-primary);
+}
+
+.expense-line-items {
+  display: grid;
+  gap: 10px;
+}
+
+.expense-line-items summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.expense-line-items-table {
+  max-height: 280px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+}
+
+.expense-line-items-table table {
+  min-width: 760px;
+  font-size: 0.82rem;
+}
+
+.expense-line-items-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--color-surface);
+}
+
+.expense-line-items-table td,
+.expense-line-items-table th {
+  vertical-align: top;
 }
 
 .department-service-heading {

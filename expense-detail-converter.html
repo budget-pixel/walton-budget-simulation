@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Detail Converter</title>
+  <style>
+    :root {
+      --color-page: #f4f6f7;
+      --color-surface: #ffffff;
+      --color-text: #1f2a2e;
+      --color-muted: #5d686d;
+      --color-border: #d9e1e4;
+      --color-primary: #006231;
+      --color-primary-dark: #004a25;
+      --color-warning: #7a4d00;
+      --radius-small: 6px;
+    }
+    body { margin: 0; background: var(--color-page); color: var(--color-text); font-family: Arial, Helvetica, sans-serif; }
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0; }
+    header { margin-bottom: 20px; }
+    h1, h2 { margin: 0; color: var(--color-primary-dark); }
+    p { color: var(--color-muted); line-height: 1.5; }
+    .panel { padding: 18px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; }
+    .grid { display: grid; grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr); gap: 16px; align-items: start; }
+    label { display: grid; gap: 8px; font-weight: 700; color: var(--color-primary); }
+    input, textarea { width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-small); font: inherit; }
+    textarea { min-height: 520px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.84rem; }
+    button { width: fit-content; padding: 10px 14px; border: 0; border-radius: var(--radius-small); background: var(--color-primary); color: #ffffff; font-weight: 800; cursor: pointer; }
+    .status { margin-top: 12px; color: var(--color-muted); }
+    .warning { color: var(--color-warning); font-weight: 700; }
+    .summary { display: grid; gap: 8px; margin-top: 14px; }
+    .summary div { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--color-border); padding-top: 8px; }
+    @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Expense Detail Converter</h1>
+      <p>Upload the budget publication CSV or Excel export. The converter groups rows by Proposal, maps account codes into citizen-facing categories, and creates paste-ready JavaScript for <strong>data/expenseDetail.js</strong>.</p>
+    </header>
+    <div class="grid">
+      <section class="panel">
+        <label>
+          Expense Detail CSV or Excel File
+          <input id="fileInput" type="file" accept=".csv,text/csv,.xlsx,.xls,.xlsm">
+        </label>
+        <p class="status" id="status">Waiting for a file.</p>
+        <div class="summary" id="summary"></div>
+      </section>
+      <section class="panel">
+        <h2>Generated JavaScript</h2>
+        <p>Paste this into <strong>data/expenseDetail.js</strong>.</p>
+        <textarea id="output" readonly></textarea>
+        <p class="status" id="unmatched"></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script>
+    const categoryMap = {
+      "Personnel": ["511000", "512000", "512007", "513000", "514000"],
+      "Benefits": ["521000", "522000", "523000", "524000", "525000"],
+      "Professional Services": ["531000", "532000", "533000", "534000"],
+      "Communications & Technology": ["541000", "547000", "554000"],
+      "Travel & Training": ["540000", "555000", "555001"],
+      "Facilities, Utilities & Maintenance": ["543000", "544000", "545000", "546000", "546001"],
+      "Supplies & Fuel": ["551000", "552000", "552002"],
+      "Buildings & Infrastructure": ["562000", "563000"],
+      "Vehicles & Equipment": ["564000"],
+      "Grants, Aid & Transfers": ["581000", "581001", "582000", "583000", "591000"],
+      "Debt Service": ["571000", "572000"],
+      "Contingency & Other": ["530000", "548000", "549000", "599000"]
+    };
+    const codeToCategory = Object.fromEntries(Object.entries(categoryMap).flatMap(([category, codes]) => codes.map((code) => [code, category])));
+    const requiredColumns = {
+      proposal: ["proposal"],
+      projectName: ["project name name", "project name", "name"],
+      type: ["type"],
+      accountCode: ["account code", "accountcode"],
+      accountName: ["account name", "accountname"],
+      description: ["description"],
+      amount: ["2027 proposed budget", "proposed budget", "amount"]
+    };
+
+    const normalizeHeader = (value) => String(value || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+    const parseAmount = (value) => Number(String(value || "").replace(/[$,]/g, "").trim()) || 0;
+    const categoryForCode = (code) => codeToCategory[String(code || "").trim()] || "Uncategorized";
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+      const source = String(text || "").replace(/^\uFEFF/, "");
+      for (let index = 0; index < source.length; index += 1) {
+        const char = source[index];
+        const next = source[index + 1];
+        if (char === '"') {
+          if (inQuotes && next === '"') { field += '"'; index += 1; } else { inQuotes = !inQuotes; }
+        } else if (char === "," && !inQuotes) {
+          row.push(field); field = "";
+        } else if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (char === "\r" && next === "\n") index += 1;
+          row.push(field);
+          if (row.some((value) => String(value).trim())) rows.push(row);
+          row = []; field = "";
+        } else {
+          field += char;
+        }
+      }
+      row.push(field);
+      if (row.some((value) => String(value).trim())) rows.push(row);
+      return rows;
+    }
+
+    function fieldMap(headers) {
+      return Object.fromEntries(Object.entries(requiredColumns).map(([field, aliases]) => [
+        field,
+        headers.findIndex((header) => aliases.some((alias) => normalizeHeader(alias) === normalizeHeader(header)))
+      ]));
+    }
+
+    function rowsFromWorkbook(buffer) {
+      const workbook = XLSX.read(buffer, { type: "array" });
+      let bestRows = [];
+      let bestScore = 0;
+      workbook.SheetNames.forEach((sheetName) => {
+        const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: "", blankrows: false });
+        rows.forEach((row, index) => {
+          const score = Object.values(fieldMap(row)).filter((column) => column >= 0).length;
+          if (score > bestScore) { bestScore = score; bestRows = rows.slice(index); }
+        });
+      });
+      return bestRows;
+    }
+
+    async function rowsFromFile(file) {
+      const buffer = await file.arrayBuffer();
+      const bytes = new Uint8Array(buffer.slice(0, 4));
+      if (bytes[0] === 0x50 && bytes[1] === 0x4b) return rowsFromWorkbook(buffer);
+      return parseCsv(new TextDecoder().decode(buffer));
+    }
+
+    function convertRows(rows) {
+      if (rows.length < 2) throw new Error("The file must include a header row and at least one data row.");
+      const fields = fieldMap(rows[0]);
+      const missing = Object.entries(fields).filter(([, column]) => column < 0).map(([field]) => field);
+      if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
+      const departments = new Map();
+      const unmatchedCodes = new Set();
+      rows.slice(1).forEach((row) => {
+        const proposal = String(row[fields.proposal] || "").trim();
+        if (!proposal) return;
+        const accountCode = String(row[fields.accountCode] || "").trim();
+        const category = categoryForCode(accountCode);
+        if (category === "Uncategorized" && accountCode) unmatchedCodes.add(accountCode);
+        const item = {
+          proposal,
+          projectName: String(row[fields.projectName] || "").trim(),
+          type: String(row[fields.type] || "").trim(),
+          accountCode,
+          accountName: String(row[fields.accountName] || "").trim(),
+          description: String(row[fields.description] || "").trim(),
+          amount: parseAmount(row[fields.amount]),
+          category
+        };
+        if (!departments.has(proposal)) departments.set(proposal, { department: proposal, total: 0, categories: new Map(), items: [] });
+        const department = departments.get(proposal);
+        department.total += item.amount;
+        department.items.push(item);
+        if (!department.categories.has(category)) department.categories.set(category, { category, amount: 0, percent: 0, items: [] });
+        const categoryRow = department.categories.get(category);
+        categoryRow.amount += item.amount;
+        categoryRow.items.push(item);
+      });
+      const output = [...departments.values()].map((department) => {
+        const categories = [...department.categories.values()]
+          .map((category) => ({ ...category, percent: department.total ? Math.round(category.amount / department.total * 1000) / 10 : 0 }))
+          .sort((a, b) => b.amount - a.amount || a.category.localeCompare(b.category));
+        return { department: department.department, total: department.total, categories, items: department.items };
+      }).sort((a, b) => a.department.localeCompare(b.department));
+      return { output, unmatchedCodes: [...unmatchedCodes].sort() };
+    }
+
+    document.getElementById("fileInput").addEventListener("change", async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      document.getElementById("status").textContent = "Reading file...";
+      try {
+        const rows = await rowsFromFile(file);
+        const result = convertRows(rows);
+        document.getElementById("output").value = `window.wcExpenseDetail = ${JSON.stringify(result.output, null, 2)};\n`;
+        document.getElementById("status").textContent = `Converted ${result.output.length} departments from ${file.name}.`;
+        document.getElementById("summary").innerHTML = result.output.slice(0, 8).map((department) => `<div><span>${department.department}</span><strong>${department.total.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}</strong></div>`).join("");
+        document.getElementById("unmatched").innerHTML = result.unmatchedCodes.length ? `<span class="warning">Unmatched account codes:</span> ${result.unmatchedCodes.join(", ")}` : "No unmatched account codes found.";
+      } catch (error) {
+        document.getElementById("status").textContent = error.message || "Conversion failed.";
+        document.getElementById("output").value = "";
+        document.getElementById("summary").innerHTML = "";
+        document.getElementById("unmatched").textContent = "";
+      }
+    });
+  </script>
+</body>
+</html>
