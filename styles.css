@@ -356,6 +356,12 @@ button.view-all-button {
   cursor: pointer;
   text-decoration: none;
 }
+.small-toggle-button {
+  padding: 6px 10px;
+  min-height: 30px;
+  font-size: 0.78rem;
+  border-radius: 6px;
+}
 .view-all-button:hover,
 .view-all-button:focus { background: var(--color-primary-dark); outline: none; }
 .button-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }

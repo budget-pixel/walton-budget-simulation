@@ -824,36 +824,8 @@ function renderExpenseCapitalProjects() {
 }
 
 function renderExpenseLineItems(items) {
-  if (!items.length) return "";
-  return `
-    <details class="expense-line-items">
-      <summary>Show detailed line items</summary>
-      <div class="table-scroll expense-line-items-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Project name</th>
-              <th>Account code</th>
-              <th>Account name</th>
-              <th>Description</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${items.map((item) => `
-              <tr>
-                <td>${escapeHtml(item.projectName || item.name || "")}</td>
-                <td>${escapeHtml(item.accountCode || "")}</td>
-                <td>${escapeHtml(item.accountName || "")}</td>
-                <td>${escapeHtml(item.description || "")}</td>
-                <td>${money(item.amount || 0)}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    </details>
-  `;
+  // Detailed line items removed from the inline expense card per request.
+  return "";
 }
 
 function renderExpenseDetail(department) {
@@ -890,7 +862,7 @@ function renderExpenseDetail(department) {
         }).join("")}
       </div>
       ${renderExpenseLineItems(expenseItemsForDetail(detail, categories))}
-      ${categories.length > 3 ? `<div class="expense-show-toggle"><button type="button" class="view-all-button" data-control="toggle-expense-categories" data-department="${department.id}">${showAll ? "Show Less" : "Show All"}</button></div>` : ""}
+      ${categories.length > 3 ? `<div class="expense-show-toggle"><button type="button" class="view-all-button small-toggle-button" data-control="toggle-expense-categories" data-department="${department.id}">${showAll ? "Show Less" : "Show All"}</button></div>` : ""}
     </section>
   `;
 }
