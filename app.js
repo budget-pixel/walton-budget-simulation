@@ -700,10 +700,19 @@ function normalizeAndCombineCategories(categories) {
     if (/^\s*(personnel|benefits)\s*$/i.test(key) || /^Personnel & Benefits$/i.test(key)) key = "Personnel & Benefits";
     // remap by category text
     if (/freight|postage/i.test(key)) key = "Supplies & Fuel";
-    // if category is uncategorized or doesn't reflect freight/postage, inspect items for account codes or names
+    // if category is uncategorized or doesn't reflect freight/postage or personnel, inspect items for account codes or names
     if (!/supplies|fuel|freight|postage/i.test(key)) {
       const hasFreight = (cat.items || []).some((it) => String(it.accountCode || "") === "542000" || /freight|postage/i.test(String(it.accountName || "")));
       if (hasFreight) key = "Supplies & Fuel";
+    }
+    // map specific account codes to desired categories
+    if (!/personnel|benefits/i.test(key)) {
+      const hasOtherSalaries = (cat.items || []).some((it) => String(it.accountCode || "").trim() === "513000" || /other salaries|other salary/i.test(String(it.accountName || "")));
+      if (hasOtherSalaries) key = "Personnel & Benefits";
+    }
+    if (!/supplies|fuel|freight|postage/i.test(key)) {
+      const hasOtherCurrentCharges = (cat.items || []).some((it) => String(it.accountCode || "").trim() === "549000" || /other current charges/i.test(String(it.accountName || "")));
+      if (hasOtherCurrentCharges) key = "Supplies & Fuel";
     }
     const existing = map.get(key) || { category: key, amount: 0, percent: 0, items: [] };
     existing.amount += Number(cat.amount || 0);
