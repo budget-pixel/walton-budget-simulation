@@ -1086,6 +1086,24 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   line-height: 1.5;
 }
 
+.department-service-counts {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.department-service-counts span {
+  color: var(--color-border);
+  font-weight: 400;
+}
+
+.department-service-fallback p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
 .department-service-block h4 {
   margin: 0 0 6px;
   color: var(--color-primary);
@@ -1096,4 +1114,49 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   margin: 0;
   padding-left: 18px;
   color: var(--color-text-muted);
+}
+
+.service-diagnostics-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.service-diagnostics-summary div {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  padding: 10px 12px;
+  background: var(--color-surface-muted);
+}
+
+.service-diagnostics-summary span {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.service-diagnostics-summary strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-primary-dark);
+  font-size: 1.15rem;
+}
+
+.service-diagnostics-missing {
+  margin-top: 12px;
+  color: var(--color-text-muted);
+}
+
+.service-diagnostics-missing h4 {
+  margin: 0 0 6px;
+  color: var(--color-primary);
+  font-size: 0.86rem;
+}
+
+.service-diagnostics-missing ul {
+  margin: 0;
+  padding-left: 18px;
 }

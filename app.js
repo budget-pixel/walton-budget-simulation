@@ -484,39 +484,169 @@ function departmentExplorerRows() {
   return rows.sort((a, b) => departmentSupport(b, state.departmentFiscalYear) - departmentSupport(a, state.departmentFiscalYear) || sortDepartments(a, b));
 }
 
-function departmentServiceRows(departmentId) {
-  return (window.departmentServiceAreas?.serviceAreas || []).filter((row) => row.departmentId === departmentId);
+const serviceAreaCategories = [
+  "Public Safety",
+  "Infrastructure Services",
+  "Parks & Recreation",
+  "Community Development",
+  "Administrative Support",
+  "Environmental & Beach Services",
+  "Judicial & Statutory Services",
+  "Other County Services"
+];
+
+let serviceAuditLogged = false;
+
+function serviceDataSource() {
+  const candidates = [
+    { name: "window.departmentServiceAreas", value: window.departmentServiceAreas },
+    { name: "window.departmentServices", value: window.departmentServices }
+  ];
+  const source = candidates.find((candidate) => candidate.value && Array.isArray(candidate.value.serviceAreas));
+  return {
+    name: source?.name || "none",
+    data: source?.value || { serviceAreas: [], departmentMappings: {} }
+  };
 }
 
-function serviceFieldList(title, value) {
-  if (!value) return "";
-  const items = Array.isArray(value)
-    ? value
-    : String(value).split(/\n|;|\|/).map((item) => item.trim()).filter(Boolean);
+function getDepartmentServices(departmentId) {
+  const { data } = serviceDataSource();
+  return (data.serviceAreas || []).filter((row) => row && row.departmentId === departmentId);
+}
+
+function splitServiceItems(value) {
+  const values = Array.isArray(value) ? value : [value];
+  return values
+    .flatMap((item) => String(item || "").split(/\n|;|\||\u2022/))
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function uniqueItems(items) {
+  return [...new Map(items.map((item) => [item.toLowerCase(), item])).values()];
+}
+
+function getDepartmentDescription(departmentId) {
+  const rows = getDepartmentServices(departmentId);
+  return rows.find((row) => row.description)?.description || rows.find((row) => row.mission)?.mission || "";
+}
+
+function getDepartmentServicePrograms(departmentId) {
+  const rows = getDepartmentServices(departmentId);
+  return uniqueItems(rows.flatMap((row) => splitServiceItems(row.programName || row.services)));
+}
+
+function getDepartmentProjects(departmentId) {
+  const rows = getDepartmentServices(departmentId);
+  return uniqueItems(rows.flatMap((row) => splitServiceItems(row.capitalProjects)));
+}
+
+function getDepartmentPerformanceMeasures(departmentId) {
+  const rows = getDepartmentServices(departmentId);
+  return uniqueItems(rows.flatMap((row) => splitServiceItems(row.performanceMeasures)));
+}
+
+function serviceFieldList(title, items) {
   if (!items.length) return "";
   return `<div class="department-service-block"><h4>${title}</h4><ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>`;
 }
 
+function serviceCountMarkup(programs, projects, measures) {
+  const counts = [
+    programs.length ? `${programs.length} ${programs.length === 1 ? "Service" : "Services"}` : "",
+    projects.length ? `${projects.length} ${projects.length === 1 ? "Capital Project" : "Capital Projects"}` : "",
+    measures.length ? `${measures.length} ${measures.length === 1 ? "Performance Measure" : "Performance Measures"}` : ""
+  ].filter(Boolean);
+  return counts.length ? `<p class="department-service-counts">${counts.map(escapeHtml).join(" <span>|</span> ")}</p>` : "";
+}
+
+function departmentServiceAreaName(departmentId, rows = getDepartmentServices(departmentId)) {
+  const mappedAreaId = window.serviceAreaMappings?.departmentMappings?.[departmentId];
+  const mappedArea = window.serviceAreaMappings?.serviceAreas?.find((area) => area.id === mappedAreaId)?.name;
+  return rows.find((row) => row.serviceArea)?.serviceArea || mappedArea || "Department Services";
+}
+
 function renderDepartmentServices(departmentId) {
-  const rows = departmentServiceRows(departmentId);
-  if (!rows.length) return "";
-  const descriptions = rows.map((row) => row.description).filter(Boolean);
-  const programs = rows.map((row) => row.programName || row.services).filter(Boolean);
-  const capitalProjects = rows.map((row) => row.capitalProjects).filter(Boolean);
-  const performanceMeasures = rows.map((row) => row.performanceMeasures).filter(Boolean);
-  const description = descriptions[0] || "";
+  const rows = getDepartmentServices(departmentId);
+  if (!rows.length) {
+    return isStaffMode
+      ? `<section class="department-service-section department-service-fallback" aria-label="Department service and program information"><p>Service information is currently being developed for this department.</p></section>`
+      : "";
+  }
+  const description = getDepartmentDescription(departmentId);
+  const programs = getDepartmentServicePrograms(departmentId);
+  const capitalProjects = getDepartmentProjects(departmentId);
+  const performanceMeasures = getDepartmentPerformanceMeasures(departmentId);
   return `
     <section class="department-service-section" aria-label="Department service and program information">
       <div class="department-service-heading">
         <p class="eyebrow">Services & Programs</p>
-        <h4>${escapeHtml(rows[0].serviceArea || "Department Services")}</h4>
+        <h4>${escapeHtml(departmentServiceAreaName(departmentId, rows))}</h4>
       </div>
-      ${description ? `<p class="department-service-description">${escapeHtml(description)}</p>` : ""}
-      ${serviceFieldList("Top services / programs / functions", programs)}
-      ${serviceFieldList("Capital projects", capitalProjects)}
-      ${serviceFieldList("Performance measures", performanceMeasures)}
+      ${serviceCountMarkup(programs, capitalProjects, performanceMeasures)}
+      ${description ? `<div class="department-service-block"><h4>Description</h4><p class="department-service-description">${escapeHtml(description)}</p></div>` : ""}
+      ${serviceFieldList("Services & Programs", programs)}
+      ${serviceFieldList("Capital Projects", capitalProjects)}
+      ${serviceFieldList("Performance Measures", performanceMeasures)}
     </section>
   `;
+}
+
+function serviceCoverageAudit() {
+  const { name, data } = serviceDataSource();
+  const allDepartments = budgetData.departments || [];
+  const serviceRows = data.serviceAreas || [];
+  const departmentIds = new Set(allDepartments.map((department) => department.id));
+  const serviceDepartmentIds = new Set(serviceRows.map((row) => row.departmentId).filter(Boolean));
+  const withServiceData = allDepartments.filter((department) => serviceDepartmentIds.has(department.id));
+  const missingServiceData = allDepartments.filter((department) => !serviceDepartmentIds.has(department.id));
+  const unmatchedServiceRecords = serviceRows.filter((row) => row.departmentId && !departmentIds.has(row.departmentId));
+  const coveragePercentage = allDepartments.length ? Math.round(withServiceData.length / allDepartments.length * 1000) / 10 : 0;
+  return { sourceName: name, departments: allDepartments, withServiceData, missingServiceData, unmatchedServiceRecords, coveragePercentage };
+}
+
+function serviceAreaForDepartment(departmentId) {
+  const rows = getDepartmentServices(departmentId);
+  const name = departmentServiceAreaName(departmentId, rows);
+  return serviceAreaCategories.includes(name) ? name : "Other County Services";
+}
+
+function logServiceDataAudit() {
+  if (serviceAuditLogged) return;
+  serviceAuditLogged = true;
+  const audit = serviceCoverageAudit();
+  console.groupCollapsed("Department service data audit");
+  console.info("Service data source", audit.sourceName);
+  console.info("Departments with service data", audit.withServiceData.map((department) => department.name));
+  console.info("Departments missing service data", audit.missingServiceData.map((department) => department.name));
+  console.info("Service records not matched to departments", audit.unmatchedServiceRecords.map((row) => row.departmentName || row.departmentId));
+  console.info("Coverage percentage", `${audit.coveragePercentage}%`);
+  console.table([{ departments: audit.departments.length, departmentsWithServiceData: audit.withServiceData.length, missingDepartments: audit.missingServiceData.length, unmatchedServiceRecords: audit.unmatchedServiceRecords.length, coverage: `${audit.coveragePercentage}%` }]);
+  console.groupEnd();
+  console.table(serviceAreaCategories.map((category) => ({
+    serviceArea: category,
+    departments: audit.departments.filter((department) => serviceAreaForDepartment(department.id) === category).map((department) => department.name).join(", ") || "None"
+  })));
+}
+
+function renderServiceDiagnostics() {
+  const panel = $("#serviceDiagnosticsPanel");
+  if (!panel || !isStaffMode) return;
+  const audit = serviceCoverageAudit();
+  const summary = $("#serviceDiagnosticsSummary");
+  const missing = $("#serviceDiagnosticsMissing");
+  if (summary) {
+    summary.innerHTML = `
+      <div><span>Departments</span><strong>${audit.departments.length}</strong></div>
+      <div><span>Departments with Service Data</span><strong>${audit.withServiceData.length}</strong></div>
+      <div><span>Coverage</span><strong>${audit.coveragePercentage}%</strong></div>
+    `;
+  }
+  if (missing) {
+    missing.innerHTML = audit.missingServiceData.length
+      ? `<h4>Departments still missing service data</h4><ul>${audit.missingServiceData.map((department) => `<li>${escapeHtml(department.name)}</li>`).join("")}</ul>`
+      : `<p>All departments have service data.</p>`;
+  }
 }
 
 function renderDepartments() {
@@ -1056,6 +1186,7 @@ function rerender() {
   renderTopServices();
   renderRankings();
   renderDepartments();
+  renderServiceDiagnostics();
   renderAssumptions();
   renderScenarioManager();
   setupScenarioAccordions();
@@ -1419,6 +1550,7 @@ document.addEventListener("click", (event) => {
 
 function init() {
   renderChrome();
+  logServiceDataAudit();
   const drawer = $("#scenarioToolsDrawer");
   if (drawer) drawer.hidden = true;
 
@@ -1435,6 +1567,7 @@ function init() {
   renderTopServices();
   renderRankings();
   renderDepartments();
+  renderServiceDiagnostics();
   renderAssumptions();
   renderScenarioManager();
   setupScenarioAccordions();

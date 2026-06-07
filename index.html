@@ -296,6 +296,17 @@
             </div>
           </section>
           <hr>
+          <section id="serviceDiagnosticsPanel" class="staff-service-diagnostics" data-staff-only aria-label="Service information diagnostics">
+            <div class="panel-header compact-header">
+              <div>
+                <p class="eyebrow">Service Data Diagnostics</p>
+                <h3>Department Service Coverage</h3>
+              </div>
+            </div>
+            <div id="serviceDiagnosticsSummary" class="service-diagnostics-summary"></div>
+            <div id="serviceDiagnosticsMissing" class="service-diagnostics-missing"></div>
+          </section>
+          <hr>
           <div class="panel-header compact-header">
             <div>
               <p class="eyebrow">Budget Exercise Mode</p>
@@ -522,7 +533,7 @@
   <script src="data/budgetData.js"></script>
   <script src="data/historicalDepartmentFunding.js"></script>
   <script src="data/serviceAreaMappings.js"></script>
-  <script src="departmentServiceAreas.generated.js"></script>
+  <script src="data/DepartmentServices.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
