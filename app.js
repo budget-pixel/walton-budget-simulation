@@ -25,6 +25,8 @@ const state = {
   operatingReductions: {},
   keptProjects: {},
   lockedDepartments: {},
+  removedOperatingItems: {},
+  operatingItemAmounts: {},
   departmentFiscalYear: "FY2027 Budget",
   overviewFiscalYear: "FY2027 Budget",
   rankingTab: "support",
@@ -162,9 +164,11 @@ function scenarioTotals(raw = false) {
     const operatingPercent = isLocked || constitutional(department) ? 0 : Number(state.operatingReductions[department.id] || 0);
     const personnelReduction = (fteReduction + buyoutCount) * averageCost;
     const oneTimeBuyoutCost = buyoutCount * buyoutCost;
-    const operatingReductionAmount = department.operatingBudget * operatingPercent / 100;
+    const removedOperatingAmount = sumRemovedForDepartment(department.id);
+    const effectiveOperatingBudget = Math.max(department.operatingBudget - removedOperatingAmount, 0);
+    const operatingReductionAmount = Math.round(effectiveOperatingBudget * operatingPercent / 100);
     personnelReductions += personnelReduction;
-    operatingReductions += operatingReductionAmount;
+    operatingReductions += operatingReductionAmount + removedOperatingAmount;
     buyoutOneTimeCosts += oneTimeBuyoutCost;
     return {
       department,
@@ -177,7 +181,8 @@ function scenarioTotals(raw = false) {
       firstYearNetImpact: personnelReduction - oneTimeBuyoutCost,
       operatingReduction: operatingPercent,
       operatingReductionAmount,
-      totalReduction: personnelReduction + operatingReductionAmount
+      removedOperatingAmount,
+      totalReduction: personnelReduction + operatingReductionAmount + removedOperatingAmount
     };
   });
   const capitalReductions = budgetData.capitalProjects.reduce((total, project) => locked(project.departmentId) || state.keptProjects[project.id] ? total : total + project.cost, 0);
@@ -208,7 +213,8 @@ function currentReductionValue(type, id) {
   }
   if (type === "operating") {
     const department = budgetData.departments.find((item) => item.id === id);
-    return department ? department.operatingBudget * Number(state.operatingReductions[id] || 0) / 100 : 0;
+    const removed = sumRemovedForDepartment(id);
+    return department ? Math.round((department.operatingBudget - removed) * Number(state.operatingReductions[id] || 0) / 100 + removed) : 0;
   }
   if (type === "capital") {
     const project = budgetData.capitalProjects.find((item) => item.id === id);
@@ -220,6 +226,11 @@ function currentReductionValue(type, id) {
 function availableShortfallExcluding(type, id) {
   const totals = scenarioTotals(true);
   return Math.max(totals.revenueShortfall - (totals.actualTotalReductions - currentReductionValue(type, id)), 0);
+}
+
+function sumRemovedForDepartment(departmentId) {
+  if (!window.boccExpenses) return 0;
+  return window.boccExpenses.filter((item) => item.departmentId === departmentId && state.removedOperatingItems[item.id]).reduce((t, item) => t + (Number(state.operatingItemAmounts[item.id] ?? item.amount || 0) || 0), 0);
 }
 
 function capPublicFte(department, requested) {
@@ -446,9 +457,20 @@ function renderOperating() {
     const isLocked = locked(department.id);
     if (isLocked) state.operatingReductions[department.id] = 0;
     const reductionPercent = Number(state.operatingReductions[department.id] || 0);
-    const newOperatingBudget = department.operatingBudget * (1 - reductionPercent / 100);
+    const removedSum = sumRemovedForDepartment(department.id);
+    const newOperatingBudget = Math.max(department.operatingBudget - removedSum, 0) * (1 - reductionPercent / 100);
     const programsMarkup = serviceFieldList("Services & Programs", getDepartmentServicePrograms(department.id));
-    return `<div class="slider-row ${isLocked ? "locked-row" : ""}"><div><label>${department.name}</label><div class="slider-meta">Operating budget: ${money(department.operatingBudget)}${isLocked ? " | Locked" : ""}</div><div class="slider-meta slider-meta-secondary">New operating budget: <span class="new-operating-budget-value">${money(newOperatingBudget)}</span></div></div><input class="operating-slider" type="range" min="0" max="100" value="${reductionPercent}" data-control="operating" data-department="${department.id}" ${isLocked ? "disabled" : ""}><label class="percent-entry"><input type="number" min="0" max="100" step="1" value="${reductionPercent}" data-control="operating-percent" data-department="${department.id}" ${isLocked ? "disabled" : ""}><span>%</span></label>${programsMarkup}</div>`;
+    let itemizedMarkup = "";
+    if (window.boccExpenses && department.id === "board-of-county-commissioners") {
+      const items = window.boccExpenses.filter((item) => item.departmentId === department.id);
+      itemizedMarkup = `<div class="itemized-list"><h4>Itemized Board Expenses</h4>` + items.map((item) => {
+        const amt = Number(state.operatingItemAmounts[item.id] ?? item.amount || 0) || 0;
+        const removed = Boolean(state.removedOperatingItems[item.id]);
+        return `<div class="item-row ${removed ? 'item-removed' : ''}"><div class="item-meta"><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.category)}</small></div><div class="item-actions"><input data-control="item-amount" data-item="${item.id}" type="text" value="${moneyInput(amt)}" class="item-amount-input" ${isLocked ? 'disabled' : ''}><button class="remove-item-button" data-control="toggle-operating-item" data-item="${item.id}" ${isLocked ? 'disabled' : ''}>${removed ? 'Undo' : 'Remove'}</button></div></div>`;
+      }).join("") + `</div>`;
+    }
+
+    return `<div class="slider-row ${isLocked ? "locked-row" : ""}"><div><label>${department.name}</label><div class="slider-meta">Operating budget: ${money(department.operatingBudget)}${isLocked ? " | Locked" : ""}</div><div class="slider-meta slider-meta-secondary">New operating budget: <span class="new-operating-budget-value">${money(newOperatingBudget)}</span></div></div><input class="operating-slider" type="range" min="0" max="100" value="${reductionPercent}" data-control="operating" data-department="${department.id}" ${isLocked ? "disabled" : ""}><label class="percent-entry"><input type="number" min="0" max="100" step="1" value="${reductionPercent}" data-control="operating-percent" data-department="${department.id}" ${isLocked ? "disabled" : ""}><span>%</span></label>${programsMarkup}${itemizedMarkup}</div>`;
   }).join("");
 }
 
@@ -1198,8 +1220,8 @@ function reductionRowsForPdf() {
   const impacts = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department) && (impact.fteReduction || impact.buyoutCount || impact.operatingReductionAmount || impact.personnelReduction));
   const capitalRows = budgetData.capitalProjects.filter((project) => !state.keptProjects[project.id]).map((project) => `<tr><td>${departmentName(project.departmentId)}</td><td>${project.name}</td><td>${money(project.cost)}</td></tr>`).join("") || '<tr><td colspan="3">No capital or equipment projects removed.</td></tr>';
   const personnelRows = impacts.filter((impact) => impact.fteReduction || impact.buyoutCount).map((impact) => `<tr><td>${impact.department.name}</td><td>${number(impact.fteReduction)}</td><td>${number(impact.buyoutCount)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.buyoutOneTimeCost)}</td></tr>`).join("") || '<tr><td colspan="5">No personnel reductions selected.</td></tr>';
-  const operatingRows = impacts.filter((impact) => impact.operatingReductionAmount).map((impact) => `<tr><td>${impact.department.name}</td><td>${percent(impact.operatingReduction)}</td><td>${money(impact.operatingReductionAmount)}</td></tr>`).join("") || '<tr><td colspan="3">No operating reductions selected.</td></tr>';
-  const impactRows = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => `<tr><td>${impact.department.name}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.totalReduction)}</td><td>${impact.locked || constitutional(impact.department) ? "Locked" : "Adjustable"}</td></tr>`).join("");
+  const operatingRows = impacts.filter((impact) => impact.operatingReductionAmount || impact.removedOperatingAmount).map((impact) => `<tr><td>${impact.department.name}</td><td>${percent(impact.operatingReduction)}</td><td>${money((impact.operatingReductionAmount || 0) + (impact.removedOperatingAmount || 0))}${impact.removedOperatingAmount ? ` <small>(includes ${money(impact.removedOperatingAmount)} removed items)</small>` : ''}</td></tr>`).join("") || '<tr><td colspan="3">No operating reductions selected.</td></tr>';
+  const impactRows = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => `<tr><td>${impact.department.name}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money((impact.operatingReductionAmount || 0) + (impact.removedOperatingAmount || 0))}</td><td>${money(impact.totalReduction)}</td><td>${impact.locked || constitutional(impact.department) ? "Locked" : "Adjustable"}</td></tr>`).join("");
   return { personnelRows, operatingRows, capitalRows, impactRows };
 }
 
@@ -1599,6 +1621,12 @@ document.addEventListener("input", (event) => {
   }
   if (control === "ranking-search") { state.rankingSearch = event.target.value; renderRankings(); }
   if (control === "department-search") { state.departmentSearch = event.target.value; renderDepartments(); }
+  if (control === "item-amount") {
+    const itemId = event.target.dataset.item;
+    const parsed = parseMoney(event.target.value || 0);
+    state.operatingItemAmounts[itemId] = parsed;
+    updateResults();
+  }
   if (control === "scenario-meta") { state.scenarioMeta[event.target.dataset.field] = event.target.value; }
   if (control === "millage" && isStaffMode) {
     const cleanedMillage = String(event.target.value || "").replace(/[^0-9.]/g, "");
@@ -1676,6 +1704,17 @@ document.addEventListener("click", (event) => {
   if (control === "delete-scenario") deleteScenario();
   if (control === "reset-scenario") resetWorkingScenario();
   if (control === "reset-millage" && isStaffMode) { state.proposedMillage = budgetData.millageAssumptions.adoptedMillage; updateResults(); }
+  if (control === "toggle-operating-item") {
+    const itemId = button.dataset.item;
+    state.removedOperatingItems[itemId] = !state.removedOperatingItems[itemId];
+    // ensure amount tracked
+    if (state.removedOperatingItems[itemId] && state.operatingItemAmounts[itemId] == null) {
+      const item = (window.boccExpenses || []).find((i) => i.id === itemId);
+      state.operatingItemAmounts[itemId] = item ? Number(item.amount || 0) : 0;
+    }
+    renderOperating();
+    updateResults();
+  }
   if (control === "select-department") { state.selectedDepartmentId = button.dataset.department; renderDepartments(); }
 });
 
