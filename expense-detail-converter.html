@@ -38,7 +38,7 @@
   <main>
     <header>
       <h1>Expense Detail Converter</h1>
-      <p>Upload the budget publication CSV or Excel export. The converter groups rows by Proposal, maps account codes into citizen-facing categories, and creates paste-ready JavaScript for <strong>data/expenseDetail.js</strong>.</p>
+      <p>Upload the budget publication CSV or Excel export. The converter groups rows by Proposal, maps account codes into citizen-facing categories, and creates paste-ready JavaScript for <strong>data/departmentExpenses.js</strong>. The budget amount column should be <strong>Period 1 Proposed</strong>.</p>
     </header>
     <div class="grid">
       <section class="panel">
@@ -51,7 +51,7 @@
       </section>
       <section class="panel">
         <h2>Generated JavaScript</h2>
-        <p>Paste this into <strong>data/expenseDetail.js</strong>.</p>
+        <p>Paste this into <strong>data/departmentExpenses.js</strong>.</p>
         <textarea id="output" readonly></textarea>
         <p class="status" id="unmatched"></p>
       </section>
@@ -61,16 +61,22 @@
       <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
       <script src="converter-utils.js"></script>
       <script>
+        if (!window.converterUtils) {
+          document.getElementById("status").textContent = "Converter utilities failed to load. Check converter-utils.js.";
+          throw new Error("converter-utils.js did not load");
+        }
+
         const { mapFields, parseMoney, jsAssign, rowsFromFile: rowsFromBuffer } = window.converterUtils;
         const categoryMap = {
-      "Personnel & Benefits": ["511000", "512000", "512007", "513000", "514000", "521000", "522000", "523000", "524000", "525000"],
+      "Personnel & Benefits": ["510000", "511000", "512000", "512007", "513000", "514000", "521000", "522000", "523000", "524000", "525000"],
       "Professional Services": ["531000", "532000", "533000", "534000"],
       "Communications & Technology": ["541000", "547000", "554000"],
       "Travel & Training": ["540000", "555000", "555001"],
       "Facilities, Utilities & Maintenance": ["543000", "544000", "545000", "546000", "546001"],
-      "Supplies & Fuel": ["551000", "552000", "552002", "548000"],
-      "Buildings & Infrastructure": ["562000", "563000"],
+      "Supplies & Fuel": ["531001", "531002", "531003", "531004", "535000", "542000", "551000", "552000", "552002", "548000"],
+      "Buildings & Infrastructure": ["560000", "562000", "563000"],
       "Vehicles & Equipment": ["564000"],
+      "Library Materials": ["566000"],
       "Grants, Aid & Transfers": ["581000", "581001", "582000", "583000", "591000"],
       "Debt Service": ["571000", "572000"],
       "Contingency & Other": ["530000", "549000", "599000"]
@@ -83,9 +89,65 @@
       accountCode: ["account code", "accountcode"],
       accountName: ["account name", "accountname"],
       description: ["description"],
-      amount: ["2027 proposed budget", "proposed budget", "amount"]
+      amount: ["period 1 proposed", "2027 proposed budget", "proposed budget", "amount"]
     };
     const categoryForCode = (code) => codeToCategory[String(code || "").trim()] || "Uncategorized";
+
+    function shouldExcludeDepartment(proposal) {
+      const normalized = String(proposal || "")
+        .trim()
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (!normalized) return false;
+
+      const exactExclusions = new Set([
+        "ad valorem taxes",
+        "building department",
+        "mosquito control",
+        "solid waste",
+        "recreation plat fee fund",
+        "recreation plat fee",
+        "sidewalk fund",
+        "self insurance fund",
+        "e911",
+        "housing and urban development",
+        "public works",
+        "opiod",
+        "opioid",
+        "opioid settlement",
+        "municipal service benefit unit",
+        "mossy head wastewater treatment facility"
+      ]);
+
+      return exactExclusions.has(normalized) ||
+        normalized.startsWith("tdc") ||
+        normalized.startsWith("tourism") ||
+        normalized.includes("tourisim") ||
+        normalized.includes("municipal service benefit unit") ||
+        normalized.includes("opioid settlement") ||
+        normalized.includes("recreation plat fee");
+    }
+
+    function normalizeProposalForGrouping(proposal) {
+      const normalized = String(proposal || "")
+        .trim()
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (normalized === "planning vacation rental certification program" ||
+          normalized.includes("planning vacation rental certification")) {
+        return "Planning";
+      }
+
+      return String(proposal || "").trim();
+    }
 
     async function rowsFromFile(file){
       const buffer = await file.arrayBuffer();
@@ -94,17 +156,37 @@
 
     function convertRows(rows) {
       if (rows.length < 2) throw new Error("The file must include a header row and at least one data row.");
+
       const fields = mapFields(rows[0], requiredColumns);
-      const missing = Object.entries(fields).filter(([, column]) => column < 0).map(([field]) => field);
+      const missing = Object.entries(fields)
+        .filter(([, column]) => column < 0)
+        .map(([field]) => field);
+
       if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
+
       const departments = new Map();
       const unmatchedCodes = new Set();
+
       rows.slice(1).forEach((row) => {
-        const proposal = String(row[fields.proposal] || "").trim();
-        if (!proposal) return;
-        const accountCode = String(row[fields.accountCode] || "").trim();
+        const rawProposal = String(row[fields.proposal] || "").trim();
+        if (!rawProposal) return;
+        if (shouldExcludeDepartment(rawProposal)) return;
+
+        const proposal = normalizeProposalForGrouping(rawProposal);
+        const accountCode = String(row[fields.accountCode] ?? "")
+          .replace(/\.0$/, "")
+          .replace(/[^0-9]/g, "")
+          .trim();
+
+        // Ignore non-expense accounts that begin with 3.
+        if (accountCode.startsWith("3")) return;
+
+        const amount = parseMoney(row[fields.amount]);
+        if (!amount) return;
+
         const category = categoryForCode(accountCode);
         if (category === "Uncategorized" && accountCode) unmatchedCodes.add(accountCode);
+
         const item = {
           proposal,
           projectName: String(row[fields.projectName] || "").trim(),
@@ -112,45 +194,93 @@
           accountCode,
           accountName: String(row[fields.accountName] || "").trim(),
           description: String(row[fields.description] || "").trim(),
-          amount: parseMoney(row[fields.amount]),
+          amount,
           category
         };
-        if (!departments.has(proposal)) departments.set(proposal, { department: proposal, total: 0, categories: new Map(), items: [] });
+
+        if (!departments.has(proposal)) {
+          departments.set(proposal, {
+            department: proposal,
+            total: 0,
+            categories: new Map(),
+            items: []
+          });
+        }
+
         const department = departments.get(proposal);
         department.total += item.amount;
         department.items.push(item);
-        if (!department.categories.has(category)) department.categories.set(category, { category, amount: 0, percent: 0, items: [] });
+
+        if (!department.categories.has(category)) {
+          department.categories.set(category, {
+            category,
+            amount: 0,
+            percent: 0,
+            items: []
+          });
+        }
+
         const categoryRow = department.categories.get(category);
         categoryRow.amount += item.amount;
         categoryRow.items.push(item);
       });
+
       const output = [...departments.values()].map((department) => {
         const categories = [...department.categories.values()]
-          .map((category) => ({ ...category, percent: department.total ? Math.round(category.amount / department.total * 1000) / 10 : 0 }))
+          .map((category) => ({
+            ...category,
+            percent: department.total ? Math.round(category.amount / department.total * 1000) / 10 : 0
+          }))
           .sort((a, b) => b.amount - a.amount || a.category.localeCompare(b.category));
-        return { department: department.department, total: department.total, categories, items: department.items };
+
+        return {
+          department: department.department,
+          total: department.total,
+          categories,
+          items: department.items
+        };
       }).sort((a, b) => a.department.localeCompare(b.department));
-      return { output, unmatchedCodes: [...unmatchedCodes].sort() };
+
+      return {
+        output,
+        unmatchedCodes: [...unmatchedCodes].sort()
+      };
     }
 
-    document.getElementById("fileInput").addEventListener("change", async (event) => {
+    const fileInput = document.getElementById("fileInput");
+    fileInput.addEventListener("change", async (event) => {
       const file = event.target.files && event.target.files[0];
-      if (!file) return;
-      document.getElementById("status").textContent = "Reading file...";
+      if (!file) {
+        document.getElementById("status").textContent = "No file selected.";
+        return;
+      }
+
+      document.getElementById("status").textContent = `Reading ${file.name}...`;
+      document.getElementById("output").value = "";
+      document.getElementById("summary").innerHTML = "";
+      document.getElementById("unmatched").textContent = "";
+
       try {
         const rows = await rowsFromFile(file);
+        if (!Array.isArray(rows) || rows.length === 0) {
+          throw new Error("No rows were parsed from the selected file. Make sure the workbook has a Budget sheet or upload a CSV.");
+        }
+
         const result = convertRows(rows);
-        document.getElementById("output").value = jsAssign('wcExpenseDetail', result.output);
-        document.getElementById("status").textContent = `Converted ${result.output.length} departments from ${file.name}.`;
+        document.getElementById("output").value = jsAssign("wcDepartmentExpenses", result.output);
+        document.getElementById("status").textContent = `Converted ${result.output.length} departments from ${file.name}. Parsed ${rows.length} rows.`;
         document.getElementById("summary").innerHTML = result.output.slice(0, 8).map((department) => `<div><span>${department.department}</span><strong>${department.total.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}</strong></div>`).join("");
         document.getElementById("unmatched").innerHTML = result.unmatchedCodes.length ? `<span class="warning">Unmatched account codes:</span> ${result.unmatchedCodes.join(", ")}` : "No unmatched account codes found.";
       } catch (error) {
+        console.error("Expense detail conversion failed", error);
         document.getElementById("status").textContent = error.message || "Conversion failed.";
         document.getElementById("output").value = "";
         document.getElementById("summary").innerHTML = "";
         document.getElementById("unmatched").textContent = "";
       }
     });
+
+    document.getElementById("status").textContent = "Waiting for a file.";
   </script>
 </body>
 </html>

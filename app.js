@@ -144,7 +144,7 @@ function buildBudgetDataFallback() {
     };
   }).filter((department) => department.id);
 
-  const adValoremSupportedExpenseBaseline = departments.reduce((total, department) => total + Number(department.adValoremSupport || 0), 0) || departments.reduce((total, department) => total + Number(department.totalBudget || 0), 0);
+  const adValoremSupportedExpenseBaseline = departments.reduce((total, department) => total + Number(department.adValoremSupport || 0), 0);
 
   return {
     departments,
@@ -258,7 +258,38 @@ const constitutional = (department) => budgetData.constitutionalOfficeIds.includ
 const excluded = (department) => budgetData.excludedScenarioDepartmentIds.includes(department.id);
 const locked = (id) => isStaffMode && Boolean(state.lockedDepartments[id]);
 const departments = () => budgetData.departments.filter((department) => !excluded(department));
+
 const departmentName = (id) => budgetData.departments.find((department) => department.id === id)?.name || "Countywide";
+
+function hideExpenseDetailForDepartment(department) {
+  const id = normalizeBootstrapDepartmentId(
+    department?.id || department?.departmentId || department?.name
+  );
+  const name = String(
+    department?.name || department?.department || ""
+  ).toLowerCase();
+
+  const hiddenDepartmentIds = new Set([
+    "property-appraiser",
+    "tax-collector",
+    "supervisor-of-elections",
+    "clerk-of-court",
+    "clerk-and-comptroller",
+    "sheriffs-office",
+    "sheriff-s-office"
+  ]);
+
+  return (
+    constitutional(department) ||
+    hiddenDepartmentIds.has(id) ||
+    name.includes("property appraiser") ||
+    name.includes("tax collector") ||
+    name.includes("supervisor of elections") ||
+    name.includes("clerk of court") ||
+    name.includes("clerk and comptroller") ||
+    name.includes("sheriff")
+  );
+}
 
 function showMessage(text) {
   const message = $("#scenarioMessage");
@@ -827,7 +858,9 @@ function renderDepartmentServices(departmentId) {
   const rows = getDepartmentServices(departmentId);
   const department = budgetData.departments.find((dept) => dept.id === departmentId);
   if (!rows.length) {
-    return isStaffMode && department && !constitutional(department)
+    const hideFallback = department && hideExpenseDetailForDepartment(department);
+
+    return isStaffMode && department && !hideFallback
       ? `<section class="department-service-section department-service-fallback" aria-label="Department service and program information"><p>Service information is currently being developed for this department.</p></section>`
       : "";
   }
@@ -1368,7 +1401,7 @@ function renderDepartments() {
             + detail("Ad Valorem Support", record.adValoremSupport)
           : '<p class="historical-note">No historical record is available for this department and fiscal year.</p>'
     }</div>
-    ${renderExpenseDetail(selectedDepartment)}
+    ${hideExpenseDetailForDepartment(selectedDepartment) ? "" : renderExpenseDetail(selectedDepartment)}
     ${renderDepartmentServices(selectedDepartment.id)}
   `;
 }

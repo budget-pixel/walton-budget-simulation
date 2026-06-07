@@ -1,36 +1,96 @@
-window.wcExpenseDetail = [
+window.wcDepartmentExpenses = [
   {
     "department": "Board of County Commissioners",
-    "total": 13762032,
+    "total": 12484302,
     "categories": [
       {
         "category": "Facilities, Utilities & Maintenance",
-        "amount": 4320000,
-        "percent": 31.4,
+        "amount": 3867000,
+        "percent": 31,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
-            "description": "Postage machine for Tax Collector & Clerk, Lease for SLEERS towers, Copier Leases for Commission Offices",
-            "amount": 170000,
+            "description": "",
+            "amount": 142000,
             "category": "Facilities, Utilities & Maintenance"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "544000",
+            "accountName": "Rentals & Leases",
+            "description": "Lease for SLEERS towers,",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "544000",
+            "accountName": "Rentals & Leases",
+            "description": "Postage machine for Tax Collector & Clerk",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "544000",
+            "accountName": "Rentals & Leases",
+            "description": "Copier Leases for Commission Offices",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "545000",
             "accountName": "Insurance",
-            "description": "General Liability & Cyber Liability Coverage (FACT), Auto, Property, & Workers Compensation Coverage (FMIT),  Freeport Business Complex (NORCO)",
-            "amount": 4000000,
+            "description": "",
+            "amount": 3575000,
             "category": "Facilities, Utilities & Maintenance"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "545000",
+            "accountName": "Insurance",
+            "description": "General Liability & Cyber Liability Coverage (FACT)",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "545000",
+            "accountName": "Insurance",
+            "description": "Auto, Property, & Workers Compensation Coverage (FMIT)",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "545000",
+            "accountName": "Insurance",
+            "description": "Freeport Business Complex (NORCO)",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -42,12 +102,12 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Professional Services",
-        "amount": 2910000,
-        "percent": 21.1,
+        "amount": 2710000,
+        "percent": 21.7,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -57,7 +117,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "532000",
             "accountName": "Accounting & Auditing",
@@ -67,24 +127,191 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
-            "description": "Highway 98 Landscaping Contract, Juvenile Justice Department, Tyler Technologies, Board agenda software, County website",
-            "amount": 2200000,
+            "description": "",
+            "amount": 2000000,
             "category": "Professional Services"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "534000",
+            "accountName": "Other Services",
+            "description": "Highway 98 Landscaping Contract",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "534000",
+            "accountName": "Other Services",
+            "description": "Board agenda, website & public records software",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "534000",
+            "accountName": "Other Services",
+            "description": "Board ERP Software",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "534000",
+            "accountName": "Other Services",
+            "description": "State Mandated Juvenile Justice Department Contribution",
+            "amount": 0,
+            "category": "Professional Services"
+          }
+        ]
+      },
+      {
+        "category": "Personnel & Benefits",
+        "amount": 2616802,
+        "percent": 21,
+        "items": [
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "511000",
+            "accountName": "Executive Salaries",
+            "description": "Commissioner salaries as set per F.S. 145.031",
+            "amount": 395500,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "512000",
+            "accountName": "Regular Salaries & Wages",
+            "description": "Commissioner aid salaries",
+            "amount": 476617,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "512007",
+            "accountName": "Sick Leave Incentive Pay",
+            "description": "",
+            "amount": 19016,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "513000",
+            "accountName": "Other Salaries & Wages",
+            "description": "Summer Students @$16/hour = $110,000, additional funding for General Fund merit increases",
+            "amount": 275000,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "",
+            "amount": 60789,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "",
+            "amount": 249148,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 1124857,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 0,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "Health Insurance Subsidy (HIS) Retirees",
+            "amount": 0,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "Blue Cross Blue Shield Retiree Benefits",
+            "amount": 0,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 875,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "525000",
+            "accountName": "Unemployment Compensation",
+            "description": "County share of the State Unemployment Compensation Trust Fund for employees that receive unemployment compensation",
+            "amount": 15000,
+            "category": "Personnel & Benefits"
           }
         ]
       },
       {
         "category": "Buildings & Infrastructure",
         "amount": 1805000,
-        "percent": 13.1,
+        "percent": 14.5,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "MANAGED VENDOR PROGRAM",
+            "projectName": "10647",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -94,7 +321,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -104,7 +331,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -115,90 +342,23 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Benefits",
-        "amount": 1450399,
-        "percent": 10.5,
-        "items": [
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "521000",
-            "accountName": "FICA Taxes & Medicare",
-            "description": "",
-            "amount": 60789,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "522000",
-            "accountName": "Retirement Contributions",
-            "description": "",
-            "amount": 249148,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "523000",
-            "accountName": "Life & Health Insurance",
-            "description": "$45,800/mo for retiree HIS = $549,600; $35,000 for retiree BCBS benefit; $154,340 for employee benefit",
-            "amount": 1124587,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "524000",
-            "accountName": "Workers' Compensation",
-            "description": "",
-            "amount": 875,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "525000",
-            "accountName": "Unemployment Compensation",
-            "description": "County share of the State Unemployment Compensation Trust Fund for employees that receive unemployment compensation",
-            "amount": 15000,
-            "category": "Benefits"
-          }
-        ]
-      },
-      {
         "category": "Contingency & Other",
-        "amount": 1214000,
-        "percent": 8.8,
+        "amount": 690000,
+        "percent": 5.5,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "530000",
             "accountName": "Operating Expenses and Budget",
             "description": "Contingency Budget",
-            "amount": 500000,
+            "amount": 0,
             "category": "Contingency & Other"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "548000",
-            "accountName": "Promotional Activities",
-            "description": "Citizen Academy & Employee Plaques",
-            "amount": 24000,
-            "category": "Contingency & Other"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -208,7 +368,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "599000",
             "accountName": "Other Uses/Contingency",
@@ -219,110 +379,63 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Personnel",
-        "amount": 1166133,
-        "percent": 8.5,
-        "items": [
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "511000",
-            "accountName": "Executive Salaries",
-            "description": "Commissioner salaries as set per F.S. 145.031",
-            "amount": 395500,
-            "category": "Personnel"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "512000",
-            "accountName": "Regular Salaries & Wages",
-            "description": "Commissioner aid salaries",
-            "amount": 476617,
-            "category": "Personnel"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "512007",
-            "accountName": "Sick Leave Incentive Pay",
-            "description": "",
-            "amount": 19016,
-            "category": "Personnel"
-          },
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "513000",
-            "accountName": "Other Salaries & Wages",
-            "description": "Summer Students @$16/hour = $110,000, additional funding for General Fund merit increases",
-            "amount": 275000,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
         "category": "Supplies & Fuel",
-        "amount": 326500,
-        "percent": 2.4,
+        "amount": 290500,
+        "percent": 2.3,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "DISTRICT 1 COMMISSIONER BUDGET",
+            "projectName": "00001",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
             "description": "D1 Office funding",
-            "amount": 25000,
+            "amount": 0,
             "category": "Supplies & Fuel"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "DISTRICT 2 COMMISSIONER BUDGET",
+            "projectName": "00002",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
             "description": "D2 Office funding",
-            "amount": 25000,
+            "amount": 0,
             "category": "Supplies & Fuel"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "DISTRICT 3 COMMISSIONER BUDGET",
+            "projectName": "00003",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
             "description": "D3 Office funding",
-            "amount": 25000,
+            "amount": 0,
             "category": "Supplies & Fuel"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "DISTRICT 4 COMMISSIONER BUDGET",
+            "projectName": "00004",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
             "description": "D4 Office funding",
-            "amount": 25000,
+            "amount": 0,
             "category": "Supplies & Fuel"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "DISTRICT 5 COMMISSIONER BUDGET",
+            "projectName": "00005",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
             "description": "D5 Office funding",
-            "amount": 25000,
+            "amount": 0,
             "category": "Supplies & Fuel"
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "TECHNOLOGY & SECURITY UPGRADES",
+            "projectName": "10030",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -332,7 +445,27 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "State Mandated TRIM notice mailed by the Property Appraiser",
+            "amount": 65000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "548000",
+            "accountName": "Promotional Activities",
+            "description": "Citizen Academy & Employee Plaques",
+            "amount": 24000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Board of County Commissioners",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -342,7 +475,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -355,11 +488,11 @@ window.wcExpenseDetail = [
       {
         "category": "Communications & Technology",
         "amount": 280000,
-        "percent": 2,
+        "percent": 2.2,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -369,7 +502,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -382,11 +515,11 @@ window.wcExpenseDetail = [
       {
         "category": "Travel & Training",
         "amount": 170000,
-        "percent": 1.2,
+        "percent": 1.4,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -396,7 +529,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -407,30 +540,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Uncategorized",
-        "amount": 65000,
-        "percent": 0.5,
-        "items": [
-          {
-            "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "TRIM notice mailed by the Property Appraiser",
-            "amount": 65000,
-            "category": "Uncategorized"
-          }
-        ]
-      },
-      {
         "category": "Vehicles & Equipment",
         "amount": 50000,
         "percent": 0.4,
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -440,7 +556,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -457,7 +573,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "581001",
             "accountName": "Aid to Government Agencies",
@@ -467,7 +583,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Board of County Commissioners",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "591000",
             "accountName": "Intergovernmental Transfers",
@@ -481,57 +597,57 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "DISTRICT 1 COMMISSIONER BUDGET",
+        "projectName": "00001",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
         "description": "D1 Office funding",
-        "amount": 25000,
+        "amount": 0,
         "category": "Supplies & Fuel"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "DISTRICT 2 COMMISSIONER BUDGET",
+        "projectName": "00002",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
         "description": "D2 Office funding",
-        "amount": 25000,
+        "amount": 0,
         "category": "Supplies & Fuel"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "DISTRICT 3 COMMISSIONER BUDGET",
+        "projectName": "00003",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
         "description": "D3 Office funding",
-        "amount": 25000,
+        "amount": 0,
         "category": "Supplies & Fuel"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "DISTRICT 4 COMMISSIONER BUDGET",
+        "projectName": "00004",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
         "description": "D4 Office funding",
-        "amount": 25000,
+        "amount": 0,
         "category": "Supplies & Fuel"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "DISTRICT 5 COMMISSIONER BUDGET",
+        "projectName": "00005",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
         "description": "D5 Office funding",
-        "amount": 25000,
+        "amount": 0,
         "category": "Supplies & Fuel"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "TECHNOLOGY & SECURITY UPGRADES",
+        "projectName": "10030",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -541,7 +657,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "MANAGED VENDOR PROGRAM",
+        "projectName": "10647",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -551,107 +667,137 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "511000",
         "accountName": "Executive Salaries",
         "description": "Commissioner salaries as set per F.S. 145.031",
         "amount": 395500,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "Commissioner aid salaries",
         "amount": 476617,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 19016,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "Summer Students @$16/hour = $110,000, additional funding for General Fund merit increases",
         "amount": 275000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 60789,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 249148,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
-        "description": "$45,800/mo for retiree HIS = $549,600; $35,000 for retiree BCBS benefit; $154,340 for employee benefit",
-        "amount": 1124587,
-        "category": "Benefits"
+        "description": "",
+        "amount": 1124857,
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "523000",
+        "accountName": "Life & Health Insurance",
+        "description": "",
+        "amount": 0,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "523000",
+        "accountName": "Life & Health Insurance",
+        "description": "Health Insurance Subsidy (HIS) Retirees",
+        "amount": 0,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "523000",
+        "accountName": "Life & Health Insurance",
+        "description": "Blue Cross Blue Shield Retiree Benefits",
+        "amount": 0,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 875,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "525000",
         "accountName": "Unemployment Compensation",
         "description": "County share of the State Unemployment Compensation Trust Fund for employees that receive unemployment compensation",
         "amount": 15000,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "530000",
         "accountName": "Operating Expenses and Budget",
         "description": "Contingency Budget",
-        "amount": 500000,
+        "amount": 0,
         "category": "Contingency & Other"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -661,7 +807,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "532000",
         "accountName": "Accounting & Auditing",
@@ -671,17 +817,57 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
-        "description": "Highway 98 Landscaping Contract, Juvenile Justice Department, Tyler Technologies, Board agenda software, County website",
-        "amount": 2200000,
+        "description": "",
+        "amount": 2000000,
         "category": "Professional Services"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "534000",
+        "accountName": "Other Services",
+        "description": "Highway 98 Landscaping Contract",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "534000",
+        "accountName": "Other Services",
+        "description": "Board agenda, website & public records software",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "534000",
+        "accountName": "Other Services",
+        "description": "Board ERP Software",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "534000",
+        "accountName": "Other Services",
+        "description": "State Mandated Juvenile Justice Department Contribution",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -691,7 +877,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -701,37 +887,97 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
-        "description": "TRIM notice mailed by the Property Appraiser",
+        "description": "State Mandated TRIM notice mailed by the Property Appraiser",
         "amount": 65000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
-        "description": "Postage machine for Tax Collector & Clerk, Lease for SLEERS towers, Copier Leases for Commission Offices",
-        "amount": 170000,
+        "description": "",
+        "amount": 142000,
         "category": "Facilities, Utilities & Maintenance"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "544000",
+        "accountName": "Rentals & Leases",
+        "description": "Lease for SLEERS towers,",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "544000",
+        "accountName": "Rentals & Leases",
+        "description": "Postage machine for Tax Collector & Clerk",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "544000",
+        "accountName": "Rentals & Leases",
+        "description": "Copier Leases for Commission Offices",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "545000",
         "accountName": "Insurance",
-        "description": "General Liability & Cyber Liability Coverage (FACT), Auto, Property, & Workers Compensation Coverage (FMIT),  Freeport Business Complex (NORCO)",
-        "amount": 4000000,
+        "description": "",
+        "amount": 3575000,
         "category": "Facilities, Utilities & Maintenance"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "545000",
+        "accountName": "Insurance",
+        "description": "General Liability & Cyber Liability Coverage (FACT)",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "545000",
+        "accountName": "Insurance",
+        "description": "Auto, Property, & Workers Compensation Coverage (FMIT)",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "545000",
+        "accountName": "Insurance",
+        "description": "Freeport Business Complex (NORCO)",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Board of County Commissioners",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -741,17 +987,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "548000",
         "accountName": "Promotional Activities",
         "description": "Citizen Academy & Employee Plaques",
         "amount": 24000,
-        "category": "Contingency & Other"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -761,7 +1007,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -771,7 +1017,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -781,7 +1027,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -791,7 +1037,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -801,7 +1047,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -811,7 +1057,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -821,7 +1067,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -831,7 +1077,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "581001",
         "accountName": "Aid to Government Agencies",
@@ -841,7 +1087,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -851,7 +1097,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "591000",
         "accountName": "Intergovernmental Transfers",
@@ -861,7 +1107,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Board of County Commissioners",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "599000",
         "accountName": "Other Uses/Contingency",
@@ -876,69 +1122,109 @@ window.wcExpenseDetail = [
     "total": 10700000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 3703464,
-        "percent": 34.6,
+        "category": "Personnel & Benefits",
+        "amount": 5442755,
+        "percent": 50.9,
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 3402464,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 15000,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "513000",
             "accountName": "Other Salaries & Wages",
             "description": "",
             "amount": 225000,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "513000",
             "accountName": "Other Salaries & Wages",
             "description": "(4) Seasonal Workers for Countywide park maintenance",
             "amount": 0,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "513000",
             "accountName": "Other Salaries & Wages",
             "description": "(6) Seasonal Workers for Morrison Springs Park",
             "amount": 0,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "514000",
             "accountName": "Overtime",
             "description": "Overtime for special events, Tournaments, and emergencies",
             "amount": 61000,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Building Construction and Maintenance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "",
+            "amount": 259685,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Building Construction and Maintenance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "",
+            "amount": 459182,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Building Construction and Maintenance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 934416,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Building Construction and Maintenance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 86008,
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -949,7 +1235,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "543000",
             "accountName": "Utility Services",
@@ -959,7 +1245,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "543000",
             "accountName": "Utility Services",
@@ -969,7 +1255,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -979,7 +1265,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -989,7 +1275,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -999,7 +1285,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -1009,7 +1295,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546001",
             "accountName": "Tires",
@@ -1020,60 +1306,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Benefits",
-        "amount": 1739291,
-        "percent": 16.3,
-        "items": [
-          {
-            "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "521000",
-            "accountName": "FICA Taxes & Medicare",
-            "description": "",
-            "amount": 259685,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "522000",
-            "accountName": "Retirement Contributions",
-            "description": "",
-            "amount": 459182,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "523000",
-            "accountName": "Life & Health Insurance",
-            "description": "",
-            "amount": 934416,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "524000",
-            "accountName": "Workers' Compensation",
-            "description": "",
-            "amount": 86008,
-            "category": "Benefits"
-          }
-        ]
-      },
-      {
         "category": "Buildings & Infrastructure",
         "amount": 1260000,
         "percent": 11.8,
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -1083,7 +1322,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -1093,7 +1332,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1103,7 +1342,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1113,7 +1352,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1130,7 +1369,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "ADA FACILITY COST",
+            "projectName": "10466",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -1140,7 +1379,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "ADA FACILITY COST",
+            "projectName": "10466",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -1150,7 +1389,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -1160,7 +1399,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -1170,7 +1409,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -1180,7 +1419,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -1190,7 +1429,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -1207,7 +1446,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1217,7 +1456,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1227,7 +1466,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1237,7 +1476,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1247,7 +1486,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1257,7 +1496,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1267,7 +1506,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1277,7 +1516,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -1294,7 +1533,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -1304,7 +1543,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -1321,7 +1560,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -1331,7 +1570,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -1348,7 +1587,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -1358,7 +1597,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -1375,7 +1614,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -1385,7 +1624,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Building Construction and Maintenance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -1399,7 +1638,7 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "ADA FACILITY COST",
+        "projectName": "10466",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -1409,7 +1648,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "ADA FACILITY COST",
+        "projectName": "10466",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -1419,107 +1658,107 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 3402464,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 15000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "",
         "amount": 225000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "(4) Seasonal Workers for Countywide park maintenance",
         "amount": 0,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "(6) Seasonal Workers for Morrison Springs Park",
         "amount": 0,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "Overtime for special events, Tournaments, and emergencies",
         "amount": 61000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 259685,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 459182,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 934416,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 86008,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -1529,7 +1768,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -1539,7 +1778,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -1549,7 +1788,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -1559,7 +1798,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "543000",
         "accountName": "Utility Services",
@@ -1569,7 +1808,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "543000",
         "accountName": "Utility Services",
@@ -1579,7 +1818,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -1589,7 +1828,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -1599,7 +1838,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -1609,7 +1848,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -1619,7 +1858,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546001",
         "accountName": "Tires",
@@ -1629,7 +1868,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -1639,7 +1878,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -1649,7 +1888,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -1659,7 +1898,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -1669,7 +1908,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -1679,7 +1918,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -1689,7 +1928,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -1699,7 +1938,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -1709,7 +1948,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -1719,7 +1958,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -1729,7 +1968,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -1739,7 +1978,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -1749,7 +1988,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -1759,7 +1998,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -1769,7 +2008,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1779,7 +2018,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1789,7 +2028,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1799,7 +2038,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1809,7 +2048,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1819,7 +2058,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1829,7 +2068,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1839,7 +2078,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Building Construction and Maintenance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -1860,7 +2099,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Capital Projects",
-            "projectName": "FTE REPORT",
+            "projectName": "99999",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -1870,7 +2109,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -1880,7 +2119,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "CHAT HOLLEY & US 331 INTERS IMP LTO",
+            "projectName": "10538",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1890,7 +2129,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "CR 83 N BLUE MTN RD EXT US 98 TO CH",
+            "projectName": "10553",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1900,7 +2139,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "DRIFTWOOD & US 98 INTERS SIGNALIZAT",
+            "projectName": "10566",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1910,7 +2149,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "HEWETT BAYOU CONNECTOR E LAMB DR EX",
+            "projectName": "10572",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1920,7 +2159,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "HOLIDAY RD & CR 2378 SCENIC GULF SI",
+            "projectName": "10573",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1930,7 +2169,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "HOLIDAY SHORES DRAIN & PED IMP PH II",
+            "projectName": "10574",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1940,7 +2179,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "SUGAR DRIVE CONNECTOR RD",
+            "projectName": "10598",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1950,7 +2189,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "SOUTH ORANGE STREET PEDESTRIAN IMPROVEMENTS",
+            "projectName": "10600",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1960,7 +2199,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "CR 30A Sidewalk from Ventana Blvd to Blue Gulf Drive",
+            "projectName": "10723",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1970,7 +2209,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "POINCIANA BLVD & SCENIC HWY 98 IN",
+            "projectName": "10728",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1980,7 +2219,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "N ORANGE STREET PEDESTRIAN IMPROVEM",
+            "projectName": "10734",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -1990,7 +2229,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "E BAY LOOP (CR 83A E) NORTHBOUND RI",
+            "projectName": "10735",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -2007,7 +2246,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Capital Projects",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "571000",
             "accountName": "Principal",
@@ -2017,7 +2256,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Capital Projects",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "572000",
             "accountName": "Interest Expense",
@@ -2031,7 +2270,7 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Capital Projects",
-        "projectName": "FTE REPORT",
+        "projectName": "99999",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -2041,7 +2280,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -2051,7 +2290,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "CHAT HOLLEY & US 331 INTERS IMP LTO",
+        "projectName": "10538",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2061,7 +2300,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "CR 83 N BLUE MTN RD EXT US 98 TO CH",
+        "projectName": "10553",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2071,7 +2310,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "DRIFTWOOD & US 98 INTERS SIGNALIZAT",
+        "projectName": "10566",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2081,7 +2320,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "HEWETT BAYOU CONNECTOR E LAMB DR EX",
+        "projectName": "10572",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2091,7 +2330,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "HOLIDAY RD & CR 2378 SCENIC GULF SI",
+        "projectName": "10573",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2101,7 +2340,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "HOLIDAY SHORES DRAIN & PED IMP PH II",
+        "projectName": "10574",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2111,7 +2350,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "SUGAR DRIVE CONNECTOR RD",
+        "projectName": "10598",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2121,7 +2360,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "SOUTH ORANGE STREET PEDESTRIAN IMPROVEMENTS",
+        "projectName": "10600",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2131,7 +2370,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "CR 30A Sidewalk from Ventana Blvd to Blue Gulf Drive",
+        "projectName": "10723",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2141,7 +2380,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "POINCIANA BLVD & SCENIC HWY 98 IN",
+        "projectName": "10728",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2151,7 +2390,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "N ORANGE STREET PEDESTRIAN IMPROVEM",
+        "projectName": "10734",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2161,7 +2400,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "E BAY LOOP (CR 83A E) NORTHBOUND RI",
+        "projectName": "10735",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -2171,7 +2410,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "571000",
         "accountName": "Principal",
@@ -2181,7 +2420,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Capital Projects",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "572000",
         "accountName": "Interest Expense",
@@ -2192,161 +2431,489 @@ window.wcExpenseDetail = [
     ]
   },
   {
-    "department": "Code Compliance",
-    "total": 4840000,
+    "department": "Circuit Court",
+    "total": 261493,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 2885020,
-        "percent": 59.6,
+        "category": "Personnel & Benefits",
+        "amount": 224093,
+        "percent": 85.7,
         "items": [
           {
-            "proposal": "Code Compliance",
-            "projectName": "SHORT-TERM RENTAL",
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "510000",
+            "accountName": "Personnel Services or Budget",
+            "description": "Reimbursement to Walton County for WCSO Court Security Services *Matched to Sheriff request",
+            "amount": 187097,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
-            "description": "STR",
-            "amount": 55096,
-            "category": "Personnel"
+            "description": "Case Manager position paid 50% from Circuit Court and 50% from innovative program funding generated by court fees. FTE position at $22.48/hour, plus 3% COLA.",
+            "amount": 25275,
+            "category": "Personnel & Benefits"
           },
           {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "512000",
-            "accountName": "Regular Salaries & Wages",
-            "description": "",
-            "amount": 2570456,
-            "category": "Personnel"
-          },
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "512007",
-            "accountName": "Sick Leave Incentive Pay",
-            "description": "*OMB entered",
-            "amount": 7468,
-            "category": "Personnel"
-          },
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "513000",
-            "accountName": "Other Salaries & Wages",
-            "description": "Seasonal Beach Stewards",
-            "amount": 250000,
-            "category": "Personnel"
-          },
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "514000",
-            "accountName": "Overtime",
-            "description": "*OMB entered",
-            "amount": 2000,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 1255070,
-        "percent": 25.9,
-        "items": [
-          {
-            "proposal": "Code Compliance",
-            "projectName": "SHORT-TERM RENTAL",
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
-            "description": "STR",
-            "amount": 4139,
-            "category": "Benefits"
+            "description": "50% FICA Expense for Case Manager position",
+            "amount": 1934,
+            "category": "Personnel & Benefits"
           },
           {
-            "proposal": "Code Compliance",
-            "projectName": "SHORT-TERM RENTAL",
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
-            "description": "STR",
-            "amount": 7369,
-            "category": "Benefits"
+            "description": "50% Retirement for Case Manager position.",
+            "amount": 3379,
+            "category": "Personnel & Benefits"
           },
           {
-            "proposal": "Code Compliance",
-            "projectName": "SHORT-TERM RENTAL",
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
-            "description": "STR",
-            "amount": 13344,
-            "category": "Benefits"
+            "description": "50% Life & Health for Case Manager position.",
+            "amount": 6353,
+            "category": "Personnel & Benefits"
           },
           {
-            "proposal": "Code Compliance",
-            "projectName": "SHORT-TERM RENTAL",
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
-            "description": "STR",
-            "amount": 1120,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "521000",
-            "accountName": "FICA Taxes & Medicare",
-            "description": "",
-            "amount": 193810,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "522000",
-            "accountName": "Retirement Contributions",
-            "description": "",
-            "amount": 355670,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "523000",
-            "accountName": "Life & Health Insurance",
-            "description": "",
-            "amount": 640689,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "524000",
-            "accountName": "Workers' Compensation",
-            "description": "",
-            "amount": 38929,
-            "category": "Benefits"
+            "description": "50% Work Comp for Case Manager position.",
+            "amount": 55,
+            "category": "Personnel & Benefits"
           }
         ]
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 278000,
-        "percent": 5.7,
+        "amount": 31400,
+        "percent": 12,
+        "items": [
+          {
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "535000",
+            "accountName": "Investigations",
+            "description": "CSE Grant Payment",
+            "amount": 10400,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "non-tech related operating expenses for Case Manager position, judiciary, and public spaces.",
+            "amount": 21000,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      },
+      {
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 5000,
+        "percent": 1.9,
+        "items": [
+          {
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "544000",
+            "accountName": "Rentals & Leases",
+            "description": "Copier Lease and Water Cooler",
+            "amount": 5000,
+            "category": "Facilities, Utilities & Maintenance"
+          }
+        ]
+      },
+      {
+        "category": "Communications & Technology",
+        "amount": 1000,
+        "percent": 0.4,
+        "items": [
+          {
+            "proposal": "Circuit Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "T-Mobile Account - $40/month ($480 annually). Line item reduced. Monthly Uniti Fiber expense accounted for in Court Technology budget.",
+            "amount": 1000,
+            "category": "Communications & Technology"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "510000",
+        "accountName": "Personnel Services or Budget",
+        "description": "Reimbursement to Walton County for WCSO Court Security Services *Matched to Sheriff request",
+        "amount": 187097,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "512000",
+        "accountName": "Regular Salaries & Wages",
+        "description": "Case Manager position paid 50% from Circuit Court and 50% from innovative program funding generated by court fees. FTE position at $22.48/hour, plus 3% COLA.",
+        "amount": 25275,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "521000",
+        "accountName": "FICA Taxes & Medicare",
+        "description": "50% FICA Expense for Case Manager position",
+        "amount": 1934,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "522000",
+        "accountName": "Retirement Contributions",
+        "description": "50% Retirement for Case Manager position.",
+        "amount": 3379,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "523000",
+        "accountName": "Life & Health Insurance",
+        "description": "50% Life & Health for Case Manager position.",
+        "amount": 6353,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "524000",
+        "accountName": "Workers' Compensation",
+        "description": "50% Work Comp for Case Manager position.",
+        "amount": 55,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "535000",
+        "accountName": "Investigations",
+        "description": "CSE Grant Payment",
+        "amount": 10400,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "T-Mobile Account - $40/month ($480 annually). Line item reduced. Monthly Uniti Fiber expense accounted for in Court Technology budget.",
+        "amount": 1000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "544000",
+        "accountName": "Rentals & Leases",
+        "description": "Copier Lease and Water Cooler",
+        "amount": 5000,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Circuit Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "non-tech related operating expenses for Case Manager position, judiciary, and public spaces.",
+        "amount": 21000,
+        "category": "Supplies & Fuel"
+      }
+    ]
+  },
+  {
+    "department": "Clerk of Courts & County Comptroller",
+    "total": 6871175,
+    "categories": [
+      {
+        "category": "Personnel & Benefits",
+        "amount": 4905230,
+        "percent": 71.4,
+        "items": [
+          {
+            "proposal": "Clerk of Courts & County Comptroller",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "510000",
+            "accountName": "Personnel Services or Budget",
+            "description": "Reduced personnel costs by projected revenues.",
+            "amount": 4905230,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      },
+      {
+        "category": "Contingency & Other",
+        "amount": 1845945,
+        "percent": 26.9,
+        "items": [
+          {
+            "proposal": "Clerk of Courts & County Comptroller",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "530000",
+            "accountName": "Operating Expenses and Budget",
+            "description": "FY 26 - $135,000 in recurring expenses for IT subscriptions/maintenance.",
+            "amount": 1845945,
+            "category": "Contingency & Other"
+          }
+        ]
+      },
+      {
+        "category": "Buildings & Infrastructure",
+        "amount": 120000,
+        "percent": 1.7,
+        "items": [
+          {
+            "proposal": "Clerk of Courts & County Comptroller",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "560000",
+            "accountName": "Capital Outlay Budget",
+            "description": "",
+            "amount": 120000,
+            "category": "Buildings & Infrastructure"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Clerk of Courts & County Comptroller",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "510000",
+        "accountName": "Personnel Services or Budget",
+        "description": "Reduced personnel costs by projected revenues.",
+        "amount": 4905230,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Clerk of Courts & County Comptroller",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "530000",
+        "accountName": "Operating Expenses and Budget",
+        "description": "FY 26 - $135,000 in recurring expenses for IT subscriptions/maintenance.",
+        "amount": 1845945,
+        "category": "Contingency & Other"
+      },
+      {
+        "proposal": "Clerk of Courts & County Comptroller",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "560000",
+        "accountName": "Capital Outlay Budget",
+        "description": "",
+        "amount": 120000,
+        "category": "Buildings & Infrastructure"
+      }
+    ]
+  },
+  {
+    "department": "Code Compliance",
+    "total": 4840000,
+    "categories": [
+      {
+        "category": "Personnel & Benefits",
+        "amount": 4140090,
+        "percent": 85.5,
         "items": [
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "10639",
+            "type": "Expenses",
+            "accountCode": "512000",
+            "accountName": "Regular Salaries & Wages",
+            "description": "STR",
+            "amount": 55096,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "10639",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "STR",
+            "amount": 4139,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "10639",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "STR",
+            "amount": 7369,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "10639",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "STR",
+            "amount": 13344,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "10639",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "STR",
+            "amount": 1120,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "512000",
+            "accountName": "Regular Salaries & Wages",
+            "description": "",
+            "amount": 2570456,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "512007",
+            "accountName": "Sick Leave Incentive Pay",
+            "description": "*OMB entered",
+            "amount": 7468,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "513000",
+            "accountName": "Other Salaries & Wages",
+            "description": "Seasonal Beach Stewards",
+            "amount": 250000,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "514000",
+            "accountName": "Overtime",
+            "description": "*OMB entered",
+            "amount": 2000,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "",
+            "amount": 193810,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "",
+            "amount": 355670,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 640689,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 38929,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 291000,
+        "percent": 6,
+        "items": [
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 13000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Code Compliance",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -2356,7 +2923,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -2366,7 +2933,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -2383,7 +2950,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -2393,7 +2960,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -2403,7 +2970,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -2413,7 +2980,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -2423,7 +2990,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -2433,7 +3000,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -2443,7 +3010,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -2460,7 +3027,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -2477,7 +3044,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -2487,7 +3054,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "547000",
             "accountName": "Printing & Binding",
@@ -2497,7 +3064,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -2514,7 +3081,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -2524,7 +3091,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -2534,7 +3101,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546001",
             "accountName": "Tires",
@@ -2551,7 +3118,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -2561,7 +3128,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -2572,30 +3139,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Uncategorized",
-        "amount": 13000,
-        "percent": 0.3,
-        "items": [
-          {
-            "proposal": "Code Compliance",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 13000,
-            "category": "Uncategorized"
-          }
-        ]
-      },
-      {
         "category": "Contingency & Other",
         "amount": 3000,
         "percent": 0.1,
         "items": [
           {
             "proposal": "Code Compliance",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -2609,137 +3159,137 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Code Compliance",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "STR",
         "amount": 55096,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "STR",
         "amount": 4139,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "STR",
         "amount": 7369,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "STR",
         "amount": 13344,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "STR",
         "amount": 1120,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 2570456,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 7468,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "Seasonal Beach Stewards",
         "amount": 250000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "*OMB entered",
         "amount": 2000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 193810,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 355670,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 640689,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 38929,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -2749,7 +3299,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -2759,7 +3309,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -2769,17 +3319,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 13000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -2789,7 +3339,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -2799,7 +3349,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546001",
         "accountName": "Tires",
@@ -2809,7 +3359,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "547000",
         "accountName": "Printing & Binding",
@@ -2819,7 +3369,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -2829,7 +3379,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -2839,7 +3389,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -2849,7 +3399,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -2859,7 +3409,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -2869,7 +3419,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -2879,7 +3429,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -2889,7 +3439,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -2899,7 +3449,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -2909,7 +3459,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -2919,7 +3469,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -2929,7 +3479,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -2939,7 +3489,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Code Compliance",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -2954,86 +3504,79 @@ window.wcExpenseDetail = [
     "total": 2270000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 1440147,
-        "percent": 63.4,
+        "category": "Personnel & Benefits",
+        "amount": 2071000,
+        "percent": 91.2,
         "items": [
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 1429186,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
             "amount": 9961,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "514000",
             "accountName": "Overtime",
             "description": "*OMB entered",
             "amount": 1000,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 630853,
-        "percent": 27.8,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 106573,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 270237,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 250676,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 3367,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -3044,7 +3587,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -3054,7 +3597,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -3071,7 +3614,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -3081,7 +3624,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -3098,7 +3641,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -3108,7 +3651,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -3120,12 +3663,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 28000,
-        "percent": 1.2,
+        "amount": 33000,
+        "percent": 1.5,
         "items": [
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "548000",
+            "accountName": "Promotional Activities",
+            "description": "",
+            "amount": 5000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "County Administration",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -3135,7 +3688,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3145,7 +3698,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -3162,7 +3715,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -3172,7 +3725,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -3182,7 +3735,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546001",
             "accountName": "Tires",
@@ -3194,22 +3747,12 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Contingency & Other",
-        "amount": 6000,
-        "percent": 0.3,
+        "amount": 1000,
+        "percent": 0,
         "items": [
           {
             "proposal": "County Administration",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "548000",
-            "accountName": "Promotional Activities",
-            "description": "",
-            "amount": 5000,
-            "category": "Contingency & Other"
-          },
-          {
-            "proposal": "County Administration",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -3223,77 +3766,77 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 1429186,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 9961,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "*OMB entered",
         "amount": 1000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 106573,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 270237,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 250676,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 3367,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -3303,7 +3846,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -3313,7 +3856,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -3323,7 +3866,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -3333,7 +3876,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546001",
         "accountName": "Tires",
@@ -3343,17 +3886,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "548000",
         "accountName": "Promotional Activities",
         "description": "",
         "amount": 5000,
-        "category": "Contingency & Other"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -3363,7 +3906,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -3373,7 +3916,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -3383,7 +3926,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -3393,7 +3936,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -3403,7 +3946,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -3413,7 +3956,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -3423,7 +3966,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "County Administration",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -3434,53 +3977,1214 @@ window.wcExpenseDetail = [
     ]
   },
   {
+    "department": "County Court",
+    "total": 70056,
+    "categories": [
+      {
+        "category": "Personnel & Benefits",
+        "amount": 65856,
+        "percent": 94,
+        "items": [
+          {
+            "proposal": "County Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "510000",
+            "accountName": "Personnel Services or Budget",
+            "description": "Walton County Sheriff Department Budget Reimbursement Request for Court Security ($5488/month).",
+            "amount": 65856,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      },
+      {
+        "category": "Communications & Technology",
+        "amount": 3000,
+        "percent": 4.3,
+        "items": [
+          {
+            "proposal": "County Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "amount": 3000,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "County Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "Verizon monthly phone service ($50/month) plus replacement phone allowance.",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "County Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "VOIP expenses",
+            "amount": 0,
+            "category": "Communications & Technology"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 1200,
+        "percent": 1.7,
+        "items": [
+          {
+            "proposal": "County Court",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 1200,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "County Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "510000",
+        "accountName": "Personnel Services or Budget",
+        "description": "Walton County Sheriff Department Budget Reimbursement Request for Court Security ($5488/month).",
+        "amount": 65856,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "County Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "amount": 3000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "County Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "Verizon monthly phone service ($50/month) plus replacement phone allowance.",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "County Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "VOIP expenses",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "County Court",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 1200,
+        "category": "Supplies & Fuel"
+      }
+    ]
+  },
+  {
+    "department": "Court Innovations",
+    "total": 80000,
+    "categories": [
+      {
+        "category": "Supplies & Fuel",
+        "amount": 43109,
+        "percent": 53.9,
+        "items": [
+          {
+            "proposal": "Court Innovations",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531001",
+            "accountName": "County Ordinance (Law Library)",
+            "description": "",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Innovations",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531002",
+            "accountName": "County Ordinance (Juvenile Justice))",
+            "description": "",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Innovations",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531003",
+            "accountName": "County Ordinance (Legal Aid)",
+            "description": "Legal Services of North Florida",
+            "amount": 21555,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Innovations",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531004",
+            "accountName": "County Ordinance (Innovative Program)",
+            "description": "Magistrate per Judge OMB meeting 6/26",
+            "amount": 21554,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      },
+      {
+        "category": "Personnel & Benefits",
+        "amount": 36891,
+        "percent": 46.1,
+        "items": [
+          {
+            "proposal": "Court Innovations",
+            "projectName": "01040",
+            "type": "Expenses",
+            "accountCode": "512000",
+            "accountName": "Regular Salaries & Wages",
+            "description": "Case Manager position paid 50% from Circuit Court and 50% from innovative program funding generated by court fees. FTE position at $22.48/hour.",
+            "amount": 25285,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Court Innovations",
+            "projectName": "01040",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "50% of FICA expense for Case Manager position.",
+            "amount": 1934,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Court Innovations",
+            "projectName": "01040",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "50% of Retirement expense for Case Manager position.",
+            "amount": 3379,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Court Innovations",
+            "projectName": "01040",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "50% of Life & Health expense for Case Manager position. Includes $25 Work Comp.",
+            "amount": 6264,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Court Innovations",
+            "projectName": "01040",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 29,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Court Innovations",
+        "projectName": "01040",
+        "type": "Expenses",
+        "accountCode": "512000",
+        "accountName": "Regular Salaries & Wages",
+        "description": "Case Manager position paid 50% from Circuit Court and 50% from innovative program funding generated by court fees. FTE position at $22.48/hour.",
+        "amount": 25285,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "01040",
+        "type": "Expenses",
+        "accountCode": "521000",
+        "accountName": "FICA Taxes & Medicare",
+        "description": "50% of FICA expense for Case Manager position.",
+        "amount": 1934,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "01040",
+        "type": "Expenses",
+        "accountCode": "522000",
+        "accountName": "Retirement Contributions",
+        "description": "50% of Retirement expense for Case Manager position.",
+        "amount": 3379,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "01040",
+        "type": "Expenses",
+        "accountCode": "523000",
+        "accountName": "Life & Health Insurance",
+        "description": "50% of Life & Health expense for Case Manager position. Includes $25 Work Comp.",
+        "amount": 6264,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "01040",
+        "type": "Expenses",
+        "accountCode": "524000",
+        "accountName": "Workers' Compensation",
+        "description": "",
+        "amount": 29,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531001",
+        "accountName": "County Ordinance (Law Library)",
+        "description": "",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531002",
+        "accountName": "County Ordinance (Juvenile Justice))",
+        "description": "",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531003",
+        "accountName": "County Ordinance (Legal Aid)",
+        "description": "Legal Services of North Florida",
+        "amount": 21555,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Innovations",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531004",
+        "accountName": "County Ordinance (Innovative Program)",
+        "description": "Magistrate per Judge OMB meeting 6/26",
+        "amount": 21554,
+        "category": "Supplies & Fuel"
+      }
+    ]
+  },
+  {
+    "department": "Court Technology",
+    "total": 737380,
+    "categories": [
+      {
+        "category": "Supplies & Fuel",
+        "amount": 277888,
+        "percent": 37.7,
+        "items": [
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "551000",
+            "accountName": "Office Supplies",
+            "description": "",
+            "amount": 13000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "551000",
+            "accountName": "Office Supplies",
+            "description": "AV Equipment for Courtrooms",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "551000",
+            "accountName": "Office Supplies",
+            "description": "PC Refresh",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "551000",
+            "accountName": "Office Supplies",
+            "description": "Network, Cables, Power, UPS",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 22540,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 242348,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      },
+      {
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 265404,
+        "percent": 36,
+        "items": [
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "",
+            "amount": 7708,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "Network Repair & Maintenance (30 hours @ $150/hour)",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "Annual Copier Lease + Repair & Maintenance price (CPC Office Technologies) R&M - $708/year | Lease - $2500/year",
+            "amount": 0,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "",
+            "amount": 214293,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "",
+            "amount": 43403,
+            "category": "Facilities, Utilities & Maintenance"
+          }
+        ]
+      },
+      {
+        "category": "Professional Services",
+        "amount": 122378,
+        "percent": 16.6,
+        "items": [
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "",
+            "amount": 121878,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "Cloud Data Storage - $100/month @ 12 months",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "Reimbursement to Escambia County for one FTE MIS employee in Walton County and shared personnel expenses for four other circuit MIS employees.",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "534000",
+            "accountName": "Other Services",
+            "description": "Webhosting and Maintenance for the First Circuit's webpage (5 hours @ $100/hour)",
+            "amount": 500,
+            "category": "Professional Services"
+          }
+        ]
+      },
+      {
+        "category": "Communications & Technology",
+        "amount": 70710,
+        "percent": 9.6,
+        "items": [
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "amount": 9000,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "Internet Connection (DMS - Walton Jail, Century Link - GAL, Unity - South Walton/Defuniak)",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "Verizon - Cell MiFi for judges",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "",
+            "amount": 32350,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "SmartBench - Maintenance",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "eSubmit - eWarrant",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "PaloAlto - Firewall Maintenance",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "AppRiver - Email Filter",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Cisco Smartnet Switch Maintenance",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Veeam - Data Backup Maintenance",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Veeam - O365 Backup",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Crowdstrike - PC Anti-Virus Maintenance",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "LanSweeper - Asset Management",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Adobe - Remote Access",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Remote Access XiO and Reflect - AV Maintenance",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "MicroSoft Enterprise Agreement Office 365",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "HR Cloud Maintenance",
+            "amount": 0,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "amount": 18000,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "amount": 11360,
+            "category": "Communications & Technology"
+          }
+        ]
+      },
+      {
+        "category": "Travel & Training",
+        "amount": 1000,
+        "percent": 0.1,
+        "items": [
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "540000",
+            "accountName": "Travel & Per Diem",
+            "description": "Intra-Circuit travel for IT operations, repair, and maintenance. Estimated mileage required is 1500 at $0.70/mile.",
+            "amount": 1000,
+            "category": "Travel & Training"
+          }
+        ]
+      },
+      {
+        "category": "Vehicles & Equipment",
+        "amount": 0,
+        "percent": 0,
+        "items": [
+          {
+            "proposal": "Court Technology",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "564000",
+            "accountName": "Machinery & Equipment",
+            "description": "",
+            "amount": 0,
+            "category": "Vehicles & Equipment"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "",
+        "amount": 121878,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "Cloud Data Storage - $100/month @ 12 months",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "Reimbursement to Escambia County for one FTE MIS employee in Walton County and shared personnel expenses for four other circuit MIS employees.",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "534000",
+        "accountName": "Other Services",
+        "description": "Webhosting and Maintenance for the First Circuit's webpage (5 hours @ $100/hour)",
+        "amount": 500,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "540000",
+        "accountName": "Travel & Per Diem",
+        "description": "Intra-Circuit travel for IT operations, repair, and maintenance. Estimated mileage required is 1500 at $0.70/mile.",
+        "amount": 1000,
+        "category": "Travel & Training"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "amount": 9000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "Internet Connection (DMS - Walton Jail, Century Link - GAL, Unity - South Walton/Defuniak)",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "Verizon - Cell MiFi for judges",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "",
+        "amount": 7708,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "Network Repair & Maintenance (30 hours @ $150/hour)",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "Annual Copier Lease + Repair & Maintenance price (CPC Office Technologies) R&M - $708/year | Lease - $2500/year",
+        "amount": 0,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "551000",
+        "accountName": "Office Supplies",
+        "description": "",
+        "amount": 13000,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "551000",
+        "accountName": "Office Supplies",
+        "description": "AV Equipment for Courtrooms",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "551000",
+        "accountName": "Office Supplies",
+        "description": "PC Refresh",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "551000",
+        "accountName": "Office Supplies",
+        "description": "Network, Cables, Power, UPS",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "",
+        "amount": 32350,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "SmartBench - Maintenance",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "eSubmit - eWarrant",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "PaloAlto - Firewall Maintenance",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "AppRiver - Email Filter",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "Cisco Smartnet Switch Maintenance",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "Veeam - Data Backup Maintenance",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "Veeam - O365 Backup",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "Crowdstrike - PC Anti-Virus Maintenance",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "LanSweeper - Asset Management",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "Adobe - Remote Access",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "Remote Access XiO and Reflect - AV Maintenance",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "MicroSoft Enterprise Agreement Office 365",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "HR Cloud Maintenance",
+        "amount": 0,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "564000",
+        "accountName": "Machinery & Equipment",
+        "description": "",
+        "amount": 0,
+        "category": "Vehicles & Equipment"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "amount": 18000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "",
+        "amount": 214293,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 22540,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "amount": 11360,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "",
+        "amount": 43403,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Court Technology",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 242348,
+        "category": "Supplies & Fuel"
+      }
+    ]
+  },
+  {
     "department": "Eagle Springs Golf and Recreation Center",
     "total": 2212000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 687388,
-        "percent": 31.1,
+        "category": "Personnel & Benefits",
+        "amount": 1009500,
+        "percent": 45.6,
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 593293,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 4095,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "513000",
             "accountName": "Other Salaries & Wages",
             "description": "Contract labor for Lifeguards",
             "amount": 65000,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "514000",
             "accountName": "Overtime",
             "description": "",
             "amount": 25000,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Golf and Recreation Center",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "",
+            "amount": 44890,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Golf and Recreation Center",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "",
+            "amount": 79930,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Golf and Recreation Center",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 190123,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Golf and Recreation Center",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 7169,
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -3491,7 +5195,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "BUILDING OPERATING SUPPLIES",
+            "projectName": "10329",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3501,7 +5205,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "BUILDING OPERATING SUPPLIES",
+            "projectName": "10329",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3511,7 +5215,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "GOLF COURSE PRO SHOP",
+            "projectName": "10330",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3521,7 +5225,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "GOLF COURSE PRO SHOP",
+            "projectName": "10330",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3531,7 +5235,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -3541,7 +5245,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3551,7 +5255,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3561,7 +5265,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -3571,7 +5275,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -3588,7 +5292,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "FTE REPORT",
+            "projectName": "99999",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -3598,7 +5302,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "FTE REPORT",
+            "projectName": "99999",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -3608,7 +5312,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -3618,7 +5322,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
@@ -3629,60 +5333,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Benefits",
-        "amount": 322112,
-        "percent": 14.6,
-        "items": [
-          {
-            "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "521000",
-            "accountName": "FICA Taxes & Medicare",
-            "description": "",
-            "amount": 44890,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "522000",
-            "accountName": "Retirement Contributions",
-            "description": "",
-            "amount": 79930,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "523000",
-            "accountName": "Life & Health Insurance",
-            "description": "",
-            "amount": 190123,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "524000",
-            "accountName": "Workers' Compensation",
-            "description": "",
-            "amount": 7169,
-            "category": "Benefits"
-          }
-        ]
-      },
-      {
         "category": "Facilities, Utilities & Maintenance",
         "amount": 210500,
         "percent": 9.5,
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -3692,7 +5349,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -3702,7 +5359,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -3712,7 +5369,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546001",
             "accountName": "Tires",
@@ -3729,7 +5386,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -3739,7 +5396,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -3749,7 +5406,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -3766,7 +5423,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -3776,7 +5433,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -3793,7 +5450,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -3810,7 +5467,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -3820,7 +5477,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -3837,7 +5494,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Golf and Recreation Center",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -3851,7 +5508,7 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "BUILDING OPERATING SUPPLIES",
+        "projectName": "10329",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -3861,7 +5518,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "BUILDING OPERATING SUPPLIES",
+        "projectName": "10329",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -3871,7 +5528,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "GOLF COURSE PRO SHOP",
+        "projectName": "10330",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -3881,7 +5538,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "GOLF COURSE PRO SHOP",
+        "projectName": "10330",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -3891,7 +5548,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "FTE REPORT",
+        "projectName": "99999",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -3901,7 +5558,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "FTE REPORT",
+        "projectName": "99999",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -3911,87 +5568,87 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 593293,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 4095,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "Contract labor for Lifeguards",
         "amount": 65000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "",
         "amount": 25000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 44890,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 79930,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 190123,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 7169,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -4001,7 +5658,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -4011,7 +5668,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -4021,7 +5678,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -4031,7 +5688,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -4041,7 +5698,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -4051,7 +5708,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546001",
         "accountName": "Tires",
@@ -4061,7 +5718,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -4071,7 +5728,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -4081,7 +5738,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -4091,7 +5748,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -4101,7 +5758,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -4111,7 +5768,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -4121,7 +5778,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -4131,7 +5788,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -4141,7 +5798,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -4151,7 +5808,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
@@ -4161,7 +5818,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -4171,7 +5828,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -4181,7 +5838,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Golf and Recreation Center",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -4196,39 +5853,79 @@ window.wcExpenseDetail = [
     "total": 570000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 270179,
-        "percent": 47.4,
+        "category": "Personnel & Benefits",
+        "amount": 385100,
+        "percent": 67.6,
         "items": [
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 265179,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 0,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "514000",
             "accountName": "Overtime",
             "description": "",
             "amount": 5000,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Grill",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "",
+            "amount": 19776,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Grill",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "",
+            "amount": 32008,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Grill",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 60702,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Eagle Springs Grill",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 2435,
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -4239,7 +5936,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "FOOD BUDGET",
+            "projectName": "10331",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -4249,7 +5946,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "BEVERAGE BUDGET",
+            "projectName": "10332",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -4259,7 +5956,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -4269,7 +5966,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -4280,60 +5977,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Benefits",
-        "amount": 114921,
-        "percent": 20.2,
-        "items": [
-          {
-            "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "521000",
-            "accountName": "FICA Taxes & Medicare",
-            "description": "",
-            "amount": 19776,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "522000",
-            "accountName": "Retirement Contributions",
-            "description": "",
-            "amount": 32008,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "523000",
-            "accountName": "Life & Health Insurance",
-            "description": "",
-            "amount": 60702,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "524000",
-            "accountName": "Workers' Compensation",
-            "description": "",
-            "amount": 2435,
-            "category": "Benefits"
-          }
-        ]
-      },
-      {
         "category": "Contingency & Other",
         "amount": 10000,
         "percent": 1.8,
         "items": [
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -4350,7 +6000,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -4367,7 +6017,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -4384,7 +6034,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -4394,7 +6044,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Eagle Springs Grill",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -4408,7 +6058,7 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "FOOD BUDGET",
+        "projectName": "10331",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -4418,7 +6068,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "BEVERAGE BUDGET",
+        "projectName": "10332",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -4428,77 +6078,77 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 265179,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 0,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "",
         "amount": 5000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 19776,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 32008,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 60702,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 2435,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -4508,7 +6158,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -4518,7 +6168,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -4528,7 +6178,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -4538,7 +6188,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -4548,7 +6198,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -4558,7 +6208,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Eagle Springs Grill",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -4570,89 +6220,82 @@ window.wcExpenseDetail = [
   },
   {
     "department": "Emergency Management",
-    "total": 889000,
+    "total": 888000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 458013,
-        "percent": 51.5,
+        "category": "Personnel & Benefits",
+        "amount": 679871,
+        "percent": 76.6,
         "items": [
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
-            "amount": 454975,
-            "category": "Personnel"
+            "amount": 454870,
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
-            "amount": 3038,
-            "category": "Personnel"
+            "amount": 2143,
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "514000",
             "accountName": "Overtime",
             "description": "",
             "amount": 0,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 222858,
-        "percent": 25.1,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 34806,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 97732,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 89819,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 501,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -4663,7 +6306,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -4673,7 +6316,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "547000",
             "accountName": "Printing & Binding",
@@ -4683,7 +6326,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -4700,7 +6343,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -4710,7 +6353,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -4722,12 +6365,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 31729,
+        "amount": 32129,
         "percent": 3.6,
         "items": [
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 400,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Emergency Management",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -4737,7 +6390,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -4754,7 +6407,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -4767,11 +6420,11 @@ window.wcExpenseDetail = [
       {
         "category": "Facilities, Utilities & Maintenance",
         "amount": 28000,
-        "percent": 3.1,
+        "percent": 3.2,
         "items": [
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -4781,7 +6434,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Emergency Management",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -4790,99 +6443,82 @@ window.wcExpenseDetail = [
             "category": "Facilities, Utilities & Maintenance"
           }
         ]
-      },
-      {
-        "category": "Uncategorized",
-        "amount": 400,
-        "percent": 0,
-        "items": [
-          {
-            "proposal": "Emergency Management",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 400,
-            "category": "Uncategorized"
-          }
-        ]
       }
     ],
     "items": [
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
-        "amount": 454975,
-        "category": "Personnel"
+        "amount": 454870,
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
-        "amount": 3038,
-        "category": "Personnel"
+        "amount": 2143,
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "",
         "amount": 0,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 34806,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 97732,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 89819,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 501,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -4892,7 +6528,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -4902,17 +6538,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 400,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -4922,7 +6558,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -4932,7 +6568,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "547000",
         "accountName": "Printing & Binding",
@@ -4942,7 +6578,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -4952,7 +6588,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -4962,7 +6598,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -4972,7 +6608,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -4982,7 +6618,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Emergency Management",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -4997,76 +6633,69 @@ window.wcExpenseDetail = [
     "total": 2545000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 1643658,
-        "percent": 64.6,
+        "category": "Personnel & Benefits",
+        "amount": 2249000,
+        "percent": 88.4,
         "items": [
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 1628444,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 15214,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 605342,
-        "percent": 23.8,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 124576,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 252715,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 225872,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 2179,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -5077,7 +6706,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -5089,12 +6718,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 53500,
+        "amount": 54500,
         "percent": 2.1,
         "items": [
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "Includes certified letters, mailouts for public meetings, projects and right-of-way acquisition/easement attainment.",
+            "amount": 1000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Engineering Services",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -5104,7 +6743,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -5114,7 +6753,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -5131,7 +6770,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -5141,7 +6780,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -5158,7 +6797,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -5168,7 +6807,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -5178,7 +6817,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -5195,7 +6834,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -5205,7 +6844,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -5222,7 +6861,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -5232,7 +6871,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Engineering Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -5241,89 +6880,72 @@ window.wcExpenseDetail = [
             "category": "Travel & Training"
           }
         ]
-      },
-      {
-        "category": "Uncategorized",
-        "amount": 1000,
-        "percent": 0,
-        "items": [
-          {
-            "proposal": "Engineering Services",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "Includes certified letters, mailouts for public meetings, projects and right-of-way acquisition/easement attainment.",
-            "amount": 1000,
-            "category": "Uncategorized"
-          }
-        ]
       }
     ],
     "items": [
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 1628444,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 15214,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 124576,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 252715,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 225872,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 2179,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -5333,7 +6955,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -5343,7 +6965,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -5353,17 +6975,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "Includes certified letters, mailouts for public meetings, projects and right-of-way acquisition/easement attainment.",
         "amount": 1000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -5373,7 +6995,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -5383,7 +7005,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -5393,7 +7015,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -5403,7 +7025,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -5413,7 +7035,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -5423,7 +7045,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -5433,7 +7055,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -5443,7 +7065,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -5453,7 +7075,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Engineering Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -5468,29 +7090,69 @@ window.wcExpenseDetail = [
     "total": 850000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 317376,
-        "percent": 37.3,
+        "category": "Personnel & Benefits",
+        "amount": 452909,
+        "percent": 53.3,
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 316298,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
             "amount": 1078,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Environmental Resources",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "",
+            "amount": 24197,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Environmental Resources",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "",
+            "amount": 50185,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Environmental Resources",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 60803,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Environmental Resources",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 348,
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -5501,7 +7163,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -5511,7 +7173,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -5521,7 +7183,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -5531,7 +7193,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -5548,7 +7210,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -5558,7 +7220,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -5568,7 +7230,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -5578,7 +7240,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -5588,7 +7250,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -5599,60 +7261,23 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Benefits",
-        "amount": 135533,
-        "percent": 15.9,
-        "items": [
-          {
-            "proposal": "Environmental Resources",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "521000",
-            "accountName": "FICA Taxes & Medicare",
-            "description": "",
-            "amount": 24197,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Environmental Resources",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "522000",
-            "accountName": "Retirement Contributions",
-            "description": "",
-            "amount": 50185,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Environmental Resources",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "523000",
-            "accountName": "Life & Health Insurance",
-            "description": "",
-            "amount": 60803,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Environmental Resources",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "524000",
-            "accountName": "Workers' Compensation",
-            "description": "",
-            "amount": 348,
-            "category": "Benefits"
-          }
-        ]
-      },
-      {
         "category": "Supplies & Fuel",
-        "amount": 31216,
-        "percent": 3.7,
+        "amount": 34216,
+        "percent": 4,
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "Education and Outreach Mailouts (MS4/NPDES)",
+            "amount": 3000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Environmental Resources",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -5662,7 +7287,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -5679,7 +7304,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -5689,7 +7314,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -5706,7 +7331,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -5716,7 +7341,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -5733,7 +7358,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -5744,30 +7369,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Uncategorized",
-        "amount": 3000,
-        "percent": 0.4,
-        "items": [
-          {
-            "proposal": "Environmental Resources",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "Education and Outreach Mailouts (MS4/NPDES)",
-            "amount": 3000,
-            "category": "Uncategorized"
-          }
-        ]
-      },
-      {
         "category": "Contingency & Other",
         "amount": 500,
         "percent": 0.1,
         "items": [
           {
             "proposal": "Environmental Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -5781,67 +7389,67 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 316298,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 1078,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 24197,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 50185,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 60803,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 348,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -5851,7 +7459,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -5861,7 +7469,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -5871,7 +7479,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -5881,7 +7489,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -5891,7 +7499,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -5901,7 +7509,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -5911,17 +7519,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "Education and Outreach Mailouts (MS4/NPDES)",
         "amount": 3000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -5931,7 +7539,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -5941,7 +7549,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -5951,7 +7559,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -5961,7 +7569,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -5971,7 +7579,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -5981,7 +7589,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -5991,7 +7599,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -6001,7 +7609,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -6011,7 +7619,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Environmental Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -6026,76 +7634,69 @@ window.wcExpenseDetail = [
     "total": 598000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 412374,
-        "percent": 69,
+        "category": "Personnel & Benefits",
+        "amount": 515605,
+        "percent": 86.2,
         "items": [
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 411693,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
             "amount": 681,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 103231,
-        "percent": 17.3,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 31495,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 42719,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 28112,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 905,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -6106,7 +7707,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -6116,7 +7717,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -6133,7 +7734,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -6143,7 +7744,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6160,7 +7761,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -6170,7 +7771,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6187,7 +7788,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -6197,7 +7798,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -6214,7 +7815,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -6231,7 +7832,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Extension Office",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "582000",
             "accountName": "Aid to Private Organizations",
@@ -6245,67 +7846,67 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 411693,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 681,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 31495,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 42719,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 28112,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 905,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -6315,7 +7916,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -6325,7 +7926,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -6335,7 +7936,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -6345,7 +7946,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -6355,7 +7956,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6365,7 +7966,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -6375,7 +7976,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -6385,7 +7986,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -6395,7 +7996,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Extension Office",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "582000",
         "accountName": "Aid to Private Organizations",
@@ -6410,76 +8011,69 @@ window.wcExpenseDetail = [
     "total": 845000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 483374,
-        "percent": 57.2,
+        "category": "Personnel & Benefits",
+        "amount": 688075,
+        "percent": 81.4,
         "items": [
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 477520,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 5854,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 204701,
-        "percent": 24.2,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 36531,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 65045,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 102599,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 526,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -6490,7 +8084,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -6500,7 +8094,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6510,7 +8104,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6520,7 +8114,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6530,7 +8124,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6540,7 +8134,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6550,7 +8144,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6560,7 +8154,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6570,7 +8164,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -6587,7 +8181,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -6597,7 +8191,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6607,7 +8201,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6617,7 +8211,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6627,7 +8221,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6637,7 +8231,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6647,7 +8241,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6657,7 +8251,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6667,7 +8261,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -6684,7 +8278,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -6694,7 +8288,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -6704,7 +8298,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -6714,7 +8308,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -6731,7 +8325,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -6741,7 +8335,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -6751,7 +8345,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -6761,7 +8355,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -6771,7 +8365,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -6781,7 +8375,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Geographic Info System",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -6795,67 +8389,67 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 477520,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 5854,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 36531,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 65045,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 102599,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 526,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -6865,7 +8459,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -6875,7 +8469,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -6885,7 +8479,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -6895,7 +8489,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -6905,7 +8499,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -6915,7 +8509,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -6925,7 +8519,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -6935,7 +8529,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -6945,7 +8539,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -6955,7 +8549,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -6965,7 +8559,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -6975,7 +8569,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -6985,7 +8579,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -6995,7 +8589,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -7005,7 +8599,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -7015,7 +8609,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -7025,7 +8619,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -7035,7 +8629,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -7045,7 +8639,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7055,7 +8649,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7065,7 +8659,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7075,7 +8669,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7085,7 +8679,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7095,7 +8689,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7105,7 +8699,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7115,7 +8709,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7125,7 +8719,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Geographic Info System",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -7136,80 +8730,162 @@ window.wcExpenseDetail = [
     ]
   },
   {
+    "department": "Guardian Ad Litem",
+    "total": 9000,
+    "categories": [
+      {
+        "category": "Communications & Technology",
+        "amount": 6000,
+        "percent": 66.7,
+        "items": [
+          {
+            "proposal": "Guardian Ad Litem",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "amount": 6000,
+            "category": "Communications & Technology"
+          }
+        ]
+      },
+      {
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 2000,
+        "percent": 22.2,
+        "items": [
+          {
+            "proposal": "Guardian Ad Litem",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "",
+            "amount": 2000,
+            "category": "Facilities, Utilities & Maintenance"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 1000,
+        "percent": 11.1,
+        "items": [
+          {
+            "proposal": "Guardian Ad Litem",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 1000,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Guardian Ad Litem",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "amount": 6000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Guardian Ad Litem",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "",
+        "amount": 2000,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Guardian Ad Litem",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 1000,
+        "category": "Supplies & Fuel"
+      }
+    ]
+  },
+  {
     "department": "Human Resources",
     "total": 1430000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 839079,
-        "percent": 58.7,
+        "category": "Personnel & Benefits",
+        "amount": 1259447,
+        "percent": 88.1,
         "items": [
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 836015,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 3064,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 420368,
-        "percent": 29.4,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 63956,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 140993,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 214499,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 920,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -7220,7 +8896,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -7230,7 +8906,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -7240,7 +8916,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555001",
             "accountName": "Employee Tuition Reimbursement",
@@ -7252,12 +8928,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 35800,
-        "percent": 2.5,
+        "amount": 36800,
+        "percent": 2.6,
         "items": [
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 1000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Human Resources",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -7267,7 +8953,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -7277,7 +8963,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -7294,7 +8980,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -7304,7 +8990,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -7321,7 +9007,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -7331,7 +9017,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -7341,7 +9027,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -7351,7 +9037,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -7361,7 +9047,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -7371,7 +9057,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -7381,7 +9067,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -7398,7 +9084,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -7408,7 +9094,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -7418,7 +9104,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -7428,7 +9114,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -7438,7 +9124,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7455,7 +9141,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -7465,7 +9151,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Human Resources",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -7474,89 +9160,72 @@ window.wcExpenseDetail = [
             "category": "Facilities, Utilities & Maintenance"
           }
         ]
-      },
-      {
-        "category": "Uncategorized",
-        "amount": 1000,
-        "percent": 0.1,
-        "items": [
-          {
-            "proposal": "Human Resources",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 1000,
-            "category": "Uncategorized"
-          }
-        ]
       }
     ],
     "items": [
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 836015,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 3064,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 63956,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 140993,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 214499,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 920,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -7566,7 +9235,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -7576,7 +9245,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -7586,7 +9255,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -7596,7 +9265,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -7606,7 +9275,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -7616,7 +9285,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -7626,7 +9295,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -7636,7 +9305,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -7646,7 +9315,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -7656,7 +9325,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -7666,7 +9335,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -7676,17 +9345,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 1000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -7696,7 +9365,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -7706,7 +9375,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -7716,7 +9385,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -7726,7 +9395,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -7736,7 +9405,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7746,7 +9415,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -7756,7 +9425,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555001",
         "accountName": "Employee Tuition Reimbursement",
@@ -7766,7 +9435,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -7776,7 +9445,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Human Resources",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -7791,76 +9460,69 @@ window.wcExpenseDetail = [
     "total": 2257000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 1123436,
-        "percent": 49.8,
+        "category": "Personnel & Benefits",
+        "amount": 1627000,
+        "percent": 72.1,
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 1122091,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 1345,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 503564,
-        "percent": 22.3,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 85458,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 137559,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 279318,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 1229,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -7871,7 +9533,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -7881,7 +9543,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "547000",
             "accountName": "Printing & Binding",
@@ -7891,7 +9553,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -7902,40 +9564,50 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Uncategorized",
-        "amount": 152000,
-        "percent": 6.7,
+        "category": "Library Materials",
+        "amount": 150000,
+        "percent": 6.6,
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "ILL shipping funded in part by state library, decreasing our costs",
-            "amount": 2000,
-            "category": "Uncategorized"
-          },
-          {
-            "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "566000",
             "accountName": "Books, Publications, Library Materials",
             "description": "significant increase in print and e-books circulation and costs; supports Dolly Parton's Imagination Library directly instead of through nonprofit grant process at $20,000.",
             "amount": 150000,
-            "category": "Uncategorized"
+            "category": "Library Materials"
           }
         ]
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 108000,
-        "percent": 4.8,
+        "amount": 113000,
+        "percent": 5,
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "ILL shipping funded in part by state library, decreasing our costs",
+            "amount": 2000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Libraries",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "548000",
+            "accountName": "Promotional Activities",
+            "description": "",
+            "amount": 3000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Libraries",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -7945,7 +9617,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -7955,7 +9627,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -7972,7 +9644,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -7989,7 +9661,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "543000",
             "accountName": "Utility Services",
@@ -7999,7 +9671,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -8009,7 +9681,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -8026,7 +9698,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -8036,7 +9708,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -8048,22 +9720,12 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Contingency & Other",
-        "amount": 3500,
-        "percent": 0.2,
+        "amount": 500,
+        "percent": 0,
         "items": [
           {
             "proposal": "Libraries",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "548000",
-            "accountName": "Promotional Activities",
-            "description": "",
-            "amount": 3000,
-            "category": "Contingency & Other"
-          },
-          {
-            "proposal": "Libraries",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -8077,67 +9739,67 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 1122091,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 1345,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 85458,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 137559,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 279318,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 1229,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -8147,7 +9809,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -8157,17 +9819,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "ILL shipping funded in part by state library, decreasing our costs",
         "amount": 2000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "543000",
         "accountName": "Utility Services",
@@ -8177,7 +9839,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -8187,7 +9849,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -8197,7 +9859,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "547000",
         "accountName": "Printing & Binding",
@@ -8207,17 +9869,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "548000",
         "accountName": "Promotional Activities",
         "description": "",
         "amount": 3000,
-        "category": "Contingency & Other"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -8227,7 +9889,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -8237,7 +9899,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -8247,7 +9909,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -8257,7 +9919,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8267,7 +9929,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -8277,7 +9939,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -8287,13 +9949,307 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Libraries",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "566000",
         "accountName": "Books, Publications, Library Materials",
         "description": "significant increase in print and e-books circulation and costs; supports Dolly Parton's Imagination Library directly instead of through nonprofit grant process at $20,000.",
         "amount": 150000,
-        "category": "Uncategorized"
+        "category": "Library Materials"
+      }
+    ]
+  },
+  {
+    "department": "Medical Examiner",
+    "total": 1100000,
+    "categories": [
+      {
+        "category": "Professional Services",
+        "amount": 1100000,
+        "percent": 100,
+        "items": [
+          {
+            "proposal": "Medical Examiner",
+            "projectName": "10345",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "Medical Examiner Facility County Share - Walton County total to date $3.225M",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Medical Examiner",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "Overall ME budget is a % increase.  Walton County's share of cases increased from %  in FY 25 to % for FY 26",
+            "amount": 1100000,
+            "category": "Professional Services"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Medical Examiner",
+        "projectName": "10345",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "Medical Examiner Facility County Share - Walton County total to date $3.225M",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Medical Examiner",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "Overall ME budget is a % increase.  Walton County's share of cases increased from %  in FY 25 to % for FY 26",
+        "amount": 1100000,
+        "category": "Professional Services"
+      }
+    ]
+  },
+  {
+    "department": "Mosquito Control State Aid",
+    "total": 69588,
+    "categories": [
+      {
+        "category": "Supplies & Fuel",
+        "amount": 45588,
+        "percent": 65.5,
+        "items": [
+          {
+            "proposal": "Mosquito Control State Aid",
+            "projectName": "10630",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 45588,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      },
+      {
+        "category": "Travel & Training",
+        "amount": 22000,
+        "percent": 31.6,
+        "items": [
+          {
+            "proposal": "Mosquito Control State Aid",
+            "projectName": "10630",
+            "type": "Expenses",
+            "accountCode": "540000",
+            "accountName": "Travel & Per Diem",
+            "description": "",
+            "amount": 11000,
+            "category": "Travel & Training"
+          },
+          {
+            "proposal": "Mosquito Control State Aid",
+            "projectName": "10630",
+            "type": "Expenses",
+            "accountCode": "555000",
+            "accountName": "Training",
+            "description": "",
+            "amount": 11000,
+            "category": "Travel & Training"
+          }
+        ]
+      },
+      {
+        "category": "Professional Services",
+        "amount": 2000,
+        "percent": 2.9,
+        "items": [
+          {
+            "proposal": "Mosquito Control State Aid",
+            "projectName": "10630",
+            "type": "Expenses",
+            "accountCode": "534000",
+            "accountName": "Other Services",
+            "description": "",
+            "amount": 2000,
+            "category": "Professional Services"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Mosquito Control State Aid",
+        "projectName": "10630",
+        "type": "Expenses",
+        "accountCode": "534000",
+        "accountName": "Other Services",
+        "description": "",
+        "amount": 2000,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Mosquito Control State Aid",
+        "projectName": "10630",
+        "type": "Expenses",
+        "accountCode": "540000",
+        "accountName": "Travel & Per Diem",
+        "description": "",
+        "amount": 11000,
+        "category": "Travel & Training"
+      },
+      {
+        "proposal": "Mosquito Control State Aid",
+        "projectName": "10630",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 45588,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Mosquito Control State Aid",
+        "projectName": "10630",
+        "type": "Expenses",
+        "accountCode": "555000",
+        "accountName": "Training",
+        "description": "",
+        "amount": 11000,
+        "category": "Travel & Training"
+      }
+    ]
+  },
+  {
+    "department": "Municipal Service Benefit Unit",
+    "total": 12250,
+    "categories": [
+      {
+        "category": "Professional Services",
+        "amount": 12250,
+        "percent": 100,
+        "items": [
+          {
+            "proposal": "Municipal Service Benefit Unit",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "",
+            "amount": 12250,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Municipal Service Benefit Unit",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "Accenture - Daughette",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Municipal Service Benefit Unit",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "Annual Filing Fee - Daughette",
+            "amount": 0,
+            "category": "Professional Services"
+          },
+          {
+            "proposal": "Municipal Service Benefit Unit",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "531000",
+            "accountName": "Professional Services",
+            "description": "Tax Collector Commission on Collections - Daughette",
+            "amount": 0,
+            "category": "Professional Services"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Municipal Service Benefit Unit",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "",
+        "amount": 12250,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Municipal Service Benefit Unit",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "Accenture - Daughette",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Municipal Service Benefit Unit",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "Annual Filing Fee - Daughette",
+        "amount": 0,
+        "category": "Professional Services"
+      },
+      {
+        "proposal": "Municipal Service Benefit Unit",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "531000",
+        "accountName": "Professional Services",
+        "description": "Tax Collector Commission on Collections - Daughette",
+        "amount": 0,
+        "category": "Professional Services"
+      }
+    ]
+  },
+  {
+    "department": "Non-Profit Program Funding",
+    "total": 0,
+    "categories": [
+      {
+        "category": "Grants, Aid & Transfers",
+        "amount": 0,
+        "percent": 0,
+        "items": [
+          {
+            "proposal": "Non-Profit Program Funding",
+            "projectName": "10261",
+            "type": "Expenses",
+            "accountCode": "583000",
+            "accountName": "Other Grants & Aid",
+            "description": "Non-Profit Program Funding",
+            "amount": 0,
+            "category": "Grants, Aid & Transfers"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Non-Profit Program Funding",
+        "projectName": "10261",
+        "type": "Expenses",
+        "accountCode": "583000",
+        "accountName": "Other Grants & Aid",
+        "description": "Non-Profit Program Funding",
+        "amount": 0,
+        "category": "Grants, Aid & Transfers"
       }
     ]
   },
@@ -8302,76 +10258,69 @@ window.wcExpenseDetail = [
     "total": 1245000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 679133,
-        "percent": 54.5,
+        "category": "Personnel & Benefits",
+        "amount": 969250,
+        "percent": 77.9,
         "items": [
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 677141,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 1992,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 290117,
-        "percent": 23.3,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 50638,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 138247,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 100487,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 745,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -8382,7 +10331,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -8392,7 +10341,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8402,7 +10351,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8412,7 +10361,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8429,7 +10378,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -8439,7 +10388,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -8456,7 +10405,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -8468,12 +10417,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 11000,
+        "amount": 11250,
         "percent": 0.9,
         "items": [
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "Monthly Billing Postage",
+            "amount": 250,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Office of Management and Budget",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -8483,7 +10442,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -8493,7 +10452,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -8503,7 +10462,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -8520,7 +10479,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -8530,7 +10489,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -8539,89 +10498,72 @@ window.wcExpenseDetail = [
             "category": "Facilities, Utilities & Maintenance"
           }
         ]
-      },
-      {
-        "category": "Uncategorized",
-        "amount": 250,
-        "percent": 0,
-        "items": [
-          {
-            "proposal": "Office of Management and Budget",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "Monthly Billing Postage",
-            "amount": 250,
-            "category": "Uncategorized"
-          }
-        ]
       }
     ],
     "items": [
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 677141,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 1992,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 50638,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 138247,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 100487,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 745,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -8631,7 +10573,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -8641,7 +10583,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -8651,17 +10593,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "Monthly Billing Postage",
         "amount": 250,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -8671,7 +10613,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -8681,7 +10623,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -8691,7 +10633,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -8701,7 +10643,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -8711,7 +10653,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -8721,7 +10663,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8731,7 +10673,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8741,7 +10683,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8751,7 +10693,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of Management and Budget",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -8766,29 +10708,69 @@ window.wcExpenseDetail = [
     "total": 1897000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 784586,
-        "percent": 41.4,
+        "category": "Personnel & Benefits",
+        "amount": 1147000,
+        "percent": 60.5,
         "items": [
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 779327,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 5259,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Office of the County Attorney",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "521000",
+            "accountName": "FICA Taxes & Medicare",
+            "description": "",
+            "amount": 59654,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Office of the County Attorney",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "522000",
+            "accountName": "Retirement Contributions",
+            "description": "",
+            "amount": 166912,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Office of the County Attorney",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 135084,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Office of the County Attorney",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 764,
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -8799,7 +10781,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -8809,7 +10791,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "533000",
             "accountName": "Court Reporter Services",
@@ -8820,60 +10802,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Benefits",
-        "amount": 362414,
-        "percent": 19.1,
-        "items": [
-          {
-            "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "521000",
-            "accountName": "FICA Taxes & Medicare",
-            "description": "",
-            "amount": 59654,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "522000",
-            "accountName": "Retirement Contributions",
-            "description": "",
-            "amount": 166912,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "523000",
-            "accountName": "Life & Health Insurance",
-            "description": "",
-            "amount": 135084,
-            "category": "Benefits"
-          },
-          {
-            "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "524000",
-            "accountName": "Workers' Compensation",
-            "description": "",
-            "amount": 764,
-            "category": "Benefits"
-          }
-        ]
-      },
-      {
         "category": "Travel & Training",
         "amount": 25000,
         "percent": 1.3,
         "items": [
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -8883,7 +10818,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -8900,7 +10835,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -8910,7 +10845,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -8922,12 +10857,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 21000,
+        "amount": 21500,
         "percent": 1.1,
         "items": [
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 500,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Office of the County Attorney",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -8937,7 +10882,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -8947,7 +10892,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -8964,7 +10909,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -8974,7 +10919,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -8983,89 +10928,72 @@ window.wcExpenseDetail = [
             "category": "Facilities, Utilities & Maintenance"
           }
         ]
-      },
-      {
-        "category": "Uncategorized",
-        "amount": 500,
-        "percent": 0,
-        "items": [
-          {
-            "proposal": "Office of the County Attorney",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 500,
-            "category": "Uncategorized"
-          }
-        ]
       }
     ],
     "items": [
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 779327,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 5259,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 59654,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 166912,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 135084,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 764,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -9075,7 +11003,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "533000",
         "accountName": "Court Reporter Services",
@@ -9085,7 +11013,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -9095,7 +11023,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -9105,17 +11033,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 500,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -9125,7 +11053,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -9135,7 +11063,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -9145,7 +11073,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -9155,7 +11083,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -9165,7 +11093,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9175,7 +11103,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Office of the County Attorney",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -9186,90 +11114,138 @@ window.wcExpenseDetail = [
     ]
   },
   {
+    "department": "Opioid Settlement",
+    "total": 311251,
+    "categories": [
+      {
+        "category": "Grants, Aid & Transfers",
+        "amount": 311251,
+        "percent": 100,
+        "items": [
+          {
+            "proposal": "Opioid Settlement",
+            "projectName": "10720",
+            "type": "Expenses",
+            "accountCode": "581000",
+            "accountName": "Aid to Government Agencies",
+            "description": "Y4 Opioid County",
+            "amount": 242483,
+            "category": "Grants, Aid & Transfers"
+          },
+          {
+            "proposal": "Opioid Settlement",
+            "projectName": "10732",
+            "type": "Expenses",
+            "accountCode": "581000",
+            "accountName": "Aid to Government Agencies",
+            "description": "",
+            "amount": 68768,
+            "category": "Grants, Aid & Transfers"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Opioid Settlement",
+        "projectName": "10720",
+        "type": "Expenses",
+        "accountCode": "581000",
+        "accountName": "Aid to Government Agencies",
+        "description": "Y4 Opioid County",
+        "amount": 242483,
+        "category": "Grants, Aid & Transfers"
+      },
+      {
+        "proposal": "Opioid Settlement",
+        "projectName": "10732",
+        "type": "Expenses",
+        "accountCode": "581000",
+        "accountName": "Aid to Government Agencies",
+        "description": "",
+        "amount": 68768,
+        "category": "Grants, Aid & Transfers"
+      }
+    ]
+  },
+  {
     "department": "Planning",
     "total": 5820000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 3065809,
-        "percent": 52.7,
+        "category": "Personnel & Benefits",
+        "amount": 4380975,
+        "percent": 75.3,
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 3007917,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
             "amount": 17892,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "513000",
             "accountName": "Other Salaries & Wages",
             "description": "",
             "amount": 40000,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 1315166,
-        "percent": 22.6,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 230106,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 412708,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 669080,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 3272,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -9280,7 +11256,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -9290,7 +11266,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -9300,7 +11276,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -9310,7 +11286,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -9320,7 +11296,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -9332,12 +11308,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 282825,
-        "percent": 4.9,
+        "amount": 306825,
+        "percent": 5.3,
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 24000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Planning",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -9347,7 +11333,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9357,7 +11343,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9367,7 +11353,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9377,7 +11363,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9387,7 +11373,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9397,7 +11383,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9407,7 +11393,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9417,7 +11403,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9427,7 +11413,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9437,7 +11423,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -9447,7 +11433,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -9464,7 +11450,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -9474,7 +11460,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -9484,7 +11470,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -9494,7 +11480,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -9504,7 +11490,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -9521,7 +11507,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -9531,7 +11517,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
@@ -9548,7 +11534,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -9558,7 +11544,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -9568,7 +11554,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -9578,7 +11564,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -9588,7 +11574,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -9598,7 +11584,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -9608,7 +11594,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -9618,7 +11604,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -9628,7 +11614,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -9638,7 +11624,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -9655,7 +11641,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -9665,7 +11651,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9675,7 +11661,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9685,7 +11671,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9695,7 +11681,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9705,7 +11691,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9715,7 +11701,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9725,7 +11711,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -9742,7 +11728,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -9751,99 +11737,82 @@ window.wcExpenseDetail = [
             "category": "Contingency & Other"
           }
         ]
-      },
-      {
-        "category": "Uncategorized",
-        "amount": 24000,
-        "percent": 0.4,
-        "items": [
-          {
-            "proposal": "Planning",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 24000,
-            "category": "Uncategorized"
-          }
-        ]
       }
     ],
     "items": [
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 3007917,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 17892,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "",
         "amount": 40000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 230106,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 412708,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 669080,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 3272,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -9853,7 +11822,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -9863,7 +11832,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -9873,7 +11842,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -9883,7 +11852,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -9893,7 +11862,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -9903,7 +11872,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -9913,7 +11882,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -9923,7 +11892,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -9933,7 +11902,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -9943,7 +11912,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -9953,17 +11922,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 24000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -9973,7 +11942,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -9983,7 +11952,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -9993,7 +11962,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -10003,7 +11972,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -10013,7 +11982,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -10023,7 +11992,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -10033,7 +12002,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10043,7 +12012,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10053,7 +12022,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10063,7 +12032,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10073,7 +12042,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10083,7 +12052,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10093,7 +12062,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10103,7 +12072,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10113,7 +12082,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10123,7 +12092,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10133,7 +12102,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -10143,7 +12112,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -10153,7 +12122,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -10163,7 +12132,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -10173,7 +12142,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -10183,7 +12152,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -10193,7 +12162,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -10203,7 +12172,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -10213,7 +12182,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -10223,7 +12192,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -10233,7 +12202,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -10243,7 +12212,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -10253,7 +12222,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -10263,7 +12232,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -10273,7 +12242,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -10294,7 +12263,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -10304,7 +12273,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -10314,7 +12283,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -10324,7 +12293,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -10334,7 +12303,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -10345,66 +12314,59 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Personnel",
-        "amount": 368218,
-        "percent": 24.5,
+        "category": "Personnel & Benefits",
+        "amount": 552000,
+        "percent": 36.8,
         "items": [
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "*Does not include the STR Code enforcement officer, this is account in Code Compliance",
             "amount": 368218,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 183782,
-        "percent": 12.3,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 29502,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 52529,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 100402,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 1349,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -10415,7 +12377,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -10426,40 +12388,33 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Vehicles & Equipment",
-        "amount": 49000,
-        "percent": 3.3,
+        "category": "Supplies & Fuel",
+        "amount": 53000,
+        "percent": 3.5,
         "items": [
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
-            "accountCode": "564000",
-            "accountName": "Machinery & Equipment",
-            "description": "New allocation for additional STR Code Officer *One time allocation",
-            "amount": 49000,
-            "category": "Vehicles & Equipment"
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 20000,
+            "category": "Supplies & Fuel"
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
-            "accountCode": "564000",
-            "accountName": "Machinery & Equipment",
-            "description": "SUV",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "Postage",
             "amount": 0,
-            "category": "Vehicles & Equipment"
-          }
-        ]
-      },
-      {
-        "category": "Supplies & Fuel",
-        "amount": 33000,
-        "percent": 2.2,
-        "items": [
+            "category": "Supplies & Fuel"
+          },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -10469,7 +12424,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -10479,7 +12434,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -10489,7 +12444,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -10499,7 +12454,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -10509,7 +12464,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -10520,13 +12475,40 @@ window.wcExpenseDetail = [
         ]
       },
       {
+        "category": "Vehicles & Equipment",
+        "amount": 49000,
+        "percent": 3.3,
+        "items": [
+          {
+            "proposal": "Planning Vacation Rental Certification Program",
+            "projectName": "10639",
+            "type": "Expenses",
+            "accountCode": "564000",
+            "accountName": "Machinery & Equipment",
+            "description": "New allocation for additional STR Code Officer *One time allocation",
+            "amount": 49000,
+            "category": "Vehicles & Equipment"
+          },
+          {
+            "proposal": "Planning Vacation Rental Certification Program",
+            "projectName": "10639",
+            "type": "Expenses",
+            "accountCode": "564000",
+            "accountName": "Machinery & Equipment",
+            "description": "SUV",
+            "amount": 0,
+            "category": "Vehicles & Equipment"
+          }
+        ]
+      },
+      {
         "category": "Travel & Training",
         "amount": 20000,
         "percent": 1.3,
         "items": [
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -10537,40 +12519,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Uncategorized",
-        "amount": 20000,
-        "percent": 1.3,
-        "items": [
-          {
-            "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 20000,
-            "category": "Uncategorized"
-          },
-          {
-            "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "Postage",
-            "amount": 0,
-            "category": "Uncategorized"
-          }
-        ]
-      },
-      {
         "category": "Facilities, Utilities & Maintenance",
         "amount": 16000,
         "percent": 1.1,
         "items": [
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -10580,7 +12535,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -10590,7 +12545,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Planning Vacation Rental Certification Program",
-            "projectName": "SHORT-TERM RENTAL",
+            "projectName": "10639",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -10604,57 +12559,57 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "*Does not include the STR Code enforcement officer, this is account in Code Compliance",
         "amount": 368218,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 29502,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 52529,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 100402,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 1349,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -10664,7 +12619,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -10674,7 +12629,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -10684,7 +12639,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -10694,7 +12649,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -10704,27 +12659,27 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 20000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "Postage",
         "amount": 0,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -10734,7 +12689,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -10744,7 +12699,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -10754,7 +12709,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -10764,7 +12719,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -10774,7 +12729,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10784,7 +12739,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10794,7 +12749,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10804,7 +12759,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -10814,7 +12769,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -10824,7 +12779,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -10834,7 +12789,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -10844,7 +12799,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Planning Vacation Rental Certification Program",
-        "projectName": "SHORT-TERM RENTAL",
+        "projectName": "10639",
         "type": "Expenses",
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
@@ -10859,76 +12814,69 @@ window.wcExpenseDetail = [
     "total": 372000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 220870,
-        "percent": 59.4,
+        "category": "Personnel & Benefits",
+        "amount": 330950,
+        "percent": 89,
         "items": [
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 219447,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
             "amount": 1423,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 110080,
-        "percent": 29.6,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 16788,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 29892,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 60259,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 3141,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -10939,7 +12887,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -10949,7 +12897,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -10961,12 +12909,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 11250,
-        "percent": 3,
+        "amount": 12250,
+        "percent": 3.3,
         "items": [
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 1000,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Probation",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -10976,7 +12934,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -10993,7 +12951,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -11003,7 +12961,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "547000",
             "accountName": "Printing & Binding",
@@ -11013,7 +12971,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11030,7 +12988,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -11041,30 +12999,13 @@ window.wcExpenseDetail = [
         ]
       },
       {
-        "category": "Uncategorized",
-        "amount": 1000,
-        "percent": 0.3,
-        "items": [
-          {
-            "proposal": "Probation",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 1000,
-            "category": "Uncategorized"
-          }
-        ]
-      },
-      {
         "category": "Travel & Training",
         "amount": 500,
         "percent": 0.1,
         "items": [
           {
             "proposal": "Probation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -11078,67 +13019,67 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 219447,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 1423,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 16788,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 29892,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 60259,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 3141,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -11148,7 +13089,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -11158,7 +13099,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -11168,7 +13109,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -11178,17 +13119,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 1000,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -11198,7 +13139,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "547000",
         "accountName": "Printing & Binding",
@@ -11208,7 +13149,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -11218,7 +13159,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -11228,7 +13169,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Probation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11239,80 +13180,304 @@ window.wcExpenseDetail = [
     ]
   },
   {
+    "department": "Property Appraiser",
+    "total": 5302000,
+    "categories": [
+      {
+        "category": "Personnel & Benefits",
+        "amount": 4422000,
+        "percent": 83.4,
+        "items": [
+          {
+            "proposal": "Property Appraiser",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "510000",
+            "accountName": "Personnel Services or Budget",
+            "description": "",
+            "amount": 4400000,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Property Appraiser",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 22000,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      },
+      {
+        "category": "Contingency & Other",
+        "amount": 880000,
+        "percent": 16.6,
+        "items": [
+          {
+            "proposal": "Property Appraiser",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "530000",
+            "accountName": "Operating Expenses and Budget",
+            "description": "",
+            "amount": 750000,
+            "category": "Contingency & Other"
+          },
+          {
+            "proposal": "Property Appraiser",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "599000",
+            "accountName": "Other Uses/Contingency",
+            "description": "",
+            "amount": 130000,
+            "category": "Contingency & Other"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Property Appraiser",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "510000",
+        "accountName": "Personnel Services or Budget",
+        "description": "",
+        "amount": 4400000,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Property Appraiser",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "524000",
+        "accountName": "Workers' Compensation",
+        "description": "",
+        "amount": 22000,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Property Appraiser",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "530000",
+        "accountName": "Operating Expenses and Budget",
+        "description": "",
+        "amount": 750000,
+        "category": "Contingency & Other"
+      },
+      {
+        "proposal": "Property Appraiser",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "599000",
+        "accountName": "Other Uses/Contingency",
+        "description": "",
+        "amount": 130000,
+        "category": "Contingency & Other"
+      }
+    ]
+  },
+  {
+    "department": "Public Defender",
+    "total": 36000,
+    "categories": [
+      {
+        "category": "Communications & Technology",
+        "amount": 27000,
+        "percent": 75,
+        "items": [
+          {
+            "proposal": "Public Defender",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "amount": 25000,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Public Defender",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Annual Subscription for ZOHO Corporation Manage Engine",
+            "amount": 2000,
+            "category": "Communications & Technology"
+          }
+        ]
+      },
+      {
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 8500,
+        "percent": 23.6,
+        "items": [
+          {
+            "proposal": "Public Defender",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "543000",
+            "accountName": "Utility Services",
+            "description": "",
+            "amount": 6000,
+            "category": "Facilities, Utilities & Maintenance"
+          },
+          {
+            "proposal": "Public Defender",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "",
+            "amount": 2500,
+            "category": "Facilities, Utilities & Maintenance"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 500,
+        "percent": 1.4,
+        "items": [
+          {
+            "proposal": "Public Defender",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 500,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Public Defender",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "amount": 25000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Public Defender",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "543000",
+        "accountName": "Utility Services",
+        "description": "",
+        "amount": 6000,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Public Defender",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "",
+        "amount": 2500,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Public Defender",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 500,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Public Defender",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "554000",
+        "accountName": "Books, Publications, Subscriptions, or Memberships",
+        "description": "Annual Subscription for ZOHO Corporation Manage Engine",
+        "amount": 2000,
+        "category": "Communications & Technology"
+      }
+    ]
+  },
+  {
     "department": "Purchasing",
     "total": 1185000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 641850,
-        "percent": 54.2,
+        "category": "Personnel & Benefits",
+        "amount": 914200,
+        "percent": 77.1,
         "items": [
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 638649,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "",
             "amount": 3201,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 272350,
-        "percent": 23,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 49513,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 88161,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 132112,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 2564,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -11323,7 +13488,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -11333,7 +13498,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11343,7 +13508,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11353,7 +13518,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11370,7 +13535,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -11387,7 +13552,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -11397,7 +13562,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -11407,7 +13572,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -11424,7 +13589,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -11434,7 +13599,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -11451,7 +13616,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -11461,7 +13626,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -11471,7 +13636,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546001",
             "accountName": "Tires",
@@ -11488,7 +13653,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Purchasing",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "549000",
             "accountName": "Other Current Charges",
@@ -11502,67 +13667,67 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 638649,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "",
         "amount": 3201,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 49513,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 88161,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 132112,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 2564,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -11572,7 +13737,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -11582,7 +13747,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -11592,7 +13757,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -11602,7 +13767,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546001",
         "accountName": "Tires",
@@ -11612,7 +13777,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "549000",
         "accountName": "Other Current Charges",
@@ -11622,7 +13787,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -11632,7 +13797,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -11642,7 +13807,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -11652,7 +13817,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11662,7 +13827,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11672,7 +13837,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11682,7 +13847,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
@@ -11692,7 +13857,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Purchasing",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -11707,96 +13872,89 @@ window.wcExpenseDetail = [
     "total": 868000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 434704,
-        "percent": 50.1,
+        "category": "Personnel & Benefits",
+        "amount": 596837,
+        "percent": 68.8,
         "items": [
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 354525,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
             "amount": 5179,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "513000",
             "accountName": "Other Salaries & Wages",
             "description": "Referees, Soccer Directors, and Pickle ball director",
             "amount": 65000,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "514000",
             "accountName": "Overtime",
             "description": "",
             "amount": 10000,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 162133,
-        "percent": 18.7,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 27064,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 48189,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 86490,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 390,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -11807,7 +13965,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -11817,7 +13975,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -11827,7 +13985,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552002",
             "accountName": "Fuel",
@@ -11844,7 +14002,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "534000",
             "accountName": "Other Services",
@@ -11861,7 +14019,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "562000",
             "accountName": "Buildings",
@@ -11878,7 +14036,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -11888,7 +14046,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "545000",
             "accountName": "Insurance",
@@ -11898,7 +14056,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "546000",
             "accountName": "Repair & Maintenance",
@@ -11915,7 +14073,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -11925,7 +14083,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Recreation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -11939,87 +14097,87 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 354525,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 5179,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
         "description": "Referees, Soccer Directors, and Pickle ball director",
         "amount": 65000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "",
         "amount": 10000,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 27064,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 48189,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 86490,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 390,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "534000",
         "accountName": "Other Services",
@@ -12029,7 +14187,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -12039,7 +14197,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -12049,7 +14207,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "545000",
         "accountName": "Insurance",
@@ -12059,7 +14217,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "546000",
         "accountName": "Repair & Maintenance",
@@ -12069,7 +14227,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -12079,7 +14237,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -12089,7 +14247,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552002",
         "accountName": "Fuel",
@@ -12099,7 +14257,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -12109,7 +14267,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Recreation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "562000",
         "accountName": "Buildings",
@@ -12120,70 +14278,261 @@ window.wcExpenseDetail = [
     ]
   },
   {
+    "department": "Recreation Plat Fee",
+    "total": 600000,
+    "categories": [
+      {
+        "category": "Buildings & Infrastructure",
+        "amount": 600000,
+        "percent": 100,
+        "items": [
+          {
+            "proposal": "Recreation Plat Fee",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "Funding for allocation to recreation projects as designated by the Board",
+            "amount": 600000,
+            "category": "Buildings & Infrastructure"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Recreation Plat Fee",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "Funding for allocation to recreation projects as designated by the Board",
+        "amount": 600000,
+        "category": "Buildings & Infrastructure"
+      }
+    ]
+  },
+  {
+    "department": "Sheriff's Office",
+    "total": 114116228,
+    "categories": [
+      {
+        "category": "Personnel & Benefits",
+        "amount": 83607042,
+        "percent": 73.3,
+        "items": [
+          {
+            "proposal": "Sheriff's Office",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "510000",
+            "accountName": "Personnel Services or Budget",
+            "description": "Court Services Personnel Budget included in County & Circuit Court Budgets",
+            "amount": 71254611,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Sheriff's Office",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 12352431,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      },
+      {
+        "category": "Contingency & Other",
+        "amount": 17848864,
+        "percent": 15.6,
+        "items": [
+          {
+            "proposal": "Sheriff's Office",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "530000",
+            "accountName": "Operating Expenses and Budget",
+            "description": "",
+            "amount": 17848864,
+            "category": "Contingency & Other"
+          }
+        ]
+      },
+      {
+        "category": "Buildings & Infrastructure",
+        "amount": 9160322,
+        "percent": 8,
+        "items": [
+          {
+            "proposal": "Sheriff's Office",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "560000",
+            "accountName": "Capital Outlay Budget",
+            "description": "",
+            "amount": 9160322,
+            "category": "Buildings & Infrastructure"
+          }
+        ]
+      },
+      {
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 3500000,
+        "percent": 3.1,
+        "items": [
+          {
+            "proposal": "Sheriff's Office",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "Jail Special Housing Budget",
+            "amount": 3500000,
+            "category": "Facilities, Utilities & Maintenance"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 0,
+        "percent": 0,
+        "items": [
+          {
+            "proposal": "Sheriff's Office",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Sheriff's Office",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Sheriff's Office",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "510000",
+        "accountName": "Personnel Services or Budget",
+        "description": "Court Services Personnel Budget included in County & Circuit Court Budgets",
+        "amount": 71254611,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Sheriff's Office",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "523000",
+        "accountName": "Life & Health Insurance",
+        "description": "",
+        "amount": 12352431,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Sheriff's Office",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "530000",
+        "accountName": "Operating Expenses and Budget",
+        "description": "",
+        "amount": 17848864,
+        "category": "Contingency & Other"
+      },
+      {
+        "proposal": "Sheriff's Office",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "Jail Special Housing Budget",
+        "amount": 3500000,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Sheriff's Office",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "560000",
+        "accountName": "Capital Outlay Budget",
+        "description": "",
+        "amount": 9160322,
+        "category": "Buildings & Infrastructure"
+      }
+    ]
+  },
+  {
     "department": "Soil Conservation",
     "total": 150000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 100076,
-        "percent": 66.7,
+        "category": "Personnel & Benefits",
+        "amount": 148520,
+        "percent": 99,
         "items": [
           {
             "proposal": "Soil Conservation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 100076,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 48444,
-        "percent": 32.3,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Soil Conservation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 7608,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Soil Conservation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 13547,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Soil Conservation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 26425,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Soil Conservation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 864,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -12194,7 +14543,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Soil Conservation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -12211,7 +14560,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Soil Conservation",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -12225,57 +14574,57 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Soil Conservation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 100076,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Soil Conservation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 7608,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Soil Conservation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 13547,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Soil Conservation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 26425,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Soil Conservation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 864,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Soil Conservation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -12285,12 +14634,163 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Soil Conservation",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
         "description": "",
         "amount": 1000,
+        "category": "Supplies & Fuel"
+      }
+    ]
+  },
+  {
+    "department": "South Walton Fire & State Control",
+    "total": 980074,
+    "categories": [
+      {
+        "category": "Professional Services",
+        "amount": 947284,
+        "percent": 96.7,
+        "items": [
+          {
+            "proposal": "South Walton Fire & State Control",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "534000",
+            "accountName": "Other Services",
+            "description": "South Walton Fire District - Use CPI adjustment for Municipal Class Size D - South (All Items) for April - April. The minimum adjustment shall be 2% and the maximum 4%.                   \nhttps://www.bls.gov/regions/southeast/news-release/consumerpriceindex_south.htm",
+            "amount": 947284,
+            "category": "Professional Services"
+          }
+        ]
+      },
+      {
+        "category": "Grants, Aid & Transfers",
+        "amount": 32790,
+        "percent": 3.3,
+        "items": [
+          {
+            "proposal": "South Walton Fire & State Control",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "581000",
+            "accountName": "Aid to Government Agencies",
+            "description": "Fire Control Assessment and County Forester Assessments Florida Department of Agriculture & Consumer Services; this is based on 425,577 acres at $0.07 per acre for a total of $29,790.39 and County Forester assessment of $3,000.",
+            "amount": 32790,
+            "category": "Grants, Aid & Transfers"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "South Walton Fire & State Control",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "581000",
+        "accountName": "Aid to Government Agencies",
+        "description": "Fire Control Assessment and County Forester Assessments Florida Department of Agriculture & Consumer Services; this is based on 425,577 acres at $0.07 per acre for a total of $29,790.39 and County Forester assessment of $3,000.",
+        "amount": 32790,
+        "category": "Grants, Aid & Transfers"
+      },
+      {
+        "proposal": "South Walton Fire & State Control",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "534000",
+        "accountName": "Other Services",
+        "description": "South Walton Fire District - Use CPI adjustment for Municipal Class Size D - South (All Items) for April - April. The minimum adjustment shall be 2% and the maximum 4%.                   \nhttps://www.bls.gov/regions/southeast/news-release/consumerpriceindex_south.htm",
+        "amount": 947284,
+        "category": "Professional Services"
+      }
+    ]
+  },
+  {
+    "department": "State Attorney Facility",
+    "total": 25000,
+    "categories": [
+      {
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 12000,
+        "percent": 48,
+        "items": [
+          {
+            "proposal": "State Attorney Facility",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "543000",
+            "accountName": "Utility Services",
+            "description": "DeFuniak Springs Water and FPL",
+            "amount": 12000,
+            "category": "Facilities, Utilities & Maintenance"
+          }
+        ]
+      },
+      {
+        "category": "Communications & Technology",
+        "amount": 10000,
+        "percent": 40,
+        "items": [
+          {
+            "proposal": "State Attorney Facility",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "Verizon, Uniti hitting Court Tech",
+            "amount": 10000,
+            "category": "Communications & Technology"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 3000,
+        "percent": 12,
+        "items": [
+          {
+            "proposal": "State Attorney Facility",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 3000,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "State Attorney Facility",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "Verizon, Uniti hitting Court Tech",
+        "amount": 10000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "State Attorney Facility",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "543000",
+        "accountName": "Utility Services",
+        "description": "DeFuniak Springs Water and FPL",
+        "amount": 12000,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "State Attorney Facility",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 3000,
         "category": "Supplies & Fuel"
       }
     ]
@@ -12306,7 +14806,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "ECONOMIC DEV ALLIANCE",
+            "projectName": "10257",
             "type": "Expenses",
             "accountCode": "582000",
             "accountName": "Aid to Private Organizations",
@@ -12316,7 +14816,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "ECONOMIC DEV ALLIANCE",
+            "projectName": "10257",
             "type": "Expenses",
             "accountCode": "582000",
             "accountName": "Aid to Private Organizations",
@@ -12326,7 +14826,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Medicaid Services",
+            "projectName": "10259",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12336,7 +14836,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Medicaid Services",
+            "projectName": "10259",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12346,7 +14846,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "HEALTH CARE RESPONSE HCRA",
+            "projectName": "10260",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12356,7 +14856,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "HEALTH CARE RESPONSE HCRA",
+            "projectName": "10260",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12366,7 +14866,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12376,7 +14876,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12386,7 +14886,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "583000",
             "accountName": "Other Grants & Aid",
@@ -12396,7 +14896,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "583000",
             "accountName": "Other Grants & Aid",
@@ -12406,7 +14906,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Gulf Coast Kids House",
+            "projectName": "10251",
             "type": "Expenses",
             "accountCode": "582000",
             "accountName": "Aid to Private Organizations",
@@ -12416,7 +14916,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Gulf Coast Kids House",
+            "projectName": "10251",
             "type": "Expenses",
             "accountCode": "582000",
             "accountName": "Aid to Private Organizations",
@@ -12426,7 +14926,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "NW TRI-COUNTY SENIOR CENTER",
+            "projectName": "10253",
             "type": "Expenses",
             "accountCode": "582000",
             "accountName": "Aid to Private Organizations",
@@ -12436,7 +14936,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "NW TRI-COUNTY SENIOR CENTER",
+            "projectName": "10253",
             "type": "Expenses",
             "accountCode": "582000",
             "accountName": "Aid to Private Organizations",
@@ -12446,7 +14946,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "LIBERTY VFD",
+            "projectName": "10277",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12456,7 +14956,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "LIBERTY VFD",
+            "projectName": "10277",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12466,7 +14966,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "ARGYLE VFD",
+            "projectName": "10278",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12476,7 +14976,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "ARGYLE VFD",
+            "projectName": "10278",
             "type": "Expenses",
             "accountCode": "581000",
             "accountName": "Aid to Government Agencies",
@@ -12493,7 +14993,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Lakeview Center (Women & Children)",
+            "projectName": "10246",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -12503,7 +15003,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Lakeview Center (Women & Children)",
+            "projectName": "10246",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -12513,7 +15013,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Lakeview Mental Health",
+            "projectName": "10247",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -12523,7 +15023,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "Lakeview Mental Health",
+            "projectName": "10247",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -12533,7 +15033,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "BAKER ACT",
+            "projectName": "10248",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -12543,7 +15043,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Statutory & Other Agency Funding",
-            "projectName": "BAKER ACT",
+            "projectName": "10248",
             "type": "Expenses",
             "accountCode": "531000",
             "accountName": "Professional Services",
@@ -12557,7 +15057,7 @@ window.wcExpenseDetail = [
     "items": [
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "ECONOMIC DEV ALLIANCE",
+        "projectName": "10257",
         "type": "Expenses",
         "accountCode": "582000",
         "accountName": "Aid to Private Organizations",
@@ -12567,7 +15067,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "ECONOMIC DEV ALLIANCE",
+        "projectName": "10257",
         "type": "Expenses",
         "accountCode": "582000",
         "accountName": "Aid to Private Organizations",
@@ -12577,7 +15077,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Medicaid Services",
+        "projectName": "10259",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12587,7 +15087,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Medicaid Services",
+        "projectName": "10259",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12597,7 +15097,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "HEALTH CARE RESPONSE HCRA",
+        "projectName": "10260",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12607,7 +15107,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "HEALTH CARE RESPONSE HCRA",
+        "projectName": "10260",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12617,7 +15117,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12627,7 +15127,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12637,7 +15137,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Lakeview Center (Women & Children)",
+        "projectName": "10246",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -12647,7 +15147,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Lakeview Center (Women & Children)",
+        "projectName": "10246",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -12657,7 +15157,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Lakeview Mental Health",
+        "projectName": "10247",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -12667,7 +15167,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Lakeview Mental Health",
+        "projectName": "10247",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -12677,7 +15177,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "BAKER ACT",
+        "projectName": "10248",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -12687,7 +15187,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "BAKER ACT",
+        "projectName": "10248",
         "type": "Expenses",
         "accountCode": "531000",
         "accountName": "Professional Services",
@@ -12697,7 +15197,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "583000",
         "accountName": "Other Grants & Aid",
@@ -12707,7 +15207,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "583000",
         "accountName": "Other Grants & Aid",
@@ -12717,7 +15217,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Gulf Coast Kids House",
+        "projectName": "10251",
         "type": "Expenses",
         "accountCode": "582000",
         "accountName": "Aid to Private Organizations",
@@ -12727,7 +15227,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "Gulf Coast Kids House",
+        "projectName": "10251",
         "type": "Expenses",
         "accountCode": "582000",
         "accountName": "Aid to Private Organizations",
@@ -12737,7 +15237,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "NW TRI-COUNTY SENIOR CENTER",
+        "projectName": "10253",
         "type": "Expenses",
         "accountCode": "582000",
         "accountName": "Aid to Private Organizations",
@@ -12747,7 +15247,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "NW TRI-COUNTY SENIOR CENTER",
+        "projectName": "10253",
         "type": "Expenses",
         "accountCode": "582000",
         "accountName": "Aid to Private Organizations",
@@ -12757,7 +15257,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "LIBERTY VFD",
+        "projectName": "10277",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12767,7 +15267,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "LIBERTY VFD",
+        "projectName": "10277",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12777,7 +15277,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "ARGYLE VFD",
+        "projectName": "10278",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12787,7 +15287,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Statutory & Other Agency Funding",
-        "projectName": "ARGYLE VFD",
+        "projectName": "10278",
         "type": "Expenses",
         "accountCode": "581000",
         "accountName": "Aid to Government Agencies",
@@ -12798,90 +15298,375 @@ window.wcExpenseDetail = [
     ]
   },
   {
+    "department": "Supervisor of Elections",
+    "total": 1663865,
+    "categories": [
+      {
+        "category": "Personnel & Benefits",
+        "amount": 1198763,
+        "percent": 72,
+        "items": [
+          {
+            "proposal": "Supervisor of Elections",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "510000",
+            "accountName": "Personnel Services or Budget",
+            "description": "",
+            "amount": 1197899,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Supervisor of Elections",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "523000",
+            "accountName": "Life & Health Insurance",
+            "description": "",
+            "amount": 0,
+            "category": "Personnel & Benefits"
+          },
+          {
+            "proposal": "Supervisor of Elections",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 864,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      },
+      {
+        "category": "Contingency & Other",
+        "amount": 373682,
+        "percent": 22.5,
+        "items": [
+          {
+            "proposal": "Supervisor of Elections",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "530000",
+            "accountName": "Operating Expenses and Budget",
+            "description": "",
+            "amount": 348682,
+            "category": "Contingency & Other"
+          },
+          {
+            "proposal": "Supervisor of Elections",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "599000",
+            "accountName": "Other Uses/Contingency",
+            "description": "",
+            "amount": 25000,
+            "category": "Contingency & Other"
+          }
+        ]
+      },
+      {
+        "category": "Buildings & Infrastructure",
+        "amount": 91420,
+        "percent": 5.5,
+        "items": [
+          {
+            "proposal": "Supervisor of Elections",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "560000",
+            "accountName": "Capital Outlay Budget",
+            "description": "",
+            "amount": 91420,
+            "category": "Buildings & Infrastructure"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 0,
+        "percent": 0,
+        "items": [
+          {
+            "proposal": "Supervisor of Elections",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "amount": 0,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Supervisor of Elections",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "510000",
+        "accountName": "Personnel Services or Budget",
+        "description": "",
+        "amount": 1197899,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Supervisor of Elections",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "523000",
+        "accountName": "Life & Health Insurance",
+        "description": "",
+        "amount": 0,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Supervisor of Elections",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "524000",
+        "accountName": "Workers' Compensation",
+        "description": "",
+        "amount": 864,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Supervisor of Elections",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "530000",
+        "accountName": "Operating Expenses and Budget",
+        "description": "",
+        "amount": 348682,
+        "category": "Contingency & Other"
+      },
+      {
+        "proposal": "Supervisor of Elections",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "amount": 0,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Supervisor of Elections",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "560000",
+        "accountName": "Capital Outlay Budget",
+        "description": "",
+        "amount": 91420,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Supervisor of Elections",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "599000",
+        "accountName": "Other Uses/Contingency",
+        "description": "",
+        "amount": 25000,
+        "category": "Contingency & Other"
+      }
+    ]
+  },
+  {
+    "department": "Tax Collector",
+    "total": 8449400,
+    "categories": [
+      {
+        "category": "Contingency & Other",
+        "amount": 8260400,
+        "percent": 97.8,
+        "items": [
+          {
+            "proposal": "Tax Collector",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "549000",
+            "accountName": "Other Current Charges",
+            "description": "",
+            "amount": 8260400,
+            "category": "Contingency & Other"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 160000,
+        "percent": 1.9,
+        "items": [
+          {
+            "proposal": "Tax Collector",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 160000,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      },
+      {
+        "category": "Communications & Technology",
+        "amount": 25000,
+        "percent": 0.3,
+        "items": [
+          {
+            "proposal": "Tax Collector",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "amount": 25000,
+            "category": "Communications & Technology"
+          }
+        ]
+      },
+      {
+        "category": "Personnel & Benefits",
+        "amount": 4000,
+        "percent": 0,
+        "items": [
+          {
+            "proposal": "Tax Collector",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "524000",
+            "accountName": "Workers' Compensation",
+            "description": "",
+            "amount": 4000,
+            "category": "Personnel & Benefits"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Tax Collector",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "524000",
+        "accountName": "Workers' Compensation",
+        "description": "",
+        "amount": 4000,
+        "category": "Personnel & Benefits"
+      },
+      {
+        "proposal": "Tax Collector",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "amount": 25000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Tax Collector",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "542000",
+        "accountName": "Freight & Postage Services",
+        "description": "",
+        "amount": 160000,
+        "category": "Supplies & Fuel"
+      },
+      {
+        "proposal": "Tax Collector",
+        "projectName": "BLANK",
+        "type": "Expenses",
+        "accountCode": "549000",
+        "accountName": "Other Current Charges",
+        "description": "",
+        "amount": 8260400,
+        "category": "Contingency & Other"
+      }
+    ]
+  },
+  {
     "department": "Veteran Services",
     "total": 318000,
     "categories": [
       {
-        "category": "Personnel",
-        "amount": 208186,
-        "percent": 65.5,
+        "category": "Personnel & Benefits",
+        "amount": 300074,
+        "percent": 94.4,
         "items": [
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512000",
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "amount": 206356,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "512007",
             "accountName": "Sick Leave Incentive Pay",
             "description": "*OMB entered",
             "amount": 1350,
-            "category": "Personnel"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "514000",
             "accountName": "Overtime",
             "description": "",
             "amount": 480,
-            "category": "Personnel"
-          }
-        ]
-      },
-      {
-        "category": "Benefits",
-        "amount": 91888,
-        "percent": 28.9,
-        "items": [
+            "category": "Personnel & Benefits"
+          },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "521000",
             "accountName": "FICA Taxes & Medicare",
             "description": "",
             "amount": 15787,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "522000",
             "accountName": "Retirement Contributions",
             "description": "",
             "amount": 28109,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "",
             "amount": 47765,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "524000",
             "accountName": "Workers' Compensation",
             "description": "",
             "amount": 227,
-            "category": "Benefits"
+            "category": "Personnel & Benefits"
           }
         ]
       },
@@ -12892,7 +15677,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "541000",
             "accountName": "Communication Services",
@@ -12902,7 +15687,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -12919,7 +15704,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "540000",
             "accountName": "Travel & Per Diem",
@@ -12929,7 +15714,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "555000",
             "accountName": "Training",
@@ -12941,12 +15726,22 @@ window.wcExpenseDetail = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 3776,
+        "amount": 3926,
         "percent": 1.2,
         "items": [
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
+            "type": "Expenses",
+            "accountCode": "542000",
+            "accountName": "Freight & Postage Services",
+            "description": "",
+            "amount": 150,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "Veteran Services",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "551000",
             "accountName": "Office Supplies",
@@ -12956,7 +15751,7 @@ window.wcExpenseDetail = [
           },
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "552000",
             "accountName": "Operating Supplies",
@@ -12973,7 +15768,7 @@ window.wcExpenseDetail = [
         "items": [
           {
             "proposal": "Veteran Services",
-            "projectName": "Description pending",
+            "projectName": "BLANK",
             "type": "Expenses",
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
@@ -12982,99 +15777,82 @@ window.wcExpenseDetail = [
             "category": "Facilities, Utilities & Maintenance"
           }
         ]
-      },
-      {
-        "category": "Uncategorized",
-        "amount": 150,
-        "percent": 0,
-        "items": [
-          {
-            "proposal": "Veteran Services",
-            "projectName": "Description pending",
-            "type": "Expenses",
-            "accountCode": "542000",
-            "accountName": "Freight & Postage Services",
-            "description": "",
-            "amount": 150,
-            "category": "Uncategorized"
-          }
-        ]
       }
     ],
     "items": [
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512000",
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "amount": 206356,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "512007",
         "accountName": "Sick Leave Incentive Pay",
         "description": "*OMB entered",
         "amount": 1350,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "514000",
         "accountName": "Overtime",
         "description": "",
         "amount": 480,
-        "category": "Personnel"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "521000",
         "accountName": "FICA Taxes & Medicare",
         "description": "",
         "amount": 15787,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "522000",
         "accountName": "Retirement Contributions",
         "description": "",
         "amount": 28109,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "",
         "amount": 47765,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "524000",
         "accountName": "Workers' Compensation",
         "description": "",
         "amount": 227,
-        "category": "Benefits"
+        "category": "Personnel & Benefits"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "540000",
         "accountName": "Travel & Per Diem",
@@ -13084,7 +15862,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "541000",
         "accountName": "Communication Services",
@@ -13094,17 +15872,17 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "",
         "amount": 150,
-        "category": "Uncategorized"
+        "category": "Supplies & Fuel"
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
@@ -13114,7 +15892,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "551000",
         "accountName": "Office Supplies",
@@ -13124,7 +15902,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "552000",
         "accountName": "Operating Supplies",
@@ -13134,7 +15912,7 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
@@ -13144,13 +15922,48 @@ window.wcExpenseDetail = [
       },
       {
         "proposal": "Veteran Services",
-        "projectName": "Description pending",
+        "projectName": "BLANK",
         "type": "Expenses",
         "accountCode": "555000",
         "accountName": "Training",
         "description": "",
         "amount": 1500,
         "category": "Travel & Training"
+      }
+    ]
+  },
+  {
+    "department": "Walton County Health Department",
+    "total": 1724397,
+    "categories": [
+      {
+        "category": "Grants, Aid & Transfers",
+        "amount": 1724397,
+        "percent": 100,
+        "items": [
+          {
+            "proposal": "Walton County Health Department",
+            "projectName": "10255",
+            "type": "Expenses",
+            "accountCode": "581000",
+            "accountName": "Aid to Government Agencies",
+            "description": "",
+            "amount": 1724397,
+            "category": "Grants, Aid & Transfers"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "proposal": "Walton County Health Department",
+        "projectName": "10255",
+        "type": "Expenses",
+        "accountCode": "581000",
+        "accountName": "Aid to Government Agencies",
+        "description": "",
+        "amount": 1724397,
+        "category": "Grants, Aid & Transfers"
       }
     ]
   }
