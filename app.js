@@ -1249,6 +1249,19 @@ function setServiceAreaStatus(message, isError = false) {
   status.classList.toggle("negative-value", isError);
 }
 
+function loadSheetJs() {
+  if (window.XLSX) return Promise.resolve(window.XLSX);
+  if (window.sheetJsLoading) return window.sheetJsLoading;
+  window.sheetJsLoading = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js";
+    script.onload = () => resolve(window.XLSX);
+    script.onerror = () => reject(new Error("Spreadsheet parser could not be loaded."));
+    document.head.appendChild(script);
+  });
+  return window.sheetJsLoading;
+}
+
 const csvColumnAliases = {
   department: ["department"],
   serviceArea: ["servicearea", "service area"],
@@ -1307,6 +1320,41 @@ function parseCsv(text) {
   row.push(field);
   if (row.some((value) => String(value).trim())) rows.push(row);
   return rows;
+}
+
+function isSpreadsheetPackage(buffer) {
+  const bytes = new Uint8Array(buffer.slice(0, 4));
+  return bytes[0] === 0x50 && bytes[1] === 0x4b;
+}
+
+function serviceHeaderScore(row) {
+  const fields = csvFieldMap(row || []);
+  return Object.values(fields).filter((index) => index >= 0).length;
+}
+
+async function spreadsheetRows(buffer) {
+  await loadSheetJs();
+  const workbook = window.XLSX.read(buffer, { type: "array" });
+  let bestRows = [];
+  let bestScore = 0;
+  workbook.SheetNames.forEach((sheetName) => {
+    const rows = window.XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: "", blankrows: false });
+    rows.forEach((row, index) => {
+      const score = serviceHeaderScore(row);
+      if (score > bestScore) {
+        bestScore = score;
+        bestRows = rows.slice(index);
+      }
+    });
+  });
+  return bestRows;
+}
+
+async function serviceRowsFromFile(file) {
+  const buffer = await file.arrayBuffer();
+  if (isSpreadsheetPackage(buffer)) return spreadsheetRows(buffer);
+  const text = new TextDecoder().decode(buffer);
+  return parseCsv(text);
 }
 
 function splitCsvList(value) {
@@ -1410,9 +1458,9 @@ async function importServiceCsv(file) {
   if (!file) return;
   if (!isStaffMode) return;
   state.serviceAreaSourceFileName = file.name || "department_services_review.csv";
-  setServiceAreaStatus("Reading CSV...");
+  setServiceAreaStatus("Reading service data...");
   try {
-    const csvRows = parseCsv(await file.text());
+    const csvRows = await serviceRowsFromFile(file);
     const result = serviceDraftFromCsvRows(csvRows, state.serviceAreaSourceFileName);
     state.serviceAreaDraft = result.rows;
     state.serviceAreaWarnings = result.warnings;
