@@ -47,6 +47,7 @@ const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 const money = (value) => currencyFormatter.format(Math.round(Number(value || 0)));
 const moneyInput = (value) => currencyInputFormatter.format(Number(value || 0));
+const wholeMoneyInput = (value) => money(value);
 const parseMoney = (value) => Number(String(value || "").replace(/[^0-9.-]/g, "")) || 0;
 const number = (value) => numberFormatter.format(Number(value || 0));
 const percent = (value) => `${percentFormatter.format(Number(value || 0))}%`;
@@ -90,7 +91,11 @@ function estimatedMillageRevenue(rate = state.proposedMillage) {
 }
 
 function rollbackRate() {
-  return budgetData.millageAssumptions.fy2026BudgetedAdValoremRevenue / budgetData.millageAssumptions.taxableValueBase * 1000;
+  return Number(state.revenueAssumptions.baselineRevenue || budgetData.revenueForecast.baseRevenue) / budgetData.millageAssumptions.taxableValueBase * 1000;
+}
+
+function rollbackRevenueTarget() {
+  return estimatedMillageRevenue(Number(rollbackRate().toFixed(4)));
 }
 
 function millageRevenueImpact() {
@@ -395,11 +400,11 @@ function renderStaffRevenueControls() {
   if (!container) return;
   container.innerHTML = `
     <label><span>Revenue Growth</span><input type="number" step="0.1" value="${state.revenueAssumptions.futureRevenueGrowthRate * 100}" data-control="revenue-assumption" data-assumption="futureRevenueGrowthRate"></label>
-    <label><span>Baseline Revenue</span><input type="text" value="${moneyInput(state.revenueAssumptions.baselineRevenue)}" data-control="revenue-assumption" data-assumption="baselineRevenue" data-format="currency"></label>
+    <label><span>Baseline Revenue</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.baselineRevenue)}" data-control="revenue-assumption" data-assumption="baselineRevenue" data-format="currency"></label>
     <label><span>FY2029+ Annaul Service Cost Growth</span><input type="number" step="0.1" value="${state.revenueAssumptions.futureExpenseInflationRate * 100}" data-control="revenue-assumption" data-assumption="futureExpenseInflationRate"></label>
-    <label><span>Baseline Expense</span><input type="text" value="${moneyInput(state.revenueAssumptions.baselineExpense)}" data-control="revenue-assumption" data-assumption="baselineExpense" data-format="currency"></label>
-    <label><span>FY2028 Revenue Reduction</span><input type="text" value="${moneyInput(state.revenueAssumptions.fy2028RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2028RevenueReduction" data-format="currency"></label>
-    <label><span>FY2029 Revenue Reduction</span><input type="text" value="${moneyInput(state.revenueAssumptions.fy2029RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2029RevenueReduction" data-format="currency"></label>
+    <label><span>Baseline Expense</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.baselineExpense)}" data-control="revenue-assumption" data-assumption="baselineExpense" data-format="currency"></label>
+    <label><span>FY2028 Revenue Reduction</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.fy2028RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2028RevenueReduction" data-format="currency"></label>
+    <label><span>FY2029 Revenue Reduction</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.fy2029RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2029RevenueReduction" data-format="currency"></label>
   `;
 }
 
@@ -961,7 +966,7 @@ function renderMillage() {
   const currentMillageImpactElement = $("#millageRevenueImpact");
   currentMillageImpactElement.textContent = signedMoney(currentMillageImpact);
   currentMillageImpactElement.className = toneClass(currentMillageImpact);
-  const rollbackImpact = estimatedRevenue - budgetData.millageAssumptions.fy2026BudgetedAdValoremRevenue;
+  const rollbackImpact = estimatedRevenue - rollbackRevenueTarget();
   const rollbackImpactElement = $("#rollbackRevenueImpact");
   rollbackImpactElement.textContent = signedMoney(rollbackImpact);
   rollbackImpactElement.className = toneClass(rollbackImpact);
@@ -1527,8 +1532,10 @@ function exportServiceAreaDraft() {
 
 function updateRevenueAssumptionFromInput(input) {
   const assumption = input.dataset.assumption;
-  const value = input.dataset.format === "currency" ? parseMoney(input.value) : Number(input.value || 0);
+  const isCurrency = input.dataset.format === "currency";
+  const value = isCurrency ? parseMoney(input.value) : Number(input.value || 0);
   state.revenueAssumptions[assumption] = assumption.includes("Rate") ? value / 100 : value;
+  if (isCurrency) input.value = String(input.value || "").trim() ? wholeMoneyInput(value) : "";
   updateResults();
 }
 
