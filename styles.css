@@ -910,6 +910,26 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   background: #ffffff;
 }
 
+.property-tax-context {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.property-tax-context h2 {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: 1.2rem;
+}
+
+.property-tax-context p:last-child {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
 @media (max-width: 900px) {
   .department-detail-layout { grid-template-columns: 1fr; }
   .department-side-detail { position: static; }
