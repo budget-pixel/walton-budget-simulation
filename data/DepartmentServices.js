@@ -6,7 +6,7 @@ window.departmentServices = {
     "board-of-county-commissioners": {
       "department": "Board of County Commissioners",
       "serviceArea": "Administrative Support",
-      "description": "Serves as Walton Countyâ€™s elected legislative and policy-making body, adopts the county budget, appoints key county officers, and establishes policy through ordinances and resolutions.",
+      "description": "Serves as Walton County's elected legislative and policy-making body, adopts the county budget, appoints key county officers, and establishes policy through ordinances and resolutions.",
       "services": [
         "County Policy & Legislative Governance",
         "Budget Adoption & Funding Decisions",
@@ -107,7 +107,7 @@ window.departmentServices = {
     "eagle-springs-golf-and-recreation-center": {
       "department": "Eagle Springs Golf and Recreation Center",
       "serviceArea": "Parks & Recreation",
-      "description": "Operates Walton Countyâ€™s public golf and recreation center, including the golf course, driving range, pro shop, pickleball courts, swimming pool, walking path, and related recreational amenities.",
+      "description": "Operates Walton County's public golf and recreation center, including the golf course, driving range, pro shop, pickleball courts, swimming pool, walking path, and related recreational amenities.",
       "services": [
         "Public Golf Course Operations",
         "Driving Range and Pro Shop Services",
@@ -196,7 +196,7 @@ window.departmentServices = {
     "environmental-services": {
       "department": "Environmental Services",
       "serviceArea": "Environmental & Beach Services",
-      "description": "Provides environmental support to county government, residents, and partner agencies to protect Walton Countyâ€™s natural resources, water quality, stormwater systems, and environmental assets.",
+      "description": "Provides environmental support to county government, residents, and partner agencies to protect Walton County's natural resources, water quality, stormwater systems, and environmental assets.",
       "services": [
         "Natural Resource Protection",
         "MS4 and NPDES Stormwater Compliance",
@@ -270,7 +270,7 @@ window.departmentServices = {
         "Employee Benefits Administration",
         "Employee Relations and Performance Support",
         "Workforce Training and Development",
-        "Risk and Workersâ€™ Compensation Support",
+        "Risk and Workers' Compensation Support",
         "ADA Compliance Support",
         "Retirement and Employee Resource Support"
       ],
@@ -355,7 +355,7 @@ window.departmentServices = {
     "planning": {
       "department": "Planning",
       "serviceArea": "Community Development",
-      "description": "Administers the countyâ€™s vacation rental certification program using dedicated program revenue to review, process, and approve short-term vacation rental certifications.",
+      "description": "Administers the county's vacation rental certification program using dedicated program revenue to review, process, and approve short-term vacation rental certifications.",
       "services": [
         "Vacation Rental Certification Review",
         "Short-Term Rental Compliance Support",
