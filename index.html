@@ -264,17 +264,16 @@
           <p id="scenarioMessage" class="small-status"></p>
           <div id="scenarioComparison" class="comparison-grid"></div>
           <hr>
-          <section class="staff-converter-panel" data-staff-only aria-label="Service area converter">
+          <section class="staff-converter-panel" aria-label="Service area converter">
             <div class="panel-header compact-header">
               <div>
                 <p class="eyebrow">Service Data</p>
                 <h3>Reviewed Department Services & Programs</h3>
               </div>
             </div>
-            <p class="small-status">Upload the reviewed service/program CSV to preview and export app-ready department service data. Expected source: department_services_review.csv, though any CSV or spreadsheet with the required columns is accepted.</p>
             <div class="service-converter-controls">
-              <label><span>Reviewed Service File</span><input type="file" accept=".csv,text/csv,.xlsx,.xls,.xlsm" data-control="service-csv"></label>
-              <button type="button" class="view-all-button" data-control="export-service-areas" disabled>Download DepartmentServices.js</button>
+              <p class="small-status">Use the converter to prepare department services data for the app. Open the converter in a new tab to upload and export.</p>
+              <a class="view-all-button" href="expense-detail-converter.html" target="_blank" rel="noopener">Open Department Services Converter</a>
             </div>
             <p id="serviceAreaImportStatus" class="small-status" aria-live="polite"></p>
             <p id="serviceAreaSourceFile" class="small-status service-source-file"></p>
@@ -296,7 +295,7 @@
               </table>
             </div>
           </section>
-          <p class="small-status"><a class="view-all-button" href="expense-detail-converter.html" target="_blank" rel="noopener">Open Expense Detail Converter</a></p>
+          <!-- Converter access moved into Service Data panel -->
           <hr>
           <section id="serviceDiagnosticsPanel" class="staff-service-diagnostics" data-staff-only aria-label="Service information diagnostics">
             <div class="panel-header compact-header">
@@ -319,6 +318,8 @@
           <div id="validationWarnings" class="warning-list"></div>
         </div>
       </aside>
+
+      <p class="small-status"><a class="view-all-button" href="expense-detail-converter.html" target="_blank" rel="noopener">Open Expense Detail Converter</a></p>
 
       <div class="builder-layout">
         <div class="builder-main">

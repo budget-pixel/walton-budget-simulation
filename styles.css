@@ -1088,6 +1088,15 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 .staff-converter-panel {
   display: grid;
   gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.1fr);
+}
+
+@media (max-width: 740px) {
+  .staff-converter-panel { grid-template-columns: 1fr; padding: 12px; }
 }
 
 .service-converter-controls {

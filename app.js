@@ -1587,7 +1587,7 @@ function serviceDraftFromCsvRows(csvRows, fileName) {
 }
 
 function renderServiceAreaReview() {
-  const table = $("#serviceAreaReviewTable");
+  const table = $("#serviceAreaPreviewTable");
   const wrap = table?.closest(".service-review-wrap");
   const exportButton = $('[data-control="export-service-areas"]');
   const sourceFile = $("#serviceAreaSourceFile");
