@@ -14,6 +14,7 @@ const state = {
     baselineExpense: budgetData.budgetBaselineTotals.adValoremSupportedExpenseBaseline,
     futureRevenueGrowthRate: 0.01,
     futureExpenseInflationRate: 0.01,
+    rollbackRate: "",
     fy2029RevenueReduction: 9700000
   },
   personnelDrivers: { ...budgetData.personnelCostDrivers },
@@ -90,8 +91,14 @@ function estimatedMillageRevenue(rate = state.proposedMillage) {
   return budgetData.millageAssumptions.taxableValueBase * Number(rate || 0) / 1000;
 }
 
-function rollbackRate() {
+function calculatedRollbackRate() {
   return Number(state.revenueAssumptions.baselineRevenue || budgetData.revenueForecast.baseRevenue) / budgetData.millageAssumptions.taxableValueBase * 1000;
+}
+
+function rollbackRate() {
+  return state.revenueAssumptions.rollbackRate === "" || state.revenueAssumptions.rollbackRate == null
+    ? calculatedRollbackRate()
+    : Number(state.revenueAssumptions.rollbackRate || 0);
 }
 
 function rollbackRevenueTarget() {
@@ -398,12 +405,14 @@ function renderDrivers() {
 function renderStaffRevenueControls() {
   const container = $("#staffRevenueControls");
   if (!container) return;
+  const rollbackValue = state.revenueAssumptions.rollbackRate === "" || state.revenueAssumptions.rollbackRate == null ? calculatedRollbackRate() : Number(state.revenueAssumptions.rollbackRate || 0);
   container.innerHTML = `
     <label><span>Revenue Growth</span><input type="number" step="0.1" value="${state.revenueAssumptions.futureRevenueGrowthRate * 100}" data-control="revenue-assumption" data-assumption="futureRevenueGrowthRate"></label>
     <label><span>Baseline Revenue</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.baselineRevenue)}" data-control="revenue-assumption" data-assumption="baselineRevenue" data-format="currency"></label>
     <label><span>FY2029+ Annaul Service Cost Growth</span><input type="number" step="0.1" value="${state.revenueAssumptions.futureExpenseInflationRate * 100}" data-control="revenue-assumption" data-assumption="futureExpenseInflationRate"></label>
     <label><span>Baseline Expense</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.baselineExpense)}" data-control="revenue-assumption" data-assumption="baselineExpense" data-format="currency"></label>
     <label><span>FY2028 Revenue Reduction</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.fy2028RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2028RevenueReduction" data-format="currency"></label>
+    <label><span>Rollback Rate</span><input type="number" step="0.0001" value="${Number(rollbackValue || 0).toFixed(4)}" data-control="revenue-assumption" data-assumption="rollbackRate" data-format="millage"></label>
     <label><span>FY2029 Revenue Reduction</span><input type="text" value="${wholeMoneyInput(state.revenueAssumptions.fy2029RevenueReduction)}" data-control="revenue-assumption" data-assumption="fy2029RevenueReduction" data-format="currency"></label>
   `;
 }
@@ -1533,9 +1542,18 @@ function exportServiceAreaDraft() {
 function updateRevenueAssumptionFromInput(input) {
   const assumption = input.dataset.assumption;
   const isCurrency = input.dataset.format === "currency";
+  const isMillage = input.dataset.format === "millage";
   const value = isCurrency ? parseMoney(input.value) : Number(input.value || 0);
-  state.revenueAssumptions[assumption] = assumption.includes("Rate") ? value / 100 : value;
+  if (isMillage && !String(input.value || "").trim()) {
+    state.revenueAssumptions[assumption] = "";
+  } else {
+    state.revenueAssumptions[assumption] = ["futureRevenueGrowthRate", "futureExpenseInflationRate"].includes(assumption) ? value / 100 : value;
+  }
   if (isCurrency) input.value = String(input.value || "").trim() ? wholeMoneyInput(value) : "";
+  if (assumption === "baselineRevenue" && (state.revenueAssumptions.rollbackRate === "" || state.revenueAssumptions.rollbackRate == null)) {
+    const rollbackInput = $('[data-assumption="rollbackRate"]');
+    if (rollbackInput && document.activeElement !== rollbackInput) rollbackInput.value = calculatedRollbackRate().toFixed(4);
+  }
   updateResults();
 }
 

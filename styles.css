@@ -342,6 +342,8 @@ button.view-all-button {
   gap: 14px;
 }
 .scenario-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 14px; }
+.millage-header-actions { display: flex; align-items: stretch; justify-content: flex-end; gap: 12px; }
+.header-millage-box { min-width: 190px; padding: 10px 12px; }
 .scenario-meta-grid label,
 .driver-card,
 .metric-box,
@@ -441,6 +443,9 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   .lock-grid,
   .calculator-results,
   .parcel-results { grid-template-columns: 1fr; }
+  .millage-header-actions { justify-content: stretch; }
+  .millage-header-actions .view-all-button,
+  .millage-header-actions .header-millage-box { flex: 1 1 auto; }
   .button-row { align-items: stretch; }
   .button-row .view-all-button { flex: 1 1 170px; }
 }
