@@ -724,6 +724,36 @@ function normalizeAndCombineCategories(categories) {
   return out.sort((a, b) => b.amount - a.amount || a.category.localeCompare(b.category));
 }
 
+const expenseCategoryTips = {
+  "Personnel & Benefits": "Pay and benefits for county employees. This includes salaries, wages, temporary or seasonal help, payroll taxes, retirement, health insurance, workers’ compensation, and unemployment costs.",
+
+  "Professional Services": "Specialized work provided by outside professionals or vendors. This can include legal, engineering, auditing, consulting, appraisal, technology, medical, or other contracted professional support.",
+
+  "Communications & Technology": "Tools and services that help the department communicate, process information, or operate digitally. This can include phones, internet, mobile devices, software, subscriptions, memberships, publications, data tools, and printing.",
+
+  "Travel & Training": "Costs for employees to attend meetings, conferences, certifications, continuing education, required training, and related travel expenses.",
+
+  "Supplies & Fuel": "Everyday materials used to operate the department. This can include office supplies, operating supplies, fuel, uniforms, small equipment, software under the capitalization threshold, chemicals, food, and other consumable items.",
+
+  "Facilities, Utilities & Maintenance": "Costs to operate, rent, insure, repair, and maintain county facilities, vehicles, equipment, and workspaces. This can include utilities, leases, insurance, repairs, maintenance contracts, tires, and facility upkeep.",
+
+  "Buildings, Infrastructure & Capital": "Larger capital costs for public assets. This can include buildings, renovations, roads, sidewalks, drainage, parking areas, lighting, parks, fields, land improvements, and other infrastructure.",
+
+  "Vehicles & Equipment": "Purchases of vehicles, machinery, heavy equipment, office furniture, computers, tools, and other equipment expected to last beyond normal daily use.",
+
+  "Grants, Aid & Transfers": "Funding passed through to other governments, agencies, nonprofits, or outside organizations to support public services, required contributions, grants, or intergovernmental obligations.",
+
+  "Debt Service": "Payments on borrowed money, including principal and interest.",
+
+  "Contingency & Other": "Budgeted reserve or other costs that do not fit neatly into another category. This may include contingency, public notices, promotional activities, current charges, or other miscellaneous uses.",
+
+  "Uncategorized": "Expense items that were not automatically matched to one of the standard categories. These should be reviewed by staff."
+};
+
+function expenseCategoryTip(category) {
+  return expenseCategoryTips[category] || expenseCategoryTips.Uncategorized;
+}
+
 function expenseItemsForDetail(detail, categories) {
   if (Array.isArray(detail?.items) && detail.items.length) return detail.items;
   return categories.flatMap((category) => category.items || []);
