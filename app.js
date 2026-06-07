@@ -696,8 +696,15 @@ function normalizeAndCombineCategories(categories) {
   const map = new Map();
   categories.forEach((cat) => {
     let key = String(cat.category || "");
+    // combine personnel & benefits
     if (/^\s*(personnel|benefits)\s*$/i.test(key) || /^Personnel & Benefits$/i.test(key)) key = "Personnel & Benefits";
+    // remap by category text
     if (/freight|postage/i.test(key)) key = "Supplies & Fuel";
+    // if category is uncategorized or doesn't reflect freight/postage, inspect items for account codes or names
+    if (!/supplies|fuel|freight|postage/i.test(key)) {
+      const hasFreight = (cat.items || []).some((it) => String(it.accountCode || "") === "542000" || /freight|postage/i.test(String(it.accountName || "")));
+      if (hasFreight) key = "Supplies & Fuel";
+    }
     const existing = map.get(key) || { category: key, amount: 0, percent: 0, items: [] };
     existing.amount += Number(cat.amount || 0);
     existing.items = existing.items.concat(cat.items || []);
@@ -796,11 +803,13 @@ function renderOperatingLineItems(department, isLocked) {
             <header><strong>${escapeHtml(group.label)}</strong><span>${money(group.amount)}</span></header>
             ${group.items.map((item) => {
               const removed = Boolean(state.removedOperatingItems[item.expenseKey]);
+              const projectLabel = (item.projectName && !/^\s*Description pending\s*$/i.test(String(item.projectName))) ? item.projectName : (item.name || item.accountName || "Line item");
+              const desc = (item.description && !/^\s*Description pending\s*$/i.test(String(item.description))) ? item.description : "";
               return `
                 <div class="operating-line-item ${removed ? "line-item-removed" : ""}">
                   <div>
-                    <strong>${escapeHtml(item.projectName || item.name || "Line item")}</strong>
-                    <small>${escapeHtml(item.description || item.type || "No description provided")}</small>
+                    <strong>${escapeHtml(projectLabel)}</strong>
+                    ${desc ? `<small>${escapeHtml(desc)}</small>` : ""}
                   </div>
                   <span>${money(item.amount)}</span>
                   <button type="button" class="line-item-toggle" data-control="toggle-operating-item" data-item="${item.expenseKey}" ${isLocked ? "disabled" : ""}>${removed ? "Keep" : "Remove"}</button>
