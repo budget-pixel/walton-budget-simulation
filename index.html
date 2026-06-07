@@ -271,31 +271,38 @@
                 <h3>Reviewed Department Services & Programs</h3>
               </div>
             </div>
-            <div class="service-converter-controls">
-              <p class="small-status">Use the converter to prepare department services data for the app. Open the converter in a new tab to upload and export.</p>
-              <a class="view-all-button" href="expense-detail-converter.html" target="_blank" rel="noopener">Open Department Services Converter</a>
+            <p class="small-status">Open a converter to prepare app-ready service or expense detail data.</p>
+            <div class="converter-button-row">
+              <button type="button" class="view-all-button" data-control="open-service-converter">Open Service Converter</button>
+              <button type="button" class="view-all-button" data-control="open-expense-converter">Open Expense Detail Converter</button>
             </div>
-            <p id="serviceAreaImportStatus" class="small-status" aria-live="polite"></p>
-            <p id="serviceAreaSourceFile" class="small-status service-source-file"></p>
-            <div id="serviceAreaValidationWarnings" class="warning-list service-validation-warnings"></div>
-            <div class="table-scroll service-review-wrap" hidden>
-              <table class="service-review-table">
-                <thead>
-                  <tr>
-                    <th>Department</th>
-                    <th>Service Area</th>
-                    <th>Description</th>
-                    <th>Service Count</th>
-                    <th>Capital Project Count</th>
-                    <th>Performance Measure Count</th>
-                    <th>Notes</th>
-                  </tr>
-                </thead>
-                <tbody id="serviceAreaPreviewTable"></tbody>
-              </table>
+            <div id="serviceConverterContent" class="service-converter-content" hidden>
+              <p class="small-status">Upload the reviewed service/program CSV to preview and export app-ready department service data. Expected source: department_services_review.csv, though any CSV or spreadsheet with the required columns is accepted.</p>
+              <div class="service-converter-controls">
+                <label><span>Reviewed Service File</span><input type="file" accept=".csv,text/csv,.xlsx,.xls,.xlsm" data-control="service-csv"></label>
+                <button type="button" class="view-all-button" data-control="export-service-areas" disabled>Download DepartmentServices.js</button>
+              </div>
+              <p id="serviceAreaImportStatus" class="small-status" aria-live="polite"></p>
+              <p id="serviceAreaSourceFile" class="small-status service-source-file"></p>
+              <div id="serviceAreaValidationWarnings" class="warning-list service-validation-warnings"></div>
+              <div class="table-scroll service-review-wrap" hidden>
+                <table class="service-review-table">
+                  <thead>
+                    <tr>
+                      <th>Department</th>
+                      <th>Service Area</th>
+                      <th>Description</th>
+                      <th>Service Count</th>
+                      <th>Capital Project Count</th>
+                      <th>Performance Measure Count</th>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody id="serviceAreaPreviewTable"></tbody>
+                </table>
+              </div>
             </div>
           </section>
-          <!-- Converter access moved into Service Data panel -->
           <hr>
           <section id="serviceDiagnosticsPanel" class="staff-service-diagnostics" data-staff-only aria-label="Service information diagnostics">
             <div class="panel-header compact-header">
@@ -318,8 +325,6 @@
           <div id="validationWarnings" class="warning-list"></div>
         </div>
       </aside>
-
-      <p class="small-status"><a class="view-all-button" href="expense-detail-converter.html" target="_blank" rel="noopener">Open Expense Detail Converter</a></p>
 
       <div class="builder-layout">
         <div class="builder-main">

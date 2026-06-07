@@ -1807,6 +1807,14 @@ document.addEventListener("click", (event) => {
   if (control === "export-impact") csv("scenario-impact.csv", ["Department", "FTE Reduced", "Operating Reduction", "Personnel Reduction", "Operating Reduction Amount", "Total Department Reduction"], scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => [impact.department.name, number(impact.fteReduction), constitutional(impact.department) ? "" : percent(impact.operatingReduction), money(impact.personnelReduction), money(impact.operatingReductionAmount), money(impact.totalReduction)]));
   if (control === "export-pdf") exportPdf();
   if (control === "export-service-areas") exportServiceAreaDraft();
+  if (control === "open-service-converter") {
+    const converter = $("#serviceConverterContent");
+    if (converter) converter.hidden = false;
+    converter?.querySelector('[data-control="service-csv"]')?.focus();
+  }
+  if (control === "open-expense-converter") {
+    window.open("expense-detail-converter.html", "_blank", "noopener");
+  }
   if (control === "save-scenario") saveScenario();
   if (control === "load-scenario") loadScenario();
   if (control === "delete-scenario") deleteScenario();

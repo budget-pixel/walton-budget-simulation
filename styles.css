@@ -1099,6 +1099,21 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   .staff-converter-panel { grid-template-columns: 1fr; padding: 12px; }
 }
 
+.converter-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.service-converter-content {
+  display: grid;
+  gap: 12px;
+}
+
+.service-converter-content[hidden] {
+  display: none;
+}
+
 .service-converter-controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
