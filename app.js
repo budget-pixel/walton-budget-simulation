@@ -1028,6 +1028,7 @@ function chartOptions(bar = false, stacked = false) {
 }
 
 function renderCharts() {
+  if (!window.Chart || !$("#trendChart") || !$("#shortfallChart")) return;
   const forecast = forecastYears();
   const components = shortfallComponents();
   Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
@@ -1057,6 +1058,7 @@ function renderCharts() {
 }
 
 function updateCharts() {
+  if (!trendChart || !shortfallChart) return;
   const forecast = forecastYears();
   const components = shortfallComponents();
   trendChart.data.labels = forecast.map((year) => year.year);
@@ -1808,9 +1810,7 @@ document.addEventListener("click", (event) => {
   if (control === "export-pdf") exportPdf();
   if (control === "export-service-areas") exportServiceAreaDraft();
   if (control === "open-service-converter") {
-    const converter = $("#serviceConverterContent");
-    if (converter) converter.hidden = false;
-    converter?.querySelector('[data-control="service-csv"]')?.focus();
+    window.open("service-data-converter.html", "_blank", "noopener");
   }
   if (control === "open-expense-converter") {
     window.open("expense-detail-converter.html", "_blank", "noopener");

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Data Converter</title>
+  <style>
+    :root {
+      --color-page: #f4f6f7;
+      --color-surface: #ffffff;
+      --color-text: #1f2a2e;
+      --color-muted: #5d686d;
+      --color-border: #d9e1e4;
+      --color-primary: #006231;
+      --color-primary-dark: #004a25;
+      --color-warning: #7a4d00;
+      --radius-small: 6px;
+    }
+    body { margin: 0; background: var(--color-page); color: var(--color-text); font-family: Arial, Helvetica, sans-serif; }
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0; }
+    h1, h2 { margin: 0; color: var(--color-primary-dark); }
+    p { color: var(--color-muted); line-height: 1.5; }
+    .panel { padding: 18px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; }
+    .grid { display: grid; grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr); gap: 16px; align-items: start; }
+    label { display: grid; gap: 8px; font-weight: 700; color: var(--color-primary); }
+    input, textarea { width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-small); font: inherit; }
+    textarea { min-height: 420px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.84rem; }
+    button { width: fit-content; padding: 10px 14px; border: 0; border-radius: var(--radius-small); background: var(--color-primary); color: #ffffff; font-weight: 800; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { padding: 9px; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+    th { color: var(--color-primary-dark); background: #eef2f4; }
+    .table-wrap { max-height: 380px; overflow: auto; border: 1px solid var(--color-border); border-radius: var(--radius-small); }
+    .status { margin-top: 12px; color: var(--color-muted); }
+    .warning { color: var(--color-warning); font-weight: 700; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .summary { display: grid; gap: 8px; margin-top: 14px; }
+    .summary div { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--color-border); padding-top: 8px; }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Service Data Converter</h1>
+      <p>Upload the reviewed department services CSV or spreadsheet. The converter matches departments to the app data model and creates a downloadable <strong>DepartmentServices.js</strong> file.</p>
+    </header>
+    <div class="grid">
+      <section class="panel">
+        <label>
+          Reviewed Service File
+          <input id="fileInput" type="file" accept=".csv,text/csv,.xlsx,.xls,.xlsm">
+        </label>
+        <div class="actions">
+          <button id="downloadButton" type="button" disabled>Download DepartmentServices.js</button>
+        </div>
+        <p class="status" id="status">Waiting for a file.</p>
+        <div class="summary" id="summary"></div>
+      </section>
+      <section class="panel">
+        <h2>Preview</h2>
+        <p id="warnings" class="status"></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th>Service Area</th>
+                <th>Description</th>
+                <th>Services</th>
+                <th>Capital</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody id="previewBody"></tbody>
+          </table>
+        </div>
+        <h2 style="margin-top:18px;">Generated JavaScript</h2>
+        <textarea id="output" readonly></textarea>
+      </section>
+    </div>
+  </main>
+
+  <script src="data/budgetData.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script>
+    const departmentAliases = {
+      "purchasing": "Procurement",
+      "geographic info system": "Geographic Info Systems",
+      "environmental resources": "Environmental Services",
+      "probation": "Probation Services",
+      "planning vacation rental certification program": "Planning"
+    };
+    const ignoredDepartments = new Set([
+      "property appraiser", "tax collector", "supervisor of elections", "clerk of court",
+      "sheriff s office", "state attorney", "public defender", "county court", "circuit court"
+    ]);
+    const requiredColumns = {
+      department: ["department"],
+      serviceArea: ["servicearea", "service area"],
+      description: ["description"],
+      services: ["services", "services programs", "services and programs"],
+      capitalProjects: ["capitalprojects", "capital projects"],
+      performanceMeasures: ["performancemeasures", "performance measures"],
+      notes: ["notes", "review notes"]
+    };
+    let generatedText = "";
+
+    const normalizeHeader = (value) => String(value || "").trim().toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, " ").trim().replace(/ /g, "");
+    const normalizeName = (value) => String(value || "").trim().toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, " ").trim();
+    const slug = (value) => normalizeName(value).replace(/ /g, "-") || "department";
+    const escapeHtml = (value) => String(value || "").replace(/[&<>\"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
+    const csvCell = (row, index) => index >= 0 ? String(row[index] || "").trim() : "";
+
+    function splitItems(value) {
+      return String(value || "")
+        .split(/\r?\n|;|\||\u2022|(?:^|\s)\d+[.)]\s+/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let inQuotes = false;
+      const source = String(text || "").replace(/^\uFEFF/, "");
+      for (let index = 0; index < source.length; index += 1) {
+        const char = source[index];
+        const next = source[index + 1];
+        if (char === '"') {
+          if (inQuotes && next === '"') { field += '"'; index += 1; } else { inQuotes = !inQuotes; }
+        } else if (char === "," && !inQuotes) {
+          row.push(field); field = "";
+        } else if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (char === "\r" && next === "\n") index += 1;
+          row.push(field);
+          if (row.some((value) => String(value).trim())) rows.push(row);
+          row = []; field = "";
+        } else {
+          field += char;
+        }
+      }
+      row.push(field);
+      if (row.some((value) => String(value).trim())) rows.push(row);
+      return rows;
+    }
+
+    function fieldMap(headers) {
+      return Object.fromEntries(Object.entries(requiredColumns).map(([field, aliases]) => [
+        field,
+        headers.findIndex((header) => aliases.some((alias) => normalizeHeader(alias) === normalizeHeader(header)))
+      ]));
+    }
+
+    async function rowsFromFile(file) {
+      const buffer = await file.arrayBuffer();
+      const bytes = new Uint8Array(buffer.slice(0, 4));
+      if (bytes[0] === 0x50 && bytes[1] === 0x4b) {
+        const workbook = XLSX.read(buffer, { type: "array" });
+        let bestRows = [];
+        let bestScore = 0;
+        workbook.SheetNames.forEach((sheetName) => {
+          const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1, defval: "", blankrows: false });
+          rows.forEach((row, index) => {
+            const score = Object.values(fieldMap(row)).filter((column) => column >= 0).length;
+            if (score > bestScore) { bestScore = score; bestRows = rows.slice(index); }
+          });
+        });
+        return bestRows;
+      }
+      return parseCsv(new TextDecoder().decode(buffer));
+    }
+
+    function matchDepartment(name) {
+      const aliased = departmentAliases[normalizeName(name)] || name;
+      return (window.budgetData?.departments || []).find((department) => normalizeName(department.name) === normalizeName(aliased));
+    }
+
+    function convertRows(rows, sourceName) {
+      if (rows.length < 2) throw new Error("The file must include a header row and at least one data row.");
+      const fields = fieldMap(rows[0]);
+      const missing = Object.entries(fields).filter(([, index]) => index < 0).map(([field]) => field);
+      if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
+      const warnings = [];
+      const seen = new Set();
+      const departments = {};
+      const preview = [];
+      rows.slice(1).forEach((row, index) => {
+        const department = csvCell(row, fields.department);
+        if (!department) { warnings.push(`Row ${index + 2}: missing department.`); return; }
+        if (ignoredDepartments.has(normalizeName(department))) return;
+        if (seen.has(normalizeName(department))) warnings.push(`${department}: duplicate department row.`);
+        seen.add(normalizeName(department));
+        const matched = matchDepartment(department);
+        if (!matched) warnings.push(`${department}: department was not matched to budgetData.departments.`);
+        const record = {
+          department,
+          serviceArea: csvCell(row, fields.serviceArea),
+          description: csvCell(row, fields.description),
+          services: splitItems(csvCell(row, fields.services)),
+          capitalProjects: splitItems(csvCell(row, fields.capitalProjects)),
+          performanceMeasures: splitItems(csvCell(row, fields.performanceMeasures)),
+          notes: csvCell(row, fields.notes)
+        };
+        if (!record.serviceArea) warnings.push(`${department}: missing service area.`);
+        if (!record.description) warnings.push(`${department}: missing description.`);
+        if (!record.services.length) warnings.push(`${department}: no services/programs listed.`);
+        departments[matched?.id || slug(department)] = record;
+        preview.push({ ...record, matched });
+      });
+      (window.budgetData?.departments || []).forEach((department) => {
+        if (!departments[department.id] && !ignoredDepartments.has(normalizeName(department.name))) warnings.push(`${department.name}: no service data in uploaded file.`);
+      });
+      return {
+        preview,
+        warnings,
+        payload: {
+          version: 1,
+          generatedAt: new Date().toISOString(),
+          source: sourceName,
+          departments
+        }
+      };
+    }
+
+    function renderResult(result) {
+      generatedText = `window.departmentServices = ${JSON.stringify(result.payload, null, 2)};\n`;
+      document.getElementById("output").value = generatedText;
+      document.getElementById("downloadButton").disabled = !result.preview.length;
+      document.getElementById("summary").innerHTML = `
+        <div><span>Departments converted</span><strong>${result.preview.length}</strong></div>
+        <div><span>Validation warnings</span><strong>${result.warnings.length}</strong></div>
+      `;
+      document.getElementById("warnings").innerHTML = result.warnings.length
+        ? `<span class="warning">${result.warnings.length} warning${result.warnings.length === 1 ? "" : "s"}:</span> ${result.warnings.slice(0, 12).map(escapeHtml).join("; ")}${result.warnings.length > 12 ? "; ..." : ""}`
+        : "No validation warnings.";
+      document.getElementById("previewBody").innerHTML = result.preview.map((row) => `
+        <tr>
+          <td><strong>${escapeHtml(row.department)}</strong>${row.matched ? "" : "<br><span class=\"warning\">Unmatched</span>"}</td>
+          <td>${escapeHtml(row.serviceArea)}</td>
+          <td>${escapeHtml(row.description)}</td>
+          <td>${row.services.length}</td>
+          <td>${row.capitalProjects.length}</td>
+          <td>${row.performanceMeasures.length}</td>
+        </tr>
+      `).join("");
+    }
+
+    document.getElementById("fileInput").addEventListener("change", async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      document.getElementById("status").textContent = "Reading file...";
+      try {
+        const rows = await rowsFromFile(file);
+        const result = convertRows(rows, file.name || "department_services_review.csv");
+        renderResult(result);
+        document.getElementById("status").textContent = `Converted ${result.preview.length} department service row${result.preview.length === 1 ? "" : "s"} from ${file.name}.`;
+      } catch (error) {
+        document.getElementById("status").textContent = error.message || "Conversion failed.";
+        document.getElementById("output").value = "";
+        document.getElementById("previewBody").innerHTML = "";
+        document.getElementById("downloadButton").disabled = true;
+      }
+    });
+
+    document.getElementById("downloadButton").addEventListener("click", () => {
+      if (!generatedText) return;
+      const blob = new Blob([generatedText], { type: "text/javascript" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "DepartmentServices.js";
+      link.click();
+      URL.revokeObjectURL(link.href);
+    });
+  </script>
+</body>
+</html>

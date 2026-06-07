@@ -1105,15 +1105,6 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   gap: 10px;
 }
 
-.service-converter-content {
-  display: grid;
-  gap: 12px;
-}
-
-.service-converter-content[hidden] {
-  display: none;
-}
-
 .service-converter-controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
