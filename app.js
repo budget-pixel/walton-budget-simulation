@@ -14,7 +14,7 @@ const state = {
     baselineExpense: budgetData.budgetBaselineTotals.adValoremSupportedExpenseBaseline,
     futureRevenueGrowthRate: 0.01,
     futureExpenseInflationRate: 0.01,
-    rollbackRate: "",
+    rollbackRate: 3.3531,
     fy2029RevenueReduction: 9700000
   },
   personnelDrivers: { ...budgetData.personnelCostDrivers },
@@ -447,7 +447,8 @@ function renderOperating() {
     if (isLocked) state.operatingReductions[department.id] = 0;
     const reductionPercent = Number(state.operatingReductions[department.id] || 0);
     const newOperatingBudget = department.operatingBudget * (1 - reductionPercent / 100);
-    return `<div class="slider-row ${isLocked ? "locked-row" : ""}"><div><label>${department.name}</label><div class="slider-meta">Operating budget: ${money(department.operatingBudget)}${isLocked ? " | Locked" : ""}</div><div class="slider-meta slider-meta-secondary">New operating budget: <span class="new-operating-budget-value">${money(newOperatingBudget)}</span></div></div><input class="operating-slider" type="range" min="0" max="100" value="${reductionPercent}" data-control="operating" data-department="${department.id}" ${isLocked ? "disabled" : ""}><label class="percent-entry"><input type="number" min="0" max="100" step="1" value="${reductionPercent}" data-control="operating-percent" data-department="${department.id}" ${isLocked ? "disabled" : ""}><span>%</span></label></div>`;
+    const programsMarkup = serviceFieldList("Services & Programs", getDepartmentServicePrograms(department.id));
+    return `<div class="slider-row ${isLocked ? "locked-row" : ""}"><div><label>${department.name}</label><div class="slider-meta">Operating budget: ${money(department.operatingBudget)}${isLocked ? " | Locked" : ""}</div><div class="slider-meta slider-meta-secondary">New operating budget: <span class="new-operating-budget-value">${money(newOperatingBudget)}</span></div></div><input class="operating-slider" type="range" min="0" max="100" value="${reductionPercent}" data-control="operating" data-department="${department.id}" ${isLocked ? "disabled" : ""}><label class="percent-entry"><input type="number" min="0" max="100" step="1" value="${reductionPercent}" data-control="operating-percent" data-department="${department.id}" ${isLocked ? "disabled" : ""}><span>%</span></label>${programsMarkup}</div>`;
   }).join("");
 }
 
@@ -641,7 +642,22 @@ function renderDepartmentServices(departmentId) {
 
 function serviceCoverageAudit() {
   const { name, data } = serviceDataSource();
-  const allDepartments = budgetData.departments || [];
+  const excludedDepartmentIds = new Set([
+    "property-appraiser",
+    "tax-collector",
+    "supervisor-of-elections",
+    "clerk-of-court",
+    "medical-examiner",
+    "south-walton-fire-district",
+    "state-attorney",
+    "public-defender",
+    "county-court",
+    "circuit-court",
+    "guardian-ad-litem",
+    "human-services",
+    "sheriff-s-office"
+  ]);
+  const allDepartments = (budgetData.departments || []).filter((department) => !excludedDepartmentIds.has(department.id));
   const serviceRows = normalizedServiceRows();
   const departmentIds = new Set(allDepartments.map((department) => department.id));
   const serviceDepartmentIds = new Set(serviceRows.map((row) => row.departmentId).filter(Boolean));
@@ -1694,6 +1710,15 @@ function init() {
 
   const toggleButton = $('[data-control="toggle-tools"]');
   if (toggleButton) toggleButton.setAttribute("aria-expanded", "false");
+
+  if (drawer) {
+    drawer.addEventListener("click", (event) => {
+      if (event.target === drawer) {
+        drawer.hidden = true;
+        toggleButton?.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 
   syncScenarioFields();
   renderDrivers();
