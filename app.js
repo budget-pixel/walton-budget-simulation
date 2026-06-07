@@ -164,11 +164,9 @@ function scenarioTotals(raw = false) {
     const operatingPercent = isLocked || constitutional(department) ? 0 : Number(state.operatingReductions[department.id] || 0);
     const personnelReduction = (fteReduction + buyoutCount) * averageCost;
     const oneTimeBuyoutCost = buyoutCount * buyoutCost;
-    const removedOperatingAmount = sumRemovedForDepartment(department.id);
-    const effectiveOperatingBudget = Math.max(department.operatingBudget - removedOperatingAmount, 0);
-    const operatingReductionAmount = Math.round(effectiveOperatingBudget * operatingPercent / 100);
+    const operatingReductionAmount = Math.round(department.operatingBudget * operatingPercent / 100);
     personnelReductions += personnelReduction;
-    operatingReductions += operatingReductionAmount + removedOperatingAmount;
+    operatingReductions += operatingReductionAmount;
     buyoutOneTimeCosts += oneTimeBuyoutCost;
     return {
       department,
@@ -181,8 +179,8 @@ function scenarioTotals(raw = false) {
       firstYearNetImpact: personnelReduction - oneTimeBuyoutCost,
       operatingReduction: operatingPercent,
       operatingReductionAmount,
-      removedOperatingAmount,
-      totalReduction: personnelReduction + operatingReductionAmount + removedOperatingAmount
+      removedOperatingAmount: 0,
+      totalReduction: personnelReduction + operatingReductionAmount
     };
   });
   const capitalReductions = budgetData.capitalProjects.reduce((total, project) => locked(project.departmentId) || state.keptProjects[project.id] ? total : total + project.cost, 0);
