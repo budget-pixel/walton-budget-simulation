@@ -1364,9 +1364,25 @@ function splitCsvList(value) {
     .filter(Boolean);
 }
 
+const serviceDepartmentAliases = {
+  "purchasing": "Procurement",
+  "geographic info system": "Geographic Info Systems",
+  "environmental resources": "Environmental Services",
+  "probation": "Probation Services",
+  "planning vacation rental certification program": "Planning"
+};
+
+const serviceWarningIgnoreDepartmentIds = new Set([
+  ...(budgetData.constitutionalOfficeIds || []),
+  ...(budgetData.excludedScenarioDepartmentIds || [])
+]);
+
 function matchDepartmentByName(name) {
   const normalized = normalizeCsvHeader(name);
+  const aliasName = serviceDepartmentAliases[normalized];
+  const normalizedAlias = normalizeCsvHeader(aliasName);
   return budgetData.departments.find((department) => normalizeCsvHeader(department.name) === normalized)
+    || budgetData.departments.find((department) => normalizeCsvHeader(department.name) === normalizedAlias)
     || budgetData.departments.find((department) => slug(department.name) === slug(name));
 }
 
@@ -1393,6 +1409,7 @@ function buildServiceWarnings(rows) {
     }
   });
   budgetData.departments.forEach((department) => {
+    if (serviceWarningIgnoreDepartmentIds.has(department.id)) return;
     if (!matchedIds.has(department.id)) warnings.push(`${department.name}: no CSV service data.`);
   });
   return warnings;
