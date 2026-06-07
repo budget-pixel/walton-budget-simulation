@@ -972,9 +972,12 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 .table-link-button:focus { color: var(--color-primary); text-decoration: underline; outline: none; }
 .selected-row td { background: var(--color-primary-soft); }
 .department-side-detail {
+  position: static;
   display: grid;
   gap: 14px;
   align-self: start;
+  max-height: none;
+  overflow: visible;
   margin-top: 0;
   margin-bottom: 0;
   padding: 18px;
