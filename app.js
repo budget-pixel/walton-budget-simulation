@@ -190,7 +190,7 @@ function buildBudgetDataFallback() {
     revenueForecast: {
       baseRevenue: adValoremSupportedExpenseBaseline,
       defaultAssumptions: {
-        fy2028RevenueReduction: 5700000
+        fy2028RevenueReduction: 6485765
       }
     },
     millageAssumptions: {
@@ -239,7 +239,7 @@ const state = {
     futureRevenueGrowthRate: 0.01,
     futureExpenseInflationRate: 0.01,
     rollbackRate: 3.3531,
-    fy2029RevenueReduction: 9700000
+    fy2029RevenueReduction: 9478842
   },
   personnelDrivers: { ...budgetData.personnelCostDrivers },
   scenarioMeta: { name: "", author: "", notes: "" },
@@ -256,7 +256,17 @@ const state = {
   operatingDetailOpen: {},
   keptProjects: {},
   keptExpenseCapitalItems: {},
-  lockedDepartments: {},
+  lockedDepartments: {
+    "board-of-county-commissioners": true,
+    "clerk-of-court": true,
+    "clerk-and-comptroller": true,
+    "clerk-of-courts-and-county-comptroller": true,
+    "tax-collector": true,
+    "property-appraiser": true,
+    "supervisor-of-elections": true,
+    "sheriffs-office": true,
+    "sheriff-s-office": true
+  },
   departmentFiscalYear: "FY2027 Budget",
   overviewFiscalYear: "FY2027 Budget",
   rankingTab: "support",
@@ -359,8 +369,29 @@ function departmentExcludedFromReductionControls(department) {
 }
 
 const reductionEligibleDepartment = (department) => department && !excluded(department) && !constitutional(department) && !departmentExcludedFromReductionControls(department);
-const operatingVisibleDepartment = (department) => reductionEligibleDepartment(department) || boardOfCountyCommissioners(department);
-const operatingEditableDepartment = (department) => reductionEligibleDepartment(department) && !boardOfCountyCommissioners(department);
+const operatingVisibleDepartment = (department) => operatingEditableDepartment(department) || boardOfCountyCommissioners(department);
+const operatingEditableDepartment = (department) => {
+  const id = normalizeBootstrapDepartmentId(
+    department?.id || department?.departmentId || department?.name
+  );
+
+  const operatingOnlyDepartments = new Set([
+    "sheriffs-office",
+    "sheriff-s-office",
+    "clerk-of-court",
+    "clerk-and-comptroller",
+    "clerk-of-courts-and-county-comptroller",
+    "property-appraiser",
+    "tax-collector",
+    "supervisor-of-elections"
+  ]);
+
+  if (operatingOnlyDepartments.has(id)) {
+    return !boardOfCountyCommissioners(department);
+  }
+
+  return reductionEligibleDepartment(department) && !boardOfCountyCommissioners(department);
+};
 
 function hideExpenseDetailForDepartment(department) {
   const id = normalizeBootstrapDepartmentId(
@@ -505,7 +536,7 @@ function fiscalYears() {
   const expenseGrowth = Number(state.revenueAssumptions.futureExpenseInflationRate || 0);
   const fy2028Reduction = Number(state.revenueAssumptions.fy2028RevenueReduction || 0);
   const fy2029Reduction = Number(state.revenueAssumptions.fy2029RevenueReduction || 0);
-  const fy2028Revenue = baseRevenue - fy2028Reduction;
+  const fy2028Revenue = baseRevenue * (1 + growth) - fy2028Reduction;
   const fy2029Revenue = fy2028Revenue * (1 + growth) - fy2029Reduction;
   const revenue = [baseRevenue, fy2028Revenue, fy2029Revenue];
   const expense = [baselineExpense];
@@ -871,7 +902,18 @@ function renderStaffRevenueControls() {
 function renderLocks() {
   const container = $("#departmentLocks");
   if (!container) return;
-  container.innerHTML = departments().sort(sortDepartments).map((department) => `<label class="lock-card ${constitutional(department) ? "constitutional-card" : ""}"><input type="checkbox" ${state.lockedDepartments[department.id] ? "checked" : ""} data-control="department-lock" data-department="${department.id}"><span>${department.name}</span></label>`).join("");
+  container.innerHTML = departments()
+    .filter((department) => {
+      const id = normalizeBootstrapDepartmentId(department.id || department.name);
+      return ![
+        "state-attorney",
+        "public-defender",
+        "county-court",
+        "circuit-court"
+      ].includes(id);
+    })
+    .sort(sortDepartments)
+    .map((department) => `<label class="lock-card ${constitutional(department) ? "constitutional-card" : ""}"><input type="checkbox" ${state.lockedDepartments[department.id] ? "checked" : ""} data-control="department-lock" data-department="${department.id}"><span>${department.name}</span></label>`).join("");
 }
 
 function renderPersonnel() {
@@ -1774,39 +1816,35 @@ function scenarioAppliesToForecastYear(year) {
   return fiscalYearNumber(year?.year) >= fiscalYearNumber(budgetData.scenarioYear);
 }
 
+function appliedScenarioReductionForYear(year) {
+  if (!state.appliedScenarioToForecast || year.historical || !scenarioAppliesToForecastYear(year)) return 0;
+
+  const recurringReduction = Number(state.appliedScenarioRecurringReductionAmount || 0);
+  const oneTimeCapitalReduction = Number(state.appliedScenarioOneTimeCapitalReductionAmount || 0);
+
+  return year.year === budgetData.scenarioYear
+    ? recurringReduction + oneTimeCapitalReduction
+    : recurringReduction;
+}
+
 function forecastYearWithAppliedScenario(year) {
-  if (!state.appliedScenarioToForecast || year.historical || !scenarioAppliesToForecastYear(year)) return year;
+  const applicableReduction = appliedScenarioReductionForYear(year);
+  if (!applicableReduction) return year;
+
   const adjustedRevenueShortfall = Math.max(
-    Number(year.revenueShortfall || 0) - Number(state.appliedScenarioReductionAmount || 0),
+    Number(year.revenueShortfall || 0) - applicableReduction,
     0
   );
-  return { ...year, revenueShortfall: adjustedRevenueShortfall };
+
+  return {
+    ...year,
+    revenueShortfall: adjustedRevenueShortfall,
+    appliedScenarioReduction: applicableReduction
+  };
 }
 
 function fiscalYearsForForecastDisplay() {
-  const recurringReduction = state.appliedScenarioToForecast
-    ? Number(state.appliedScenarioRecurringReductionAmount || 0)
-    : 0;
-
-  const oneTimeCapitalReduction = state.appliedScenarioToForecast
-    ? Number(state.appliedScenarioOneTimeCapitalReductionAmount || 0)
-    : 0;
-
-  return fiscalYears().map((year) => {
-    if (!state.appliedScenarioToForecast || year.historical || year.year < budgetData.scenarioYear) {
-      return year;
-    }
-
-    const applicableReduction = year.year === budgetData.scenarioYear
-      ? recurringReduction + oneTimeCapitalReduction
-      : recurringReduction;
-
-    return {
-      ...year,
-      revenueShortfall: Math.max(Number(year.revenueShortfall || 0) - applicableReduction, 0),
-      appliedScenarioReduction: applicableReduction
-    };
-  });
+  return fiscalYears().map(forecastYearWithAppliedScenario);
 }
 
 function forecastYearsForChart() {
@@ -1924,7 +1962,16 @@ function updateCharts() {
 
 function renderImpact() {
   const rows = scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments);
-  $("#impactTable").innerHTML = rows.map((impact) => `<tr class="${constitutional(impact.department) ? "constitutional-row" : ""} ${impact.locked ? "locked-row" : ""}"><td><strong>${impact.department.name}</strong>${impact.locked ? "<small>Locked</small>" : ""}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.totalReduction)}</td></tr>`).join("");
+  const totalFteReduction = rows.reduce((sum, impact) => sum + Number(impact.fteReduction || 0), 0);
+  const totalPersonnelReduction = rows.reduce((sum, impact) => sum + Number(impact.personnelReduction || 0), 0);
+  const totalOperatingReductionAmount = rows.reduce((sum, impact) => sum + Number(impact.operatingReductionAmount || 0), 0);
+  const totalReduction = rows.reduce((sum, impact) => sum + Number(impact.totalReduction || 0), 0);
+
+  const departmentRows = rows.map((impact) => `<tr class="${constitutional(impact.department) ? "constitutional-row" : ""} ${impact.locked ? "locked-row" : ""}"><td><strong>${impact.department.name}</strong>${impact.locked ? "<small>Locked</small>" : ""}</td><td>${number(impact.fteReduction)}</td><td>${constitutional(impact.department) ? "" : percent(impact.operatingReduction)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.totalReduction)}</td></tr>`).join("");
+
+  const totalRow = rows.length ? `<tr class="impact-total-row"><td><strong>Total</strong></td><td><strong>${number(totalFteReduction)}</strong></td><td></td><td><strong>${money(totalPersonnelReduction)}</strong></td><td><strong>${money(totalOperatingReductionAmount)}</strong></td><td><strong>${money(totalReduction)}</strong></td></tr>` : "";
+
+  $("#impactTable").innerHTML = departmentRows + totalRow;
   $("#impactTableWrap").hidden = !state.showImpactTable;
   $('[data-control="toggle-impact-table"]').textContent = state.showImpactTable ? "Show Less" : "View All";
   $("#validationWarnings").innerHTML = isStaffMode ? `<p>${Object.values(state.lockedDepartments).filter(Boolean).length} departments locked. Staff mode can exceed the shortfall and will label any surplus as Modeled Surplus.</p>` : "";
@@ -2053,6 +2100,8 @@ function scenarioSnapshot() {
     lockedDepartments: state.lockedDepartments,
     appliedScenarioToForecast: state.appliedScenarioToForecast,
     appliedScenarioReductionAmount: state.appliedScenarioReductionAmount,
+    appliedScenarioRecurringReductionAmount: state.appliedScenarioRecurringReductionAmount,
+    appliedScenarioOneTimeCapitalReductionAmount: state.appliedScenarioOneTimeCapitalReductionAmount,
     proposedMillage: state.proposedMillage,
     scenarioMeta: state.scenarioMeta,
     savedTotals: scenarioTotals()
@@ -2114,6 +2163,8 @@ function loadScenario() {
   state.lockedDepartments = { ...(saved.data.lockedDepartments || {}) };
   state.appliedScenarioToForecast = Boolean(saved.data.appliedScenarioToForecast);
   state.appliedScenarioReductionAmount = Number(saved.data.appliedScenarioReductionAmount || 0);
+  state.appliedScenarioRecurringReductionAmount = Number(saved.data.appliedScenarioRecurringReductionAmount || 0);
+  state.appliedScenarioOneTimeCapitalReductionAmount = Number(saved.data.appliedScenarioOneTimeCapitalReductionAmount || 0);
   state.proposedMillage = saved.data.proposedMillage || budgetData.millageAssumptions.adoptedMillage;
   state.scenarioMeta = { name: saved.name, author: saved.author || "", notes: saved.notes || "" };
   state.selectedScenarioName = name;
@@ -2150,6 +2201,8 @@ function resetWorkingScenario() {
   state.lockedDepartments = {};
   state.appliedScenarioToForecast = false;
   state.appliedScenarioReductionAmount = 0;
+  state.appliedScenarioRecurringReductionAmount = 0;
+  state.appliedScenarioOneTimeCapitalReductionAmount = 0;
   state.proposedMillage = budgetData.millageAssumptions.adoptedMillage;
   state.scenarioMeta = { name: "", author: "", notes: "" };
   state.selectedScenarioName = "";

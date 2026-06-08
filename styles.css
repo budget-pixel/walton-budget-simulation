@@ -390,9 +390,23 @@ button.view-all-button {
 .view-all-button:hover,
 .view-all-button:focus { background: var(--color-primary-dark); outline: none; }
 .button-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
 .table-actions { margin: 10px 0 14px; display: flex; justify-content: flex-end; }
 #impactTableWrap { padding-top: 16px; }
 .collapsed-table[hidden] { display: none; }
+
+.impact-total-row {
+  border-top: 2px solid rgba(0, 98, 49, 0.25);
+  background: rgba(0, 98, 49, 0.04);
+}
+
+.impact-total-row td {
+  font-weight: 800;
+}
+
+.impact-total-row td:first-child {
+  color: var(--color-primary-dark);
+}
 
 .scenario-meta-grid,
 .millage-grid,
