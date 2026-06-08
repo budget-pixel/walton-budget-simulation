@@ -246,6 +246,10 @@ const state = {
   fteReductions: {},
   buyoutCounts: {},
   buyoutCosts: {},
+  buyoutAssumptions: {
+    averageYearsOfService: 10,
+    incentivePerYear: 1000
+  },
   operatingReductions: {},
   bulkOperatingReductionPercent: 0,
   removedOperatingItems: {},
@@ -528,6 +532,12 @@ function scenarioYear() { return forecastYears().find((year) => year.year === bu
 function driverTotal() { return Object.values(state.personnelDrivers).reduce((total, value) => total + Number(value || 0), 0) || 1; }
 function baseDriverTotal() { return Object.values(budgetData.personnelCostDrivers).reduce((total, value) => total + value, 0) || 1; }
 function fteCost(department) { return Math.round((department.averageFteCost || 0) * driverTotal() / baseDriverTotal()); }
+function defaultBuyoutCost() {
+  return Math.round(
+    Number(state.buyoutAssumptions.averageYearsOfService || 0) *
+    Number(state.buyoutAssumptions.incentivePerYear || 0)
+  );
+}
 
 function scenarioTotals(raw = false) {
   const revenueShortfall = scenarioYear().revenueShortfall;
@@ -865,10 +875,33 @@ function renderPersonnel() {
   if (costFactors) {
     costFactors.innerHTML = `<div class="personnel-factor-compact-header"><h4>Personnel Cost Factors</h4><p>Percentage of total personnel cost.</p></div><div class="personnel-driver-grid personnel-driver-grid-compact">${personnelDriverCardsMarkup()}</div>`;
   }
+  const buyoutSettings = document.getElementById("buyoutAssumptionSettings");
+  if (buyoutSettings) {
+    buyoutSettings.innerHTML = `
+      <div class="personnel-factor-compact-header">
+        <h4>Voluntary Separation Buyout Assumption</h4>
+        <p>Default one-time buyout cost is estimated as average years of service multiplied by the incentive amount per year.</p>
+      </div>
+      <div class="personnel-driver-grid personnel-driver-grid-compact">
+        <label class="driver-card compact-driver-card">
+          <span>Average Years of Service</span>
+          <input type="number" min="0" step="1" value="${state.buyoutAssumptions.averageYearsOfService}" data-control="buyout-assumption" data-assumption="averageYearsOfService">
+        </label>
+        <label class="driver-card compact-driver-card">
+          <span>Incentive Per Year</span>
+          <input type="text" value="${moneyInput(state.buyoutAssumptions.incentivePerYear)}" data-control="buyout-assumption" data-assumption="incentivePerYear" data-format="currency">
+        </label>
+        <div class="driver-card compact-driver-card">
+          <span>Default Buyout Cost</span>
+          <strong>${money(defaultBuyoutCost())}</strong>
+        </div>
+      </div>
+    `;
+  }
   $("#personnelControls").innerHTML = departments().filter((department) => reductionEligibleDepartment(department) && department.fteCount > 0 && !department.nonFteAdjustable && department.name !== "Board of County Commissioners").sort(sortDepartments).map((department) => {
     const isLocked = locked(department.id);
     const averageCost = fteCost(department);
-    state.buyoutCosts[department.id] ??= Math.round(averageCost * 0.35);
+    state.buyoutCosts[department.id] ??= defaultBuyoutCost();
     if (isLocked) { state.fteReductions[department.id] = 0; state.buyoutCounts[department.id] = 0; }
     const recurring = (Number(state.fteReductions[department.id] || 0) + Number(state.buyoutCounts[department.id] || 0)) * averageCost;
     const oneTime = Number(state.buyoutCounts[department.id] || 0) * Number(state.buyoutCosts[department.id] || 0);
@@ -1938,6 +1971,7 @@ function scenarioSnapshot() {
     fteReductions: state.fteReductions,
     buyoutCounts: state.buyoutCounts,
     buyoutCosts: state.buyoutCosts,
+    buyoutAssumptions: state.buyoutAssumptions,
     operatingReductions: state.operatingReductions,
     bulkOperatingReductionPercent: state.bulkOperatingReductionPercent,
     removedOperatingItems: state.removedOperatingItems,
@@ -1992,6 +2026,11 @@ function loadScenario() {
   state.fteReductions = { ...(saved.data.fteReductions || {}) };
   state.buyoutCounts = { ...(saved.data.buyoutCounts || {}) };
   state.buyoutCosts = { ...(saved.data.buyoutCosts || {}) };
+  state.buyoutAssumptions = {
+    averageYearsOfService: 10,
+    incentivePerYear: 1000,
+    ...(saved.data.buyoutAssumptions || {})
+  };
   state.operatingReductions = { ...(saved.data.operatingReductions || {}) };
   state.bulkOperatingReductionPercent = Number(saved.data.bulkOperatingReductionPercent || 0);
   state.removedOperatingItems = { ...(saved.data.removedOperatingItems || {}) };
@@ -2022,6 +2061,10 @@ function resetWorkingScenario() {
   state.fteReductions = {};
   state.buyoutCounts = {};
   state.buyoutCosts = {};
+  state.buyoutAssumptions = {
+    averageYearsOfService: 10,
+    incentivePerYear: 1000
+  };
   state.operatingReductions = {};
   state.bulkOperatingReductionPercent = 0;
   state.removedOperatingItems = {};
@@ -2131,6 +2174,10 @@ function rerender() {
   renderScenarioManager();
   setupScenarioAccordions();
   updateResults();
+}
+
+function render() {
+  rerender();
 }
 
 const serviceAreaConfig = window.serviceAreaMappings || { serviceAreas: [], departmentMappings: {} };
@@ -2456,17 +2503,36 @@ document.addEventListener("input", (event) => {
   if (control === "fte") {
     const department = departmentById(id);
     state.fteReductions[id] = capPublicFte(department, Number(event.target.value || 0));
-    updateResults();
+    render();
+    return;
   }
   if (control === "buyout-count") {
     const department = departmentById(id);
     state.buyoutCounts[id] = capPublicBuyout(department, Number(event.target.value || 0));
-    updateResults();
+    render();
+    return;
   }
   if (control === "buyout-cost") {
     if (!reductionEligibleDepartment(departmentById(id))) return;
     state.buyoutCosts[id] = parseMoney(event.target.value);
-    updateResults();
+    render();
+    return;
+  }
+  if (control === "buyout-assumption") {
+    const assumption = event.target.dataset.assumption;
+    const value = event.target.dataset.format === "currency"
+      ? parseMoney(event.target.value)
+      : Number(event.target.value || 0);
+
+    state.buyoutAssumptions[assumption] = Math.max(value, 0);
+
+    const updatedDefault = defaultBuyoutCost();
+    departments().forEach((department) => {
+      state.buyoutCosts[department.id] = updatedDefault;
+    });
+
+    rerender();
+    return;
   }
   if (control === "operating") {
     const department = departmentById(id);
@@ -2593,7 +2659,7 @@ document.addEventListener("click", (event) => {
     renderCapital();
     updateResults();
   }
-  if (control === "export-rankings") csv("department-rankings.csv", ["Department", "Ad Valorem Support", "FTE", "Budget"], sortedRankingRows().map((row) => [row.name, money(row.support), number(row.fte), money(row.budget)]));
+  if (control === "export-rankings") csv("department-detail.csv", ["Department", "Ad Valorem Support", "FTE", "Budget"], sortedRankingRows().map((row) => [row.name, money(row.support), number(row.fte), money(row.budget)]));
   if (control === "export-impact") csv("scenario-impact.csv", ["Department", "FTE Reduced", "Operating Reduction", "Personnel Reduction", "Operating Reduction Amount", "Total Department Reduction"], scenarioTotals().departmentImpacts.filter((impact) => !excluded(impact.department)).sort(sortDepartments).map((impact) => [impact.department.name, number(impact.fteReduction), constitutional(impact.department) ? "" : percent(impact.operatingReduction), money(impact.personnelReduction), money(impact.operatingReductionAmount), money(impact.totalReduction)]));
   if (control === "export-pdf") exportPdf();
   if (control === "export-service-areas") exportServiceAreaDraft();

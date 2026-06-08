@@ -89,6 +89,7 @@
       accountName: ["account name", "accountname"],
       description: ["description"],
       itemization: ["period 1 itemizations", "period 1 itemization", "itemizations", "itemization"],
+      worksheet: ["worksheet", "worksheets", "sheet", "tab"],
       amount: ["period 1 proposed", "2027 proposed budget", "proposed budget", "amount"]
     };
     const categoryForCode = (code) => codeToCategory[String(code || "").trim()] || "Uncategorized";
@@ -166,52 +167,25 @@
         .trim();
     }
 
-    async function rowsFromFile(file){
-      const buffer = await file.arrayBuffer();
-      const fileName = String(file?.name || "").toLowerCase();
+    function proposalFromRow(row, fields) {
+      const worksheetName = fields.worksheet >= 0 ? String(row[fields.worksheet] || "").trim() : "";
+      const normalizedWorksheet = normalizeSheetName(worksheetName);
+      const rawProposal = String(row[fields.proposal] || "").trim();
 
-      if (!fileName.endsWith(".xlsx") && !fileName.endsWith(".xls") && !fileName.endsWith(".xlsm") || !window.XLSX) {
-        return await rowsFromBuffer(buffer);
+      if (normalizedWorksheet === "court technology public defender") {
+        return "Public Defender";
       }
 
-      const workbook = XLSX.read(buffer, { type: "array" });
-      const budgetSheetName = workbook.SheetNames.find((sheetName) => normalizeSheetName(sheetName) === "budget") || workbook.SheetNames[0];
-      const budgetRows = XLSX.utils.sheet_to_json(workbook.Sheets[budgetSheetName], {
-        header: 1,
-        defval: "",
-        blankrows: false,
-        raw: false
-      }).filter((row) => Array.isArray(row) && row.some((cell) => String(cell || "").trim()));
+      if (normalizedWorksheet === "court technology state attorney") {
+        return "State Attorney";
+      }
 
-      if (!budgetRows.length) return budgetRows;
+      return rawProposal;
+    }
 
-      const header = budgetRows[0];
-      const fields = mapFields(header, requiredColumns);
-      const combinedRows = budgetRows.slice();
-      const specialSheets = [
-        { match: "court technology public defender", proposal: "Public Defender" },
-        { match: "court technology state attorney", proposal: "State Attorney" }
-      ];
-
-      specialSheets.forEach((specialSheet) => {
-        const sheetName = workbook.SheetNames.find((name) => normalizeSheetName(name) === specialSheet.match);
-        if (!sheetName || !workbook.Sheets[sheetName] || fields.proposal < 0) return;
-
-        const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
-          header: 1,
-          defval: "",
-          blankrows: false,
-          raw: false
-        }).filter((row) => Array.isArray(row) && row.some((cell) => String(cell || "").trim()));
-
-        rows.slice(1).forEach((row) => {
-          const clonedRow = row.slice();
-          clonedRow[fields.proposal] = specialSheet.proposal;
-          combinedRows.push(clonedRow);
-        });
-      });
-
-      return combinedRows;
+    async function rowsFromFile(file){
+      const buffer = await file.arrayBuffer();
+      return await rowsFromBuffer(buffer);
     }
 
     function convertRows(rows) {
@@ -219,7 +193,7 @@
 
       const fields = mapFields(rows[0], requiredColumns);
       const missing = Object.entries(fields)
-        .filter(([field, column]) => field !== "itemization" && column < 0)
+        .filter(([field, column]) => !["itemization", "worksheet"].includes(field) && column < 0)
         .map(([field]) => field);
 
       if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
@@ -228,7 +202,7 @@
 
       const rowsWithItemizations = new Set();
       rows.slice(1).forEach((row) => {
-        const rawProposal = String(row[fields.proposal] || "").trim();
+        const rawProposal = proposalFromRow(row, fields);
         if (!rawProposal) return;
         if (shouldExcludeDepartment(rawProposal)) return;
 
@@ -247,7 +221,7 @@
       const unmatchedCodes = new Set();
 
       rows.slice(1).forEach((row) => {
-        const rawProposal = String(row[fields.proposal] || "").trim();
+        const rawProposal = proposalFromRow(row, fields);
         if (!rawProposal) return;
         if (shouldExcludeDepartment(rawProposal)) return;
 

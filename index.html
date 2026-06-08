@@ -310,6 +310,7 @@
               </div>
             </div>
             <div id="personnelCostFactorsInline" class="personnel-driver-inline"></div>
+            <div id="buyoutAssumptionSettings" class="panel-inline-section"></div>
             <div class="table-scroll">
               <table>
                 <thead>
@@ -355,6 +356,34 @@
             </div>
             <div id="capitalControls" class="project-grid"></div>
           </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Scenario Reductions</p>
+                <h3>Department Impact Table</h3>
+              </div>
+              <div class="button-row">
+                <button type="button" class="view-all-button" data-control="toggle-impact-table">View All</button>
+                <button type="button" class="view-all-button" data-control="export-impact">Export</button>
+              </div>
+            </div>
+            <div class="table-scroll collapsed-table" id="impactTableWrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Department</th>
+                    <th>FTE Reduced</th>
+                    <th>Operating Reduction</th>
+                    <th>Personnel Reduction</th>
+                    <th>Operating Reduction Amount</th>
+                    <th>Total Department Reduction</th>
+                  </tr>
+                </thead>
+                <tbody id="impactTable"></tbody>
+              </table>
+            </div>
+          </article>
         </div>
 
         <aside class="results-panel" aria-label="Real time scenario results">
@@ -397,34 +426,6 @@
           </div>
         </aside>
       </div>
-
-      <article class="panel">
-        <div class="panel-header">
-          <div>
-            <p class="eyebrow">Scenario Reductions</p>
-            <h3>Department Impact Table</h3>
-          </div>
-          <div class="button-row">
-            <button type="button" class="view-all-button" data-control="toggle-impact-table">View All</button>
-            <button type="button" class="view-all-button" data-control="export-impact">Export</button>
-          </div>
-        </div>
-        <div class="table-scroll collapsed-table" id="impactTableWrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Department</th>
-                <th>FTE Reduced</th>
-                <th>Operating Reduction</th>
-                <th>Personnel Reduction</th>
-                <th>Operating Reduction Amount</th>
-                <th>Total Department Reduction</th>
-              </tr>
-            </thead>
-            <tbody id="impactTable"></tbody>
-          </table>
-        </div>
-      </article>
     </section>
 
 

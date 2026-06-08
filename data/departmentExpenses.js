@@ -11256,42 +11256,24 @@ window.wcDepartmentExpenses = [
   },
   {
     "department": "Public Defender",
-    "total": 36000,
+    "total": 290833,
     "categories": [
       {
-        "category": "Communications & Technology",
-        "amount": 27000,
-        "percent": 75,
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 222793,
+        "percent": 76.6,
         "items": [
           {
             "proposal": "Public Defender",
             "type": "Expenses",
-            "accountCode": "541000",
-            "accountName": "Communication Services",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
             "description": "",
             "itemization": 0,
-            "proposedAmount": 25000,
-            "amount": 25000,
-            "category": "Communications & Technology"
+            "proposedAmount": 214293,
+            "amount": 214293,
+            "category": "Facilities, Utilities & Maintenance"
           },
-          {
-            "proposal": "Public Defender",
-            "type": "Expenses",
-            "accountCode": "554000",
-            "accountName": "Books, Publications, Subscriptions, or Memberships",
-            "description": "Annual Subscription for ZOHO Corporation Manage Engine",
-            "itemization": 0,
-            "proposedAmount": 2000,
-            "amount": 2000,
-            "category": "Communications & Technology"
-          }
-        ]
-      },
-      {
-        "category": "Facilities, Utilities & Maintenance",
-        "amount": 8500,
-        "percent": 23.6,
-        "items": [
           {
             "proposal": "Public Defender",
             "type": "Expenses",
@@ -11317,10 +11299,61 @@ window.wcDepartmentExpenses = [
         ]
       },
       {
-        "category": "Supplies & Fuel",
-        "amount": 500,
-        "percent": 1.4,
+        "category": "Communications & Technology",
+        "amount": 45000,
+        "percent": 15.5,
         "items": [
+          {
+            "proposal": "Public Defender",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 18000,
+            "amount": 18000,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Public Defender",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 25000,
+            "amount": 25000,
+            "category": "Communications & Technology"
+          },
+          {
+            "proposal": "Public Defender",
+            "type": "Expenses",
+            "accountCode": "554000",
+            "accountName": "Books, Publications, Subscriptions, or Memberships",
+            "description": "Annual Subscription for ZOHO Corporation Manage Engine",
+            "itemization": 0,
+            "proposedAmount": 2000,
+            "amount": 2000,
+            "category": "Communications & Technology"
+          }
+        ]
+      },
+      {
+        "category": "Supplies & Fuel",
+        "amount": 23040,
+        "percent": 7.9,
+        "items": [
+          {
+            "proposal": "Public Defender",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 22540,
+            "amount": 22540,
+            "category": "Supplies & Fuel"
+          },
           {
             "proposal": "Public Defender",
             "type": "Expenses",
@@ -11336,6 +11369,39 @@ window.wcDepartmentExpenses = [
       }
     ],
     "items": [
+      {
+        "proposal": "Public Defender",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "itemization": 0,
+        "proposedAmount": 18000,
+        "amount": 18000,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "Public Defender",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "",
+        "itemization": 0,
+        "proposedAmount": 214293,
+        "amount": 214293,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "Public Defender",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "itemization": 0,
+        "proposedAmount": 22540,
+        "amount": 22540,
+        "category": "Supplies & Fuel"
+      },
       {
         "proposal": "Public Defender",
         "type": "Expenses",
@@ -12711,13 +12777,53 @@ window.wcDepartmentExpenses = [
   },
   {
     "department": "State Attorney",
-    "total": 25000,
+    "total": 322111,
     "categories": [
       {
-        "category": "Facilities, Utilities & Maintenance",
-        "amount": 12000,
-        "percent": 48,
+        "category": "Supplies & Fuel",
+        "amount": 245348,
+        "percent": 76.2,
         "items": [
+          {
+            "proposal": "State Attorney",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 242348,
+            "amount": 242348,
+            "category": "Supplies & Fuel"
+          },
+          {
+            "proposal": "State Attorney",
+            "type": "Expenses",
+            "accountCode": "552000",
+            "accountName": "Operating Supplies",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 3000,
+            "amount": 3000,
+            "category": "Supplies & Fuel"
+          }
+        ]
+      },
+      {
+        "category": "Facilities, Utilities & Maintenance",
+        "amount": 55403,
+        "percent": 17.2,
+        "items": [
+          {
+            "proposal": "State Attorney",
+            "type": "Expenses",
+            "accountCode": "546000",
+            "accountName": "Repair & Maintenance",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 43403,
+            "amount": 43403,
+            "category": "Facilities, Utilities & Maintenance"
+          },
           {
             "proposal": "State Attorney",
             "type": "Expenses",
@@ -12733,9 +12839,20 @@ window.wcDepartmentExpenses = [
       },
       {
         "category": "Communications & Technology",
-        "amount": 10000,
-        "percent": 40,
+        "amount": 21360,
+        "percent": 6.6,
         "items": [
+          {
+            "proposal": "State Attorney",
+            "type": "Expenses",
+            "accountCode": "541000",
+            "accountName": "Communication Services",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 11360,
+            "amount": 11360,
+            "category": "Communications & Technology"
+          },
           {
             "proposal": "State Attorney",
             "type": "Expenses",
@@ -12748,27 +12865,42 @@ window.wcDepartmentExpenses = [
             "category": "Communications & Technology"
           }
         ]
-      },
-      {
-        "category": "Supplies & Fuel",
-        "amount": 3000,
-        "percent": 12,
-        "items": [
-          {
-            "proposal": "State Attorney",
-            "type": "Expenses",
-            "accountCode": "552000",
-            "accountName": "Operating Supplies",
-            "description": "",
-            "itemization": 0,
-            "proposedAmount": 3000,
-            "amount": 3000,
-            "category": "Supplies & Fuel"
-          }
-        ]
       }
     ],
     "items": [
+      {
+        "proposal": "State Attorney",
+        "type": "Expenses",
+        "accountCode": "541000",
+        "accountName": "Communication Services",
+        "description": "",
+        "itemization": 0,
+        "proposedAmount": 11360,
+        "amount": 11360,
+        "category": "Communications & Technology"
+      },
+      {
+        "proposal": "State Attorney",
+        "type": "Expenses",
+        "accountCode": "546000",
+        "accountName": "Repair & Maintenance",
+        "description": "",
+        "itemization": 0,
+        "proposedAmount": 43403,
+        "amount": 43403,
+        "category": "Facilities, Utilities & Maintenance"
+      },
+      {
+        "proposal": "State Attorney",
+        "type": "Expenses",
+        "accountCode": "552000",
+        "accountName": "Operating Supplies",
+        "description": "",
+        "itemization": 0,
+        "proposedAmount": 242348,
+        "amount": 242348,
+        "category": "Supplies & Fuel"
+      },
       {
         "proposal": "State Attorney",
         "type": "Expenses",
