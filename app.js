@@ -266,6 +266,10 @@ const state = {
   showAllTopServices: false,
   showAllRankings: false,
   showImpactTable: false,
+  appliedScenarioToForecast: false,
+  appliedScenarioReductionAmount: 0,
+  appliedScenarioRecurringReductionAmount: 0,
+  appliedScenarioOneTimeCapitalReductionAmount: 0,
   proposedMillage: budgetData.millageAssumptions.adoptedMillage,
   selectedScenarioName: "",
   serviceAreaDraft: [],
@@ -1762,14 +1766,74 @@ function renderAssumptions() {
   ].map((item) => `<div class="formula-item"><code>${item}</code></div>`).join("");
 }
 
+function fiscalYearNumber(year) {
+  return Number(String(year || "").replace(/[^0-9]/g, "")) || 0;
+}
+
+function scenarioAppliesToForecastYear(year) {
+  return fiscalYearNumber(year?.year) >= fiscalYearNumber(budgetData.scenarioYear);
+}
+
+function forecastYearWithAppliedScenario(year) {
+  if (!state.appliedScenarioToForecast || year.historical || !scenarioAppliesToForecastYear(year)) return year;
+  const adjustedRevenueShortfall = Math.max(
+    Number(year.revenueShortfall || 0) - Number(state.appliedScenarioReductionAmount || 0),
+    0
+  );
+  return { ...year, revenueShortfall: adjustedRevenueShortfall };
+}
+
+function fiscalYearsForForecastDisplay() {
+  const recurringReduction = state.appliedScenarioToForecast
+    ? Number(state.appliedScenarioRecurringReductionAmount || 0)
+    : 0;
+
+  const oneTimeCapitalReduction = state.appliedScenarioToForecast
+    ? Number(state.appliedScenarioOneTimeCapitalReductionAmount || 0)
+    : 0;
+
+  return fiscalYears().map((year) => {
+    if (!state.appliedScenarioToForecast || year.historical || year.year < budgetData.scenarioYear) {
+      return year;
+    }
+
+    const applicableReduction = year.year === budgetData.scenarioYear
+      ? recurringReduction + oneTimeCapitalReduction
+      : recurringReduction;
+
+    return {
+      ...year,
+      revenueShortfall: Math.max(Number(year.revenueShortfall || 0) - applicableReduction, 0),
+      appliedScenarioReduction: applicableReduction
+    };
+  });
+}
+
+function forecastYearsForChart() {
+  return fiscalYearsForForecastDisplay().filter((year) => !year.historical);
+}
+
+function projectedSupportedExpenseForForecastDisplay(year) {
+  if (!state.appliedScenarioToForecast || year.historical || !scenarioAppliesToForecastYear(year)) {
+    return year.projectedSupportedExpense;
+  }
+  return Math.min(
+    Number(year.projectedSupportedExpense || 0),
+    Number(year.revenue || 0) + Number(year.revenueShortfall || 0)
+  );
+}
+
 function shortfallComponents() {
   const directReductionByYear = {
     FY2028: Number(state.revenueAssumptions.fy2028RevenueReduction || 0),
     FY2029: Number(state.revenueAssumptions.fy2029RevenueReduction || 0)
   };
 
-  return forecastYears().filter((year) => year.year !== "FY2027").map((year) => {
-    const directRevenueReduction = Number(directReductionByYear[year.year] || 0);
+  return forecastYearsForChart().filter((year) => year.year !== "FY2027").map((year) => {
+    const baseDirectRevenueReduction = Number(directReductionByYear[year.year] || 0);
+    const directRevenueReduction = state.appliedScenarioToForecast
+      ? Math.min(baseDirectRevenueReduction, Number(year.revenueShortfall || 0))
+      : baseDirectRevenueReduction;
     const expenseInflationPressure = Math.max(year.revenueShortfall - directRevenueReduction, 0);
     return { ...year, directRevenueReduction, expenseInflationPressure };
   });
@@ -1778,7 +1842,7 @@ function shortfallComponents() {
 function renderForecast() {
   const table = $("#forecastTable");
   if (!table) return;
-  table.innerHTML = fiscalYears().map((year) => `<tr><td><strong>${year.year}</strong></td><td>${money(year.revenue)}</td><td>${year.historicalSupportedExpense == null ? money(year.projectedSupportedExpense) : money(year.historicalSupportedExpense)}</td><td>${year.type}</td><td class="${!year.historical && year.revenueShortfall ? "negative-value" : ""}">${year.historical ? "-" : year.revenueShortfall ? negativeMoney(year.revenueShortfall) : "$0"}</td></tr>`).join("");
+  table.innerHTML = fiscalYearsForForecastDisplay().map((year) => `<tr><td><strong>${year.year}</strong></td><td>${money(year.revenue)}</td><td>${year.historicalSupportedExpense == null ? money(year.projectedSupportedExpense) : money(year.historicalSupportedExpense)}</td><td>${year.type}</td><td class="${!year.historical && year.revenueShortfall ? "negative-value" : ""}">${year.historical ? "-" : year.revenueShortfall ? negativeMoney(year.revenueShortfall) : "$0"}</td></tr>`).join("");
 }
 
 function chartOptions(bar = false, stacked = false) {
@@ -1815,7 +1879,7 @@ function chartOptions(bar = false, stacked = false) {
 
 function renderCharts() {
   if (!window.Chart || !$("#trendChart") || !$("#shortfallChart")) return;
-  const forecast = forecastYears();
+  const forecast = forecastYearsForChart();
   const components = shortfallComponents();
   Chart.defaults.font.family = "Arial, Helvetica, sans-serif";
   trendChart = new Chart($("#trendChart"), {
@@ -1832,7 +1896,7 @@ function renderCharts() {
         },
         {
           label: "Projected Expenses",
-          data: forecast.map((year) => year.projectedSupportedExpense),
+          data: forecast.map(projectedSupportedExpenseForForecastDisplay),
           borderColor: "#d1be78",
           backgroundColor: "#d1be78"
         }
@@ -1845,11 +1909,11 @@ function renderCharts() {
 
 function updateCharts() {
   if (!trendChart || !shortfallChart) return;
-  const forecast = forecastYears();
+  const forecast = forecastYearsForChart();
   const components = shortfallComponents();
   trendChart.data.labels = forecast.map((year) => year.year);
   trendChart.data.datasets[0].data = forecast.map((year) => year.revenue);
-  trendChart.data.datasets[1].data = forecast.map((year) => year.projectedSupportedExpense);
+  trendChart.data.datasets[1].data = forecast.map(projectedSupportedExpenseForForecastDisplay);
   trendChart.update();
   shortfallChart.data.labels = components.map((year) => year.year);
   shortfallChart.data.datasets[0].data = components.map((year) => year.directRevenueReduction);
@@ -1919,15 +1983,18 @@ function updateResults() {
   const addressed = totals.revenueShortfall ? Math.min(totals.totalReductions / totals.revenueShortfall * 100, 100) : 100;
   const heroShortfall = $("#heroRevenueShortfall");
   const heroNextShortfall = $("#heroRevenueShortfallNext");
-  const fy2028Forecast = forecastYears().find((year) => year.year === "FY2028");
-  const fy2029Forecast = forecastYears().find((year) => year.year === "FY2029");
+  const heroForecastYears = fiscalYearsForForecastDisplay();
+  const fy2028Forecast = heroForecastYears.find((year) => year.year === "FY2028");
+  const fy2029Forecast = heroForecastYears.find((year) => year.year === "FY2029");
   if (heroShortfall && fy2028Forecast) {
-    heroShortfall.textContent = fy2028Forecast.revenueShortfall ? negativeMoney(fy2028Forecast.revenueShortfall) : "$0";
-    heroShortfall.classList.add("negative-value");
+    const shortfall = Number(fy2028Forecast.revenueShortfall || 0);
+    heroShortfall.textContent = shortfall ? negativeMoney(shortfall) : "$0";
+    heroShortfall.classList.toggle("negative-value", shortfall > 0);
   }
   if (heroNextShortfall && fy2029Forecast) {
-    heroNextShortfall.textContent = fy2029Forecast.revenueShortfall ? negativeMoney(fy2029Forecast.revenueShortfall) : "$0";
-    heroNextShortfall.classList.add("negative-value");
+    const shortfall = Number(fy2029Forecast.revenueShortfall || 0);
+    heroNextShortfall.textContent = shortfall ? negativeMoney(shortfall) : "$0";
+    heroNextShortfall.classList.toggle("negative-value", shortfall > 0);
   }
   ["#startingShortfall", "#resultRevenueShortfall"].forEach((selector) => {
     const element = $(selector);
@@ -1947,6 +2014,12 @@ function updateResults() {
   $("#shortfallProgress").style.width = `${addressed}%`;
   $("#budgetStatus").className = `status-banner ${totals.remainingShortfall ? "status-deficit" : "status-balanced"}`;
   $("#budgetStatus").textContent = totals.remainingShortfall ? `${money(totals.remainingShortfall)} revenue shortfall remaining` : isStaffMode && totals.surplus ? `${money(totals.surplus)} Modeled Surplus` : "Balanced scenario: remaining revenue shortfall is $0";
+  const appliedForecastReduction = $("#appliedForecastReduction");
+  if (appliedForecastReduction) {
+    appliedForecastReduction.textContent = state.appliedScenarioToForecast
+      ? `Applied forecast reduction: ${money(state.appliedScenarioReductionAmount)}`
+      : "";
+  }
   updateCharts();
   renderForecast();
   renderMillage();
@@ -1978,6 +2051,8 @@ function scenarioSnapshot() {
     keptProjects: state.keptProjects,
     keptExpenseCapitalItems: state.keptExpenseCapitalItems,
     lockedDepartments: state.lockedDepartments,
+    appliedScenarioToForecast: state.appliedScenarioToForecast,
+    appliedScenarioReductionAmount: state.appliedScenarioReductionAmount,
     proposedMillage: state.proposedMillage,
     scenarioMeta: state.scenarioMeta,
     savedTotals: scenarioTotals()
@@ -2037,6 +2112,8 @@ function loadScenario() {
   state.keptProjects = { ...(saved.data.keptProjects || {}) };
   state.keptExpenseCapitalItems = { ...(saved.data.keptExpenseCapitalItems || {}) };
   state.lockedDepartments = { ...(saved.data.lockedDepartments || {}) };
+  state.appliedScenarioToForecast = Boolean(saved.data.appliedScenarioToForecast);
+  state.appliedScenarioReductionAmount = Number(saved.data.appliedScenarioReductionAmount || 0);
   state.proposedMillage = saved.data.proposedMillage || budgetData.millageAssumptions.adoptedMillage;
   state.scenarioMeta = { name: saved.name, author: saved.author || "", notes: saved.notes || "" };
   state.selectedScenarioName = name;
@@ -2071,6 +2148,8 @@ function resetWorkingScenario() {
   state.keptProjects = {};
   state.keptExpenseCapitalItems = {};
   state.lockedDepartments = {};
+  state.appliedScenarioToForecast = false;
+  state.appliedScenarioReductionAmount = 0;
   state.proposedMillage = budgetData.millageAssumptions.adoptedMillage;
   state.scenarioMeta = { name: "", author: "", notes: "" };
   state.selectedScenarioName = "";
@@ -2686,6 +2765,15 @@ document.addEventListener("click", (event) => {
   if (control === "delete-scenario") deleteScenario();
   if (control === "reset-scenario") resetWorkingScenario();
   if (control === "reset-millage" && isStaffMode) { state.proposedMillage = budgetData.millageAssumptions.adoptedMillage; updateResults(); }
+  if (control === "apply-scenario-to-forecast") {
+    const totals = scenarioTotals(true);
+    state.appliedScenarioToForecast = true;
+    state.appliedScenarioReductionAmount = Number(totals.actualTotalReductions || 0);
+    state.appliedScenarioRecurringReductionAmount = Number(totals.personnelReductions || 0) + Number(totals.operatingReductions || 0);
+    state.appliedScenarioOneTimeCapitalReductionAmount = Number(totals.capitalReductions || 0);
+    render();
+    document.querySelector("#overview")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
   if (control === "apply-bulk-operating") {
     const value = Math.min(Math.max(Number(state.bulkOperatingReductionPercent || 0), 0), 100);
     state.bulkOperatingReductionPercent = value;

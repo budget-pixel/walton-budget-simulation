@@ -285,6 +285,9 @@ input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-pr
 .allocation-breakdown { margin-top: 18px; display: grid; gap: 8px; }
 .allocation-breakdown div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; background: var(--color-surface-muted); border-radius: var(--radius-small); }
 .allocation-breakdown span { color: var(--color-text-muted); font-weight: 800; }
+.scenario-forecast-action { display: grid; gap: 8px; margin-top: 18px; }
+.scenario-forecast-note { margin: 0; color: var(--color-text-muted); font-size: 0.82rem; line-height: 1.35; }
+.apply-forecast-button { width: 100%; }
 
 .ranked-bars { display: grid; gap: 12px; }
 .rank-bar-row { display: grid; gap: 8px; }
