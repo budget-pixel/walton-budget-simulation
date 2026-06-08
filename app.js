@@ -1425,7 +1425,34 @@ function departmentExemptFromServiceDiagnostic(department) {
   const name = String(department?.name || department?.department || "").toLowerCase();
   return id === "statutory-and-other-agency-funding" ||
     id === "statutory-other-agency-funding" ||
-    name.includes("statutory") && name.includes("agency funding");
+    id === "clerk-of-courts-and-county-comptroller" ||
+    id === "clerk-of-court" ||
+    id === "clerk-and-comptroller" ||
+    id === "court-technology" ||
+    id === "sheriffs-office" ||
+    id === "sheriff-s-office" ||
+    id === "south-walton-fire-and-state-control" ||
+    id === "south-walton-fire-district" ||
+    id === "state-attorney-facility" ||
+    id === "state-attorney" ||
+    id === "total-ad-valorem-rev" ||
+    id === "veteran-services" ||
+    id === "walton-county-health-deparment" ||
+    id === "walton-county-health-department" ||
+    id === "health-department" ||
+    (name.includes("statutory") && name.includes("agency funding")) ||
+    name.includes("clerk of courts") ||
+    name.includes("clerk of court") ||
+    name.includes("clerk") && name.includes("comptroller") ||
+    name.includes("court technology") ||
+    name.includes("sheriff") ||
+    name.includes("south walton fire") ||
+    name.includes("state attorney") ||
+    name.includes("total ad valorem") ||
+    name.includes("veteran services") ||
+    name.includes("walton county health deparment") ||
+    name.includes("walton county health department") ||
+    name.includes("health department");
 }
 
 function serviceCoverageAudit() {
@@ -1443,10 +1470,21 @@ function serviceCoverageAudit() {
     "circuit-court",
     "guardian-ad-litem",
     "human-services",
-    "sheriff-s-office"
+    "sheriff-s-office",
+    "clerk-of-courts-and-county-comptroller",
+    "clerk-and-comptroller",
+    "court-technology",
+    "sheriffs-office",
+    "south-walton-fire-and-state-control",
+    "state-attorney-facility",
+    "total-ad-valorem-rev",
+    "veteran-services",
+    "walton-county-health-deparment",
+    "walton-county-health-department",
+    "health-department"
   ]);
   const budgetDepartmentMap = new Map((budgetData.departments || []).map((department) => [department.id, department]));
-  const allDepartments = expectedDiagnosticDepartments().filter((department) => !excludedDepartmentIds.has(department.id));
+  const allDepartments = expectedDiagnosticDepartments();
   const serviceRows = normalizedServiceRows();
   const departmentIds = new Set(allDepartments.map((department) => department.id));
   const serviceDepartmentIds = new Set(serviceRows.map((row) => row.departmentId).filter(Boolean));

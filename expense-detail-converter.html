@@ -123,8 +123,8 @@
         "mossy head wastewater treatment facility",
         "mosquito control state aid",
         "court innovations",
-        "Guardian Ad Litem",
-        "Court Technology",
+        "guardian ad litem",
+        "court technology"
       ]);
 
       return exactExclusions.has(normalized) ||
@@ -149,13 +149,69 @@
           normalized.includes("planning vacation rental certification")) {
         return "Planning";
       }
+      if (normalized === "state attorney facility") {
+        return "State Attorney";
+      }
 
       return String(proposal || "").trim();
     }
 
+    function normalizeSheetName(value) {
+      return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
     async function rowsFromFile(file){
       const buffer = await file.arrayBuffer();
-      return await rowsFromBuffer(buffer);
+      const fileName = String(file?.name || "").toLowerCase();
+
+      if (!fileName.endsWith(".xlsx") && !fileName.endsWith(".xls") && !fileName.endsWith(".xlsm") || !window.XLSX) {
+        return await rowsFromBuffer(buffer);
+      }
+
+      const workbook = XLSX.read(buffer, { type: "array" });
+      const budgetSheetName = workbook.SheetNames.find((sheetName) => normalizeSheetName(sheetName) === "budget") || workbook.SheetNames[0];
+      const budgetRows = XLSX.utils.sheet_to_json(workbook.Sheets[budgetSheetName], {
+        header: 1,
+        defval: "",
+        blankrows: false,
+        raw: false
+      }).filter((row) => Array.isArray(row) && row.some((cell) => String(cell || "").trim()));
+
+      if (!budgetRows.length) return budgetRows;
+
+      const header = budgetRows[0];
+      const fields = mapFields(header, requiredColumns);
+      const combinedRows = budgetRows.slice();
+      const specialSheets = [
+        { match: "court technology public defender", proposal: "Public Defender" },
+        { match: "court technology state attorney", proposal: "State Attorney" }
+      ];
+
+      specialSheets.forEach((specialSheet) => {
+        const sheetName = workbook.SheetNames.find((name) => normalizeSheetName(name) === specialSheet.match);
+        if (!sheetName || !workbook.Sheets[sheetName] || fields.proposal < 0) return;
+
+        const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {
+          header: 1,
+          defval: "",
+          blankrows: false,
+          raw: false
+        }).filter((row) => Array.isArray(row) && row.some((cell) => String(cell || "").trim()));
+
+        rows.slice(1).forEach((row) => {
+          const clonedRow = row.slice();
+          clonedRow[fields.proposal] = specialSheet.proposal;
+          combinedRows.push(clonedRow);
+        });
+      });
+
+      return combinedRows;
     }
 
     function convertRows(rows) {

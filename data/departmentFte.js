@@ -1,6 +1,6 @@
 window.departmentFte = {
   "version": 1,
-  "generatedAt": "2026-06-07T21:27:28.124Z",
+  "generatedAt": "2026-06-08T01:50:13.415Z",
   "departments": {
     "sheriff-s-office": {
       "department": "Sheriff's Office",
@@ -14,6 +14,26 @@ window.departmentFte = {
       "department": "Building Construction and Maintenance",
       "fte": 68
     },
+    "medical-examiner": {
+      "department": "Medical Examiner",
+      "fte": 0
+    },
+    "public-defender": {
+      "department": "Public Defender",
+      "fte": 0
+    },
+    "state-attorney": {
+      "department": "State Attorney",
+      "fte": 0
+    },
+    "circuit-court": {
+      "department": "Circuit Court",
+      "fte": 0
+    },
+    "county-court": {
+      "department": "County Court",
+      "fte": 0
+    },
     "tax-collector": {
       "department": "Tax Collector",
       "fte": 40
@@ -22,9 +42,13 @@ window.departmentFte = {
       "department": "Planning",
       "fte": 47
     },
-    "clerk-of-court": {
-      "department": "Clerk of Court",
+    "clerk-of-courts-and-county-comptroller": {
+      "department": "Clerk of Courts & County Comptroller",
       "fte": 80
+    },
+    "walton-county-health-deparment": {
+      "department": "Walton County Health Deparment",
+      "fte": 0
     },
     "property-appraiser": {
       "department": "Property Appraiser",
@@ -94,6 +118,10 @@ window.departmentFte = {
       "department": "Extension Office",
       "fte": 8.5
     },
+    "statutory-and-other-agency-funding": {
+      "department": "Statutory & Other Agency Funding",
+      "fte": 0
+    },
     "eagle-springs-grill": {
       "department": "Eagle Springs Grill",
       "fte": 6
@@ -109,7 +137,14 @@ window.departmentFte = {
     "soil-conservation": {
       "department": "Soil Conservation",
       "fte": 2
+    },
+    "capital-projects": {
+      "department": "Capital Projects",
+      "fte": 0
+    },
+    "total-ad-valorem-rev": {
+      "department": "Total Ad Valorem Rev",
+      "fte": 0
     }
   }
 };
-

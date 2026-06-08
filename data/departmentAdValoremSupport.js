@@ -1,6 +1,6 @@
 window.departmentAdValoremSupport = {
   "version": 1,
-  "generatedAt": "2026-06-08T00:50:18.733Z",
+  "generatedAt": "2026-06-08T02:01:33.691Z",
   "departments": {
     "sheriff-s-office": {
       "department": "Sheriff's Office",
@@ -42,12 +42,12 @@ window.departmentAdValoremSupport = {
       "department": "Planning",
       "support": 269446.6
     },
-    "clerk-of-court": {
-      "department": "Clerk of Court",
+    "clerk-of-courts-and-county-comptroller": {
+      "department": "Clerk of Courts & County Comptroller",
       "support": 6171175
     },
-    "walton-county-health-deparment": {
-      "department": "Walton County Health Deparment",
+    "walton-county-health-department": {
+      "department": "Walton County Health Department",
       "support": 1724397
     },
     "property-appraiser": {
@@ -98,8 +98,8 @@ window.departmentAdValoremSupport = {
       "department": "Recreation",
       "support": 42615.92
     },
-    "south-walton-fire-district": {
-      "department": "South Walton Fire District",
+    "south-walton-fire-and-state-control": {
+      "department": "South Walton Fire & State Control",
       "support": 980074
     },
     "emergency-management": {
