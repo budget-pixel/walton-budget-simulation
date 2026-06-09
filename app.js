@@ -274,7 +274,6 @@ const state = {
   operatingDetailOpen: {},
   keptProjects: {},
   keptExpenseCapitalItems: {},
-  capitalRemovedAll: false,
   lockedDepartments: {
     "board-of-county-commissioners": true,
     "clerk-of-court": true,
@@ -1104,8 +1103,8 @@ function renderOperating() {
     const reductionPercent = readOnly ? 0 : Number(state.operatingReductions[department.id] || 0);
     const removedOperatingAmount = readOnly ? 0 : removedOperatingAmountForDepartment(department);
     const newOperatingBudget = Math.max(department.operatingBudget - removedOperatingAmount, 0) * (1 - reductionPercent / 100);
-    const programsMarkup = serviceFieldList("Services & Programs", getDepartmentServicePrograms(department.id));
-    return `<div class="slider-row ${isLocked ? "locked-row" : ""}"><div><label>${department.name}</label><div class="slider-meta">Operating budget: ${money(department.operatingBudget)}${removedOperatingAmount ? ` | Line items removed: ${money(removedOperatingAmount)}` : ""}${readOnly ? " | Read-only" : isLocked ? " | Locked" : ""}</div><div class="slider-meta slider-meta-secondary">New operating budget: <span class="new-operating-budget-value">${money(newOperatingBudget)}</span></div></div><input class="operating-slider" type="range" min="0" max="100" value="${reductionPercent}" data-control="operating" data-department="${department.id}" ${isLocked ? "disabled" : ""}><label class="percent-entry"><input type="number" min="0" max="100" step="1" value="${reductionPercent}" data-control="operating-percent" data-department="${department.id}" ${isLocked ? "disabled" : ""}><span>%</span></label>${programsMarkup}${renderOperatingLineItems(department, isLocked)}</div>`;
+    // const programsMarkup = serviceFieldList("Services & Programs", getDepartmentServicePrograms(department.id));
+    return `<div class="slider-row ${isLocked ? "locked-row" : ""}"><div><label>${department.name}</label><div class="slider-meta">Operating budget: ${money(department.operatingBudget)}${removedOperatingAmount ? ` | Line items removed: ${money(removedOperatingAmount)}` : ""}${readOnly ? " | Read-only" : isLocked ? " | Locked" : ""}</div><div class="slider-meta slider-meta-secondary">New operating budget: <span class="new-operating-budget-value">${money(newOperatingBudget)}</span></div></div><input class="operating-slider" type="range" min="0" max="100" value="${reductionPercent}" data-control="operating" data-department="${department.id}" ${isLocked ? "disabled" : ""}><label class="percent-entry"><input type="number" min="0" max="100" step="1" value="${reductionPercent}" data-control="operating-percent" data-department="${department.id}" ${isLocked ? "disabled" : ""}><span>%</span></label>${renderOperatingLineItems(department, isLocked)}</div>`;
   }).join("");
 }
 
@@ -1113,7 +1112,7 @@ function renderCapital() {
   const removeAllButton = `
     <div class="capital-actions">
       <button type="button" class="view-all-button" data-control="remove-all-capital">
-        ${state.capitalRemovedAll ? "Restore All" : "Remove All"}
+        Remove All
       </button>
     </div>
   `;
