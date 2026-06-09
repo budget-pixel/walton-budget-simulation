@@ -1161,6 +1161,14 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
 }
+
+.department-table-panel {
+  grid-column: 2;
+}
+
+.department-side-detail {
+  grid-column: 1;
+}
 .department-side-header { display: grid; gap: 6px; }
 .department-side-header h3 { font-size: 1.35rem; }
 .department-badge {

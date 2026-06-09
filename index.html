@@ -440,7 +440,10 @@
       </div>
 
       <div class="tax-grid">
-        <article class="panel millage-impact-panel" data-staff-only>
+        <article class="panel property-tax-breakdown-panel">
+          <iframe class="property-tax-embed" title="Walton County Property Tax Breakdown" src="https://budget-pixel.github.io/walton-property-breakdown/" loading="lazy"></iframe>
+        </article>
+        <article class="panel millage-impact-panel">
           <div class="panel-header">
             <div>
               <p class="eyebrow">Millage Impact</p>
@@ -459,11 +462,8 @@
             <div class="metric-box"><span>Vs Current Millage <button class="info-button" type="button" aria-label="Revenue difference help" data-tip="Revenue difference shows how much more or less Property Tax revenue the proposed millage would generate compared with the selected reference point, such as current millage or the rollback revenue target.">i</button></span><strong id="millageRevenueImpact"></strong></div>
             <div class="metric-box"><span>Vs Rollback Revenue <button class="info-button" type="button" aria-label="Revenue difference help" data-tip="Revenue difference shows how much more or less Property Tax revenue the proposed millage would generate compared with the selected reference point, such as current millage or the rollback revenue target.">i</button></span><strong id="rollbackRevenueImpact"></strong></div>
             <div class="metric-box"><span>Resulting Shortfall</span><strong id="millageShortfallImpact"></strong></div>
-            <div class="metric-box"><span>2026 Annual Property Tax Savings per Taxable Value</span><div id="taxpayerImpactTiers" class="taxpayer-impact-tiers"></div><small><em>Amounts will be populated when the proposed millage is entered.</em></small></div>
+            <div class="metric-box"><span>2026 Annual Property Tax Savings per Taxable Value</span><div id="taxpayerImpactTiers" class="taxpayer-impact-tiers"></div><small><em>Amounts will be populated when the proposed millage is adjusted above.</em></small></div>
           </div>
-        </article>
-        <article class="panel property-tax-breakdown-panel">
-          <iframe class="property-tax-embed" title="Walton County Property Tax Breakdown" src="https://budget-pixel.github.io/walton-property-breakdown/" loading="lazy"></iframe>
         </article>
       </div>
     </section>
