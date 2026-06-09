@@ -1710,3 +1710,11 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   border-top: 0;
   border-bottom: 0;
 }
+body:not(.staff-mode) table:has(#personnelControls) th:nth-child(4),
+body:not(.staff-mode) table:has(#personnelControls) th:nth-child(5),
+body:not(.staff-mode) table:has(#personnelControls) th:nth-child(6),
+body:not(.staff-mode) #personnelControls td:nth-child(4),
+body:not(.staff-mode) #personnelControls td:nth-child(5),
+body:not(.staff-mode) #personnelControls td:nth-child(6) {
+  display: none !important;
+}

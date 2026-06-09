@@ -1047,13 +1047,64 @@ function publicCountyStaffDepartments() {
     .sort(sortDepartments);
 }
 
+function publicPersonnelOfficeDepartments() {
+  const publicOfficeIds = [
+    "sheriffs-office",
+    "clerk-of-courts-and-county-comptroller",
+    "tax-collector",
+    "supervisor-of-elections",
+    "property-appraiser"
+  ];
+
+  return publicOfficeIds
+    .map((id) => budgetData.departments.find((department) => normalizeBootstrapDepartmentId(department.id || department.name) === id))
+    .filter(Boolean);
+}
+
 function publicCountyStaffFteReduction() {
-  return publicCountyStaffDepartments().reduce((total, department) => total + Number(state.fteReductions[department.id] || 0), 0);
+  return publicCountyStaffDepartments()
+    .concat(publicPersonnelOfficeDepartments())
+    .reduce((total, department) => total + Number(state.fteReductions[department.id] || 0), 0);
 }
 
 function publicCountyStaffPersonnelReduction() {
-  return publicCountyStaffDepartments().reduce((total, department) => total + Number(state.fteReductions[department.id] || 0) * fteCost(department), 0);
+  return publicCountyStaffDepartments()
+    .concat(publicPersonnelOfficeDepartments())
+    .reduce((total, department) => total + Number(state.fteReductions[department.id] || 0) * fteCost(department), 0);
 }
+
+function applyPublicCountyStaffFteReduction(value) {
+  const publicDepartments = publicCountyStaffDepartments().concat(publicPersonnelOfficeDepartments());
+  const totalFte = publicDepartments.reduce((total, department) => total + Number(department.fteCount || 0), 0);
+  const shortfallCap = Number(scenarioYear()?.revenueShortfall || 0);
+  let remainingFte = Math.min(Math.max(Number(value || 0), 0), totalFte);
+  let remainingDollars = shortfallCap;
+
+  publicDepartments.forEach((department) => {
+    const averageCost = fteCost(department);
+    const maxByDepartment = Number(department.fteCount || 0);
+    const maxByShortfall = averageCost > 0 ? Math.floor((remainingDollars / averageCost) * 2) / 2 : 0;
+    const reduction = Math.min(maxByDepartment, remainingFte, maxByShortfall);
+
+    state.fteReductions[department.id] = reduction;
+    remainingFte -= reduction;
+    remainingDollars -= reduction * averageCost;
+  });
+
+  if (remainingFte > 0) {
+    showMessage("Selected FTE reductions cannot exceed the FY2028 revenue shortfall.");
+  }
+}
+
+document.addEventListener("input", (event) => {
+  if (event.target?.dataset?.control !== "public-county-fte") return;
+  applyPublicCountyStaffFteReduction(event.target.value);
+  const appliedReduction = publicCountyStaffFteReduction();
+  event.target.value = appliedReduction;
+  const valueLabel = event.target.closest("td")?.querySelector("small");
+  if (valueLabel) valueLabel.textContent = `${number(appliedReduction)} FTE reduced`;
+  updateResults();
+});
 
 function renderPersonnel() {
   const costFactors = $("#personnelCostFactorsInline");
@@ -1085,28 +1136,39 @@ function renderPersonnel() {
   }
   if (!isStaffMode) {
     const countyDepartments = publicCountyStaffDepartments();
+    const publicOfficeRows = publicPersonnelOfficeDepartments();
     const countyFteTotal = countyDepartments.reduce((total, department) => total + Number(department.fteCount || 0), 0);
+    const publicOfficeFteTotal = publicOfficeRows.reduce((total, department) => total + Number(department.fteCount || 0), 0);
+    const publicFteTotal = countyFteTotal + publicOfficeFteTotal;
     const countyFteReduction = publicCountyStaffFteReduction();
     const countyPersonnelReduction = publicCountyStaffPersonnelReduction();
-    const publicOfficeIds = [
-      "sheriffs-office",
-      "tax-collector",
-      "supervisor-of-elections",
-      "clerk-of-courts-and-county-comptroller",
-      "property-appraiser"
-    ];
-    const publicOfficeRows = publicOfficeIds
-      .map((id) => budgetData.departments.find((department) => normalizeBootstrapDepartmentId(department.id || department.name) === id))
-      .filter(Boolean);
 
     $("#personnelControls").innerHTML = `
       <tr>
-        <td><strong>Board of County Commissioners</strong><small>County departments total</small></td>
-        <td>${number(countyFteTotal)}</td>
-        <td><input type="number" step="0.5" min="0" max="${countyFteTotal}" value="${countyFteReduction}" data-control="public-county-fte"></td>
+        <td><strong>Countywide FTE Reduction</strong></td>
+        <td>${number(publicFteTotal)}</td>
+        <td>
+          <input
+            type="range"
+            min="0"
+            max="${publicFteTotal}"
+            step="0.5"
+            value="${countyFteReduction}"
+            data-control="public-county-fte"
+          >
+          <small>${number(countyFteReduction)} FTE reduced</small>
+        </td>
         <td></td>
         <td>${money(countyPersonnelReduction)}</td>
         <td>${money(countyPersonnelReduction)}</td>
+      </tr>
+      <tr class="locked-row">
+        <td><strong>Board of County Commissioners</strong><small>County departments total</small></td>
+        <td>${number(countyFteTotal)}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
       ${publicOfficeRows.map((department) => `
         <tr class="locked-row">
@@ -2987,6 +3049,9 @@ function updateRevenueAssumptionFromInput(input) {
 
 document.addEventListener("input", (event) => {
   const control = event.target.dataset.control;
+  if (control === "public-county-fte") {
+  return;
+}
   const id = event.target.dataset.department;
   if (control === "fte") {
     return;
