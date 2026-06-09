@@ -1301,6 +1301,44 @@ function renderDepartmentCapitalProjects(department) {
   `;
 }
 
+// Funding Detail for Statutory & Other Agency Funding
+function renderStatutoryAgencyFundingItems(department) {
+  const id = normalizeBootstrapDepartmentId(department?.id || department?.departmentId || department?.name);
+  const name = String(department?.name || department?.department || "").toLowerCase();
+  const isStatutoryAgencyFunding = id === "statutory-and-other-agency-funding" ||
+    id === "statutory-other-agency-funding" ||
+    (name.includes("statutory") && name.includes("agency funding"));
+
+  if (!isStatutoryAgencyFunding) return "";
+
+  const items = expenseItemsForDepartment(department)
+    .filter((item) => Number(item.amount || 0) > 0)
+    .sort((a, b) => Number(b.amount || 0) - Number(a.amount || 0) || String(a.description || a.projectName || a.name || a.accountName || "").localeCompare(String(b.description || b.projectName || b.name || b.accountName || "")));
+
+  if (!items.length) return "";
+
+  return `
+    <section class="department-capital-projects-section" aria-label="Statutory and other agency funding detail">
+      <div class="department-service-heading">
+        <h4>Funding Detail</h4>
+      </div>
+      <div class="department-capital-project-list">
+        ${items.map((item) => {
+          const description = item.description || item.projectName || item.name || item.accountName || "Funding item";
+          return `
+            <div class="department-capital-project-item">
+              <div>
+                <strong>${escapeHtml(description)}</strong>
+              </div>
+              <span>${money(item.amount)}</span>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function normalizeExpenseDepartmentName(value) {
   return String(value || "")
     .toLowerCase()
@@ -1403,19 +1441,19 @@ function normalizeAndCombineCategories(categories) {
 const expenseCategoryTips = {
   "Personnel & Benefits": "Pay and benefits for county employees. This includes salaries, wages, temporary or seasonal help, payroll taxes, retirement, health insurance, workers’ compensation, and unemployment costs.",
 
-  "Professional Services": "Specialized work provided by outside professionals or vendors. This can include legal, engineering, auditing, consulting, appraisal, technology, medical, or other contracted professional support.",
+  "Professional Services": "Specialized work provided by outside professionals or vendors. This can include legal, engineering, auditing, consulting, appraisal, technology, or other contracted professional support.",
 
   "Communications & Technology": "Tools and services that help the department communicate, process information, or operate digitally. This can include phones, internet, mobile devices, software, subscriptions, memberships, publications, data tools, and printing.",
 
   "Travel & Training": "Costs for employees to attend meetings, conferences, certifications, continuing education, required training, and related travel expenses.",
 
-  "Supplies & Fuel": "Everyday materials used to operate the department. This can include office supplies, operating supplies, fuel, uniforms, small equipment, software under the capitalization threshold, chemicals, food, and other consumable items.",
+  "Supplies & Fuel": "Everyday materials used to operate the department. This can include office supplies, operating supplies, fuel, small equipment, chemicals, and other consumable items.",
 
   "Facilities, Utilities & Maintenance": "Costs to operate, rent, insure, repair, and maintain county facilities, vehicles, equipment, and workspaces. This can include utilities, leases, insurance, repairs, maintenance contracts, tires, and facility upkeep.",
 
   "Buildings, Infrastructure & Capital": "Larger capital costs for public assets. This can include buildings, renovations, roads, sidewalks, drainage, parking areas, lighting, parks, fields, land improvements, and other infrastructure.",
 
-  "Vehicles & Equipment": "Purchases of vehicles, machinery, heavy equipment, office furniture, computers, tools, and other equipment expected to last beyond normal daily use.",
+  "Vehicles & Equipment": "Purchases of vehicles, machinery, heavy equipment, computers, tools, and other equipment per Walton County asset policy.",
 
   "Grants, Aid & Transfers": "Funding passed through to other governments, agencies, nonprofits, or outside organizations to support public services, required contributions, grants, or intergovernmental obligations.",
 
@@ -1884,7 +1922,7 @@ function renderDepartments() {
       budgetYear
         ? `<div class="${useListMetricsForDepartment(selectedDepartment) ? "department-side-metric-list" : "detail-grid department-side-grid"}">
             ${Number(selectedDepartment.personnelBudget || 0) > 0 ? detail("Personnel Budget", selectedDepartment.personnelBudget) : ""}
-            ${Number(selectedDepartment.operatingBudget || 0) > 0 ? detail("Operating Budget", selectedDepartment.operatingBudget) : ""}
+            ${Number(selectedDepartment.operatingBudget || 0) > 0 && Math.round(Number(selectedDepartment.operatingBudget || 0)) < Math.round(Number(selectedDepartment.totalBudget || 0)) ? detail("Operating Budget", selectedDepartment.operatingBudget) : ""}
             ${Number(selectedDepartment.capitalBudget || 0) > 0 ? detail("Capital Budget", selectedDepartment.capitalBudget) : ""}
             ${Number(selectedDepartment.totalBudget || 0) > 0 ? detail("Total Budget", selectedDepartment.totalBudget) : ""}
             ${Number(selectedDepartment.fteCount || 0) > 0 ? detail("FTE Count", selectedDepartment.fteCount, number) : ""}
@@ -1902,6 +1940,7 @@ function renderDepartments() {
     }
     ${hideExpenseDetailForDepartment(selectedDepartment) ? "" : renderExpenseDetail(selectedDepartment)}
     ${renderDepartmentCapitalProjects(selectedDepartment)}
+    ${renderStatutoryAgencyFundingItems(selectedDepartment)}
     ${renderDepartmentServices(selectedDepartment.id)}
   `;
 }
@@ -1978,17 +2017,37 @@ function setupScenarioAccordions() {
 }
 
 function renderAssumptions() {
-  $("#inflationAssumptions").innerHTML = "<li>Personnel cost factors show both dollars and percent of total personnel cost.</li><li>Staff mode can edit revenue forecast settings, millage targets, and department locks.</li><li>Expense inflation pressure represents year-over-year growth in projected supported expense.</li>";
-  $("#methodologyList").innerHTML = "<li>Public reductions are capped at the projected revenue shortfall.</li><li>Staff mode may model surplus for internal planning.</li><li>Ranking exports are generated from internal data even though the full support table is hidden.</li>";
-  $("#formulaDefinitions").innerHTML = [
-    "Revenue Shortfall = Projected Supported Expense - Projected Revenue",
-    "Direct Revenue Reduction = Staff revenue reduction setting for the fiscal year",
-    "Structural Budget Gap = Revenue Shortfall - Direct Revenue Reduction",
-    "Estimated Ad Valorem Revenue = Taxable Value Base x Millage / 1,000",
-    "Required Millage = Target Revenue / Taxable Value Base x 1,000",
-    "Rollback Rate = FY2026 Budgeted Ad Valorem Revenue / Taxable Value Base x 1,000",
-    "Buy-Out First-Year Net = Recurring Reduction - One-Time Cost"
-  ].map((item) => `<div class="formula-item"><code>${item}</code></div>`).join("");
+  const inflationAssumptions = $("#inflationAssumptions");
+  const methodologyList = $("#methodologyList");
+  const formulaDefinitions = $("#formulaDefinitions");
+
+  if (inflationAssumptions) {
+    inflationAssumptions.innerHTML = "<li>Personnel cost factors show both dollars and percent of total personnel cost.</li><li>Staff mode can edit revenue forecast settings, millage targets, and department locks.</li><li>Expense inflation pressure represents year-over-year growth in projected supported expense.</li>";
+  }
+
+  const methodologySection = methodologyList?.closest("article, section, .panel");
+  const formulaSection = formulaDefinitions?.closest("article, section, .panel");
+
+  if (methodologySection) methodologySection.hidden = !isStaffMode;
+  if (formulaSection && formulaSection !== methodologySection) formulaSection.hidden = !isStaffMode;
+
+  if (!isStaffMode) return;
+
+  if (methodologyList) {
+    methodologyList.innerHTML = "<li>Public reductions are capped at the projected revenue shortfall.</li><li>Staff mode may model surplus for internal planning.</li><li>Ranking exports are generated from internal data even though the full support table is hidden.</li>";
+  }
+
+  if (formulaDefinitions) {
+    formulaDefinitions.innerHTML = [
+      "Revenue Shortfall = Projected Supported Expense - Projected Revenue",
+      "Direct Revenue Reduction = Staff revenue reduction setting for the fiscal year",
+      "Structural Budget Gap = Revenue Shortfall - Direct Revenue Reduction",
+      "Estimated Ad Valorem Revenue = Taxable Value Base x Millage / 1,000",
+      "Required Millage = Target Revenue / Taxable Value Base x 1,000",
+      "Rollback Rate = FY2026 Budgeted Ad Valorem Revenue / Taxable Value Base x 1,000",
+      "Buy-Out First-Year Net = Recurring Reduction - One-Time Cost"
+    ].map((item) => `<div class="formula-item"><code>${item}</code></div>`).join("");
+  }
 }
 
 function fiscalYearNumber(year) {
