@@ -565,15 +565,17 @@ function modeledFy2027Revenue() {
 }
 
 function modeledFy2028Revenue() {
+  const growth = Number(state.revenueAssumptions.futureRevenueGrowthRate || 0);
   return revenueFromTaxableValue(
-    modeledFy2028TaxableValue(),
+    modeledFy2028TaxableValue() * (1 + growth),
     state.revenueAssumptions.proposedRate
   );
 }
 
 function modeledFy2029Revenue() {
+  const growth = Number(state.revenueAssumptions.futureRevenueGrowthRate || 0);
   return revenueFromTaxableValue(
-    modeledFy2029TaxableValue(),
+    modeledFy2029TaxableValue() * Math.pow(1 + growth, 2),
     state.revenueAssumptions.proposedRate
   );
 }
