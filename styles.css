@@ -476,32 +476,48 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   border-radius: var(--radius-small);
   background: #fbfcfc;
 }
+
+.metric-box:has(#taxpayerImpactTiers) > span {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .driver-card strong,
 .metric-box strong { display: block; margin-top: 6px; color: var(--color-primary); font-size: 1.3rem; line-height: 1.15; overflow-wrap: anywhere; }
 
 .taxpayer-impact-tiers {
   display: grid;
   gap: 6px;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
-.taxpayer-impact-tiers div {
+.taxpayer-impact-tier {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  padding: 4px 0;
 }
 
-.taxpayer-impact-tiers span {
-  color: var(--color-text-muted);
-  font-size: 0.82rem;
+.taxpayer-impact-tier:not(:last-child) {
+  border-bottom: 1px solid rgba(31, 42, 46, 0.08);
+}
+
+.taxpayer-impact-tier span {
+  color: var(--color-text);
+  font-size: 0.9rem;
   font-weight: 700;
 }
 
-.taxpayer-impact-tiers strong {
+.taxpayer-impact-tier strong {
   margin-top: 0;
-  font-size: 0.95rem;
+  color: var(--color-primary-dark);
+  font-size: 0.9rem;
   font-weight: 800;
+  white-space: nowrap;
 }
 .driver-card small,
 .metric-box small { display: block; margin-top: 6px; color: var(--color-text-muted); }
@@ -567,6 +583,10 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 
 .tax-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
 .property-tax-breakdown-panel {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+.millage-impact-panel {
   grid-column: 1 / -1;
   width: 100%;
 }
@@ -1156,6 +1176,24 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 }
 
 #departmentDetailPanel > .detail-grid.department-side-grid > .detail-item:nth-child(6) {
+  display: none;
+}
+
+#rollbackRevenueImpact {
+  display: none;
+}
+
+#rollbackRevenueImpact.closest-metric-box,
+.metric-box:has(#rollbackRevenueImpact) {
+  display: none;
+}
+
+#millageRevenueImpact {
+  display: none;
+}
+
+#millageRevenueImpact.closest-metric-box,
+.metric-box:has(#millageRevenueImpact) {
   display: none;
 }
 

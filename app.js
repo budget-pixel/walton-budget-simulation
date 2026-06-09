@@ -393,6 +393,10 @@ const operatingEditableDepartment = (department) => {
     department?.id || department?.departmentId || department?.name
   );
 
+  if (boardOfCountyCommissioners(department)) {
+    return isStaffMode;
+  }
+
   const operatingOnlyDepartments = new Set([
     "sheriffs-office",
     "sheriff-s-office",
@@ -405,10 +409,10 @@ const operatingEditableDepartment = (department) => {
   ]);
 
   if (operatingOnlyDepartments.has(id)) {
-    return !boardOfCountyCommissioners(department);
+    return true;
   }
 
-  return reductionEligibleDepartment(department) && !boardOfCountyCommissioners(department);
+  return reductionEligibleDepartment(department);
 };
 
 function hideExpenseDetailForDepartment(department) {
