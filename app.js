@@ -236,6 +236,14 @@ var budgetData = window.budgetData || buildBudgetDataFallback();
 
 const currencyFormatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 console.info('app.js loaded');
+// Fallback converter launcher
+window.addEventListener("click", (event) => {
+  const trigger = event.target.closest('[data-control="open-expense-detail-converter"]');
+  if (!trigger) return;
+
+  event.preventDefault();
+  window.open("expense-detail-converter.html", "_blank");
+});
 const currencyInputFormatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const numberFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
 const percentFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
@@ -3288,6 +3296,10 @@ document.addEventListener("click", (event) => {
   }
   if (control === "open-service-converter") {
     window.open("service-data-converter.html", "_blank", "noopener");
+  }
+  if (control === "open-expense-detail-converter") {
+  window.open("expense-detail-converter.html", "_blank");
+  return;
   }
   if (control === "open-expense-converter") {
     window.open("expense-detail-converter.html", "_blank", "noopener");
