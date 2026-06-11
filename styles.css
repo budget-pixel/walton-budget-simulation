@@ -524,7 +524,7 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 .taxpayer-impact-tier span,
 .resulting-shortfall-table-row strong {
   color: var(--color-primary-dark);
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
 }
 
@@ -532,7 +532,7 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 .resulting-shortfall-table-row em {
   margin-top: 0;
   color: var(--color-primary-dark);
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 800;
   text-align: right;
@@ -584,13 +584,18 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
 .ranking-list > .view-all-button,
 .department-grid > .view-all-button { grid-column: 1 / -1; width: fit-content; }
 
-.tax-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+.tax-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+}
+
 .property-tax-breakdown-panel {
-  grid-column: 1 / -1;
+  grid-column: 1;
   width: 100%;
 }
+
 .millage-impact-panel {
-  grid-column: 1 / -1;
+  grid-column: 2;
   width: 100%;
 }
 .millage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1729,3 +1734,4 @@ body:not(.staff-mode) #personnelControls td:nth-child(5),
 body:not(.staff-mode) #personnelControls td:nth-child(6) {
   display: none !important;
 }
+/* Remove duplicate grid-column: 1 / -1; for .property-tax-breakdown-panel if present elsewhere */
