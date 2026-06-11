@@ -538,6 +538,10 @@ body:not(.staff-mode) [data-staff-only] { display: none !important; }
   text-align: right;
   white-space: nowrap;
 }
+
+#resultingShortfallForecast .resulting-shortfall-table-row em {
+  font-size: 1.5rem;
+}
 .driver-card small,
 .metric-box small { display: block; margin-top: 6px; color: var(--color-text-muted); }
 .total-driver { background: var(--color-primary-soft); }
