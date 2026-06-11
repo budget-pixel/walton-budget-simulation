@@ -752,7 +752,7 @@ function currentReductionValue(type, id) {
   }
   if (type === "operating-item") {
     const item = expenseItemByKey(id);
-    return item && operatingEditableDepartment(departmentById(item.departmentId)) && state.removedOperatingItems[id] ? Number(item.amount || 0) : 0;
+    return item && !lockedOperatingExpenseItem(item) && operatingEditableDepartment(departmentById(item.departmentId)) && state.removedOperatingItems[id] ? Number(item.amount || 0) : 0;
   }
   if (type === "capital") {
     const project = budgetData.capitalProjects.find((item) => item.id === id);
@@ -1709,7 +1709,7 @@ function expenseItemByKey(key) {
 }
 
 function removedOperatingItemsForDepartment(department) {
-  return operatingExpenseItemsForDepartment(department).filter((item) => state.removedOperatingItems[item.expenseKey]);
+  return operatingExpenseItemsForDepartment(department).filter((item) => !lockedOperatingExpenseItem(item) && state.removedOperatingItems[item.expenseKey]);
 }
 
 function removedOperatingAmountForDepartment(department) {
@@ -1747,6 +1747,7 @@ function renderOperatingLineItems(department, isLocked) {
             <header><strong>${escapeHtml(group.label)}</strong><span>${money(group.amount)}</span></header>
             ${group.items.map((item) => {
               const removed = Boolean(state.removedOperatingItems[item.expenseKey]);
+              const itemLocked = lockedOperatingExpenseItem(item);
               const projectLabel = (item.projectName && !/^\s*Description pending\s*$/i.test(String(item.projectName))) ? item.projectName : (item.name || item.accountName || "Line item");
               const desc = (item.description && !/^\s*Description pending\s*$/i.test(String(item.description))) ? item.description : "";
               return `
@@ -1755,7 +1756,7 @@ function renderOperatingLineItems(department, isLocked) {
                     ${desc ? `<strong>${escapeHtml(desc)}</strong>` : `<strong>${escapeHtml(projectLabel)}</strong>`}
                   </div>
                   <span>${money(item.amount)}</span>
-                  ${isStaffMode ? `<button type="button" class="line-item-toggle" data-control="toggle-operating-item" data-item="${item.expenseKey}" ${isLocked ? "disabled" : ""}>${removed ? "Keep" : "Remove"}</button>` : ""}
+                  ${isStaffMode ? `<button type="button" class="line-item-toggle" data-control="toggle-operating-item" data-item="${item.expenseKey}" ${(isLocked || itemLocked) ? "disabled" : ""}>${itemLocked ? "Locked" : removed ? "Keep" : "Remove"}</button>` : ""}
                 </div>
               `;
             }).join("")}
