@@ -1164,7 +1164,7 @@ function renderPersonnel() {
 
     $("#personnelControls").innerHTML = `
       <tr>
-        <td><strong>Countywide FTE Reduction</strong></td>
+        <td><strong>County General Fund FTE Total</strong></td>
         <td>${number(publicFteTotal)}</td>
         <td>
           <input
