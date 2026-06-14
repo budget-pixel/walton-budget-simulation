@@ -2849,11 +2849,14 @@ function commissionerServiceImpactMarkup(totals) {
 }
 
 function commissionerTaxpayerImpactRows() {
-  const tiers = [200000, 300000, 500000, 1000000];
-  const millageDifference = Number(budgetData.millageAssumptions.adoptedMillage || 0) - Number(state.proposedMillage || 0);
+  const tiers = [100000, 200000, 300000, 500000, 1000000];
+  const currentMillage = Number(budgetData.millageAssumptions.adoptedMillage || 0);
+  const proposedMillage = Number(state.proposedMillage || 0);
   return tiers.map((value) => ({
     value,
-    impact: value * millageDifference / 1000
+    currentAmount: value * currentMillage / 1000,
+    newAmount: value * proposedMillage / 1000,
+    savings: value * (currentMillage - proposedMillage) / 1000
   }));
 }
 
@@ -3091,8 +3094,20 @@ function commissionerDepartmentFundingDetailMarkup() {
     support: sum.support + row.support,
     fte: sum.fte + row.fte
   }), { totalBudget: 0, support: 0, fte: 0 });
+  const capitalDetailMarkup = (department) => {
+    const id = normalizeBootstrapDepartmentId(department?.id || department?.departmentId || department?.name);
+    const name = String(department?.name || department?.department || "").toLowerCase();
+    if (id !== "capital-projects" && !name.includes("capital projects")) return "";
+    const projects = capitalProjectItemsForDepartment(department);
+    if (!projects.length) return "";
+    const projectRows = projects.map((project) => {
+      const description = project.description || project.projectName || project.name || project.accountName || "Capital project";
+      return `<li>${escapeHtml(description)} <strong>${money(project.amount)}</strong></li>`;
+    }).join("");
+    return `<div class="capital-project-detail"><span>Equipment &amp; Capital:</span><ul>${projectRows}</ul></div>`;
+  };
   return `<table><thead><tr><th>Department</th><th>Total Budget</th><th>Property Tax Support</th><th>Percent of Total Property Tax Budget</th><th>FTE</th></tr></thead><tbody>
-    ${commissionerGroupedRows(rows, (row) => `<tr><td><strong>${escapeHtml(row.department.name)}</strong></td><td>${money(row.totalBudget)}</td><td>${money(row.support)}</td><td>${percent(row.supportPercent)}</td><td>${row.fte ? number(row.fte) : ""}</td></tr>`, 5)}
+    ${commissionerGroupedRows(rows, (row) => `<tr><td><strong>${escapeHtml(row.department.name)}</strong>${capitalDetailMarkup(row.department)}</td><td>${money(row.totalBudget)}</td><td>${money(row.support)}</td><td>${percent(row.supportPercent)}</td><td>${row.fte ? number(row.fte) : ""}</td></tr>`, 5)}
     <tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.totalBudget)}</strong></td><td><strong>${money(totals.support)}</strong></td><td><strong>${percent(100)}</strong></td><td><strong>${totals.fte ? number(totals.fte) : ""}</strong></td></tr>
   </tbody></table>`;
 }
@@ -3172,7 +3187,7 @@ function commissionerCapitalReductionItems() {
 function commissionerCapitalReductionDetailMarkup() {
   const items = commissionerCapitalReductionItems();
   if (!items.length) return "";
-  return `<div class="capital-project-detail"><span>Projects included:</span><ul>${items.map((item) => `<li>${escapeHtml(item.departmentName)} - ${escapeHtml(item.label)} <strong>${money(item.amount)}</strong></li>`).join("")}</ul></div>`;
+  return `<div class="capital-project-detail"><span>Itemized reductions:</span><ul>${items.map((item) => `<li>${escapeHtml(item.departmentName)} - ${escapeHtml(item.label)} <strong>${money(item.amount)}</strong></li>`).join("")}</ul></div>`;
 }
 
 function commissionerMillageShortfallMarkup(totals) {
@@ -3264,17 +3279,9 @@ function exportCommissionerBriefingPdf() {
   const totals = scenarioTotals(true);
   const scenarioName = state.scenarioMeta.name || "Working Scenario";
   const showTaxpayerImpact = Math.abs(Number(state.proposedMillage || 0) - Number(budgetData.millageAssumptions.adoptedMillage || 0)) > 0.000001;
-  const millageImpactLabel = Number(budgetData.millageAssumptions.adoptedMillage || 0) >= Number(state.proposedMillage || 0)
-    ? "Estimated annual savings versus current millage"
-    : "Estimated annual increase versus current millage";
   const taxpayerImpactRows = commissionerTaxpayerImpactRows();
-  const taxpayerTotals = taxpayerImpactRows.reduce((sum, row) => ({
-    value: sum.value + row.value,
-    impact: sum.impact + row.impact
-  }), { value: 0, impact: 0 });
   const taxpayerRows = taxpayerImpactRows
-    .map((row) => `<tr><td>${money(row.value)}</td><td>${signedMoney(row.impact)}</td></tr>`)
-    .concat(`<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${signedMoney(taxpayerTotals.impact)}</strong></td></tr>`)
+    .map((row) => `<tr><td>${money(row.value)}</td><td>${money(row.currentAmount)}</td><td>${money(row.newAmount)}</td><td>${signedMoney(row.savings)}</td></tr>`)
     .join("");
   const appendixRows = commissionerAppendixRows();
   const fy2028ProjectedShortfall = commissionerProjectedShortfall("FY2028");
@@ -3314,10 +3321,9 @@ function exportCommissionerBriefingPdf() {
     <section class="briefing-page remaining-page">
       ${commissionerScenarioLabelMarkup(scenarioName)}
       <h2>Remaining Shortfall After Reductions</h2>
-      <p class="plain-note">Recurring reductions are applied to future years. One-time capital and equipment reductions are applied only to the scenario year.</p>
       ${commissionerRemainingShortfallMarkup(totals)}
       ${commissionerMillageShortfallMarkup(totals)}
-      ${showTaxpayerImpact ? `<h3>Taxpayer Impact</h3><p class="plain-note">${millageImpactLabel}. Annual impact = taxable value x millage difference / 1,000.</p><table><thead><tr><th>Taxable Value</th><th>Estimated Annual Impact vs Current Millage</th></tr></thead><tbody>${taxpayerRows}</tbody></table>` : ""}
+      ${showTaxpayerImpact ? `<h3>Taxpayer Impact</h3><p class="plain-note">Estimated savings based on new millage, using the taxable value listed on the right.</p><table><thead><tr><th>Taxable Value</th><th>Amount Paid with Current Millage</th><th>Amount with New Millage</th><th>Savings</th></tr></thead><tbody>${taxpayerRows}</tbody></table>` : ""}
     </section>
   </body></html>`);
   report.document.close();
