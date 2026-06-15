@@ -1,12 +1,12 @@
 window.wcDepartmentExpenses = [
   {
     "department": "Board of County Commissioners",
-    "total": 12034601,
+    "total": 13126104,
     "categories": [
       {
         "category": "Facilities, Utilities & Maintenance",
-        "amount": 4190000,
-        "percent": 34.8,
+        "amount": 4550000,
+        "percent": 34.7,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -14,9 +14,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
             "description": "Lease for SLEERS towers,",
-            "itemization": 120000,
+            "itemization": 125000,
             "proposedAmount": 0,
-            "amount": 120000,
+            "amount": 125000,
             "category": "Facilities, Utilities & Maintenance"
           },
           {
@@ -36,9 +36,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "544000",
             "accountName": "Rentals & Leases",
             "description": "Copier Leases for Commission Offices",
-            "itemization": 20000,
+            "itemization": 25000,
             "proposedAmount": 0,
-            "amount": 20000,
+            "amount": 25000,
             "category": "Facilities, Utilities & Maintenance"
           },
           {
@@ -47,9 +47,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "545000",
             "accountName": "Insurance",
             "description": "General Liability & Cyber Liability Coverage (FACT)",
-            "itemization": 2250000,
+            "itemization": 2350000,
             "proposedAmount": 0,
-            "amount": 2250000,
+            "amount": 2350000,
             "category": "Facilities, Utilities & Maintenance"
           },
           {
@@ -58,9 +58,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "545000",
             "accountName": "Insurance",
             "description": "Auto, Property, & Workers Compensation Coverage (FMIT)",
-            "itemization": 1500000,
+            "itemization": 1750000,
             "proposedAmount": 0,
-            "amount": 1500000,
+            "amount": 1750000,
             "category": "Facilities, Utilities & Maintenance"
           },
           {
@@ -89,8 +89,8 @@ window.wcDepartmentExpenses = [
       },
       {
         "category": "Professional Services",
-        "amount": 2840000,
-        "percent": 23.6,
+        "amount": 3090000,
+        "percent": 23.5,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -98,9 +98,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "531000",
             "accountName": "Professional Services",
             "description": "Outside legal counsel, OPEB valuation, Value Adjustment Board Attorney, Employee benefits consultant, State Lobbying, Federal Lobbying, Fire MSBU",
-            "itemization": 500000,
+            "itemization": 700000,
             "proposedAmount": 0,
-            "amount": 500000,
+            "amount": 700000,
             "category": "Professional Services"
           },
           {
@@ -131,9 +131,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "534000",
             "accountName": "Other Services",
             "description": "Board agenda, website & public records software",
-            "itemization": 100000,
+            "itemization": 150000,
             "proposedAmount": 0,
-            "amount": 100000,
+            "amount": 150000,
             "category": "Professional Services"
           },
           {
@@ -162,8 +162,8 @@ window.wcDepartmentExpenses = [
       },
       {
         "category": "Personnel & Benefits",
-        "amount": 1692101,
-        "percent": 14.1,
+        "amount": 1903604,
+        "percent": 14.5,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -182,9 +182,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "511000",
             "accountName": "Executive Salaries",
             "description": "Commissioner salaries as set per F.S. 145.031",
-            "itemization": 395500,
+            "itemization": 411860,
             "proposedAmount": 0,
-            "amount": 395500,
+            "amount": 411860,
             "category": "Personnel & Benefits"
           },
           {
@@ -225,10 +225,10 @@ window.wcDepartmentExpenses = [
             "type": "Expenses",
             "accountCode": "513000",
             "accountName": "Other Salaries & Wages",
-            "description": "Summer Student Program",
-            "itemization": 200000,
+            "description": "Summer Student Program & General Fund Merit increases",
+            "itemization": 300000,
             "proposedAmount": 0,
-            "amount": 200000,
+            "amount": 300000,
             "category": "Personnel & Benefits"
           },
           {
@@ -281,9 +281,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "Health Insurance Subsidy (HIS) Retirees",
-            "itemization": 549000,
+            "itemization": 600000,
             "proposedAmount": 0,
-            "amount": 549000,
+            "amount": 600000,
             "category": "Personnel & Benefits"
           },
           {
@@ -292,9 +292,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "523000",
             "accountName": "Life & Health Insurance",
             "description": "Blue Cross Blue Shield Retiree Benefits",
-            "itemization": 575857,
+            "itemization": 620000,
             "proposedAmount": 0,
-            "amount": 575857,
+            "amount": 620000,
             "category": "Personnel & Benefits"
           },
           {
@@ -335,7 +335,7 @@ window.wcDepartmentExpenses = [
       {
         "category": "Buildings & Infrastructure",
         "amount": 1605000,
-        "percent": 13.3,
+        "percent": 12.2,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -364,7 +364,7 @@ window.wcDepartmentExpenses = [
       {
         "category": "Contingency & Other",
         "amount": 700000,
-        "percent": 5.8,
+        "percent": 5.3,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -392,8 +392,8 @@ window.wcDepartmentExpenses = [
       },
       {
         "category": "Supplies & Fuel",
-        "amount": 472500,
-        "percent": 3.9,
+        "amount": 577500,
+        "percent": 4.4,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -456,9 +456,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "542000",
             "accountName": "Freight & Postage Services",
             "description": "State Mandated TRIM notice mailed by the Property Appraiser",
-            "itemization": 75000,
+            "itemization": 80000,
             "proposedAmount": 0,
-            "amount": 75000,
+            "amount": 80000,
             "category": "Supplies & Fuel"
           },
           {
@@ -489,17 +489,17 @@ window.wcDepartmentExpenses = [
             "accountCode": "552000",
             "accountName": "Operating Supplies",
             "description": "General Operating Supplies",
-            "itemization": 250000,
+            "itemization": 350000,
             "proposedAmount": 0,
-            "amount": 250000,
+            "amount": 350000,
             "category": "Supplies & Fuel"
           }
         ]
       },
       {
         "category": "Communications & Technology",
-        "amount": 310000,
-        "percent": 2.6,
+        "amount": 375000,
+        "percent": 2.9,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -507,9 +507,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "541000",
             "accountName": "Communication Services",
             "description": "Internet & Office Phones for Commissioner Office, Safe Connections",
-            "itemization": 160000,
+            "itemization": 175000,
             "proposedAmount": 0,
-            "amount": 160000,
+            "amount": 175000,
             "category": "Communications & Technology"
           },
           {
@@ -518,17 +518,17 @@ window.wcDepartmentExpenses = [
             "accountCode": "554000",
             "accountName": "Books, Publications, Subscriptions, or Memberships",
             "description": "Subscriptions for Smarsh, Charter Communications, Docusign, Zoom, FAC membership, West Florida Regional Planning Council",
-            "itemization": 150000,
+            "itemization": 200000,
             "proposedAmount": 0,
-            "amount": 150000,
+            "amount": 200000,
             "category": "Communications & Technology"
           }
         ]
       },
       {
         "category": "Travel & Training",
-        "amount": 170000,
-        "percent": 1.4,
+        "amount": 270000,
+        "percent": 2.1,
         "items": [
           {
             "proposal": "Board of County Commissioners",
@@ -547,9 +547,9 @@ window.wcDepartmentExpenses = [
             "accountCode": "555000",
             "accountName": "Training",
             "description": "FSU CPM Course, NACO & FAC conferences",
-            "itemization": 100000,
+            "itemization": 200000,
             "proposedAmount": 0,
-            "amount": 100000,
+            "amount": 200000,
             "category": "Travel & Training"
           }
         ]
@@ -675,9 +675,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "511000",
         "accountName": "Executive Salaries",
         "description": "Commissioner salaries as set per F.S. 145.031",
-        "itemization": 395500,
+        "itemization": 411860,
         "proposedAmount": 0,
-        "amount": 395500,
+        "amount": 411860,
         "category": "Personnel & Benefits"
       },
       {
@@ -718,10 +718,10 @@ window.wcDepartmentExpenses = [
         "type": "Expenses",
         "accountCode": "513000",
         "accountName": "Other Salaries & Wages",
-        "description": "Summer Student Program",
-        "itemization": 200000,
+        "description": "Summer Student Program & General Fund Merit increases",
+        "itemization": 300000,
         "proposedAmount": 0,
-        "amount": 200000,
+        "amount": 300000,
         "category": "Personnel & Benefits"
       },
       {
@@ -774,9 +774,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "Health Insurance Subsidy (HIS) Retirees",
-        "itemization": 549000,
+        "itemization": 600000,
         "proposedAmount": 0,
-        "amount": 549000,
+        "amount": 600000,
         "category": "Personnel & Benefits"
       },
       {
@@ -785,9 +785,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "523000",
         "accountName": "Life & Health Insurance",
         "description": "Blue Cross Blue Shield Retiree Benefits",
-        "itemization": 575857,
+        "itemization": 620000,
         "proposedAmount": 0,
-        "amount": 575857,
+        "amount": 620000,
         "category": "Personnel & Benefits"
       },
       {
@@ -829,9 +829,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "531000",
         "accountName": "Professional Services",
         "description": "Outside legal counsel, OPEB valuation, Value Adjustment Board Attorney, Employee benefits consultant, State Lobbying, Federal Lobbying, Fire MSBU",
-        "itemization": 500000,
+        "itemization": 700000,
         "proposedAmount": 0,
-        "amount": 500000,
+        "amount": 700000,
         "category": "Professional Services"
       },
       {
@@ -862,9 +862,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "534000",
         "accountName": "Other Services",
         "description": "Board agenda, website & public records software",
-        "itemization": 100000,
+        "itemization": 150000,
         "proposedAmount": 0,
-        "amount": 100000,
+        "amount": 150000,
         "category": "Professional Services"
       },
       {
@@ -906,9 +906,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "541000",
         "accountName": "Communication Services",
         "description": "Internet & Office Phones for Commissioner Office, Safe Connections",
-        "itemization": 160000,
+        "itemization": 175000,
         "proposedAmount": 0,
-        "amount": 160000,
+        "amount": 175000,
         "category": "Communications & Technology"
       },
       {
@@ -917,9 +917,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "542000",
         "accountName": "Freight & Postage Services",
         "description": "State Mandated TRIM notice mailed by the Property Appraiser",
-        "itemization": 75000,
+        "itemization": 80000,
         "proposedAmount": 0,
-        "amount": 75000,
+        "amount": 80000,
         "category": "Supplies & Fuel"
       },
       {
@@ -928,9 +928,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
         "description": "Lease for SLEERS towers,",
-        "itemization": 120000,
+        "itemization": 125000,
         "proposedAmount": 0,
-        "amount": 120000,
+        "amount": 125000,
         "category": "Facilities, Utilities & Maintenance"
       },
       {
@@ -950,9 +950,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "544000",
         "accountName": "Rentals & Leases",
         "description": "Copier Leases for Commission Offices",
-        "itemization": 20000,
+        "itemization": 25000,
         "proposedAmount": 0,
-        "amount": 20000,
+        "amount": 25000,
         "category": "Facilities, Utilities & Maintenance"
       },
       {
@@ -961,9 +961,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "545000",
         "accountName": "Insurance",
         "description": "General Liability & Cyber Liability Coverage (FACT)",
-        "itemization": 2250000,
+        "itemization": 2350000,
         "proposedAmount": 0,
-        "amount": 2250000,
+        "amount": 2350000,
         "category": "Facilities, Utilities & Maintenance"
       },
       {
@@ -972,9 +972,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "545000",
         "accountName": "Insurance",
         "description": "Auto, Property, & Workers Compensation Coverage (FMIT)",
-        "itemization": 1500000,
+        "itemization": 1750000,
         "proposedAmount": 0,
-        "amount": 1500000,
+        "amount": 1750000,
         "category": "Facilities, Utilities & Maintenance"
       },
       {
@@ -1038,9 +1038,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "552000",
         "accountName": "Operating Supplies",
         "description": "General Operating Supplies",
-        "itemization": 250000,
+        "itemization": 350000,
         "proposedAmount": 0,
-        "amount": 250000,
+        "amount": 350000,
         "category": "Supplies & Fuel"
       },
       {
@@ -1049,9 +1049,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "554000",
         "accountName": "Books, Publications, Subscriptions, or Memberships",
         "description": "Subscriptions for Smarsh, Charter Communications, Docusign, Zoom, FAC membership, West Florida Regional Planning Council",
-        "itemization": 150000,
+        "itemization": 200000,
         "proposedAmount": 0,
-        "amount": 150000,
+        "amount": 200000,
         "category": "Communications & Technology"
       },
       {
@@ -1060,9 +1060,9 @@ window.wcDepartmentExpenses = [
         "accountCode": "555000",
         "accountName": "Training",
         "description": "FSU CPM Course, NACO & FAC conferences",
-        "itemization": 100000,
+        "itemization": 200000,
         "proposedAmount": 0,
-        "amount": 100000,
+        "amount": 200000,
         "category": "Travel & Training"
       },
       {
@@ -1910,12 +1910,12 @@ window.wcDepartmentExpenses = [
   },
   {
     "department": "Capital Projects",
-    "total": 25735536,
+    "total": 28735536,
     "categories": [
       {
         "category": "Buildings & Infrastructure",
-        "amount": 23220536,
-        "percent": 90.2,
+        "amount": 26220536,
+        "percent": 91.2,
         "items": [
           {
             "proposal": "Capital Projects",
@@ -1937,6 +1937,17 @@ window.wcDepartmentExpenses = [
             "itemization": 0,
             "proposedAmount": 3500000,
             "amount": 3500000,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "Alderberry Connector Road Extension",
+            "itemization": 0,
+            "proposedAmount": 600000,
+            "amount": 600000,
             "category": "Buildings & Infrastructure"
           },
           {
@@ -2070,13 +2081,24 @@ window.wcDepartmentExpenses = [
             "proposedAmount": 300000,
             "amount": 300000,
             "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 2400000,
+            "amount": 2400000,
+            "category": "Buildings & Infrastructure"
           }
         ]
       },
       {
         "category": "Debt Service",
         "amount": 2515000,
-        "percent": 9.8,
+        "percent": 8.8,
         "items": [
           {
             "proposal": "Capital Projects",
@@ -2124,6 +2146,17 @@ window.wcDepartmentExpenses = [
         "itemization": 0,
         "proposedAmount": 3500000,
         "amount": 3500000,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "Alderberry Connector Road Extension",
+        "itemization": 0,
+        "proposedAmount": 600000,
+        "amount": 600000,
         "category": "Buildings & Infrastructure"
       },
       {
@@ -2256,6 +2289,17 @@ window.wcDepartmentExpenses = [
         "itemization": 0,
         "proposedAmount": 300000,
         "amount": 300000,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "",
+        "itemization": 0,
+        "proposedAmount": 2400000,
+        "amount": 2400000,
         "category": "Buildings & Infrastructure"
       },
       {
@@ -8579,12 +8623,12 @@ window.wcDepartmentExpenses = [
   },
   {
     "department": "Office of Management and Budget",
-    "total": 1230808,
+    "total": 1242808,
     "categories": [
       {
         "category": "Personnel & Benefits",
         "amount": 967258,
-        "percent": 78.6,
+        "percent": 77.8,
         "items": [
           {
             "proposal": "Office of Management and Budget",
@@ -8646,7 +8690,7 @@ window.wcDepartmentExpenses = [
       {
         "category": "Communications & Technology",
         "amount": 230000,
-        "percent": 18.7,
+        "percent": 18.5,
         "items": [
           {
             "proposal": "Office of Management and Budget",
@@ -8684,9 +8728,38 @@ window.wcDepartmentExpenses = [
         ]
       },
       {
+        "category": "Travel & Training",
+        "amount": 16000,
+        "percent": 1.3,
+        "items": [
+          {
+            "proposal": "Office of Management and Budget",
+            "type": "Expenses",
+            "accountCode": "540000",
+            "accountName": "Travel & Per Diem",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 11000,
+            "amount": 11000,
+            "category": "Travel & Training"
+          },
+          {
+            "proposal": "Office of Management and Budget",
+            "type": "Expenses",
+            "accountCode": "555000",
+            "accountName": "Training",
+            "description": "",
+            "itemization": 0,
+            "proposedAmount": 5000,
+            "amount": 5000,
+            "category": "Travel & Training"
+          }
+        ]
+      },
+      {
         "category": "Professional Services",
         "amount": 13000,
-        "percent": 1.1,
+        "percent": 1,
         "items": [
           {
             "proposal": "Office of Management and Budget",
@@ -8780,35 +8853,6 @@ window.wcDepartmentExpenses = [
             "category": "Facilities, Utilities & Maintenance"
           }
         ]
-      },
-      {
-        "category": "Travel & Training",
-        "amount": 4000,
-        "percent": 0.3,
-        "items": [
-          {
-            "proposal": "Office of Management and Budget",
-            "type": "Expenses",
-            "accountCode": "540000",
-            "accountName": "Travel & Per Diem",
-            "description": "",
-            "itemization": 0,
-            "proposedAmount": 2000,
-            "amount": 2000,
-            "category": "Travel & Training"
-          },
-          {
-            "proposal": "Office of Management and Budget",
-            "type": "Expenses",
-            "accountCode": "555000",
-            "accountName": "Training",
-            "description": "",
-            "itemization": 0,
-            "proposedAmount": 2000,
-            "amount": 2000,
-            "category": "Travel & Training"
-          }
-        ]
       }
     ],
     "items": [
@@ -8885,8 +8929,8 @@ window.wcDepartmentExpenses = [
         "accountName": "Travel & Per Diem",
         "description": "",
         "itemization": 0,
-        "proposedAmount": 2000,
-        "amount": 2000,
+        "proposedAmount": 11000,
+        "amount": 11000,
         "category": "Travel & Training"
       },
       {
@@ -8995,8 +9039,8 @@ window.wcDepartmentExpenses = [
         "accountName": "Training",
         "description": "",
         "itemization": 0,
-        "proposedAmount": 2000,
-        "amount": 2000,
+        "proposedAmount": 5000,
+        "amount": 5000,
         "category": "Travel & Training"
       }
     ]
@@ -9427,12 +9471,12 @@ window.wcDepartmentExpenses = [
   },
   {
     "department": "Planning",
-    "total": 7008008,
+    "total": 6994111,
     "categories": [
       {
         "category": "Personnel & Benefits",
-        "amount": 4974983,
-        "percent": 71,
+        "amount": 4961086,
+        "percent": 70.9,
         "items": [
           {
             "proposal": "Planning",
@@ -9507,8 +9551,8 @@ window.wcDepartmentExpenses = [
             "accountName": "Regular Salaries & Wages",
             "description": "",
             "itemization": 0,
-            "proposedAmount": 440623,
-            "amount": 440623,
+            "proposedAmount": 426726,
+            "amount": 426726,
             "category": "Personnel & Benefits"
           },
           {
@@ -9644,7 +9688,7 @@ window.wcDepartmentExpenses = [
       {
         "category": "Supplies & Fuel",
         "amount": 325825,
-        "percent": 4.6,
+        "percent": 4.7,
         "items": [
           {
             "proposal": "Planning",
@@ -10535,8 +10579,8 @@ window.wcDepartmentExpenses = [
         "accountName": "Regular Salaries & Wages",
         "description": "",
         "itemization": 0,
-        "proposedAmount": 440623,
-        "amount": 440623,
+        "proposedAmount": 426726,
+        "amount": 426726,
         "category": "Personnel & Benefits"
       },
       {
