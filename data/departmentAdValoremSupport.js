@@ -1,6 +1,6 @@
 window.departmentAdValoremSupport = {
   "version": 1,
-  "generatedAt": "2026-06-08T02:01:33.691Z",
+  "generatedAt": "2026-06-15T02:36:59.850Z",
   "departments": {
     "sheriff-s-office": {
       "department": "Sheriff's Office",
@@ -8,15 +8,15 @@ window.departmentAdValoremSupport = {
     },
     "board-of-county-commissioners": {
       "department": "Board of County Commissioners",
-      "support": 12484302
+      "support": 7274185
     },
     "building-construction-and-maintenance": {
       "department": "Building Construction and Maintenance",
-      "support": 658750.48
+      "support": 2308208.68
     },
     "medical-examiner": {
       "department": "Medical Examiner",
-      "support": 1100000
+      "support": 881930
     },
     "public-defender": {
       "department": "Public Defender",
@@ -40,11 +40,11 @@ window.departmentAdValoremSupport = {
     },
     "planning": {
       "department": "Planning",
-      "support": 269446.6
+      "support": 944119.21
     },
     "clerk-of-courts-and-county-comptroller": {
       "department": "Clerk of Courts & County Comptroller",
-      "support": 6171175
+      "support": 6871175
     },
     "walton-county-health-department": {
       "department": "Walton County Health Department",
@@ -52,7 +52,7 @@ window.departmentAdValoremSupport = {
     },
     "property-appraiser": {
       "department": "Property Appraiser",
-      "support": 5102000
+      "support": 5302000
     },
     "code-compliance": {
       "department": "Code Compliance",
@@ -60,15 +60,15 @@ window.departmentAdValoremSupport = {
     },
     "engineering-services": {
       "department": "Engineering Services",
-      "support": 157641.75
+      "support": 552364
     },
     "county-administration": {
       "department": "County Administration",
-      "support": 140607.76
+      "support": 492678.3
     },
     "libraries": {
       "department": "Libraries",
-      "support": 138501.75
+      "support": 485298.98
     },
     "eagle-springs-golf-and-recreation-center": {
       "department": "Eagle Springs Golf and Recreation Center",
@@ -76,27 +76,27 @@ window.departmentAdValoremSupport = {
     },
     "office-of-the-county-attorney": {
       "department": "Office of the County Attorney",
-      "support": 117503.49
+      "support": 411722.79
     },
     "supervisor-of-elections": {
       "department": "Supervisor of Elections",
-      "support": 1313865
+      "support": 1663865
     },
     "human-resources": {
       "department": "Human Resources",
-      "support": 88576.7
+      "support": 310365.62
     },
     "office-of-management-and-budget": {
       "department": "Office of Management and Budget",
-      "support": 77117.47
+      "support": 270213.43
     },
     "procurement": {
       "department": "Procurement",
-      "support": 73400.97
+      "support": 257191.09
     },
     "recreation": {
       "department": "Recreation",
-      "support": 42615.92
+      "support": 149322.76
     },
     "south-walton-fire-and-state-control": {
       "department": "South Walton Fire & State Control",
@@ -104,19 +104,19 @@ window.departmentAdValoremSupport = {
     },
     "emergency-management": {
       "department": "Emergency Management",
-      "support": 55004.27
+      "support": 192730.54
     },
     "environmental-services": {
       "department": "Environmental Services",
-      "support": 52650.48
+      "support": 184483.06
     },
     "geographic-info-systems": {
       "department": "Geographic Info Systems",
-      "support": 46022.72
+      "support": 161259.9
     },
     "extension-office": {
       "department": "Extension Office",
-      "support": 37041.16
+      "support": 129789.26
     },
     "statutory-and-other-agency-funding": {
       "department": "Statutory & Other Agency Funding",
@@ -132,7 +132,7 @@ window.departmentAdValoremSupport = {
     },
     "veteran-services": {
       "department": "Veteran Services",
-      "support": 19697.48
+      "support": 69018.37
     },
     "soil-conservation": {
       "department": "Soil Conservation",
@@ -140,7 +140,7 @@ window.departmentAdValoremSupport = {
     },
     "capital-projects": {
       "department": "Capital Projects",
-      "support": 23986536
+      "support": 23220536
     },
     "total-ad-valorem-rev": {
       "department": "Total Ad Valorem Rev",
