@@ -3181,33 +3181,49 @@ function commissionerHjrRevenueBridgeMarkup() {
 }
 
 function commissionerLargestSupportedFunctionsMarkup() {
-  const rows = commissionerDepartmentFundingRows()
-    .slice()
-    .sort((a, b) => b.support - a.support || a.department.name.localeCompare(b.department.name))
-    .slice(0, 6);
-  const maxSupport = Math.max(...rows.map((row) => row.support), 1);
-  return `<div class="ranked-support-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px">
-    ${rows.map((row, index) => `
-      <article class="ranked-support-card" style="display:grid;grid-template-columns:32px 1fr;gap:8px;align-items:center;padding:8px">
-        <span style="width:26px;height:26px">${index + 1}</span>
-        <div>
-          <strong style="font-size:14px">${escapeHtml(row.department.name)}</strong>
-          <em style="font-size:10px">${money(row.support)} | ${percent(row.supportPercent)} of total property tax support</em>
-        </div>
-      </article>
-    `).join("")}
-  </div>
-  <div style="display:grid;gap:6px;margin-top:12px">
-    ${rows.map((row) => `
-      <div style="display:grid;grid-template-columns:2.85in 1fr .95in;gap:10px;align-items:center">
-        <strong style="color:var(--green);font-size:11px">${escapeHtml(row.department.name)}</strong>
-        <div style="height:14px;background:#edf2ee;border:1px solid var(--line);border-radius:999px;overflow:hidden">
-          <span style="display:block;height:100%;width:${Math.max(row.support / maxSupport * 100, 3)}%;background:var(--green)"></span>
-        </div>
-        <strong style="text-align:right;color:var(--ink);font-size:11px">${money(row.support)}</strong>
+  const fundingRows = commissionerDepartmentFundingRows();
+  const totalSupport = fundingRows.reduce((sum, row) => sum + Number(row.support || 0), 0) || 1;
+  const groupSupport = (categoryId) => fundingRows
+    .filter((row) => commissionerControlCategoryForDepartment(row.department).id === categoryId)
+    .reduce((sum, row) => sum + Number(row.support || 0), 0);
+  const constitutionalSupportRows = fundingRows
+    .filter((row) => commissionerControlCategoryForDepartment(row.department).id === "constitutional-offices" && Number(row.support || 0) > 0)
+    .map((row) => ({ label: row.department.name, value: Number(row.support || 0) }));
+  const sheriffSupport = constitutionalSupportRows
+    .filter((row) => /sheriff/i.test(row.label))
+    .reduce((sum, row) => sum + row.value, 0);
+  const otherConstitutionalSupport = constitutionalSupportRows
+    .filter((row) => !/sheriff/i.test(row.label))
+    .reduce((sum, row) => sum + row.value, 0);
+  const rows = [
+    { label: "Sheriff's Office", value: sheriffSupport },
+    { label: "Other Constitutional Offices", value: otherConstitutionalSupport },
+    { label: "Board Departments & Programs", value: groupSupport("board-departments-programs") },
+    { label: "Capital Projects", value: groupSupport("capital-projects") },
+    { label: "Statutory & Other Agency Funding", value: groupSupport("statutory-other-agency-funding") }
+  ]
+    .filter((row) => Number(row.value || 0) > 0)
+    .map((row) => ({ ...row, share: Number(row.value || 0) / totalSupport * 100 }));
+  const colors = ["#006231", "#D1BE78", "#2F6F88", "#7A8F3A", "#8A5A44", "#4F7D5B", "#A78C39", "#5B6770", "#9DB7A3"];
+  const segmentMarkup = rows.map((row, index) => `
+    <span title="${escapeHtml(row.label)}" style="height:${Math.max(row.share, row.value ? 1.2 : 0)}%;background:${colors[index % colors.length]}"></span>
+  `).join("");
+  const itemMarkup = rows.map((row, index) => `
+    <article class="function-stack-item" style="height:${Math.max(row.share, row.value ? 1.2 : 0)}%">
+      <i style="background:${colors[index % colors.length]}"></i>
+      <div>
+        <strong>${escapeHtml(row.label)}</strong>
+        <em>${money(row.value)} (${percent(row.share)})</em>
       </div>
-    `).join("")}
-  </div>
+    </article>
+  `).join("");
+  return `
+    <section class="funding-concentration-panel">
+      <div class="funding-concentration-chart" role="img" aria-label="Vertical stacked bar chart showing property tax support by function">
+        <div class="function-stack-items">${itemMarkup}</div>
+        <div class="function-stack-bar" aria-hidden="true">${segmentMarkup}</div>
+      </div>
+    </section>
   `;
 }
 
@@ -3248,15 +3264,15 @@ function commissionerDepartmentItemizedReductionDetail(department) {
   const operatingItems = removedOperatingItemsForDepartment(department).map((item) => {
     const groupLabel = cleanExpenseItemText(item.accountName || item.name || item.projectName || item.description || "Operating item");
     const itemLabel = operatingLineItemLabel(item, groupLabel);
-    const label = itemLabel ? `${groupLabel}: ${itemLabel}` : groupLabel;
-    return `<li>Operating - ${escapeHtml(label)} <strong>${money(operatingItemReductionAmount(item))}</strong></li>`;
+    const label = itemLabel || groupLabel;
+    return `<li>${escapeHtml(label)} <strong>${money(operatingItemReductionAmount(item))}</strong></li>`;
   });
   const projectItems = budgetData.capitalProjects
     .filter((project) => project.departmentId === department.id && reductionEligibleDepartment(department) && !locked(project.departmentId) && !state.keptProjects[project.id])
-    .map((project) => `<li>Capital - ${escapeHtml(project.name || "Capital project")} <strong>${money(project.cost)}</strong></li>`);
+    .map((project) => `<li>${escapeHtml(project.name || "Capital project")} <strong>${money(project.cost)}</strong></li>`);
   const expenseCapitalItemsForDepartment = expenseCapitalItems()
     .filter((item) => item.departmentId === department.id && reductionEligibleDepartment(department) && !locked(item.departmentId) && state.keptExpenseCapitalItems[item.expenseKey] === false)
-    .map((item) => `<li>Capital - ${escapeHtml(item.description || item.projectName || item.name || item.accountName || "Capital item")} <strong>${money(item.amount)}</strong></li>`);
+    .map((item) => `<li>${escapeHtml(item.description || item.projectName || item.name || item.accountName || "Capital item")} <strong>${money(item.amount)}</strong></li>`);
   const rows = operatingItems.concat(projectItems, expenseCapitalItemsForDepartment);
   if (!rows.length) return "";
   return `<div class="impact-itemized-detail"><span>Itemized reductions:</span><ul>${rows.join("")}</ul></div>`;
@@ -3574,8 +3590,8 @@ function commissionerReportVisualStyles(scenarioName = "") {
     .plain-note{font-size:13px;color:var(--muted);margin:0 0 12px;padding-left:19px}
     .summary-text{font-size:15.5px;line-height:1.5}
     .bridge-layout .summary-text{text-align:justify;text-align-last:left}
-    .bridge-layout,.flow-graphic,.allocation-chart,.ranked-support-list,.major-project-grid,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{break-inside:avoid}
-    .bridge-layout,.allocation-chart,.ranked-support-list,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.045)}
+    .bridge-layout,.flow-graphic,.allocation-chart,.ranked-support-list,.funding-concentration-panel,.major-project-grid,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{break-inside:avoid}
+    .bridge-layout,.allocation-chart,.ranked-support-list,.funding-concentration-panel,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.045)}
     .bridge-layout{align-items:stretch;position:relative;overflow:hidden}
     .flow-graphic div{border-color:var(--green);background:var(--light-green);border-radius:8px}
     .revenue-impact-card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
@@ -3601,10 +3617,23 @@ function commissionerReportVisualStyles(scenarioName = "") {
     .funding-itemized-detail span{display:block;color:var(--green);font-weight:900}
     .funding-itemized-detail ul{margin:3px 0 0;padding-left:14px}
     .funding-itemized-detail li{margin:2px 0}
+    .impact-itemized-detail,.impact-itemized-detail span,.impact-itemized-detail li,.impact-itemized-detail strong{color:var(--ink)!important}
     .ranked-support-card{border:1px solid var(--line)!important;border-radius:8px!important;background:#fff!important;box-shadow:0 1px 4px rgba(0,0,0,.035)}
     .ranked-support-card>span{background:var(--green)!important;color:#fff!important}
     .support-bar,.allocation-track{background:#edf2ee;border:1px solid var(--line)}
     .support-bar i,.allocation-track span{background:var(--green)!important}
+    .funding-concentration-panel{margin-top:12px;box-shadow:none}
+    .funding-concentration-heading h3{font-size:21px;margin:0;color:var(--dark-green)}
+    .funding-concentration-heading p{margin:3px 0 8px;color:var(--muted);font-size:12px;font-weight:700}
+    .funding-concentration-chart{display:grid;grid-template-columns:1fr 3.05in .25in;gap:24px;width:100%;margin-top:4px;align-items:stretch}
+    .function-stack-bar{display:flex;flex-direction:column-reverse;width:2.85in;height:4.55in;background:#EEF4F0;border:1px solid var(--line);overflow:hidden;justify-self:center;grid-column:2}
+    .function-stack-bar span{display:block;width:100%;min-height:4px}
+    .function-stack-items{display:flex;flex-direction:column-reverse;height:4.55in;align-self:center;grid-column:1}
+    .function-stack-item{display:grid;grid-template-columns:13px 1fr;gap:8px;align-items:center;border-top:1px solid var(--line);padding:2px 0;box-sizing:border-box;min-height:4px}
+    .function-stack-item i{display:block;width:13px;height:13px;border:1px solid rgba(31,42,36,.2);box-sizing:border-box;margin-top:2px}
+    .function-stack-item div{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+    .function-stack-item strong{display:inline;color:var(--dark-green);font-size:12px;line-height:1.12}
+    .function-stack-item em{display:inline;color:var(--ink);font-size:11.5px;font-style:normal;font-weight:900}
     .major-project-grid{grid-template-columns:repeat(2,1fr);gap:10px;background:transparent;border:0;box-shadow:none;padding:0}
     .major-project-grid article{border:1px solid var(--line);border-left:5px solid var(--green);border-radius:8px;background:#fff;padding:12px;box-shadow:0 1px 5px rgba(0,0,0,.04)}
     .major-project-grid span{color:var(--dark-green)}
@@ -3640,7 +3669,7 @@ function commissionerReportVisualStyles(scenarioName = "") {
       .commissioner-page-header span,.commissioner-page-header em{color:#fff!important}
       .briefing-page:after{content:${footerText};position:absolute;left:.48in;right:.48in;bottom:.17in;border-top:1.5px solid #006231;padding-top:.07in;color:#66736d;font-size:9px;font-weight:700}
       .cover-page:after{display:none}
-      .bridge-layout,.allocation-chart,.ranked-support-list,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{background:#fff!important;border:1px solid #D9E1E4!important;box-shadow:none!important}
+      .bridge-layout,.allocation-chart,.ranked-support-list,.funding-concentration-panel,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{background:#fff!important;border:1px solid #D9E1E4!important;box-shadow:none!important}
       .briefing-card,.ranked-support-card,.major-project-grid article,.revenue-impact-card-grid article,.scenario-result-grid article,.taxpayer-card-grid article,.scenario-millage-panel{background:#fff!important;border:1px solid #D9E1E4!important;box-shadow:none!important;break-inside:avoid;page-break-inside:avoid}
       .revenue-impact-card-grid article{border-top:5px solid #D1BE78!important}
       .scenario-millage-panel{border-left:5px solid #006231!important}
@@ -3691,9 +3720,8 @@ function exportCommissionerBriefingPdf() {
     <section class="briefing-page cover-page">
       ${commissionerScenarioLabelMarkup(scenarioName)}
       ${commissionerSplitLogoMarkup()}
-      <h1 class="cover-title">HJR 1 Fiscal Impact Analysis</h1>
-      <p class="cover-subtitle">Property Tax Supported Services</p>
-      <p class="cover-subtitle">Commissioner Briefing</p>
+      <h1 class="cover-title">Fiscal Impact Analysis</h1>
+      <p class="cover-subtitle">Property Tax Reduction Briefing</p>
       <div class="cover-rule"></div>
       <div class="executive-summary">
         <h2>Executive Summary</h2>
@@ -3703,7 +3731,7 @@ function exportCommissionerBriefingPdf() {
         <p>This briefing summarizes the projected fiscal impact of HJR 1, the county services supported by property taxes, and the potential service-level considerations associated with future revenue reductions.</p>
       </div>
       <div class="cover-rule"></div>
-      <p class="impact-heading">Projected Impact of HJR 1</p>
+      <p class="impact-heading">Projected Impact</p>
       <div class="impact-cards">
         <article class="impact-card"><span>FY2028 Projected Revenue Shortfall</span><strong>${money(fy2028ProjectedShortfall)}</strong></article>
         <article class="impact-card"><span>FY2029 Projected Revenue Shortfall</span><strong>${money(fy2029ProjectedShortfall)}</strong></article>
@@ -3716,8 +3744,8 @@ function exportCommissionerBriefingPdf() {
     </section>
     <section class="briefing-page">
       ${commissionerScenarioLabelMarkup(scenarioName)}
-      ${commissionerPageHeaderMarkup("Largest Property Tax Supported Functions", scenarioName)}
-      <h2>Largest Property Tax Supported Functions</h2>
+      ${commissionerPageHeaderMarkup("Property Tax Supported Functions", scenarioName)}
+      <h2>Property Tax Supported Functions</h2>
       ${commissionerLargestSupportedFunctionsMarkup()}
     </section>
     <section class="briefing-page">
