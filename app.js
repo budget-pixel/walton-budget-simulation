@@ -2719,9 +2719,10 @@ function renderResultingShortfallForecast(totals) {
   }
 
   const fy2027MillageShortfall = Math.max(currentMillageRevenue() - estimatedMillageRevenue(), 0);
+  const fy2027ResultingShortfall = Math.max(fy2027MillageShortfall - Number(totals.totalReductions || 0), 0);
 
   const rows = [
-    { year: "FY2027", amount: fy2027MillageShortfall },
+    { year: "FY2027", amount: fy2027ResultingShortfall },
     ...shortfallComponents()
       .filter((year) => ["FY2028", "FY2029"].includes(year.year))
       .map((year) => {
