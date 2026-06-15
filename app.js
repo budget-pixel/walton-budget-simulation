@@ -3306,8 +3306,8 @@ function commissionerScenarioMillageRows(totals) {
     const year = forecastYears().find((item) => item.year === yearLabel);
     const projectedExpense = Number(year?.projectedSupportedExpense || 0);
     const revenueAtScenarioMillage = Number(taxableValueByYear[yearLabel] || 0) * proposedRate / 1000;
-    const capitalReduction = yearLabel === budgetData.scenarioYear ? oneTimeCapitalReduction : 0;
-    const reductionsApplied = scenarioAppliesToForecastYear(year) ? recurringReduction + capitalReduction : 0;
+    const capitalReduction = yearLabel === "FY2027" || yearLabel === budgetData.scenarioYear ? oneTimeCapitalReduction : 0;
+    const reductionsApplied = yearLabel === "FY2027" || scenarioAppliesToForecastYear(year) ? recurringReduction + capitalReduction : 0;
     return {
       year: yearLabel,
       revenueAtScenarioMillage,
