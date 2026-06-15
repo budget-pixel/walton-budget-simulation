@@ -4668,6 +4668,9 @@ document.addEventListener("click", (event) => {
   window.open("expense-detail-converter.html", "_blank");
   return;
   }
+  if (control === "open-department-total-budget-converter") {
+    window.open("department-total-budget-converter.html", "_blank", "noopener");
+  }
   if (control === "open-expense-converter") {
     window.open("expense-detail-converter.html", "_blank", "noopener");
   }

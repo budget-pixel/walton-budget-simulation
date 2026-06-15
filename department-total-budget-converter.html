@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department Total Budget Converter</title>
+  <style>
+    :root {
+      --color-page: #f4f6f7;
+      --color-surface: #ffffff;
+      --color-text: #1f2a2e;
+      --color-muted: #5d686d;
+      --color-border: #d9e1e4;
+      --color-primary: #006231;
+      --color-primary-dark: #004a25;
+      --color-warning: #7a4d00;
+      --radius-small: 6px;
+    }
+    body { margin: 0; background: var(--color-page); color: var(--color-text); font-family: Arial, Helvetica, sans-serif; }
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0; }
+    header { margin-bottom: 20px; }
+    h1, h2 { margin: 0; color: var(--color-primary-dark); }
+    p { color: var(--color-muted); line-height: 1.5; }
+    .panel { padding: 18px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; }
+    .grid { display: grid; grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr); gap: 16px; align-items: start; }
+    label { display: grid; gap: 8px; font-weight: 700; color: var(--color-primary); }
+    input, textarea { width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-small); font: inherit; }
+    textarea { min-height: 520px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.84rem; }
+    button { width: fit-content; padding: 10px 14px; border: 0; border-radius: var(--radius-small); background: var(--color-primary); color: #ffffff; font-weight: 800; cursor: pointer; }
+    button:disabled { opacity: 0.48; cursor: not-allowed; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .status { margin-top: 12px; color: var(--color-muted); }
+    .warning { color: var(--color-warning); font-weight: 700; }
+    .summary { display: grid; gap: 8px; margin-top: 14px; }
+    .summary div { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--color-border); padding-top: 8px; }
+    @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Department Total Budget Converter</h1>
+      <p>Upload the full budget publication CSV or Excel export. The converter totals expense rows by department and creates <strong>data/departmentTotalBudget.js</strong> for budget presentation pages that can be appended to the Commissioner Briefing.</p>
+    </header>
+    <div class="grid">
+      <section class="panel">
+        <label>
+          Whole Budget CSV or Excel File
+          <input id="fileInput" type="file" accept=".csv,text/csv,.xlsx,.xls,.xlsm">
+        </label>
+        <p class="status" id="status">Waiting for a file.</p>
+        <div class="summary" id="summary"></div>
+      </section>
+      <section class="panel">
+        <h2>Generated JavaScript</h2>
+        <p>Save this as <strong>data/departmentTotalBudget.js</strong>. The generated variable is <strong>window.wcDepartmentTotalBudget</strong>.</p>
+        <textarea id="output" readonly></textarea>
+        <div class="actions">
+          <button id="copyButton" type="button" disabled>Copy JavaScript</button>
+          <button id="downloadButton" type="button" disabled>Download departmentTotalBudget.js</button>
+        </div>
+        <p class="status" id="warnings"></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="converter-utils.js"></script>
+  <script>
+    if (!window.converterUtils) {
+      document.getElementById("status").textContent = "Converter utilities failed to load. Check converter-utils.js.";
+      throw new Error("converter-utils.js did not load");
+    }
+
+    const { cleanText, mapFields, normalizeName, parseMoney, jsAssign, rowsFromFile: rowsFromBuffer } = window.converterUtils;
+    const requiredColumns = {
+      department: ["proposal", "department", "department name", "org", "organization"],
+      accountCode: ["account code", "accountcode", "object code", "object", "account"],
+      accountName: ["account name", "accountname", "object description", "object name"],
+      amount: ["period 1 proposed", "2027 proposed budget", "proposed budget", "budget", "amount", "expense"]
+    };
+
+    function normalizeDepartmentName(value) {
+      const text = cleanText(value);
+      const normalized = normalizeName(text);
+      if (normalized === "planning vacation rental certification program" ||
+          normalized.includes("planning vacation rental certification")) {
+        return "Planning";
+      }
+      if (normalized === "state attorney facility") return "State Attorney";
+      return text;
+    }
+
+    function shouldExcludeDepartment(value) {
+      const normalized = normalizeName(value);
+      if (!normalized) return true;
+      const exactExclusions = new Set([
+        "ad valorem taxes",
+        "ad valorem taxes interfund transfers",
+        "ad valorem taxes inerfund transfers",
+        "self insurance fund"
+      ]);
+      return exactExclusions.has(normalized);
+    }
+
+    function isExpenseCode(accountCode) {
+      const code = String(accountCode || "").replace(/\.0$/, "").replace(/[^0-9]/g, "").trim();
+      if (!code) return true;
+      return !code.startsWith("3");
+    }
+
+    async function rowsFromFile(file) {
+      const buffer = await file.arrayBuffer();
+      return await rowsFromBuffer(buffer);
+    }
+
+    function convertRows(rows) {
+      if (rows.length < 2) throw new Error("The file must include a header row and at least one data row.");
+
+      const fields = mapFields(rows[0], requiredColumns);
+      const missing = Object.entries(fields)
+        .filter(([, column]) => column < 0)
+        .map(([field]) => field);
+
+      if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
+
+      const departments = new Map();
+      let skippedRevenueRows = 0;
+      let skippedBlankRows = 0;
+
+      rows.slice(1).forEach((row) => {
+        const rawDepartment = cleanText(row[fields.department]);
+        if (!rawDepartment || shouldExcludeDepartment(rawDepartment)) {
+          skippedBlankRows += 1;
+          return;
+        }
+
+        const accountCode = String(row[fields.accountCode] ?? "")
+          .replace(/\.0$/, "")
+          .replace(/[^0-9]/g, "")
+          .trim();
+
+        if (!isExpenseCode(accountCode)) {
+          skippedRevenueRows += 1;
+          return;
+        }
+
+        const amount = parseMoney(row[fields.amount]);
+        if (!amount) return;
+
+        const department = normalizeDepartmentName(rawDepartment);
+        if (!departments.has(department)) {
+          departments.set(department, {
+            department,
+            totalBudget: 0,
+            accounts: new Map()
+          });
+        }
+
+        const accountName = cleanText(row[fields.accountName]);
+        const record = departments.get(department);
+        record.totalBudget += amount;
+
+        const accountKey = accountCode || accountName || "Uncoded";
+        if (!record.accounts.has(accountKey)) {
+          record.accounts.set(accountKey, {
+            accountCode,
+            accountName,
+            amount: 0
+          });
+        }
+        record.accounts.get(accountKey).amount += amount;
+      });
+
+      const output = [...departments.values()].map((department) => ({
+        department: department.department,
+        totalBudget: Math.round(department.totalBudget),
+        accounts: [...department.accounts.values()]
+          .map((account) => ({ ...account, amount: Math.round(account.amount) }))
+          .sort((a, b) => String(a.accountCode).localeCompare(String(b.accountCode)) || String(a.accountName).localeCompare(String(b.accountName)))
+      })).sort((a, b) => a.department.localeCompare(b.department));
+
+      return {
+        output,
+        skippedRevenueRows,
+        skippedBlankRows,
+        grandTotal: output.reduce((sum, department) => sum + Number(department.totalBudget || 0), 0)
+      };
+    }
+
+    function setGeneratedOutput(jsText) {
+      document.getElementById("output").value = jsText;
+      document.getElementById("copyButton").disabled = !jsText;
+      document.getElementById("downloadButton").disabled = !jsText;
+    }
+
+    document.getElementById("copyButton").addEventListener("click", async () => {
+      const value = document.getElementById("output").value;
+      if (!value) return;
+      await navigator.clipboard.writeText(value);
+      document.getElementById("status").textContent = "Copied generated JavaScript.";
+    });
+
+    document.getElementById("downloadButton").addEventListener("click", () => {
+      const value = document.getElementById("output").value;
+      if (!value) return;
+      const blob = new Blob([value], { type: "text/javascript" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "departmentTotalBudget.js";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("fileInput").addEventListener("change", async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) {
+        document.getElementById("status").textContent = "No file selected.";
+        return;
+      }
+
+      document.getElementById("status").textContent = `Reading ${file.name}...`;
+      setGeneratedOutput("");
+      document.getElementById("summary").innerHTML = "";
+      document.getElementById("warnings").textContent = "";
+
+      try {
+        const rows = await rowsFromFile(file);
+        if (!Array.isArray(rows) || rows.length === 0) {
+          throw new Error("No rows were parsed from the selected file. Make sure the workbook has a Budget sheet or upload a CSV.");
+        }
+
+        const result = convertRows(rows);
+        setGeneratedOutput(jsAssign("wcDepartmentTotalBudget", result.output));
+        document.getElementById("status").textContent = `Converted ${result.output.length} departments from ${file.name}. Grand total: ${result.grandTotal.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}.`;
+        document.getElementById("summary").innerHTML = result.output.slice(0, 10).map((department) => `<div><span>${department.department}</span><strong>${department.totalBudget.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}</strong></div>`).join("");
+        document.getElementById("warnings").innerHTML = `<span class="warning">Skipped revenue rows:</span> ${result.skippedRevenueRows.toLocaleString()} &nbsp; <span class="warning">Skipped blank/excluded department rows:</span> ${result.skippedBlankRows.toLocaleString()}`;
+      } catch (error) {
+        console.error("Department total budget conversion failed", error);
+        document.getElementById("status").textContent = error.message || "Conversion failed.";
+        setGeneratedOutput("");
+        document.getElementById("summary").innerHTML = "";
+        document.getElementById("warnings").textContent = "";
+      }
+    });
+  </script>
+</body>
+</html>
