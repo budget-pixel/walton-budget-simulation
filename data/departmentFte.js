@@ -1,6 +1,6 @@
 window.departmentFte = {
   "version": 1,
-  "generatedAt": "2026-06-08T01:50:13.415Z",
+  "generatedAt": "2026-06-15T02:37:24.871Z",
   "departments": {
     "sheriff-s-office": {
       "department": "Sheriff's Office",
@@ -8,7 +8,7 @@ window.departmentFte = {
     },
     "board-of-county-commissioners": {
       "department": "Board of County Commissioners",
-      "fte": 10.5
+      "fte": 11
     },
     "building-construction-and-maintenance": {
       "department": "Building Construction and Maintenance",
@@ -46,8 +46,8 @@ window.departmentFte = {
       "department": "Clerk of Courts & County Comptroller",
       "fte": 80
     },
-    "walton-county-health-deparment": {
-      "department": "Walton County Health Deparment",
+    "walton-county-health-department": {
+      "department": "Walton County Health Department",
       "fte": 0
     },
     "property-appraiser": {
@@ -72,7 +72,7 @@ window.departmentFte = {
     },
     "eagle-springs-golf-and-recreation-center": {
       "department": "Eagle Springs Golf and Recreation Center",
-      "fte": 12.5
+      "fte": 12
     },
     "office-of-the-county-attorney": {
       "department": "Office of the County Attorney",
@@ -98,8 +98,8 @@ window.departmentFte = {
       "department": "Recreation",
       "fte": 6
     },
-    "south-walton-fire-district": {
-      "department": "South Walton Fire District",
+    "south-walton-fire-and-state-control": {
+      "department": "South Walton Fire & State Control",
       "fte": 0
     },
     "emergency-management": {
