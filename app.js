@@ -390,6 +390,12 @@ function departmentExcludedFromReductionControls(department) {
 }
 
 const reductionEligibleDepartment = (department) => department && !excluded(department) && !constitutional(department) && !departmentExcludedFromReductionControls(department);
+const capitalProjectsDepartment = (department) => {
+  const id = normalizeBootstrapDepartmentId(department?.id || department?.departmentId || department?.name);
+  const name = String(department?.name || department?.department || "").toLowerCase();
+  return id === "capital-projects" || name.includes("capital projects");
+};
+const capitalReductionEligibleDepartment = (department) => reductionEligibleDepartment(department) || (department && !excluded(department) && !constitutional(department) && capitalProjectsDepartment(department));
 const operatingVisibleDepartment = (department) => {
   const id = normalizeBootstrapDepartmentId(
     department?.id || department?.departmentId || department?.name
@@ -719,7 +725,7 @@ function scenarioTotals(raw = false) {
   });
   const capitalReductions = budgetData.capitalProjects.reduce((total, project) => {
     const department = departmentById(project.departmentId);
-    if (!reductionEligibleDepartment(department) || locked(project.departmentId) || state.keptProjects[project.id]) return total;
+    if (!capitalReductionEligibleDepartment(department) || locked(project.departmentId) || state.keptProjects[project.id]) return total;
     return total + project.cost;
   }, 0) + expenseCapitalReductionAmount();
   const actualTotalReductions = personnelReductions + operatingReductions + capitalReductions;
@@ -760,8 +766,8 @@ function currentReductionValue(type, id) {
   if (type === "capital") {
     const project = budgetData.capitalProjects.find((item) => item.id === id);
     const expenseProject = expenseItemByKey(id);
-    if (project) return reductionEligibleDepartment(departmentById(project.departmentId)) && !state.keptProjects[id] ? project.cost : 0;
-    return expenseProject && reductionEligibleDepartment(departmentById(expenseProject.departmentId)) && !state.keptExpenseCapitalItems[id] ? Number(expenseProject.amount || 0) : 0;
+    if (project) return capitalReductionEligibleDepartment(departmentById(project.departmentId)) && !state.keptProjects[id] ? project.cost : 0;
+    return expenseProject && capitalReductionEligibleDepartment(departmentById(expenseProject.departmentId)) && !state.keptExpenseCapitalItems[id] ? Number(expenseProject.amount || 0) : 0;
   }
   return 0;
 }
@@ -1271,7 +1277,7 @@ function renderCapital() {
     removeAllButton +
     budgetData.capitalProjects
       .filter((project) =>
-        reductionEligibleDepartment(departmentById(project.departmentId))
+        capitalReductionEligibleDepartment(departmentById(project.departmentId))
       )
       .map((project) => {
         state.keptProjects[project.id] ??= true;
@@ -1723,7 +1729,7 @@ function operatingExpenseItemsForDepartment(department) {
 }
 
 function expenseCapitalItems() {
-  return departments().filter(reductionEligibleDepartment).flatMap((department) => expenseItemsForDepartment(department).filter(isCapitalExpenseItem));
+  return departments().filter(capitalReductionEligibleDepartment).flatMap((department) => expenseItemsForDepartment(department).filter(isCapitalExpenseItem));
 }
 
 function expenseItemByKey(key) {
@@ -1740,7 +1746,7 @@ function removedOperatingAmountForDepartment(department) {
 
 function expenseCapitalReductionAmount() {
   return expenseCapitalItems().reduce((total, item) => {
-    if (!reductionEligibleDepartment(departmentById(item.departmentId)) || locked(item.departmentId) || state.keptExpenseCapitalItems[item.expenseKey] !== false) return total;
+    if (!capitalReductionEligibleDepartment(departmentById(item.departmentId)) || locked(item.departmentId) || state.keptExpenseCapitalItems[item.expenseKey] !== false) return total;
     return total + Number(item.amount || 0);
   }, 0);
 }
@@ -1836,13 +1842,29 @@ function renderOperatingLineItems(department, isLocked) {
 }
 
 function renderExpenseCapitalProjects() {
-  return expenseCapitalItems().map((item) => {
+  const items = expenseCapitalItems();
+  if (!items.length) return "";
+  const capitalProjectsDepartmentId = departments().find((department) => normalizeExpenseDepartmentName(department.name) === "capital projects")?.id;
+  return `
+    <div class="capital-reduction-subheading">
+      <strong>Capital budget line items</strong>
+      <span>Uncheck an item to reduce that project or capital purchase.</span>
+    </div>
+    ${items.map((item) => {
     const isLocked = locked(item.departmentId);
     if (isLocked) state.keptExpenseCapitalItems[item.expenseKey] = true;
     const kept = state.keptExpenseCapitalItems[item.expenseKey] !== false;
-    const itemName = item.projectName || item.name || item.description || "Capital item";
-    return `<div class="project-card expense-project-card ${isLocked ? "locked-row" : ""}"><input type="checkbox" ${kept ? "checked" : ""} data-control="expense-capital" data-item="${item.expenseKey}" ${isLocked ? "disabled" : ""}><div><label>${escapeHtml(itemName)}</label><p>${departmentName(item.departmentId)}${isLocked ? " | Locked" : ""}</p><small>${money(item.amount)}</small></div></div>`;
-  }).join("");
+    const isCapitalProjectsDepartment = item.departmentId === capitalProjectsDepartmentId;
+    const itemName = isCapitalProjectsDepartment
+      ? meaningfulExpenseItemText(item.description) || meaningfulExpenseItemText(item.projectName) || meaningfulExpenseItemText(item.name) || meaningfulExpenseItemText(item.accountName) || "Capital project"
+      : meaningfulExpenseItemText(item.projectName) || meaningfulExpenseItemText(item.name) || meaningfulExpenseItemText(item.description) || meaningfulExpenseItemText(item.accountName) || "Capital item";
+    const accountName = cleanExpenseItemText(item.accountName || "");
+    const detail = isCapitalProjectsDepartment && accountName && comparableExpenseItemText(accountName) !== comparableExpenseItemText(itemName)
+      ? `${departmentName(item.departmentId)} | ${accountName}`
+      : departmentName(item.departmentId);
+    return `<div class="project-card expense-project-card ${isLocked ? "locked-row" : ""}"><input type="checkbox" ${kept ? "checked" : ""} data-control="expense-capital" data-item="${item.expenseKey}" ${isLocked ? "disabled" : ""}><div><label>${escapeHtml(itemName)}</label><p>${escapeHtml(detail)}${isLocked ? " | Locked" : ""}</p><small>${money(item.amount)}</small></div></div>`;
+  }).join("")}
+  `;
 }
 
 function renderExpenseLineItems(items) {
@@ -2796,12 +2818,12 @@ function commissionerCapitalReductionsByCategory() {
   const byCategory = Object.fromEntries(commissionerBriefingCategories.map((category) => [category.id, 0]));
   budgetData.capitalProjects.forEach((project) => {
     const department = departmentById(project.departmentId);
-    if (!reductionEligibleDepartment(department) || locked(project.departmentId) || state.keptProjects[project.id]) return;
+    if (!capitalReductionEligibleDepartment(department) || locked(project.departmentId) || state.keptProjects[project.id]) return;
     byCategory[commissionerCategoryForDepartment(department).id] += Number(project.cost || 0);
   });
   expenseCapitalItems().forEach((item) => {
     const department = departmentById(item.departmentId);
-    if (!reductionEligibleDepartment(department) || locked(item.departmentId) || state.keptExpenseCapitalItems[item.expenseKey] !== false) return;
+    if (!capitalReductionEligibleDepartment(department) || locked(item.departmentId) || state.keptExpenseCapitalItems[item.expenseKey] !== false) return;
     byCategory[commissionerCategoryForDepartment(department).id] += Number(item.amount || 0);
   });
   return byCategory;
@@ -3268,10 +3290,10 @@ function commissionerDepartmentItemizedReductionDetail(department) {
     return `<li>${escapeHtml(label)} <strong>${money(operatingItemReductionAmount(item))}</strong></li>`;
   });
   const projectItems = budgetData.capitalProjects
-    .filter((project) => project.departmentId === department.id && reductionEligibleDepartment(department) && !locked(project.departmentId) && !state.keptProjects[project.id])
+    .filter((project) => project.departmentId === department.id && capitalReductionEligibleDepartment(department) && !locked(project.departmentId) && !state.keptProjects[project.id])
     .map((project) => `<li>${escapeHtml(project.name || "Capital project")} <strong>${money(project.cost)}</strong></li>`);
   const expenseCapitalItemsForDepartment = expenseCapitalItems()
-    .filter((item) => item.departmentId === department.id && reductionEligibleDepartment(department) && !locked(item.departmentId) && state.keptExpenseCapitalItems[item.expenseKey] === false)
+    .filter((item) => item.departmentId === department.id && capitalReductionEligibleDepartment(department) && !locked(item.departmentId) && state.keptExpenseCapitalItems[item.expenseKey] === false)
     .map((item) => `<li>${escapeHtml(item.description || item.projectName || item.name || item.accountName || "Capital item")} <strong>${money(item.amount)}</strong></li>`);
   const rows = operatingItems.concat(projectItems, expenseCapitalItemsForDepartment);
   if (!rows.length) return "";
@@ -3472,7 +3494,7 @@ function commissionerCapitalReductionItems() {
   const projectItems = budgetData.capitalProjects
     .filter((project) => {
       const department = departmentById(project.departmentId);
-      return reductionEligibleDepartment(department) && !locked(project.departmentId) && !state.keptProjects[project.id];
+      return capitalReductionEligibleDepartment(department) && !locked(project.departmentId) && !state.keptProjects[project.id];
     })
     .map((project) => ({
       departmentName: departmentName(project.departmentId),
@@ -3482,7 +3504,7 @@ function commissionerCapitalReductionItems() {
   const expenseItems = expenseCapitalItems()
     .filter((item) => {
       const department = departmentById(item.departmentId);
-      return reductionEligibleDepartment(department) && !locked(item.departmentId) && state.keptExpenseCapitalItems[item.expenseKey] === false;
+      return capitalReductionEligibleDepartment(department) && !locked(item.departmentId) && state.keptExpenseCapitalItems[item.expenseKey] === false;
     })
     .map((item) => ({
       departmentName: departmentName(item.departmentId),
@@ -4248,14 +4270,14 @@ document.addEventListener("change", (event) => {
   if (control === "remove-all-capital") {
     budgetData.capitalProjects.forEach((project) => {
       const department = departmentById(project.departmentId);
-      if (reductionEligibleDepartment(department) && !locked(project.departmentId)) {
+      if (capitalReductionEligibleDepartment(department) && !locked(project.departmentId)) {
         state.keptProjects[project.id] = false;
       }
     });
 
     expenseCapitalItems().forEach((item) => {
       const department = departmentById(item.departmentId);
-      if (reductionEligibleDepartment(department) && !locked(item.departmentId)) {
+      if (capitalReductionEligibleDepartment(department) && !locked(item.departmentId)) {
         state.keptExpenseCapitalItems[item.expenseKey] = false;
       }
     });
@@ -4273,7 +4295,7 @@ document.addEventListener("change", (event) => {
   }
   if (control === "capital") {
     const project = budgetData.capitalProjects.find((item) => item.id === event.target.dataset.project);
-    if (!project || !reductionEligibleDepartment(departmentById(project.departmentId))) return;
+    if (!project || !capitalReductionEligibleDepartment(departmentById(project.departmentId))) return;
     const removing = !event.target.checked;
     if (!isStaffMode && removing && project.cost > availableShortfallExcluding("capital", project.id)) {
       state.keptProjects[project.id] = true;
@@ -4286,7 +4308,7 @@ document.addEventListener("change", (event) => {
   if (control === "expense-capital") {
     const item = expenseItemByKey(event.target.dataset.item);
     const removing = !event.target.checked;
-    if (!item || !reductionEligibleDepartment(departmentById(item.departmentId))) return;
+    if (!item || !capitalReductionEligibleDepartment(departmentById(item.departmentId))) return;
     if (!isStaffMode && removing && Number(item.amount || 0) > availableShortfallExcluding("capital", item.expenseKey)) {
       state.keptExpenseCapitalItems[item.expenseKey] = true;
       event.target.checked = true;
@@ -4349,14 +4371,14 @@ document.addEventListener("click", (event) => {
   if (control === "remove-all-capital") {
     budgetData.capitalProjects.forEach((project) => {
       const department = departmentById(project.departmentId);
-      if (reductionEligibleDepartment(department) && !locked(project.departmentId)) {
+      if (capitalReductionEligibleDepartment(department) && !locked(project.departmentId)) {
         state.keptProjects[project.id] = false;
       }
     });
 
     expenseCapitalItems().forEach((item) => {
       const department = departmentById(item.departmentId);
-      if (reductionEligibleDepartment(department) && !locked(item.departmentId)) {
+      if (capitalReductionEligibleDepartment(department) && !locked(item.departmentId)) {
         state.keptExpenseCapitalItems[item.expenseKey] = false;
       }
     });
