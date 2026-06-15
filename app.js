@@ -2954,9 +2954,14 @@ function commissionerDepartmentFundingRows() {
       };
     })
     .sort((a, b) => {
-      const categoryDelta = commissionerControlCategoryForDepartment(a.department).order - commissionerControlCategoryForDepartment(b.department).order;
-      return categoryDelta || b.support - a.support || a.department.name.localeCompare(b.department.name);
+      return b.support - a.support || a.department.name.localeCompare(b.department.name);
     });
+}
+
+function propertyTaxDependencyPercent(department) {
+  const totalBudget = Number(department?.totalBudget || 0);
+  if (!totalBudget) return 0;
+  return Number(departmentSupport(department, "FY2027 Budget") || 0) / totalBudget * 100;
 }
 
 const commissionerControlCategories = [
@@ -3085,9 +3090,10 @@ function commissionerDepartmentFundingDetailMarkup() {
     support: sum.support + row.support,
     fte: sum.fte + row.fte
   }), { totalBudget: 0, support: 0, fte: 0 });
-  return `<table><thead><tr><th>Department</th><th>Total Budget</th><th>Property Tax Support</th><th>Percent of Total Property Tax Budget</th><th>FTE</th></tr></thead><tbody>
-    ${commissionerGroupedRows(rows, (row) => `<tr><td><strong>${escapeHtml(row.department.name)}</strong></td><td>${money(row.totalBudget)}</td><td>${money(row.support)}</td><td>${percent(row.supportPercent)}</td><td>${row.fte ? number(row.fte) : ""}</td></tr>`, 5)}
-    <tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.totalBudget)}</strong></td><td><strong>${money(totals.support)}</strong></td><td><strong>${percent(100)}</strong></td><td><strong>${totals.fte ? number(totals.fte) : ""}</strong></td></tr>
+  const totalDependency = totals.totalBudget ? totals.support / totals.totalBudget * 100 : 0;
+  return `<table><thead><tr><th>Department</th><th>Total Budget</th><th>Property Tax Support</th><th>Property Tax Dependency</th><th>FTE</th></tr></thead><tbody>
+    ${rows.map((row) => `<tr><td><strong>${escapeHtml(row.department.name)}</strong></td><td>${money(row.totalBudget)}</td><td>${money(row.support)}</td><td>${percent(propertyTaxDependencyPercent(row.department))}</td><td>${row.fte ? number(row.fte) : ""}</td></tr>`).join("")}
+    <tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.totalBudget)}</strong></td><td><strong>${money(totals.support)}</strong></td><td><strong>${percent(totalDependency)}</strong></td><td><strong>${totals.fte ? number(totals.fte) : ""}</strong></td></tr>
   </tbody></table>`;
 }
 
@@ -3128,11 +3134,23 @@ function commissionerLargestSupportedFunctionsMarkup() {
         <div>
           <strong style="font-size:14px">${escapeHtml(row.department.name)}</strong>
           <em style="font-size:10px">${money(row.support)} | ${percent(row.supportPercent)} of total property tax support</em>
-          <div class="support-bar" style="height:7px;margin-top:5px"><i style="width:${Math.max(row.support / maxSupport * 100, 3)}%"></i></div>
         </div>
       </article>
     `).join("")}
-  </div>`;
+  </div>
+  <div style="display:grid;gap:6px;margin-top:12px">
+    ${rows.map((row) => `
+      <div style="display:grid;grid-template-columns:2.85in 1fr .95in;gap:10px;align-items:center">
+        <strong style="color:var(--green);font-size:11px">${escapeHtml(row.department.name)}</strong>
+        <div style="height:14px;background:#edf2ee;border:1px solid var(--line);border-radius:999px;overflow:hidden">
+          <span style="display:block;height:100%;width:${Math.max(row.support / maxSupport * 100, 3)}%;background:var(--green)"></span>
+        </div>
+        <strong style="text-align:right;color:var(--ink);font-size:11px">${money(row.support)}</strong>
+      </div>
+    `).join("")}
+  </div>
+  <p class="plain-note" style="margin-top:14px">Property taxes support a broad range of county services. However, a significant share of countywide property-tax-supported expenditures is concentrated within a relatively small number of governmental functions. Understanding where these revenues are currently allocated helps illustrate the potential fiscal implications associated with projected HJR 1 revenue reductions.</p>
+  `;
 }
 
 function commissionerCapitalProjectRows() {
@@ -3217,9 +3235,9 @@ function commissionerScenarioResultsMarkup(totals) {
       const remaining = Math.max(initialShortfall - reductionsApplied, 0);
       return `<article>
         <h3>${yearLabel}</h3>
-        <div><span>Initial Revenue Shortfall</span><strong>${money(initialShortfall)}</strong></div>
-        <div><span>Reductions Applied</span><strong>${money(reductionsApplied)}</strong></div>
-        <div><span>Remaining Revenue Shortfall</span><strong>${remaining ? negativeMoney(remaining) : "$0"}</strong></div>
+        <div><span>Initial Revenue Shortfall</span><strong style="color:#b42318">${initialShortfall ? negativeMoney(initialShortfall) : "$0"}</strong></div>
+        <div><span>Reductions Applied</span><strong style="color:var(--green)">${money(reductionsApplied)}</strong></div>
+        <div><span>Remaining Revenue Shortfall</span><strong style="color:${remaining ? "#b42318" : "var(--green)"}">${remaining ? negativeMoney(remaining) : "$0"}</strong></div>
       </article>`;
     }).join("")}
   </div>`;
