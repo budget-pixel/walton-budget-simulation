@@ -131,7 +131,6 @@
         <a href="#departments">Departments</a>
         <a href="#builder">Build Scenario</a>
         <a href="#tax-impact">Property Tax</a>
-        <a href="#methodology" data-staff-only>Methodology</a>
       </nav>
       <div class="header-actions">
         <button type="button" class="settings-button" data-control="toggle-tools" data-staff-only aria-label="Open scenario tools" aria-expanded="false">&#9881;</button>
@@ -461,35 +460,13 @@
             <label class="metric-box editable-millage" data-staff-only><span>Revenue Target <button class="info-button" type="button" aria-label="Estimated revenue help" data-tip="Estimated revenue is calculated as taxable value base multiplied by millage, divided by 1,000. This is a planning estimate and may not match final certified tax roll calculations.">i</button></span><input id="revenueTarget" type="text" data-control="revenue-target" placeholder="$163,473,140"></label>
             <div class="metric-box"><span>Vs Current Millage <button class="info-button" type="button" aria-label="Revenue difference help" data-tip="Revenue difference shows how much more or less Property Tax revenue the proposed millage would generate compared with the selected reference point, such as current millage or the rollback revenue target.">i</button></span><strong id="millageRevenueImpact"></strong></div>
             <div class="metric-box"><span>Vs Rollback Revenue <button class="info-button" type="button" aria-label="Revenue difference help" data-tip="Revenue difference shows how much more or less Property Tax revenue the proposed millage would generate compared with the selected reference point, such as current millage or the rollback revenue target.">i</button></span><strong id="rollbackRevenueImpact"></strong></div>
-            <div class="metric-box"><span>Resulting Shortfall</span><strong id="millageShortfallImpact"></strong></div>
-            <div class="metric-box"><span>2026 Annual Property Tax Savings per Taxable Value</span><div id="taxpayerImpactTiers" class="taxpayer-impact-tiers"></div><small><em>Amounts will be populated when the proposed millage is adjusted above.</em></small></div>
+            <div class="metric-box"><span>Resulting Shortfall <button class="info-button" type="button" aria-label="Resulting shortfall help" data-tip="The resulting shortfall represents the remaining projected funding gap after selected reductions and any revenue generated from the proposed millage rate are applied. A negative value indicates an unresolved funding gap remains.">i</button></span><strong id="millageShortfallImpact"></strong></div>
+            <div class="metric-box"><span>2026 Property Tax Savings per Taxable Value <button class="info-button" type="button" aria-label="Annual property tax savings help" data-tip="Estimated annual savings compare the current millage rate with the proposed millage rate applied to the taxable value shown. Actual tax bills may vary based on exemptions, assessment limitations, and final adopted millage rates.">i</button></span><div id="taxpayerImpactTiers" class="taxpayer-impact-tiers"></div><small><em>Amounts will be populated when the proposed millage is adjusted above.</em></small></div>
           </div>
         </article>
       </div>
     </section>
 
-    <section id="methodology" class="page-section" data-staff-only>
-      <div class="section-heading section-heading-band">
-        <div>
-          <p class="eyebrow">Methodology</p>
-          <h2>How the Simulation Calculates Results</h2>
-        </div>
-      </div>
-      <div class="assumption-grid">
-        <article class="panel">
-          <h3>Supported Expense Assumptions</h3>
-          <ul id="inflationAssumptions"></ul>
-        </article>
-        <article class="panel">
-          <h3>Methodology</h3>
-          <ul id="methodologyList"></ul>
-        </article>
-        <article class="panel">
-          <h3>Formula Definitions</h3>
-          <div id="formulaDefinitions" class="formula-list"></div>
-        </article>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">

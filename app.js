@@ -752,7 +752,7 @@ function currentReductionValue(type, id) {
   }
   if (type === "operating-item") {
     const item = expenseItemByKey(id);
-    return item && !lockedOperatingExpenseItem(item) && operatingEditableDepartment(departmentById(item.departmentId)) && state.removedOperatingItems[id] ? Number(item.amount || 0) : 0;
+    return item && !lockedOperatingExpenseItem(item) && operatingEditableDepartment(departmentById(item.departmentId)) ? operatingItemReductionAmount(item) : 0;
   }
   if (type === "capital") {
     const project = budgetData.capitalProjects.find((item) => item.id === id);
@@ -761,6 +761,13 @@ function currentReductionValue(type, id) {
     return expenseProject && reductionEligibleDepartment(departmentById(expenseProject.departmentId)) && !state.keptExpenseCapitalItems[id] ? Number(expenseProject.amount || 0) : 0;
   }
   return 0;
+}
+
+function operatingItemReductionAmount(item) {
+  const value = state.removedOperatingItems[item.expenseKey];
+  if (!value) return 0;
+  const amount = Number(item.amount || 0);
+  return value === true ? amount : Math.min(Math.max(Number(value || 0), 0), amount);
 }
 
 function availableShortfallExcluding(type, id) {
@@ -1720,7 +1727,7 @@ function removedOperatingItemsForDepartment(department) {
 }
 
 function removedOperatingAmountForDepartment(department) {
-  return removedOperatingItemsForDepartment(department).reduce((total, item) => total + Number(item.amount || 0), 0);
+  return removedOperatingItemsForDepartment(department).reduce((total, item) => total + operatingItemReductionAmount(item), 0);
 }
 
 function expenseCapitalReductionAmount() {
@@ -1770,30 +1777,51 @@ function operatingLineItemLabel(item, groupLabel) {
 function renderOperatingLineItems(department, isLocked) {
   const groups = groupedExpenseItems(operatingExpenseItemsForDepartment(department));
   if (!groups.length) return "";
+  const lineItemControls = (item) => {
+    const reductionAmount = operatingItemReductionAmount(item);
+    const itemLocked = lockedOperatingExpenseItem(item);
+    if (!isStaffMode) return "";
+    return `<div class="operating-line-actions">
+      <label class="currency-entry">
+        <span>Reduction</span>
+        <input type="number" min="0" max="${Number(item.amount || 0)}" step="1" value="${reductionAmount || ""}" data-control="operating-item-amount" data-item="${item.expenseKey}" ${(isLocked || itemLocked) ? "disabled" : ""}>
+      </label>
+      <button type="button" class="line-item-toggle" data-control="toggle-operating-item" data-item="${item.expenseKey}" ${(isLocked || itemLocked) ? "disabled" : ""}>${itemLocked ? "Locked" : reductionAmount ? "Keep" : "Remove"}</button>
+    </div>`;
+  };
   return `
     <details class="operating-line-detail" data-department="${department.id}" ${state.operatingDetailOpen[department.id] ? "open" : ""}>
       <summary>Operating budget accounts and line items</summary>
       <div class="operating-account-list">
-        ${groups.map((group) => `
-          <section class="operating-account-group">
-            <header><strong>${escapeHtml(group.label)}</strong><span>${money(group.amount)}</span></header>
-            ${group.items.map((item) => {
-              const removed = Boolean(state.removedOperatingItems[item.expenseKey]);
-              const itemLocked = lockedOperatingExpenseItem(item);
-              const itemLabel = operatingLineItemLabel(item, group.label);
-              if (!itemLabel) return "";
+        ${groups.map((group) => {
+          const visibleItems = group.items
+            .map((item) => ({ item, label: operatingLineItemLabel(item, group.label) }))
+            .filter((row) => row.label);
+          const accountItem = visibleItems.length ? null : group.items[0];
+          const accountReduction = accountItem ? operatingItemReductionAmount(accountItem) : 0;
+          return `
+          <section class="operating-account-group ${accountReduction ? "line-item-removed" : ""}">
+            <header>
+              <div class="operating-account-heading">
+                <strong>${escapeHtml(group.label)}</strong>
+                <span>${money(group.amount)}</span>
+              </div>
+              ${accountItem && group.items.length === 1 ? lineItemControls(accountItem) : ""}
+            </header>
+            ${visibleItems.map(({ item, label }) => {
+              const removed = Boolean(operatingItemReductionAmount(item));
               return `
                 <div class="operating-line-item ${removed ? "line-item-removed" : ""}">
-                  <div>
-                    <strong>${escapeHtml(itemLabel)}</strong>
+                  <div class="operating-line-copy">
+                    <strong>${escapeHtml(label)}</strong>
+                    <span>${money(item.amount)}</span>
                   </div>
-                  <span>${money(item.amount)}</span>
-                  ${isStaffMode ? `<button type="button" class="line-item-toggle" data-control="toggle-operating-item" data-item="${item.expenseKey}" ${(isLocked || itemLocked) ? "disabled" : ""}>${itemLocked ? "Locked" : removed ? "Keep" : "Remove"}</button>` : ""}
+                  ${lineItemControls(item)}
                 </div>
               `;
             }).join("")}
           </section>
-        `).join("")}
+        `; }).join("")}
       </div>
     </details>
   `;
@@ -1804,7 +1832,8 @@ function renderExpenseCapitalProjects() {
     const isLocked = locked(item.departmentId);
     if (isLocked) state.keptExpenseCapitalItems[item.expenseKey] = true;
     const kept = state.keptExpenseCapitalItems[item.expenseKey] !== false;
-    return `<div class="project-card expense-project-card ${isLocked ? "locked-row" : ""}"><input type="checkbox" ${kept ? "checked" : ""} data-control="expense-capital" data-item="${item.expenseKey}" ${isLocked ? "disabled" : ""}><div><label>${escapeHtml(item.projectName || item.name || item.accountName || "Capital item")}</label><p>${departmentName(item.departmentId)} | ${escapeHtml(item.accountCode || "Capital")} ${escapeHtml(item.accountName || "")} | ${money(item.amount)}${isLocked ? " | Locked" : ""}</p>${item.description ? `<small>${escapeHtml(item.description)}</small>` : ""}</div></div>`;
+    const itemName = item.projectName || item.name || item.description || "Capital item";
+    return `<div class="project-card expense-project-card ${isLocked ? "locked-row" : ""}"><input type="checkbox" ${kept ? "checked" : ""} data-control="expense-capital" data-item="${item.expenseKey}" ${isLocked ? "disabled" : ""}><div><label>${escapeHtml(itemName)}</label><p>${departmentName(item.departmentId)}${isLocked ? " | Locked" : ""}</p><small>${money(item.amount)}</small></div></div>`;
   }).join("");
 }
 
@@ -2238,39 +2267,7 @@ function setupScenarioAccordions() {
   });
 }
 
-function renderAssumptions() {
-  const inflationAssumptions = $("#inflationAssumptions");
-  const methodologyList = $("#methodologyList");
-  const formulaDefinitions = $("#formulaDefinitions");
-
-  if (inflationAssumptions) {
-    inflationAssumptions.innerHTML = "<li>Personnel cost factors show both dollars and percent of total personnel cost.</li><li>Staff mode can edit revenue forecast settings, millage targets, and department locks.</li><li>Expense inflation pressure represents year-over-year growth in projected supported expense.</li>";
-  }
-
-  const methodologySection = methodologyList?.closest("article, section, .panel");
-  const formulaSection = formulaDefinitions?.closest("article, section, .panel");
-
-  if (methodologySection) methodologySection.hidden = !isStaffMode;
-  if (formulaSection && formulaSection !== methodologySection) formulaSection.hidden = !isStaffMode;
-
-  if (!isStaffMode) return;
-
-  if (methodologyList) {
-    methodologyList.innerHTML = "<li>Public reductions are capped at the projected revenue shortfall.</li><li>Staff mode may model surplus for internal planning.</li><li>Ranking exports are generated from internal data even though the full support table is hidden.</li>";
-  }
-
-  if (formulaDefinitions) {
-    formulaDefinitions.innerHTML = [
-      "Revenue Shortfall = Projected Supported Expense - Projected Revenue",
-      "Direct Revenue Reduction = Staff revenue reduction setting for the fiscal year",
-      "Structural Budget Gap = Revenue Shortfall - Direct Revenue Reduction",
-      "Estimated Ad Valorem Revenue = Taxable Value Base x Millage / 1,000",
-      "Required Millage = Target Revenue / Taxable Value Base x 1,000",
-      "Rollback Rate = FY2026 Budgeted Ad Valorem Revenue / Taxable Value Base x 1,000",
-      "Buy-Out First-Year Net = Recurring Reduction - One-Time Cost"
-    ].map((item) => `<div class="formula-item"><code>${item}</code></div>`).join("");
-  }
-}
+function renderAssumptions() {}
 
 function fiscalYearNumber(year) {
   return Number(String(year || "").replace(/[^0-9]/g, "")) || 0;
@@ -3319,7 +3316,7 @@ function commissionerAppendixRows() {
       const groupLabel = cleanExpenseItemText(item.accountName || item.name || item.projectName || item.description || "Operating item");
       const itemLabel = operatingLineItemLabel(item, groupLabel);
       const label = itemLabel ? `${groupLabel}: ${itemLabel}` : groupLabel;
-      return `<li>${escapeHtml(label)} <strong>${money(item.amount)}</strong></li>`;
+      return `<li>${escapeHtml(label)} <strong>${money(operatingItemReductionAmount(item))}</strong></li>`;
     }).join("");
     return `<div class="impact-itemized-detail"><span>Specific reductions:</span><ul>${rows}</ul></div>`;
   };
@@ -3966,6 +3963,26 @@ function updateRevenueAssumptionFromInput(input) {
   updateResults();
 }
 
+function updateOperatingItemReductionFromInput(input) {
+  const item = expenseItemByKey(input.dataset.item);
+  if (!item || !operatingEditableDepartment(departmentById(item.departmentId)) || lockedOperatingExpenseItem(item)) return;
+  const openDetail = input.closest(".operating-line-detail");
+  if (openDetail?.dataset.department) state.operatingDetailOpen[openDetail.dataset.department] = openDetail.open;
+  const maxAmount = Number(item.amount || 0);
+  let requestedAmount = Math.min(Math.max(Number(input.value || 0), 0), maxAmount);
+  if (!isStaffMode && requestedAmount > availableShortfallExcluding("operating-item", item.expenseKey)) {
+    requestedAmount = Math.max(availableShortfallExcluding("operating-item", item.expenseKey), 0);
+    showMessage("Selected reductions cannot exceed the projected revenue shortfall.");
+  }
+  if (requestedAmount) {
+    state.removedOperatingItems[item.expenseKey] = requestedAmount >= maxAmount ? true : requestedAmount;
+  } else {
+    delete state.removedOperatingItems[item.expenseKey];
+  }
+  renderOperating();
+  updateResults();
+}
+
 document.addEventListener("input", (event) => {
   const control = event.target.dataset.control;
   if (control === "public-county-fte") {
@@ -4112,6 +4129,9 @@ document.addEventListener("change", (event) => {
     }
     renderCapital(); updateResults();
   }
+  if (control === "operating-item-amount") {
+    updateOperatingItemReductionFromInput(event.target);
+  }
   if (control === "department-lock") { state.lockedDepartments[event.target.dataset.department] = event.target.checked; rerender(); }
   if (control === "department-year") { state.departmentFiscalYear = event.target.value; renderDepartments(); }
   if (control === "overview-year") { state.overviewFiscalYear = event.target.value; renderTopServices(); }
@@ -4230,15 +4250,19 @@ document.addEventListener("click", (event) => {
   }
   if (control === "toggle-operating-item") {
     const item = expenseItemByKey(button.dataset.item);
-    if (!item || !operatingEditableDepartment(departmentById(item.departmentId))) return;
+    if (!item || !operatingEditableDepartment(departmentById(item.departmentId)) || lockedOperatingExpenseItem(item)) return;
     const openDetail = button.closest(".operating-line-detail");
     if (openDetail?.dataset.department) state.operatingDetailOpen[openDetail.dataset.department] = openDetail.open;
-    const removing = !state.removedOperatingItems[item.expenseKey];
+    const removing = !operatingItemReductionAmount(item);
     if (!isStaffMode && removing && Number(item.amount || 0) > availableShortfallExcluding("operating-item", item.expenseKey)) {
       showMessage("Selected reductions cannot exceed the projected revenue shortfall.");
       return;
     }
-    state.removedOperatingItems[item.expenseKey] = removing;
+    if (removing) {
+      state.removedOperatingItems[item.expenseKey] = true;
+    } else {
+      delete state.removedOperatingItems[item.expenseKey];
+    }
     renderOperating();
     updateResults();
   }
