@@ -3164,10 +3164,73 @@ function commissionerDepartmentFundingDetailMarkup() {
     fte: sum.fte + row.fte
   }), { totalBudget: 0, support: 0, fte: 0 });
   const totalDependency = totals.totalBudget ? totals.support / totals.totalBudget * 100 : 0;
-  return `<table><thead><tr><th>Department</th><th>Total Budget</th><th>Property Tax Support</th><th>Property Tax Dependency</th><th>FTE</th></tr></thead><tbody>
+  return `<table class="funding-detail-table"><thead><tr><th>Department</th><th>Total Budget</th><th>Property Tax Support</th><th>Property Tax Dependency</th><th>FTE</th></tr></thead><tbody>
     ${commissionerDepartmentFundingGroupedRows(rows)}
     <tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.totalBudget)}</strong></td><td><strong>${money(totals.support)}</strong></td><td><strong>${percent(totalDependency)}</strong></td><td><strong>${totals.fte ? number(totals.fte) : ""}</strong></td></tr>
   </tbody></table>`;
+}
+
+function commissionerDepartmentFundingDetailPages(scenarioName) {
+  const rows = commissionerDepartmentFundingRows();
+  const totals = rows.reduce((sum, row) => ({
+    totalBudget: sum.totalBudget + row.totalBudget,
+    support: sum.support + row.support,
+    fte: sum.fte + row.fte
+  }), { totalBudget: 0, support: 0, fte: 0 });
+  const totalDependency = totals.totalBudget ? totals.support / totals.totalBudget * 100 : 0;
+  const statutoryDetailMarkup = (department) => {
+    const items = statutoryAgencyFundingItems(department);
+    if (!items.length) return "";
+    return `<div class="funding-itemized-detail"><span>Agencies included:</span><ul>${items.map((item) => {
+      const description = item.description || item.projectName || item.name || item.accountName || "Funding item";
+      return `<li>${escapeHtml(description)} <strong>${money(item.amount)}</strong></li>`;
+    }).join("")}</ul></div>`;
+  };
+  const rowItems = commissionerControlCategories.flatMap((category) => {
+    const groupRows = rows.filter((row) => commissionerControlCategoryForDepartment(row.department).id === category.id);
+    if (!groupRows.length) return [];
+    const subtotal = groupRows.reduce((sum, row) => ({
+      totalBudget: sum.totalBudget + row.totalBudget,
+      support: sum.support + row.support,
+      fte: sum.fte + row.fte
+    }), { totalBudget: 0, support: 0, fte: 0 });
+    const subtotalDependency = subtotal.totalBudget ? subtotal.support / subtotal.totalBudget * 100 : 0;
+    if (category.id === "capital-projects" && groupRows.length === 1) {
+      const row = groupRows[0];
+      return [{
+        html: `<tr><td><strong>${escapeHtml(row.department.name)}</strong>${statutoryDetailMarkup(row.department)}</td><td>${money(row.totalBudget)}</td><td>${money(row.support)}</td><td>${percent(propertyTaxDependencyPercent(row.department))}</td><td>${row.fte ? number(row.fte) : ""}</td></tr>`,
+        weight: 1.05
+      }];
+    }
+    const categoryItems = [
+      { html: `<tr class="control-group-row"><td colspan="5">${escapeHtml(category.label)}</td></tr>`, weight: 1.1 },
+      ...groupRows.map((row) => {
+        const itemCount = statutoryAgencyFundingItems(row.department).length;
+        return {
+          html: `<tr><td><strong>${escapeHtml(row.department.name)}</strong>${statutoryDetailMarkup(row.department)}</td><td>${money(row.totalBudget)}</td><td>${money(row.support)}</td><td>${percent(propertyTaxDependencyPercent(row.department))}</td><td>${row.fte ? number(row.fte) : ""}</td></tr>`,
+          weight: 1.05 + itemCount * 0.45
+        };
+      }),
+      { html: `<tr class="subtotal-row"><td><strong>${escapeHtml(category.label)} Subtotal</strong></td><td><strong>${money(subtotal.totalBudget)}</strong></td><td><strong>${money(subtotal.support)}</strong></td><td><strong>${percent(subtotalDependency)}</strong></td><td><strong>${subtotal.fte ? number(subtotal.fte) : ""}</strong></td></tr>`, weight: 1.1 }
+    ];
+    const categoryWeight = categoryItems.reduce((sum, item) => sum + Number(item.weight || 1), 0);
+    return categoryWeight <= 17
+      ? [{ html: categoryItems.map((item) => item.html).join(""), weight: categoryWeight }]
+      : categoryItems;
+  });
+  rowItems.push({
+    html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.totalBudget)}</strong></td><td><strong>${money(totals.support)}</strong></td><td><strong>${percent(totalDependency)}</strong></td><td><strong>${totals.fte ? number(totals.fte) : ""}</strong></td></tr>`,
+    weight: 1.15
+  });
+  return commissionerPaginatedTablePages({
+    title: "Department Funding Detail",
+    scenarioName,
+    header: "<tr><th>Department</th><th>Total Budget</th><th>Property Tax Support</th><th>Property Tax Dependency</th><th>FTE</th></tr>",
+    rowItems,
+    className: "funding-detail-table",
+    firstPageWeight: 14,
+    continuationPageWeight: 17
+  });
 }
 
 function commissionerHjrRevenueBridgeMarkup() {
@@ -3258,23 +3321,41 @@ function commissionerCapitalProjectRows() {
 }
 
 function commissionerCapitalProjectsPageMarkup() {
-  const capitalDepartment = departments().find((department) => {
-    const id = normalizeBootstrapDepartmentId(department.id || department.name);
-    return id === "capital-projects" || String(department.name || "").toLowerCase().includes("capital projects");
-  });
   const projects = commissionerCapitalProjectRows();
+  const totalAmount = projects.reduce((sum, project) => sum + Number(project.amount || 0), 0);
   return `
-    <div class="briefing-card-grid">
-      <article class="briefing-card"><span>Property Tax Support for Capital Projects</span><strong>${money(capitalDepartment ? departmentSupport(capitalDepartment) : 0)}</strong></article>
-      <article class="briefing-card"><span>Projects Listed</span><strong>${number(projects.length)}</strong></article>
-    </div>
     <table><thead><tr><th>Project</th><th>Amount</th></tr></thead><tbody>
       ${projects.map((project) => {
         const description = project.description || project.projectName || project.name || project.accountName || "Capital project";
         return `<tr><td>${escapeHtml(description)}</td><td>${money(project.amount)}</td></tr>`;
       }).join("")}
+      <tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totalAmount)}</strong></td></tr>
     </tbody></table>
   `;
+}
+
+function commissionerCapitalProjectsPages(scenarioName) {
+  const projects = commissionerCapitalProjectRows();
+  const totalAmount = projects.reduce((sum, project) => sum + Number(project.amount || 0), 0);
+  const rowItems = projects.map((project) => {
+    const description = project.description || project.projectName || project.name || project.accountName || "Capital project";
+    return {
+      html: `<tr><td>${escapeHtml(description)}</td><td>${money(project.amount)}</td></tr>`,
+      weight: 1 + Math.max(0, Math.ceil(String(description).length / 80) - 1) * 0.4
+    };
+  });
+  rowItems.push({
+    html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totalAmount)}</strong></td></tr>`,
+    weight: 1.15
+  });
+  return commissionerPaginatedTablePages({
+    title: "Capital Projects Supported by Property Taxes",
+    scenarioName,
+    header: "<tr><th>Project</th><th>Amount</th></tr>",
+    rowItems,
+    firstPageWeight: 18,
+    continuationPageWeight: 18
+  });
 }
 
 function commissionerCapitalReductionRows() {
@@ -3296,6 +3377,18 @@ function commissionerDepartmentItemizedReductionDetail(department) {
     .filter((item) => item.departmentId === department.id && capitalReductionEligibleDepartment(department) && !locked(item.departmentId) && state.keptExpenseCapitalItems[item.expenseKey] === false)
     .map((item) => `<li>${escapeHtml(item.description || item.projectName || item.name || item.accountName || "Capital item")} <strong>${money(item.amount)}</strong></li>`);
   const rows = operatingItems.concat(projectItems, expenseCapitalItemsForDepartment);
+  if (!rows.length) return "";
+  return `<div class="impact-itemized-detail"><span>Itemized reductions:</span><ul>${rows.join("")}</ul></div>`;
+}
+
+function commissionerOperatingItemizedReductionDetail(department) {
+  if (!department) return "";
+  const rows = removedOperatingItemsForDepartment(department).map((item) => {
+    const groupLabel = cleanExpenseItemText(item.accountName || item.name || item.projectName || item.description || "Operating item");
+    const itemLabel = operatingLineItemLabel(item, groupLabel);
+    const label = itemLabel || groupLabel;
+    return `<li>${escapeHtml(label)} <strong>${money(operatingItemReductionAmount(item))}</strong></li>`;
+  });
   if (!rows.length) return "";
   return `<div class="impact-itemized-detail"><span>Itemized reductions:</span><ul>${rows.join("")}</ul></div>`;
 }
@@ -3325,10 +3418,62 @@ function commissionerImpactSummaryMarkup(totals) {
       <article class="briefing-card"><span>Operating Reductions</span><strong>${money(totals.operatingReductions)}</strong></article>
       <article class="briefing-card"><span>Capital Reductions</span><strong>${money(totals.capitalReductions)}</strong></article>
     </div>
-    <table><thead><tr><th>Department</th><th>Reduction Amount</th><th>Percent of Total Scenario Reduction</th></tr></thead><tbody>
+    <table class="impact-summary-table"><thead><tr><th>Department</th><th>Reduction Amount</th><th>Percent of Total Scenario Reduction</th></tr></thead><tbody>
       ${rows.length ? rows.map((row) => `<tr><td><strong>${escapeHtml(row.departmentName)}</strong>${commissionerDepartmentItemizedReductionDetail(row.department)}</td><td>${money(row.amount)}</td><td>${percent(row.share)}</td></tr>`).join("") : '<tr><td colspan="3">No reductions selected.</td></tr>'}
+      ${rows.length ? `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totalReduction)}</strong></td><td><strong>100.0%</strong></td></tr>` : ""}
     </tbody></table>
   `;
+}
+
+function commissionerImpactSummaryPages(totals, scenarioName) {
+  const capitalByDepartment = new Map();
+  commissionerCapitalReductionItems().forEach((item) => {
+    capitalByDepartment.set(item.departmentName, (capitalByDepartment.get(item.departmentName) || 0) + Number(item.amount || 0));
+  });
+  const rowMap = new Map();
+  totals.departmentImpacts.filter((impact) => !excluded(impact.department)).forEach((impact) => {
+    const amount = Number(impact.totalReduction || 0);
+    if (amount) rowMap.set(impact.department.name, { department: impact.department, amount });
+  });
+  capitalByDepartment.forEach((amount, departmentNameValue) => {
+    const current = rowMap.get(departmentNameValue) || { department: departments().find((department) => department.name === departmentNameValue), amount: 0 };
+    rowMap.set(departmentNameValue, { ...current, amount: current.amount + amount });
+  });
+  const totalReduction = Array.from(rowMap.values()).reduce((sum, value) => sum + value.amount, 0) || 1;
+  const rows = Array.from(rowMap.entries())
+    .map(([departmentNameValue, row]) => ({ departmentName: departmentNameValue, department: row.department, amount: row.amount, share: row.amount / totalReduction * 100 }))
+    .sort((a, b) => b.amount - a.amount || a.departmentName.localeCompare(b.departmentName));
+  const beforeContent = `
+    <div class="briefing-card-grid">
+      <article class="briefing-card"><span>Total Scenario Reductions</span><strong>${money(totals.actualTotalReductions || totals.totalReductions)}</strong></article>
+      <article class="briefing-card"><span>Personnel Reductions</span><strong>${money(totals.personnelReductions)}</strong></article>
+      <article class="briefing-card"><span>Operating Reductions</span><strong>${money(totals.operatingReductions)}</strong></article>
+      <article class="briefing-card"><span>Capital Reductions</span><strong>${money(totals.capitalReductions)}</strong></article>
+    </div>`;
+  const rowItems = rows.length ? rows.map((row) => {
+    const detail = commissionerDepartmentItemizedReductionDetail(row.department);
+    const detailCount = (detail.match(/<li>/g) || []).length;
+    return {
+      html: `<tr><td><strong>${escapeHtml(row.departmentName)}</strong>${detail}</td><td>${money(row.amount)}</td><td>${percent(row.share)}</td></tr>`,
+      weight: 1.05 + detailCount * 0.55
+    };
+  }) : [{ html: '<tr><td colspan="3">No reductions selected.</td></tr>', weight: 1 }];
+  if (rows.length) {
+    rowItems.push({
+      html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totalReduction)}</strong></td><td><strong>100.0%</strong></td></tr>`,
+      weight: 1.15
+    });
+  }
+  return commissionerPaginatedTablePages({
+    title: "Department Impact Summary",
+    scenarioName,
+    header: "<tr><th>Department</th><th>Reduction Amount</th><th>Percent of Total Scenario Reduction</th></tr>",
+    rowItems,
+    beforeContent,
+    className: "impact-summary-table",
+    firstPageWeight: 11,
+    continuationPageWeight: 16
+  });
 }
 
 function commissionerScenarioMillageRows(totals) {
@@ -3424,7 +3569,7 @@ function commissionerAppendixMarkup(totals) {
     .join("");
   const operatingRows = impacts
     .filter((impact) => impact.operatingReductionAmount || impact.removedOperatingAmount)
-    .map((impact) => `<tr><td>${escapeHtml(impact.department.name)}</td><td>${percent(impact.operatingReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.removedOperatingAmount)}</td><td>${money((impact.operatingReductionAmount || 0) + (impact.removedOperatingAmount || 0))}</td></tr>`)
+    .map((impact) => `<tr><td><strong>${escapeHtml(impact.department.name)}</strong>${commissionerOperatingItemizedReductionDetail(impact.department)}</td><td>${percent(impact.operatingReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.removedOperatingAmount)}</td><td>${money((impact.operatingReductionAmount || 0) + (impact.removedOperatingAmount || 0))}</td></tr>`)
     .join("");
   const operatingTotals = impacts.reduce((sum, impact) => ({
     operatingReductionAmount: sum.operatingReductionAmount + Number(impact.operatingReductionAmount || 0),
@@ -3440,6 +3585,78 @@ function commissionerAppendixMarkup(totals) {
     operatingRows ? commissionerAppendixSection("Operating Reductions", "<tr><th>Department</th><th>Reduction</th><th>Operating Reduction</th><th>Itemized Amount</th><th>Total Operating Reduction</th></tr>", operatingRows + operatingTotalRow) : "",
     capitalRows ? commissionerAppendixSection("Capital Reductions", "<tr><th>Department</th><th>Project / Item</th><th>Reduction</th></tr>", capitalRows) : ""
   ].filter(Boolean).join("");
+}
+
+function commissionerAppendixPages(totals, scenarioName) {
+  const impacts = totals.departmentImpacts.filter((impact) => !excluded(impact.department));
+  const sections = [];
+  const personnelRows = impacts
+    .filter((impact) => impact.fteReduction || impact.buyoutCount)
+    .map((impact) => ({ html: `<tr><td>${escapeHtml(impact.department.name)}</td><td>${number(impact.fteReduction)}</td><td>${number(impact.buyoutCount)}</td><td>${money(impact.personnelReduction)}</td><td>${money(impact.buyoutOneTimeCost)}</td></tr>`, weight: 1 }));
+  if (personnelRows.length) {
+    sections.push({
+      title: "Personnel Reductions",
+      header: "<tr><th>Department</th><th>FTE Reduction</th><th>Buy-Out Count</th><th>Recurring Reduction</th><th>One-Time Buy-Out Cost</th></tr>",
+      rows: personnelRows
+    });
+  }
+  const buyoutRows = impacts
+    .filter((impact) => impact.buyoutCount)
+    .map((impact) => ({ html: `<tr><td>${escapeHtml(impact.department.name)}</td><td>${number(impact.buyoutCount)}</td><td>${money(impact.buyoutCost)}</td><td>${money(impact.buyoutOneTimeCost)}</td></tr>`, weight: 1 }));
+  if (buyoutRows.length) {
+    sections.push({
+      title: "Buy-Outs",
+      header: "<tr><th>Department</th><th>Buy-Out Count</th><th>Cost per Buy-Out</th><th>One-Time Cost</th></tr>",
+      rows: buyoutRows
+    });
+  }
+  const operatingRows = impacts
+    .filter((impact) => impact.operatingReductionAmount || impact.removedOperatingAmount)
+    .map((impact) => {
+      const detail = commissionerOperatingItemizedReductionDetail(impact.department);
+      const detailCount = (detail.match(/<li>/g) || []).length;
+      return {
+        html: `<tr><td><strong>${escapeHtml(impact.department.name)}</strong>${detail}</td><td>${percent(impact.operatingReduction)}</td><td>${money(impact.operatingReductionAmount)}</td><td>${money(impact.removedOperatingAmount)}</td><td>${money((impact.operatingReductionAmount || 0) + (impact.removedOperatingAmount || 0))}</td></tr>`,
+        weight: 1 + detailCount * 0.55
+      };
+    });
+  const operatingTotals = impacts.reduce((sum, impact) => ({
+    operatingReductionAmount: sum.operatingReductionAmount + Number(impact.operatingReductionAmount || 0),
+    removedOperatingAmount: sum.removedOperatingAmount + Number(impact.removedOperatingAmount || 0)
+  }), { operatingReductionAmount: 0, removedOperatingAmount: 0 });
+  if (operatingRows.length) {
+    operatingRows.push({
+      html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td></td><td><strong>${money(operatingTotals.operatingReductionAmount)}</strong></td><td><strong>${money(operatingTotals.removedOperatingAmount)}</strong></td><td><strong>${money(operatingTotals.operatingReductionAmount + operatingTotals.removedOperatingAmount)}</strong></td></tr>`,
+      weight: 1.15
+    });
+    sections.push({
+      title: "Operating Reductions",
+      header: "<tr><th>Department</th><th>Reduction</th><th>Operating Reduction</th><th>Itemized Amount</th><th>Total Operating Reduction</th></tr>",
+      rows: operatingRows
+    });
+  }
+  const capitalRows = commissionerCapitalReductionItems().map((item) => ({
+    html: `<tr><td>${escapeHtml(item.departmentName)}</td><td>${escapeHtml(item.label)}</td><td>${money(item.amount)}</td></tr>`,
+    weight: 1 + Math.max(0, Math.ceil(String(item.label || "").length / 80) - 1) * 0.35
+  }));
+  if (capitalRows.length) {
+    sections.push({
+      title: "Capital Reductions",
+      header: "<tr><th>Department</th><th>Project / Item</th><th>Reduction</th></tr>",
+      rows: capitalRows
+    });
+  }
+  return sections.map((section) => commissionerPaginatedTablePages({
+    title: section.title,
+    pageHeaderTitle: "Appendix",
+    scenarioName,
+    header: section.header,
+    rowItems: section.rows,
+    className: "appendix-table",
+    pageClass: "appendix",
+    firstPageWeight: 16,
+    continuationPageWeight: 19
+  })).join("");
 }
 
 function commissionerServiceConsiderationsMarkup() {
@@ -3589,12 +3806,75 @@ function commissionerPageHeaderMarkup(title, scenarioName) {
   return `<div class="commissioner-page-header"><span>${escapeHtml(title)}</span><em>${escapeHtml(scenarioName)}</em></div>`;
 }
 
+function commissionerReportPageMarkup(title, scenarioName, content, className = "") {
+  return `<section class="briefing-page ${className}">
+    ${commissionerScenarioLabelMarkup(scenarioName)}
+    ${commissionerPageHeaderMarkup(title, scenarioName)}
+    ${content}
+  </section>`;
+}
+
+function commissionerTableMarkup(header, rows, className = "") {
+  return `<table${className ? ` class="${className}"` : ""}><thead>${header}</thead><tbody>${rows}</tbody></table>`;
+}
+
+function commissionerChunkRows(rowItems, maxWeight) {
+  const chunks = [];
+  let currentRows = [];
+  let currentWeight = 0;
+  rowItems.forEach((item) => {
+    const weight = Number(item.weight || 1);
+    if (currentRows.length && currentWeight + weight > maxWeight) {
+      chunks.push(currentRows);
+      currentRows = [];
+      currentWeight = 0;
+    }
+    currentRows.push(item);
+    currentWeight += weight;
+  });
+  if (currentRows.length) chunks.push(currentRows);
+  return chunks;
+}
+
+function commissionerPaginatedTablePages({
+  title,
+  scenarioName,
+  header,
+  rowItems,
+  beforeContent = "",
+  className = "",
+  pageClass = "",
+  pageHeaderTitle = title,
+  firstPageWeight = 15,
+  continuationPageWeight = 20
+}) {
+  if (!rowItems.length) return "";
+  const chunks = [];
+  let remaining = rowItems.slice();
+  const firstChunk = [];
+  let firstWeight = 0;
+  while (remaining.length && (!firstChunk.length || firstWeight + Number(remaining[0].weight || 1) <= firstPageWeight)) {
+    const item = remaining.shift();
+    firstChunk.push(item);
+    firstWeight += Number(item.weight || 1);
+  }
+  chunks.push(firstChunk);
+  chunks.push(...commissionerChunkRows(remaining, continuationPageWeight));
+  return chunks.map((chunk, index) => {
+    const continued = index ? " continued" : "";
+    const content = `<h2>${escapeHtml(title)}${continued}</h2>
+      ${index === 0 ? beforeContent : ""}
+      ${commissionerTableMarkup(header, chunk.map((item) => item.html).join(""), className)}`;
+    return commissionerReportPageMarkup(`${pageHeaderTitle}${continued}`, scenarioName, content, pageClass);
+  }).join("");
+}
+
 function commissionerReportVisualStyles(scenarioName = "") {
   const footerText = JSON.stringify(`Walton County Board of County Commissioners   |   ${scenarioName || "Working Scenario"}`);
   return `
     @page{size:landscape;margin:.48in;@bottom-left{content:"Walton County Board of County Commissioners";color:#66736d;font-size:9px}@bottom-center{content:${JSON.stringify(scenarioName || "Working Scenario")};color:#66736d;font-size:9px}}
     :root{--green:#006231;--dark-green:#004A25;--gold:#D1BE78;--light-green:#F7F9F7;--light-gold:#FBF9F0;--alt-row:#F3F5F4;--line:#D9E1E4;--ink:#1f2a24;--muted:#5f6f66;--red:#B42318}
-    body{background:#fff;color:var(--ink);font-size:12.5px;line-height:1.42}
+    body{background:#fff;color:var(--ink);font-size:14.5px;line-height:1.48}
     .briefing-page{box-sizing:border-box;min-height:6.55in;padding:62px 4px 24px;position:relative}
     .briefing-page:after{content:"";position:absolute;left:0;right:0;bottom:14px;border-top:1.5px solid var(--green)}
     .cover-page{padding-top:18px;background:#fff}
@@ -3609,8 +3889,8 @@ function commissionerReportVisualStyles(scenarioName = "") {
     h1,h2,h3{color:var(--dark-green)}
     .briefing-page:not(.cover-page) h1,.briefing-page:not(.cover-page) h2{border-left:7px solid var(--green);padding-left:12px;margin:4px 0 8px;font-size:25px;line-height:1.1;letter-spacing:.01em}
     .briefing-page:not(.cover-page) h3{font-size:15px;margin-top:12px}
-    .plain-note{font-size:13px;color:var(--muted);margin:0 0 12px;padding-left:19px}
-    .summary-text{font-size:15.5px;line-height:1.5}
+    .plain-note{font-size:14px;color:var(--muted);margin:0 0 12px;padding-left:19px}
+    .summary-text{font-size:16.5px;line-height:1.5}
     .bridge-layout .summary-text{text-align:justify;text-align-last:left}
     .bridge-layout,.flow-graphic,.allocation-chart,.ranked-support-list,.funding-concentration-panel,.major-project-grid,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{break-inside:avoid}
     .bridge-layout,.allocation-chart,.ranked-support-list,.funding-concentration-panel,.revenue-impact-card-grid,.scenario-result-grid,.taxpayer-card-grid,.briefing-card-grid{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.045)}
@@ -3627,15 +3907,16 @@ function commissionerReportVisualStyles(scenarioName = "") {
     .briefing-card{border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:8px;padding:13px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.04)}
     .briefing-card span{color:var(--muted);font-size:10px;letter-spacing:.05em}
     .briefing-card strong{color:var(--dark-green)}
-    table{border-collapse:separate;border-spacing:0;width:100%;font-size:10.5px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.035)}
-    th{background:var(--green);color:#fff;padding:8px 9px;font-size:10px;letter-spacing:.02em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.18)}
-    td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+    table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,.035)}
+    th{background:var(--green);color:#fff;padding:8px 9px;font-size:12px;letter-spacing:.02em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.18)}
+    td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
     tbody tr:nth-child(even) td{background:var(--alt-row)}
-    tbody tr:nth-child(-n+4) td:first-child strong{color:var(--dark-green)}
-    .control-group-row td{background:#E8EFEA!important;color:var(--dark-green);font-weight:900;text-transform:uppercase;letter-spacing:.05em;border-top:2px solid var(--gold);border-bottom:1px solid var(--line)}
+    .funding-detail-table td,.funding-detail-table strong,.funding-detail-table span,.funding-detail-table li{color:var(--ink)!important}
+    .impact-summary-table td,.impact-summary-table strong,.impact-summary-table span,.impact-summary-table li{color:var(--ink)!important}
+    .control-group-row td{background:#E8EFEA!important;color:var(--ink);font-weight:900;text-transform:uppercase;letter-spacing:.05em;border-top:2px solid var(--gold);border-bottom:1px solid var(--line)}
     .subtotal-row td{background:#F7F9F7!important;border-top:1.5px solid var(--green);font-weight:900}
     .grand-total-row td{background:var(--light-gold)!important;border-top:2px solid var(--green);font-weight:900}
-    .funding-itemized-detail{margin-top:6px;color:var(--muted);font-size:9.5px;text-transform:none;letter-spacing:0;font-weight:600}
+    .funding-itemized-detail{margin-top:6px;color:var(--muted);font-size:11px;text-transform:none;letter-spacing:0;font-weight:600}
     .funding-itemized-detail span{display:block;color:var(--green);font-weight:900}
     .funding-itemized-detail ul{margin:3px 0 0;padding-left:14px}
     .funding-itemized-detail li{margin:2px 0}
@@ -3647,15 +3928,15 @@ function commissionerReportVisualStyles(scenarioName = "") {
     .funding-concentration-panel{margin-top:12px;box-shadow:none}
     .funding-concentration-heading h3{font-size:21px;margin:0;color:var(--dark-green)}
     .funding-concentration-heading p{margin:3px 0 8px;color:var(--muted);font-size:12px;font-weight:700}
-    .funding-concentration-chart{display:grid;grid-template-columns:1fr 3.05in .25in;gap:24px;width:100%;margin-top:4px;align-items:stretch}
-    .function-stack-bar{display:flex;flex-direction:column-reverse;width:2.85in;height:4.55in;background:#EEF4F0;border:1px solid var(--line);overflow:hidden;justify-self:center;grid-column:2}
+    .funding-concentration-chart{display:grid;grid-template-columns:3.9in 3.05in;gap:8px;width:7.05in;margin:16px auto 0;align-items:stretch}
+    .function-stack-bar{display:flex;flex-direction:column-reverse;width:2.85in;height:4.55in;background:#EEF4F0;border:1px solid var(--line);overflow:hidden;justify-self:start;grid-column:2}
     .function-stack-bar span{display:block;width:100%;min-height:4px}
     .function-stack-items{display:flex;flex-direction:column-reverse;height:4.55in;align-self:center;grid-column:1}
     .function-stack-item{display:grid;grid-template-columns:13px 1fr;gap:8px;align-items:center;border-top:1px solid var(--line);padding:2px 0;box-sizing:border-box;min-height:4px}
     .function-stack-item i{display:block;width:13px;height:13px;border:1px solid rgba(31,42,36,.2);box-sizing:border-box;margin-top:2px}
-    .function-stack-item div{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-    .function-stack-item strong{display:inline;color:var(--dark-green);font-size:12px;line-height:1.12}
-    .function-stack-item em{display:inline;color:var(--ink);font-size:11.5px;font-style:normal;font-weight:900}
+    .function-stack-item div{display:flex;gap:8px;align-items:baseline;justify-content:flex-end;flex-wrap:wrap;text-align:right;padding-right:6px}
+    .function-stack-item strong{display:inline;color:var(--dark-green);font-size:13px;line-height:1.12}
+    .function-stack-item em{display:inline;color:var(--ink);font-size:12.5px;font-style:normal;font-weight:900}
     .major-project-grid{grid-template-columns:repeat(2,1fr);gap:10px;background:transparent;border:0;box-shadow:none;padding:0}
     .major-project-grid article{border:1px solid var(--line);border-left:5px solid var(--green);border-radius:8px;background:#fff;padding:12px;box-shadow:0 1px 5px rgba(0,0,0,.04)}
     .major-project-grid span{color:var(--dark-green)}
@@ -3672,6 +3953,9 @@ function commissionerReportVisualStyles(scenarioName = "") {
     .scenario-result-grid-three{grid-template-columns:repeat(3,1fr)}
     .scenario-result-grid div{border-top:1px solid var(--line)}
     .scenario-result-grid strong{font-size:25px}
+    .remaining-page table{font-size:12.5px}
+    .remaining-page th{font-size:11.5px}
+    .remaining-page td{line-height:1.35}
     .taxpayer-card-grid strong{color:var(--dark-green)}
     .taxpayer-card-monthly{display:block;color:var(--dark-green);font-size:14px;font-style:normal;font-weight:900;margin:-2px 0 8px}
     .taxpayer-card-detail{margin:2px 0;color:var(--muted);font-size:10px;font-weight:800}
@@ -3697,12 +3981,13 @@ function commissionerReportVisualStyles(scenarioName = "") {
       .scenario-millage-panel{border-left:5px solid #006231!important}
       .briefing-card,.scenario-result-grid article,.taxpayer-card-grid article{border-top:4px solid #D1BE78!important}
       .major-project-grid article{border-left:5px solid #006231!important}
-      table{background:#fff!important;border:1px solid #D9E1E4!important;box-shadow:none!important;border-collapse:separate;border-spacing:0;overflow:visible!important;break-inside:auto;page-break-inside:auto}
+      table{background:#fff!important;border:1px solid #D9E1E4!important;box-shadow:none!important;border-collapse:separate;border-spacing:0;overflow:visible!important;break-inside:auto;page-break-inside:auto;font-size:13px!important}
       thead{display:table-header-group}
       tr,td,th{break-inside:avoid;page-break-inside:avoid}
-      th{background:#006231!important;color:#fff!important;border-color:#006231!important}
+      th{background:#006231!important;color:#fff!important;border-color:#006231!important;font-size:12px!important}
+      td{line-height:1.35!important}
       tbody tr:nth-child(even) td{background:#F3F5F4!important}
-      .control-group-row td{background:#E8EFEA!important;color:#004A25!important;border-top:2px solid #D1BE78!important}
+      .control-group-row td{background:#E8EFEA!important;color:#1f2a24!important;border-top:2px solid #D1BE78!important}
       .subtotal-row td{background:#F7F9F7!important;border-top:1.5px solid #006231!important;font-weight:900}
       .grand-total-row td{background:#FBF9F0!important;border-top:2px solid #006231!important}
       .ranked-support-card>span,.support-bar i,.allocation-track span{background:#006231!important;color:#fff!important}
@@ -3748,8 +4033,7 @@ function exportCommissionerBriefingPdf() {
       <div class="executive-summary">
         <h2>Executive Summary</h2>
         <p>Florida House Joint Resolution 1 (HJR 1) proposes significant changes to homestead property tax exemptions for non-school property taxes. If approved by Florida voters, the proposal would substantially increase homestead exemptions beginning in 2027 and increase them again in 2028, reducing taxable value available to support county government operations. The proposal would increase the homestead exemption to $150,000 beginning in 2027 and $250,000 beginning in 2028 for non-school property taxes.</p>
-        <p>Based on current assumptions, Walton County is projected to experience an estimated property-tax-supported revenue shortfall of approximately ${money(fy2028ProjectedShortfall)} in FY2028 and approximately ${money(fy2029ProjectedShortfall)} in FY2029.</p>
-        <p>These projected reductions do not reflect a decline in service demand. Rather, they reflect a reduction in taxable value available to generate property tax revenue used to support county services.</p>
+        <p>Based on current assumptions, Walton County is projected to experience an estimated revenue shortfall of approximately ${money(fy2028ProjectedShortfall)} in FY2028 and approximately ${money(fy2029ProjectedShortfall)} in FY2029.</p>
         <p>This briefing summarizes the projected fiscal impact of HJR 1, the county services supported by property taxes, and the potential service-level considerations associated with future revenue reductions.</p>
       </div>
       <div class="cover-rule"></div>
@@ -3770,35 +4054,16 @@ function exportCommissionerBriefingPdf() {
       <h2>Property Tax Supported Functions</h2>
       ${commissionerLargestSupportedFunctionsMarkup()}
     </section>
-    <section class="briefing-page">
-      ${commissionerScenarioLabelMarkup(scenarioName)}
-      ${commissionerPageHeaderMarkup("Department Funding Detail", scenarioName)}
-      <h2>Department Funding Detail</h2>
-      ${commissionerDepartmentFundingDetailMarkup()}
-    </section>
-    <section class="briefing-page">
-      ${commissionerScenarioLabelMarkup(scenarioName)}
-      ${commissionerPageHeaderMarkup("Capital Projects Supported by Property Taxes", scenarioName)}
-      <h2>Capital Projects Supported by Property Taxes</h2>
-      ${commissionerCapitalProjectsPageMarkup()}
-    </section>
-    <section class="briefing-page">
-      ${commissionerScenarioLabelMarkup(scenarioName)}
-      ${commissionerPageHeaderMarkup("Department Impact Summary", scenarioName)}
-      <h2>Department Impact Summary</h2>
-      ${commissionerImpactSummaryMarkup(totals)}
-    </section>
+    ${commissionerDepartmentFundingDetailPages(scenarioName)}
+    ${commissionerCapitalProjectsPages(scenarioName)}
+    ${commissionerImpactSummaryPages(totals, scenarioName)}
     <section class="briefing-page">
       ${commissionerScenarioLabelMarkup(scenarioName)}
       ${commissionerPageHeaderMarkup("Scenario Results", scenarioName)}
       <h2>Scenario Results</h2>
       ${commissionerScenarioResultsMarkup(totals, showTaxpayerImpact)}
     </section>
-    <section class="briefing-page appendix">
-      ${commissionerScenarioLabelMarkup(scenarioName)}
-      ${commissionerPageHeaderMarkup("Appendix", scenarioName)}
-      ${commissionerAppendixMarkup(totals)}
-    </section>
+    ${commissionerAppendixPages(totals, scenarioName)}
   </body></html>`);
   report.document.close();
   report.focus();
