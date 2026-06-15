@@ -3190,6 +3190,25 @@ function commissionerCapitalReductionRows() {
   return commissionerCapitalReductionItems().map((item) => `<tr><td>${escapeHtml(item.departmentName)}</td><td>${escapeHtml(item.label)}</td><td>${money(item.amount)}</td></tr>`).join("");
 }
 
+function commissionerDepartmentItemizedReductionDetail(department) {
+  if (!department) return "";
+  const operatingItems = removedOperatingItemsForDepartment(department).map((item) => {
+    const groupLabel = cleanExpenseItemText(item.accountName || item.name || item.projectName || item.description || "Operating item");
+    const itemLabel = operatingLineItemLabel(item, groupLabel);
+    const label = itemLabel ? `${groupLabel}: ${itemLabel}` : groupLabel;
+    return `<li>Operating - ${escapeHtml(label)} <strong>${money(operatingItemReductionAmount(item))}</strong></li>`;
+  });
+  const projectItems = budgetData.capitalProjects
+    .filter((project) => project.departmentId === department.id && reductionEligibleDepartment(department) && !locked(project.departmentId) && !state.keptProjects[project.id])
+    .map((project) => `<li>Capital - ${escapeHtml(project.name || "Capital project")} <strong>${money(project.cost)}</strong></li>`);
+  const expenseCapitalItemsForDepartment = expenseCapitalItems()
+    .filter((item) => item.departmentId === department.id && reductionEligibleDepartment(department) && !locked(item.departmentId) && state.keptExpenseCapitalItems[item.expenseKey] === false)
+    .map((item) => `<li>Capital - ${escapeHtml(item.description || item.projectName || item.name || item.accountName || "Capital item")} <strong>${money(item.amount)}</strong></li>`);
+  const rows = operatingItems.concat(projectItems, expenseCapitalItemsForDepartment);
+  if (!rows.length) return "";
+  return `<div class="impact-itemized-detail"><span>Itemized reductions:</span><ul>${rows.join("")}</ul></div>`;
+}
+
 function commissionerImpactSummaryMarkup(totals) {
   const capitalByDepartment = new Map();
   commissionerCapitalReductionItems().forEach((item) => {
@@ -3198,14 +3217,15 @@ function commissionerImpactSummaryMarkup(totals) {
   const rowMap = new Map();
   totals.departmentImpacts.filter((impact) => !excluded(impact.department)).forEach((impact) => {
     const amount = Number(impact.totalReduction || 0);
-    if (amount) rowMap.set(impact.department.name, amount);
+    if (amount) rowMap.set(impact.department.name, { department: impact.department, amount });
   });
   capitalByDepartment.forEach((amount, departmentNameValue) => {
-    rowMap.set(departmentNameValue, (rowMap.get(departmentNameValue) || 0) + amount);
+    const current = rowMap.get(departmentNameValue) || { department: departments().find((department) => department.name === departmentNameValue), amount: 0 };
+    rowMap.set(departmentNameValue, { ...current, amount: current.amount + amount });
   });
-  const totalReduction = Array.from(rowMap.values()).reduce((sum, value) => sum + value, 0) || 1;
+  const totalReduction = Array.from(rowMap.values()).reduce((sum, value) => sum + value.amount, 0) || 1;
   const rows = Array.from(rowMap.entries())
-    .map(([departmentNameValue, amount]) => ({ departmentName: departmentNameValue, amount, share: amount / totalReduction * 100 }))
+    .map(([departmentNameValue, row]) => ({ departmentName: departmentNameValue, department: row.department, amount: row.amount, share: row.amount / totalReduction * 100 }))
     .sort((a, b) => b.amount - a.amount || a.departmentName.localeCompare(b.departmentName));
   return `
     <div class="briefing-card-grid">
@@ -3215,7 +3235,7 @@ function commissionerImpactSummaryMarkup(totals) {
       <article class="briefing-card"><span>Capital Reductions</span><strong>${money(totals.capitalReductions)}</strong></article>
     </div>
     <table><thead><tr><th>Department</th><th>Reduction Amount</th><th>Percent of Total Scenario Reduction</th></tr></thead><tbody>
-      ${rows.length ? rows.map((row) => `<tr><td><strong>${escapeHtml(row.departmentName)}</strong></td><td>${money(row.amount)}</td><td>${percent(row.share)}</td></tr>`).join("") : '<tr><td colspan="3">No reductions selected.</td></tr>'}
+      ${rows.length ? rows.map((row) => `<tr><td><strong>${escapeHtml(row.departmentName)}</strong>${commissionerDepartmentItemizedReductionDetail(row.department)}</td><td>${money(row.amount)}</td><td>${percent(row.share)}</td></tr>`).join("") : '<tr><td colspan="3">No reductions selected.</td></tr>'}
     </tbody></table>
   `;
 }
