@@ -4024,6 +4024,20 @@ function budgetBriefingFunds() {
     .filter((fund) => !budgetBriefingHiddenFund(fund));
 }
 
+function budgetRevenueFunds() {
+  const funds = Array.isArray(window.wcDepartmentTotalBudget) ? window.wcDepartmentTotalBudget : [];
+  const hasDebtServiceFund = funds.some((fund) => String(fund?.fundNumber || "").trim() === "201" || String(fund?.fundName || "").trim().toLowerCase() === "debt service fund");
+  if (hasDebtServiceFund) return funds;
+  return funds.concat({
+    fund: "201 Debt Service Fund",
+    fundNumber: "201",
+    fundName: "Debt Service Fund",
+    revenueTotal: 0,
+    originalRevenueTotal: 55000,
+    departments: []
+  });
+}
+
 function budgetAmount(value) {
   return Number(value || 0);
 }
@@ -4037,6 +4051,7 @@ function budgetBriefingOriginalRevenueTotal(fund) {
   if (fundName === "mosquito control fund") return 1340000;
   if (fundName === "capital projects fund") return 20336997;
   if (fundName === "recreation plat fee fund") return 1000000;
+  if (fundName === "debt service fund" || String(fund?.fundNumber || "").trim() === "201") return 55000;
   return budgetAmount(fund.originalRevenueTotal);
 }
 
@@ -4277,7 +4292,7 @@ function budgetFundOverviewPages(scenarioName) {
 }
 
 function budgetRevenueComparisonPages(scenarioName) {
-  const funds = budgetBriefingFunds().slice().sort((a, b) => budgetFundLabel(a).localeCompare(budgetFundLabel(b)));
+  const funds = budgetRevenueFunds().slice().sort((a, b) => budgetFundLabel(a).localeCompare(budgetFundLabel(b)));
   const totals = budgetBriefingTotals(funds);
   const interfundTransfers = {
     originalRevenueTotal: 140404580,
