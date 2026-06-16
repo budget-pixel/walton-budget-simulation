@@ -1955,6 +1955,28 @@ window.wcDepartmentExpenses = [
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
+            "description": "Madge Lane & Sally Lane Roadway & Drainage Improvements",
+            "itemization": 0,
+            "proposedAmount": 450000,
+            "amount": 450000,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "Arbour Street (Dirt to Pave)",
+            "itemization": 0,
+            "proposedAmount": 106500,
+            "amount": 106500,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
             "description": "Chat Holley & US 331 Intersection Improvements (Long Term Option)",
             "itemization": 0,
             "proposedAmount": 260000,
@@ -1966,10 +1988,43 @@ window.wcDepartmentExpenses = [
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
+            "description": "West Violet Lane (Dirt to Pave)",
+            "itemization": 0,
+            "proposedAmount": 43500,
+            "amount": 43500,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
             "description": "CR 83 N (Blue Mountain Rd) Extension from US 98 to Chat Holley",
             "itemization": 0,
             "proposedAmount": 250000,
             "amount": 250000,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "West Fernwwod Court (Dirt to Pave)",
+            "itemization": 0,
+            "proposedAmount": 51000,
+            "amount": 51000,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "Varnum Road #604124 Bridge Replacement",
+            "itemization": 0,
+            "proposedAmount": 550000,
+            "amount": 550000,
             "category": "Buildings & Infrastructure"
           },
           {
@@ -2021,6 +2076,28 @@ window.wcDepartmentExpenses = [
             "type": "Expenses",
             "accountCode": "563000",
             "accountName": "Infrastructure",
+            "description": "Huckaba Road #604114 Bridge Replacement",
+            "itemization": 0,
+            "proposedAmount": 400000,
+            "amount": 400000,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "Passion Flower Street (Dirt to Pave)",
+            "itemization": 0,
+            "proposedAmount": 109500,
+            "amount": 109500,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
             "description": "Sugar Drive Connector Rd",
             "itemization": 0,
             "proposedAmount": 600000,
@@ -2036,6 +2113,17 @@ window.wcDepartmentExpenses = [
             "itemization": 0,
             "proposedAmount": 200000,
             "amount": 200000,
+            "category": "Buildings & Infrastructure"
+          },
+          {
+            "proposal": "Capital Projects",
+            "type": "Expenses",
+            "accountCode": "563000",
+            "accountName": "Infrastructure",
+            "description": "Shorey Drive (Dirt to Pave)",
+            "itemization": 0,
+            "proposedAmount": 109500,
+            "amount": 109500,
             "category": "Buildings & Infrastructure"
           },
           {
@@ -2089,8 +2177,8 @@ window.wcDepartmentExpenses = [
             "accountName": "Infrastructure",
             "description": "",
             "itemization": 0,
-            "proposedAmount": 2400000,
-            "amount": 2400000,
+            "proposedAmount": 580000,
+            "amount": 580000,
             "category": "Buildings & Infrastructure"
           }
         ]
@@ -2164,6 +2252,28 @@ window.wcDepartmentExpenses = [
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
+        "description": "Madge Lane & Sally Lane Roadway & Drainage Improvements",
+        "itemization": 0,
+        "proposedAmount": 450000,
+        "amount": 450000,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "Arbour Street (Dirt to Pave)",
+        "itemization": 0,
+        "proposedAmount": 106500,
+        "amount": 106500,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
         "description": "Chat Holley & US 331 Intersection Improvements (Long Term Option)",
         "itemization": 0,
         "proposedAmount": 260000,
@@ -2175,10 +2285,43 @@ window.wcDepartmentExpenses = [
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
+        "description": "West Violet Lane (Dirt to Pave)",
+        "itemization": 0,
+        "proposedAmount": 43500,
+        "amount": 43500,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
         "description": "CR 83 N (Blue Mountain Rd) Extension from US 98 to Chat Holley",
         "itemization": 0,
         "proposedAmount": 250000,
         "amount": 250000,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "West Fernwwod Court (Dirt to Pave)",
+        "itemization": 0,
+        "proposedAmount": 51000,
+        "amount": 51000,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "Varnum Road #604124 Bridge Replacement",
+        "itemization": 0,
+        "proposedAmount": 550000,
+        "amount": 550000,
         "category": "Buildings & Infrastructure"
       },
       {
@@ -2230,6 +2373,28 @@ window.wcDepartmentExpenses = [
         "type": "Expenses",
         "accountCode": "563000",
         "accountName": "Infrastructure",
+        "description": "Huckaba Road #604114 Bridge Replacement",
+        "itemization": 0,
+        "proposedAmount": 400000,
+        "amount": 400000,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "Passion Flower Street (Dirt to Pave)",
+        "itemization": 0,
+        "proposedAmount": 109500,
+        "amount": 109500,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
         "description": "Sugar Drive Connector Rd",
         "itemization": 0,
         "proposedAmount": 600000,
@@ -2245,6 +2410,17 @@ window.wcDepartmentExpenses = [
         "itemization": 0,
         "proposedAmount": 200000,
         "amount": 200000,
+        "category": "Buildings & Infrastructure"
+      },
+      {
+        "proposal": "Capital Projects",
+        "type": "Expenses",
+        "accountCode": "563000",
+        "accountName": "Infrastructure",
+        "description": "Shorey Drive (Dirt to Pave)",
+        "itemization": 0,
+        "proposedAmount": 109500,
+        "amount": 109500,
         "category": "Buildings & Infrastructure"
       },
       {
@@ -2298,8 +2474,8 @@ window.wcDepartmentExpenses = [
         "accountName": "Infrastructure",
         "description": "",
         "itemization": 0,
-        "proposedAmount": 2400000,
-        "amount": 2400000,
+        "proposedAmount": 580000,
+        "amount": 580000,
         "category": "Buildings & Infrastructure"
       },
       {

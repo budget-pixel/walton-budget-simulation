@@ -4901,13 +4901,13 @@ window.wcDepartmentTotalBudget = [
     "fundNumber": "101",
     "fundName": "Transportation Fund",
     "department": "101 Transportation Fund",
-    "totalBudget": 28075618,
-    "expenseTotal": 28075618,
-    "revenueTotal": 28075618,
+    "totalBudget": 26805618,
+    "expenseTotal": 26805618,
+    "revenueTotal": 26805618,
     "originalTotalBudget": 23644000,
     "originalExpenseTotal": 23644000,
     "originalRevenueTotal": 26439440,
-    "netTotal": 56151236,
+    "netTotal": 53611236,
     "accounts": [
       {
         "accountCode": "512000",
@@ -5099,13 +5099,6 @@ window.wcDepartmentTotalBudget = [
         "originalAmount": 9000
       },
       {
-        "accountCode": "563000",
-        "accountName": "Infrastructure",
-        "type": "Expense",
-        "amount": 1270000,
-        "originalAmount": 0
-      },
-      {
         "accountCode": "564000",
         "accountName": "Machinery & Equipment",
         "type": "Expense",
@@ -5200,7 +5193,7 @@ window.wcDepartmentTotalBudget = [
         "accountCode": "389000",
         "accountName": "Nonoperating Balance Brought Forward",
         "type": "Revenue",
-        "amount": 2151906,
+        "amount": 881906,
         "originalAmount": 800000
       }
     ],
@@ -5490,13 +5483,13 @@ window.wcDepartmentTotalBudget = [
       },
       {
         "department": "Public Works",
-        "totalBudget": 25350000,
-        "expenseTotal": 25350000,
-        "revenueTotal": 25350000,
+        "totalBudget": 24080000,
+        "expenseTotal": 24080000,
+        "revenueTotal": 24080000,
         "originalTotalBudget": 23297472,
         "originalExpenseTotal": 23297472,
         "originalRevenueTotal": 26379440,
-        "netTotal": 50700000,
+        "netTotal": 48160000,
         "accounts": [
           {
             "accountCode": "512000",
@@ -5688,13 +5681,6 @@ window.wcDepartmentTotalBudget = [
             "originalAmount": 5000
           },
           {
-            "accountCode": "563000",
-            "accountName": "Infrastructure",
-            "type": "Expense",
-            "amount": 1270000,
-            "originalAmount": 0
-          },
-          {
             "accountCode": "564000",
             "accountName": "Machinery & Equipment",
             "type": "Expense",
@@ -5782,7 +5768,7 @@ window.wcDepartmentTotalBudget = [
             "accountCode": "389000",
             "accountName": "Nonoperating Balance Brought Forward",
             "type": "Revenue",
-            "amount": 2151906,
+            "amount": 881906,
             "originalAmount": 800000
           }
         ]
@@ -6961,14 +6947,21 @@ window.wcDepartmentTotalBudget = [
     "fundNumber": "109",
     "fundName": "E911 Fund",
     "department": "109 E911 Fund",
-    "totalBudget": 0,
-    "expenseTotal": 0,
+    "totalBudget": 480000,
+    "expenseTotal": 480000,
     "revenueTotal": 480000,
-    "originalTotalBudget": 0,
-    "originalExpenseTotal": 0,
+    "originalTotalBudget": 440000,
+    "originalExpenseTotal": 440000,
     "originalRevenueTotal": 440000,
-    "netTotal": 480000,
+    "netTotal": 960000,
     "accounts": [
+      {
+        "accountCode": "591000",
+        "accountName": "Intergovernmental Transfers",
+        "type": "Expense",
+        "amount": 480000,
+        "originalAmount": 440000
+      },
       {
         "accountCode": "335221",
         "accountName": "E911 Communications/Non-Wireless",
@@ -6987,14 +6980,21 @@ window.wcDepartmentTotalBudget = [
     "departments": [
       {
         "department": "E911",
-        "totalBudget": 0,
-        "expenseTotal": 0,
+        "totalBudget": 480000,
+        "expenseTotal": 480000,
         "revenueTotal": 480000,
-        "originalTotalBudget": 0,
-        "originalExpenseTotal": 0,
+        "originalTotalBudget": 440000,
+        "originalExpenseTotal": 440000,
         "originalRevenueTotal": 440000,
-        "netTotal": 480000,
+        "netTotal": 960000,
         "accounts": [
+          {
+            "accountCode": "591000",
+            "accountName": "Intergovernmental Transfers",
+            "type": "Expense",
+            "amount": 480000,
+            "originalAmount": 440000
+          },
           {
             "accountCode": "335221",
             "accountName": "E911 Communications/Non-Wireless",
