@@ -4062,7 +4062,7 @@ function budgetBriefingOriginalExpenseTotal(record, parentFund) {
   if (departmentName === "board of county commissioners") return 12839938;
   if (departmentName === "property appraiser") return 4829596;
   if (departmentName === "statutory & other agency funding") return 3109643;
-  if (departmentName === "south walton fire & state control") return 919693;
+  if (departmentName === "south walton fire & state control") return 952483;
   if (departmentName === "medical examiner") return 1351698;
   if (departmentName === "public defender") return 152439;
   if (departmentName === "state attorney") return 260633;
