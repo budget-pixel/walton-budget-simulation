@@ -87,8 +87,7 @@
       type: ["type", "account type"],
       accountCode: ["account code", "accountcode", "object code", "object", "account"],
       accountName: ["account name", "accountname", "object description", "object name"],
-      amount: ["period 1 proposed", "2027 proposed budget", "proposed budget", "budget", "amount", "expense"],
-      originalAmount: ["2026 original budget", "fy 2026 original budget", "fy26 original budget", "fy 26 original budget", "original budget", "ad"]
+      amount: ["period 1 proposed", "2027 proposed budget", "proposed budget", "budget", "amount", "expense"]
     };
 
     function normalizeFundName(value) {
@@ -155,7 +154,7 @@
       const header = detectHeaderRow(rows);
       const fields = header.fields;
       const missing = Object.entries(fields)
-        .filter(([field, column]) => !["fundNumber", "fundName", "department", "originalAmount"].includes(field) && column < 0)
+        .filter(([field, column]) => !["fundNumber", "fundName", "department"].includes(field) && column < 0)
         .map(([field]) => field);
 
       if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
@@ -190,7 +189,6 @@
           .trim();
         const amount = parseMoney(row[fields.amount]);
         if (!amount) return;
-        const originalAmount = fields.originalAmount >= 0 ? parseMoney(row[fields.originalAmount]) : 0;
 
         const fundKey = fundInfo.fund;
         const normalizedFundName = normalizeName(fundInfo.fundName || fundInfo.fund);
@@ -260,30 +258,20 @@
             accountName,
             type,
             amount: 0,
-            originalAmount: 0,
-            originalValues: new Set()
+            originalAmount: 0
           });
         }
         record.accounts.get(accountKey).amount += amount;
-        if (originalAmount && !record.accounts.get(accountKey).originalValues.has(originalAmount)) {
-          record.accounts.get(accountKey).originalValues.add(originalAmount);
-          record.accounts.get(accountKey).originalAmount += originalAmount;
-        }
         if (!departmentRecord.accounts.has(accountKey)) {
           departmentRecord.accounts.set(accountKey, {
             accountCode,
             accountName,
             type,
             amount: 0,
-            originalAmount: 0,
-            originalValues: new Set()
+            originalAmount: 0
           });
         }
         departmentRecord.accounts.get(accountKey).amount += amount;
-        if (originalAmount && !departmentRecord.accounts.get(accountKey).originalValues.has(originalAmount)) {
-          departmentRecord.accounts.get(accountKey).originalValues.add(originalAmount);
-          departmentRecord.accounts.get(accountKey).originalAmount += originalAmount;
-        }
       });
 
       const output = [...funds.values()].map((fund) => ({
@@ -299,7 +287,7 @@
         originalRevenueTotal: Math.round([...fund.accounts.values()].filter((account) => account.type === "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
         netTotal: Math.round(fund.netTotal),
         accounts: [...fund.accounts.values()]
-          .map(({ originalValues, ...account }) => ({ ...account, amount: Math.round(account.amount), originalAmount: Math.round(account.originalAmount || 0) }))
+          .map((account) => ({ ...account, amount: Math.round(account.amount), originalAmount: Math.round(account.originalAmount || 0) }))
           .sort((a, b) => String(a.type).localeCompare(String(b.type)) || String(a.accountCode).localeCompare(String(b.accountCode)) || String(a.accountName).localeCompare(String(b.accountName))),
         departments: [...fund.departments.values()].map((department) => ({
           department: department.department,
@@ -311,7 +299,7 @@
           originalRevenueTotal: Math.round([...department.accounts.values()].filter((account) => account.type === "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
           netTotal: Math.round(department.netTotal),
           accounts: [...department.accounts.values()]
-            .map(({ originalValues, ...account }) => ({ ...account, amount: Math.round(account.amount), originalAmount: Math.round(account.originalAmount || 0) }))
+            .map((account) => ({ ...account, amount: Math.round(account.amount), originalAmount: Math.round(account.originalAmount || 0) }))
             .sort((a, b) => String(a.type).localeCompare(String(b.type)) || String(a.accountCode).localeCompare(String(b.accountCode)) || String(a.accountName).localeCompare(String(b.accountName)))
         })).sort((a, b) => a.department.localeCompare(b.department))
       })).sort((a, b) => a.fund.localeCompare(b.fund));
@@ -324,9 +312,7 @@
         skippedBlankRows,
         skippedSelfInsuranceRows,
         grandExpenseTotal: output.reduce((sum, department) => sum + Number(department.expenseTotal || 0), 0),
-        grandRevenueTotal: output.reduce((sum, department) => sum + Number(department.revenueTotal || 0), 0),
-        grandOriginalExpenseTotal: output.reduce((sum, department) => sum + Number(department.originalExpenseTotal || 0), 0),
-        grandOriginalRevenueTotal: output.reduce((sum, department) => sum + Number(department.originalRevenueTotal || 0), 0)
+        grandRevenueTotal: output.reduce((sum, department) => sum + Number(department.revenueTotal || 0), 0)
       };
     }
 
@@ -378,14 +364,13 @@
         const result = convertRows(rows);
         setGeneratedOutput(jsAssign("wcDepartmentTotalBudget", result.output));
         const moneyFormat = (value) => Number(value || 0).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-        document.getElementById("status").textContent = `Converted ${result.output.length} funds from ${file.name}. Header row: ${result.headerRow}. Fund number column: ${result.fundNumberColumn}. Fund name column: ${result.fundNameColumn}. Expenses: ${moneyFormat(result.grandExpenseTotal)}. Revenue: ${moneyFormat(result.grandRevenueTotal)}. 2026 Original Revenue: ${moneyFormat(result.grandOriginalRevenueTotal)}.`;
+        document.getElementById("status").textContent = `Converted ${result.output.length} funds from ${file.name}. Header row: ${result.headerRow}. Fund number column: ${result.fundNumberColumn}. Fund name column: ${result.fundNameColumn}. Expenses: ${moneyFormat(result.grandExpenseTotal)}. Revenue: ${moneyFormat(result.grandRevenueTotal)}.`;
         document.getElementById("summary").innerHTML = result.output.map((department) => `
           <article>
             <strong>${department.fundNumber ? `${department.fundNumber} - ` : ""}${department.fundName || department.fund || department.department}</strong>
             <dl>
               <dt>Expense</dt><dd>${moneyFormat(department.expenseTotal)}</dd>
               <dt>Revenue</dt><dd>${moneyFormat(department.revenueTotal)}</dd>
-              <dt>2026 Original Revenue</dt><dd>${moneyFormat(department.originalRevenueTotal)}</dd>
             </dl>
             <p>${department.departments.slice(0, 4).map((item) => item.department).join(", ")}${department.departments.length > 4 ? `, +${department.departments.length - 4} more` : ""}</p>
           </article>

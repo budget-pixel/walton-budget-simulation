@@ -1096,20 +1096,22 @@ function publicPersonnelOfficeDepartments() {
     .filter(Boolean);
 }
 
+function publicPersonnelReductionDepartments() {
+  return publicCountyStaffDepartments();
+}
+
 function publicCountyStaffFteReduction() {
-  return publicCountyStaffDepartments()
-    .concat(publicPersonnelOfficeDepartments())
+  return publicPersonnelReductionDepartments()
     .reduce((total, department) => total + Number(state.fteReductions[department.id] || 0), 0);
 }
 
 function publicCountyStaffPersonnelReduction() {
-  return publicCountyStaffDepartments()
-    .concat(publicPersonnelOfficeDepartments())
+  return publicPersonnelReductionDepartments()
     .reduce((total, department) => total + Number(state.fteReductions[department.id] || 0) * fteCost(department), 0);
 }
 
 function applyPublicCountyStaffFteReduction(value) {
-  const publicDepartments = publicCountyStaffDepartments().concat(publicPersonnelOfficeDepartments());
+  const publicDepartments = publicPersonnelReductionDepartments();
   const totalFte = publicDepartments.reduce((total, department) => total + Number(department.fteCount || 0), 0);
   const shortfallCap = Number(scenarioYear()?.revenueShortfall || 0);
   let remainingFte = Math.min(Math.max(Number(value || 0), 0), totalFte);
@@ -1173,14 +1175,13 @@ function renderPersonnel() {
     const countyDepartments = publicCountyStaffDepartments();
     const publicOfficeRows = publicPersonnelOfficeDepartments();
     const countyFteTotal = countyDepartments.reduce((total, department) => total + Number(department.fteCount || 0), 0);
-    const publicOfficeFteTotal = publicOfficeRows.reduce((total, department) => total + Number(department.fteCount || 0), 0);
-    const publicFteTotal = countyFteTotal + publicOfficeFteTotal;
+    const publicFteTotal = publicPersonnelReductionDepartments().reduce((total, department) => total + Number(department.fteCount || 0), 0);
     const countyFteReduction = publicCountyStaffFteReduction();
     const countyPersonnelReduction = publicCountyStaffPersonnelReduction();
 
     $("#personnelControls").innerHTML = `
       <tr>
-        <td><strong>Property Tax Funded FTE Total</strong></td>
+        <td><strong>Board-Controlled FTE Total</strong></td>
         <td>${number(publicFteTotal)}</td>
         <td>
           <input
@@ -4047,8 +4048,15 @@ function budgetBriefingOriginalRevenueTotal(fund) {
   if (fundName === "general fund") return 204494466;
   if (fundName === "transportation fund") return 26604000;
   if (fundName === "tourist development fund") return 51500000;
+  if (fundName === "msbu fund") return 43255;
   if (fundName === "building fund") return 4200000;
   if (fundName === "mosquito control fund") return 1340000;
+  if (fundName === "mosquito control state aid fund") return 61856;
+  if (fundName === "sheriff fund") return 114116228;
+  if (fundName === "e911 fund") return 440000;
+  if (fundName === "housing & urban development fund") return 3082896;
+  if (fundName === "solid waste fund") return 41000000;
+  if (fundName === "sidewalk fund") return 75000;
   if (fundName === "capital projects fund") return 20336997;
   if (fundName === "recreation plat fee fund") return 1000000;
   if (fundName === "debt service fund" || String(fund?.fundNumber || "").trim() === "201") return 55000;
@@ -4297,12 +4305,27 @@ function budgetRevenueComparisonPages(scenarioName) {
   const totals = budgetBriefingTotals(funds);
   const interfundTransfers = {
     originalRevenueTotal: 140404580,
-    revenueTotal: 144336225
+    revenueTotal: 145002036
   };
+  const generalFund = funds.find((fund) => String(fund?.fundName || fund?.fund || "").trim().toLowerCase() === "general fund");
+  const generalFundOriginalRevenue = budgetBriefingOriginalRevenueTotal(generalFund);
+  const generalFundRevenue = budgetAmount(generalFund?.revenueTotal);
+  let generalFundDisplayOriginalRevenue = null;
+  let generalFundDisplayRevenue = null;
   const rows = funds.flatMap((fund) => {
     const fundName = String(fund?.fundName || fund?.fund || "").trim().toLowerCase();
-    const originalRevenue = budgetBriefingOriginalRevenueTotal(fund);
-    const revenue = budgetAmount(fund.revenueTotal);
+    let originalRevenue = budgetBriefingOriginalRevenueTotal(fund);
+    let revenue = budgetAmount(fund.revenueTotal);
+    let generalFundBreakdownRows = [];
+
+    if (fundName === "general fund") {
+      generalFundBreakdownRows = budgetGeneralFundRevenueBreakdownRows(fund, originalRevenue, revenue);
+      originalRevenue = generalFundBreakdownRows.reduce((sum, account) => sum + budgetAmount(account.originalAmount), 0);
+      revenue = generalFundBreakdownRows.reduce((sum, account) => sum + budgetAmount(account.amount), 0);
+      generalFundDisplayOriginalRevenue = originalRevenue;
+      generalFundDisplayRevenue = revenue;
+    }
+
     const fundRow = {
       weight: 1,
       html: `<tr>
@@ -4312,7 +4335,7 @@ function budgetRevenueComparisonPages(scenarioName) {
       </tr>`
     };
     if (fundName !== "general fund") return [fundRow];
-    const detailRows = budgetGeneralFundRevenueBreakdownRows(fund, originalRevenue, revenue).map((account) => ({
+    const detailRows = generalFundBreakdownRows.map((account) => ({
       weight: 0.85,
       html: `<tr class="budget-detail-row">
         <td class="budget-detail-label"><strong>${escapeHtml(account.accountName || "Revenue")}</strong></td>
@@ -4328,11 +4351,11 @@ function budgetRevenueComparisonPages(scenarioName) {
       <td><strong>Less Interfund Transfers</strong></td>
       <td>${money(-interfundTransfers.originalRevenueTotal)}</td>
       <td>${money(-interfundTransfers.revenueTotal)}</td>
-    </tr>`
+      </tr>`
   });
   rows.push({
     weight: 1,
-    html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.originalRevenueTotal - interfundTransfers.originalRevenueTotal)}</strong></td><td><strong>${money(totals.revenueTotal - interfundTransfers.revenueTotal)}</strong></td></tr>`
+    html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.originalRevenueTotal - generalFundOriginalRevenue + (generalFundDisplayOriginalRevenue ?? generalFundOriginalRevenue) - interfundTransfers.originalRevenueTotal)}</strong></td><td><strong>${money(totals.revenueTotal - generalFundRevenue + (generalFundDisplayRevenue ?? generalFundRevenue) - interfundTransfers.revenueTotal)}</strong></td></tr>`
   });
   return commissionerPaginatedTablePages({
     title: "Budget Revenues Compared to 2026 Original",
@@ -4346,24 +4369,45 @@ function budgetRevenueComparisonPages(scenarioName) {
 }
 
 function budgetGeneralFundRevenueBreakdownRows(fund, originalRevenueTotal, revenueTotal) {
-  const selectedNames = [
-    "Ad Valorem Taxes",
-    "State Revenue Share Proceeds",
-    "Local Government 1/2 Cent Sales Tax",
-    "Short-Term Rental Certificate Fee",
-    "Indirect Administrative Fees",
-    "TDC Public Safety Reimbursements",
-    "Surplus Budget Tax Collector"
+  const remainingRevenueProjectionAdjustment = 2880433;
+  const originalRevenueOverrides = {
+    "ad valorem taxes": 155766296,
+    "state revenue share proceeds": 3300000,
+    "local government 1/2 cent sales tax": 17000000,
+    "short-term rental certificate fee": 1300000,
+    "indirect administrative fees": 3442233,
+    "tdc public safety reimbursements": 2448000,
+    "surplus budget tax collector": 3563092
+  };
+  const revenueProjectionOverrides = {
+    "ad valorem taxes": 163473140
+  };
+  const selectedRevenueLines = [
+    { name: "Ad Valorem Taxes" },
+    { name: "State Revenue Share Proceeds" },
+    { name: "Local Government 1/2 Cent Sales Tax" },
+    { name: "Short-Term Rental Certificate Fee" },
+    { name: "Indirect Administrative Fees" },
+    { name: "TDC Public Safety Reimbursements" },
+    { name: "Surplus Budget Tax Collector" }
   ];
   const revenueAccounts = (Array.isArray(fund?.accounts) ? fund.accounts : [])
     .filter((account) => account.type === "Revenue" && (budgetAmount(account.amount) || budgetAmount(account.originalAmount)))
     .sort((a, b) => String(a.accountCode || "").localeCompare(String(b.accountCode || "")));
-  const selectedRows = selectedNames.map((name) => {
-    const matches = revenueAccounts.filter((account) => String(account.accountName || "").trim().toLowerCase() === name.toLowerCase());
+  const selectedRows = selectedRevenueLines.map(({ name, accountCode }) => {
+    const matches = revenueAccounts.filter((account) => {
+      if (accountCode) return String(account.accountCode || "").trim() === accountCode;
+      return String(account.accountName || "").trim().toLowerCase() === name.toLowerCase();
+    });
+    const normalizedName = name.toLowerCase();
     return {
       accountName: name,
-      originalAmount: matches.reduce((sum, account) => sum + budgetAmount(account.originalAmount), 0),
-      amount: matches.reduce((sum, account) => sum + budgetAmount(account.amount), 0)
+      originalAmount: Object.prototype.hasOwnProperty.call(originalRevenueOverrides, normalizedName)
+        ? originalRevenueOverrides[normalizedName]
+        : matches.reduce((sum, account) => sum + budgetAmount(account.originalAmount), 0),
+      amount: Object.prototype.hasOwnProperty.call(revenueProjectionOverrides, normalizedName)
+        ? revenueProjectionOverrides[normalizedName]
+        : matches.reduce((sum, account) => sum + budgetAmount(account.amount), 0)
     };
   });
   const selectedOriginal = selectedRows.reduce((sum, account) => sum + budgetAmount(account.originalAmount), 0);
@@ -4371,7 +4415,7 @@ function budgetGeneralFundRevenueBreakdownRows(fund, originalRevenueTotal, reven
   return selectedRows.concat({
     accountName: "Remaining Revenue",
     originalAmount: budgetAmount(originalRevenueTotal) - selectedOriginal,
-    amount: budgetAmount(revenueTotal) - selectedRevenue
+    amount: budgetAmount(revenueTotal) - selectedRevenue + remainingRevenueProjectionAdjustment
   });
 }
 

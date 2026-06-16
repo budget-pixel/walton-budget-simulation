@@ -1910,12 +1910,12 @@ window.wcDepartmentExpenses = [
   },
   {
     "department": "Capital Projects",
-    "total": 28735536,
+    "total": 29401347,
     "categories": [
       {
         "category": "Buildings & Infrastructure",
-        "amount": 26220536,
-        "percent": 91.2,
+        "amount": 26886347,
+        "percent": 91.4,
         "items": [
           {
             "proposal": "Capital Projects",
@@ -2177,8 +2177,8 @@ window.wcDepartmentExpenses = [
             "accountName": "Infrastructure",
             "description": "",
             "itemization": 0,
-            "proposedAmount": 580000,
-            "amount": 580000,
+            "proposedAmount": 1245811,
+            "amount": 1245811,
             "category": "Buildings & Infrastructure"
           }
         ]
@@ -2186,7 +2186,7 @@ window.wcDepartmentExpenses = [
       {
         "category": "Debt Service",
         "amount": 2515000,
-        "percent": 8.8,
+        "percent": 8.6,
         "items": [
           {
             "proposal": "Capital Projects",
@@ -2474,8 +2474,8 @@ window.wcDepartmentExpenses = [
         "accountName": "Infrastructure",
         "description": "",
         "itemization": 0,
-        "proposedAmount": 580000,
-        "amount": 580000,
+        "proposedAmount": 1245811,
+        "amount": 1245811,
         "category": "Buildings & Infrastructure"
       },
       {
