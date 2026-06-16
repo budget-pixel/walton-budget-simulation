@@ -1797,6 +1797,10 @@ function operatingLineItemLabel(item, groupLabel) {
   return comparableExpenseItemText(label) === comparableExpenseItemText(groupLabel) ? "" : label;
 }
 
+function operatingSummaryLineItem(item, group) {
+  return Math.round(Number(item.amount || 0)) === Math.round(Number(group.amount || 0));
+}
+
 function renderOperatingLineItems(department, isLocked) {
   const groups = groupedExpenseItems(operatingExpenseItemsForDepartment(department));
   if (!groups.length) return "";
@@ -1819,7 +1823,7 @@ function renderOperatingLineItems(department, isLocked) {
         ${groups.map((group) => {
           const visibleItems = group.items
             .map((item) => ({ item, label: operatingLineItemLabel(item, group.label) }))
-            .filter((row) => row.label);
+            .filter((row) => row.label && !operatingSummaryLineItem(row.item, group));
           const accountItem = visibleItems.length ? null : group.items[0];
           const accountReduction = accountItem ? operatingItemReductionAmount(accountItem) : 0;
           return `
@@ -3502,7 +3506,9 @@ function commissionerScenarioMillageRows(totals) {
   return ["FY2027", "FY2028", "FY2029"].map((yearLabel) => {
     const year = forecastYears().find((item) => item.year === yearLabel);
     const projectedExpense = Number(year?.projectedSupportedExpense || 0);
-    const revenueAtScenarioMillage = Number(taxableValueByYear[yearLabel] || 0) * proposedRate / 1000;
+    const revenueAtScenarioMillage = yearLabel === "FY2027"
+      ? estimatedMillageRevenue(proposedRate)
+      : Number(taxableValueByYear[yearLabel] || 0) * proposedRate / 1000;
     const capitalReduction = yearLabel === "FY2027" || yearLabel === budgetData.scenarioYear ? oneTimeCapitalReduction : 0;
     const reductionsApplied = yearLabel === "FY2027" || scenarioAppliesToForecastYear(year) ? recurringReduction + capitalReduction : 0;
     return {
