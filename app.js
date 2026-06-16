@@ -4066,7 +4066,7 @@ function budgetBriefingOriginalExpenseTotal(record, parentFund) {
   if (departmentName === "medical examiner") return 1351698;
   if (departmentName === "public defender") return 152439;
   if (departmentName === "state attorney") return 260633;
-  if (departmentName === "building construction and maintenance") return 7731168;
+  if (departmentName === "building construction and maintenance") return 9986168;
   if (departmentName === "engineering services") return 2474578;
   if (departmentName === "planning") return 6689864;
   if (departmentName === "code compliance") return 4873159;
@@ -4074,7 +4074,7 @@ function budgetBriefingOriginalExpenseTotal(record, parentFund) {
   if (departmentName === "libraries") return 1894963;
   if (departmentName === "office of the county attorney") return 1993475;
   if (departmentName === "eagle springs golf and recreation center") return 1974044;
-  if (departmentName === "human resources") return 1338994;
+  if (departmentName === "human resources") return 1338993;
   if (departmentName === "office of management and budget") return 1524708;
   if (departmentName === "purchasing") return 1188795;
   if (departmentName === "emergency management") return 804151;
@@ -4103,6 +4103,7 @@ function budgetBriefingOriginalExpenseTotal(record, parentFund) {
   if (departmentName === "tdc beach renourishment") return 10000000;
   if (departmentName === "tdc south walton fire lifeguard services") return 3250749;
   if (departmentName === "tdc public safety services") return 4420000;
+  if (departmentName === "solid waste") return 41000000;
   return budgetAmount(record?.originalExpenseTotal || record?.originalTotalBudget);
 }
 
@@ -4432,9 +4433,11 @@ function budgetEntryControlCategory(entry) {
 
 function budgetBoardProgramsHiddenEntry(entry) {
   const fundName = String(entry?.fund?.fundName || entry?.fundLabel || "").trim().toLowerCase();
+  const departmentName = String(entry?.departmentName || entry?.department?.department || "").trim().toLowerCase();
   return fundName === "capital projects fund" ||
     fundName === "recreation plat fee fund" ||
-    fundName === "sidewalk fund";
+    fundName === "sidewalk fund" ||
+    departmentName === "court technology";
 }
 
 function budgetFundSortValue(entry) {
