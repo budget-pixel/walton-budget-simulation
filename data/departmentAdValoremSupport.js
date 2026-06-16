@@ -1,6 +1,6 @@
 window.departmentAdValoremSupport = {
   "version": 1,
-  "generatedAt": "2026-06-15T02:36:59.850Z",
+  "generatedAt": "2026-06-16T15:35:43.272Z",
   "departments": {
     "sheriff-s-office": {
       "department": "Sheriff's Office",
@@ -8,11 +8,11 @@ window.departmentAdValoremSupport = {
     },
     "board-of-county-commissioners": {
       "department": "Board of County Commissioners",
-      "support": 7274185
+      "support": 3053620
     },
     "building-construction-and-maintenance": {
       "department": "Building Construction and Maintenance",
-      "support": 2308208.68
+      "support": 2822903.92
     },
     "medical-examiner": {
       "department": "Medical Examiner",
@@ -36,11 +36,11 @@ window.departmentAdValoremSupport = {
     },
     "tax-collector": {
       "department": "Tax Collector",
-      "support": 4649400
+      "support": 4449400
     },
     "planning": {
       "department": "Planning",
-      "support": 944119.21
+      "support": 1154643.35
     },
     "clerk-of-courts-and-county-comptroller": {
       "department": "Clerk of Courts & County Comptroller",
@@ -56,27 +56,27 @@ window.departmentAdValoremSupport = {
     },
     "code-compliance": {
       "department": "Code Compliance",
-      "support": 425355
+      "support": 696009
     },
     "engineering-services": {
       "department": "Engineering Services",
-      "support": 552364
+      "support": 675532.72
     },
     "county-administration": {
       "department": "County Administration",
-      "support": 492678.3
+      "support": 602538.02
     },
     "libraries": {
       "department": "Libraries",
-      "support": 485298.98
+      "support": 593513.23
     },
     "eagle-springs-golf-and-recreation-center": {
       "department": "Eagle Springs Golf and Recreation Center",
-      "support": 812000
+      "support": 420555
     },
     "office-of-the-county-attorney": {
       "department": "Office of the County Attorney",
-      "support": 411722.79
+      "support": 503530.68
     },
     "supervisor-of-elections": {
       "department": "Supervisor of Elections",
@@ -84,19 +84,19 @@ window.departmentAdValoremSupport = {
     },
     "human-resources": {
       "department": "Human Resources",
-      "support": 310365.62
+      "support": 379572.41
     },
     "office-of-management-and-budget": {
       "department": "Office of Management and Budget",
-      "support": 270213.43
+      "support": 330466.89
     },
     "procurement": {
       "department": "Procurement",
-      "support": 257191.09
+      "support": 314540.77
     },
     "recreation": {
       "department": "Recreation",
-      "support": 149322.76
+      "support": 182619.45
     },
     "south-walton-fire-and-state-control": {
       "department": "South Walton Fire & State Control",
@@ -104,19 +104,19 @@ window.departmentAdValoremSupport = {
     },
     "emergency-management": {
       "department": "Emergency Management",
-      "support": 192730.54
+      "support": 235706.5
     },
     "environmental-services": {
       "department": "Environmental Services",
-      "support": 184483.06
+      "support": 225619.97
     },
     "geographic-info-systems": {
       "department": "Geographic Info Systems",
-      "support": 161259.9
+      "support": 197218.39
     },
     "extension-office": {
       "department": "Extension Office",
-      "support": 129789.26
+      "support": 158730.28
     },
     "statutory-and-other-agency-funding": {
       "department": "Statutory & Other Agency Funding",
@@ -128,11 +128,11 @@ window.departmentAdValoremSupport = {
     },
     "probation-services": {
       "department": "Probation Services",
-      "support": 157000
+      "support": 155577
     },
     "veteran-services": {
       "department": "Veteran Services",
-      "support": 69018.37
+      "support": 84408.41
     },
     "soil-conservation": {
       "department": "Soil Conservation",
@@ -140,7 +140,7 @@ window.departmentAdValoremSupport = {
     },
     "capital-projects": {
       "department": "Capital Projects",
-      "support": 23220536
+      "support": 26220536
     },
     "total-ad-valorem-rev": {
       "department": "Total Ad Valorem Rev",
