@@ -4024,6 +4024,16 @@ function budgetAmount(value) {
   return Number(value || 0);
 }
 
+function budgetBriefingOriginalRevenueTotal(fund) {
+  const fundName = String(fund?.fundName || fund?.fund || "").trim().toLowerCase();
+  if (fundName === "general fund") return 204494466;
+  if (fundName === "transportation fund") return 26604000;
+  if (fundName === "tourist development fund") return 51500000;
+  if (fundName === "building fund") return 4200000;
+  if (fundName === "mosquito control fund") return 1340000;
+  return budgetAmount(fund.originalRevenueTotal);
+}
+
 function budgetBriefingHiddenFund(fund) {
   const fundName = String(fund?.fundName || fund?.fund || "").trim().toLowerCase();
   return fundName === "recreation plat fee fund" ||
@@ -4046,7 +4056,7 @@ function budgetBriefingTotals(funds = budgetBriefingFunds()) {
     sum.expenseTotal += budgetAmount(fund.expenseTotal || fund.totalBudget);
     sum.revenueTotal += budgetAmount(fund.revenueTotal);
     sum.originalExpenseTotal += budgetAmount(fund.originalExpenseTotal || fund.originalTotalBudget);
-    sum.originalRevenueTotal += budgetAmount(fund.originalRevenueTotal);
+    sum.originalRevenueTotal += budgetBriefingOriginalRevenueTotal(fund);
     return sum;
   }, { funds: 0, departments: 0, expenseTotal: 0, revenueTotal: 0, originalExpenseTotal: 0, originalRevenueTotal: 0 });
   totals.netPosition = totals.revenueTotal - totals.expenseTotal;
@@ -4200,7 +4210,7 @@ function budgetRevenueComparisonPages(scenarioName) {
   const funds = budgetBriefingFunds().slice().sort((a, b) => budgetFundLabel(a).localeCompare(budgetFundLabel(b)));
   const totals = budgetBriefingTotals(funds);
   const rows = funds.map((fund) => {
-    const originalRevenue = budgetAmount(fund.originalRevenueTotal);
+    const originalRevenue = budgetBriefingOriginalRevenueTotal(fund);
     const revenue = budgetAmount(fund.revenueTotal);
     return {
       weight: 1,
