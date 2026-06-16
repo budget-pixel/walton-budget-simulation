@@ -31,8 +31,13 @@
     .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
     .status { margin-top: 12px; color: var(--color-muted); }
     .warning { color: var(--color-warning); font-weight: 700; }
-    .summary { display: grid; gap: 8px; margin-top: 14px; }
-    .summary div { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--color-border); padding-top: 8px; }
+    .summary { display: grid; gap: 10px; margin: 10px 0 18px; }
+    .summary article { border-top: 1px solid var(--color-border); padding-top: 10px; }
+    .summary strong { display: block; color: var(--color-primary-dark); }
+    .summary dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; margin: 6px 0 0; color: var(--color-muted); }
+    .summary dt { font-weight: 700; }
+    .summary dd { margin: 0; font-weight: 800; color: var(--color-text); }
+    .summary p { margin: 8px 0 0; font-size: 0.86rem; line-height: 1.35; }
     @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -49,6 +54,8 @@
           <input id="fileInput" type="file" accept=".csv,text/csv,.xlsx,.xls,.xlsm">
         </label>
         <p class="status" id="status">Waiting for a file.</p>
+        <h2>Preview</h2>
+        <p>First converted funds with expense and revenue totals.</p>
         <div class="summary" id="summary"></div>
       </section>
       <section class="panel">
@@ -74,11 +81,32 @@
 
     const { cleanText, mapFields, normalizeName, parseMoney, jsAssign, rowsFromFile: rowsFromBuffer } = window.converterUtils;
     const requiredColumns = {
-      department: ["proposal", "department", "department name", "org", "organization"],
+      fundNumber: ["funds", "fund", "fund number", "fund id"],
+      fundName: ["funds name", "fund name", "fund description"],
+      department: ["proposal", "organizational code name", "department", "department name", "org", "organization"],
+      type: ["type", "account type"],
       accountCode: ["account code", "accountcode", "object code", "object", "account"],
       accountName: ["account name", "accountname", "object description", "object name"],
-      amount: ["period 1 proposed", "2027 proposed budget", "proposed budget", "budget", "amount", "expense"]
+      amount: ["period 1 proposed", "2027 proposed budget", "proposed budget", "budget", "amount", "expense"],
+      originalAmount: ["2026 original budget", "fy 2026 original budget", "fy26 original budget", "fy 26 original budget", "original budget", "ad"]
     };
+
+    function normalizeFundName(value) {
+      const text = cleanText(value);
+      return text;
+    }
+
+    function parseFund(numberValue, nameValue) {
+      const fundNumber = cleanText(numberValue).replace(/\.0$/, "");
+      const fundName = normalizeFundName(nameValue);
+      const text = [fundNumber, fundName].filter(Boolean).join(" ").trim();
+      const match = text.match(/^(\d+)\s+(.+)$/);
+      return {
+        fund: text,
+        fundNumber: match ? match[1] : "",
+        fundName: match ? match[2].trim() : text
+      };
+    }
 
     function normalizeDepartmentName(value) {
       const text = cleanText(value);
@@ -91,22 +119,17 @@
       return text;
     }
 
-    function shouldExcludeDepartment(value) {
+    function shouldExcludeFund(value) {
       const normalized = normalizeName(value);
       if (!normalized) return true;
-      const exactExclusions = new Set([
-        "ad valorem taxes",
-        "ad valorem taxes interfund transfers",
-        "ad valorem taxes inerfund transfers",
-        "self insurance fund"
-      ]);
-      return exactExclusions.has(normalized);
+      return normalized === "self insurance fund";
     }
 
-    function isExpenseCode(accountCode) {
-      const code = String(accountCode || "").replace(/\.0$/, "").replace(/[^0-9]/g, "").trim();
-      if (!code) return true;
-      return !code.startsWith("3");
+    function accountType(value) {
+      const normalized = normalizeName(value);
+      if (normalized.includes("revenue")) return "Revenue";
+      if (normalized.includes("expense")) return "Expense";
+      return cleanText(value) || "Unclassified";
     }
 
     async function rowsFromFile(file) {
@@ -114,24 +137,50 @@
       return await rowsFromBuffer(buffer);
     }
 
+    function detectHeaderRow(rows) {
+      const candidates = rows.slice(0, 30).map((row, index) => ({
+        index,
+        fields: mapFields(row, requiredColumns)
+      }));
+      const required = ["type", "amount"];
+      return candidates.find((candidate) => required.every((field) => candidate.fields[field] >= 0)) || {
+        index: 0,
+        fields: mapFields(rows[0], requiredColumns)
+      };
+    }
+
     function convertRows(rows) {
       if (rows.length < 2) throw new Error("The file must include a header row and at least one data row.");
 
-      const fields = mapFields(rows[0], requiredColumns);
+      const header = detectHeaderRow(rows);
+      const fields = header.fields;
       const missing = Object.entries(fields)
-        .filter(([, column]) => column < 0)
+        .filter(([field, column]) => !["fundNumber", "fundName", "department", "originalAmount"].includes(field) && column < 0)
         .map(([field]) => field);
 
       if (missing.length) throw new Error(`Missing required columns: ${missing.join(", ")}.`);
 
-      const departments = new Map();
-      let skippedRevenueRows = 0;
+      const fundNumberColumn = fields.fundNumber >= 0 ? fields.fundNumber : 4;
+      const fundNameColumn = fields.fundName >= 0 ? fields.fundName : 5;
+      const funds = new Map();
       let skippedBlankRows = 0;
+      let skippedSelfInsuranceRows = 0;
+      let currentFundNumber = "";
+      let currentFundName = "";
 
-      rows.slice(1).forEach((row) => {
-        const rawDepartment = cleanText(row[fields.department]);
-        if (!rawDepartment || shouldExcludeDepartment(rawDepartment)) {
+      rows.slice(header.index + 1).forEach((row) => {
+        const rowFundNumber = cleanText(row[fundNumberColumn]).replace(/\.0$/, "");
+        const rowFundName = cleanText(row[fundNameColumn]);
+        if (rowFundNumber) currentFundNumber = rowFundNumber;
+        if (rowFundName) currentFundName = rowFundName;
+        if (!currentFundNumber && !currentFundName) {
           skippedBlankRows += 1;
+          return;
+        }
+
+        const fundInfo = parseFund(currentFundNumber, currentFundName);
+        if (shouldExcludeFund(fundInfo.fundName || fundInfo.fund)) {
+          skippedSelfInsuranceRows += 1;
           return;
         }
 
@@ -139,52 +188,145 @@
           .replace(/\.0$/, "")
           .replace(/[^0-9]/g, "")
           .trim();
-
-        if (!isExpenseCode(accountCode)) {
-          skippedRevenueRows += 1;
-          return;
-        }
-
         const amount = parseMoney(row[fields.amount]);
         if (!amount) return;
+        const originalAmount = fields.originalAmount >= 0 ? parseMoney(row[fields.originalAmount]) : 0;
 
-        const department = normalizeDepartmentName(rawDepartment);
-        if (!departments.has(department)) {
-          departments.set(department, {
-            department,
+        const fundKey = fundInfo.fund;
+        const normalizedFundName = normalizeName(fundInfo.fundName || fundInfo.fund);
+        const transferAllowedFund = normalizedFundName === "sheriff fund" ||
+          normalizedFundName === "capital projects fund" ||
+          normalizedFundName === "transportation fund" ||
+          normalizedFundName === "e911 fund";
+        if (accountCode === "381000" && !transferAllowedFund) return;
+        const expenseTransferAllowedFund = normalizedFundName === "sheriff fund" ||
+          normalizedFundName === "capital projects fund" ||
+          normalizedFundName === "solid waste fund" ||
+          normalizedFundName === "e911 fund";
+        if (accountCode === "591000" && !expenseTransferAllowedFund) return;
+        const rowDepartment = fields.department >= 0 ? normalizeDepartmentName(row[fields.department]) : "";
+        const departmentName = rowDepartment || "Unassigned";
+        if (!funds.has(fundKey)) {
+          funds.set(fundKey, {
+            fund: fundInfo.fund,
+            fundNumber: fundInfo.fundNumber,
+            fundName: fundInfo.fundName,
+            department: fundInfo.fund,
             totalBudget: 0,
-            accounts: new Map()
+            expenseTotal: 0,
+            revenueTotal: 0,
+            originalTotalBudget: 0,
+            originalExpenseTotal: 0,
+            originalRevenueTotal: 0,
+            netTotal: 0,
+            accounts: new Map(),
+            departments: new Map()
           });
         }
 
         const accountName = cleanText(row[fields.accountName]);
-        const record = departments.get(department);
-        record.totalBudget += amount;
+        const type = accountType(row[fields.type]);
+        const record = funds.get(fundKey);
+        if (!record.departments.has(departmentName)) {
+          record.departments.set(departmentName, {
+            department: departmentName,
+            totalBudget: 0,
+            expenseTotal: 0,
+            revenueTotal: 0,
+            originalTotalBudget: 0,
+            originalExpenseTotal: 0,
+            originalRevenueTotal: 0,
+            netTotal: 0,
+            accounts: new Map()
+          });
+        }
+        const departmentRecord = record.departments.get(departmentName);
+        if (type === "Revenue") {
+          record.revenueTotal += amount;
+          departmentRecord.revenueTotal += amount;
+        } else {
+          record.expenseTotal += amount;
+          record.totalBudget += amount;
+          departmentRecord.expenseTotal += amount;
+          departmentRecord.totalBudget += amount;
+        }
+        record.netTotal += amount;
+        departmentRecord.netTotal += amount;
 
         const accountKey = accountCode || accountName || "Uncoded";
         if (!record.accounts.has(accountKey)) {
           record.accounts.set(accountKey, {
             accountCode,
             accountName,
-            amount: 0
+            type,
+            amount: 0,
+            originalAmount: 0,
+            originalValues: new Set()
           });
         }
         record.accounts.get(accountKey).amount += amount;
+        if (originalAmount && !record.accounts.get(accountKey).originalValues.has(originalAmount)) {
+          record.accounts.get(accountKey).originalValues.add(originalAmount);
+          record.accounts.get(accountKey).originalAmount += originalAmount;
+        }
+        if (!departmentRecord.accounts.has(accountKey)) {
+          departmentRecord.accounts.set(accountKey, {
+            accountCode,
+            accountName,
+            type,
+            amount: 0,
+            originalAmount: 0,
+            originalValues: new Set()
+          });
+        }
+        departmentRecord.accounts.get(accountKey).amount += amount;
+        if (originalAmount && !departmentRecord.accounts.get(accountKey).originalValues.has(originalAmount)) {
+          departmentRecord.accounts.get(accountKey).originalValues.add(originalAmount);
+          departmentRecord.accounts.get(accountKey).originalAmount += originalAmount;
+        }
       });
 
-      const output = [...departments.values()].map((department) => ({
-        department: department.department,
-        totalBudget: Math.round(department.totalBudget),
-        accounts: [...department.accounts.values()]
-          .map((account) => ({ ...account, amount: Math.round(account.amount) }))
-          .sort((a, b) => String(a.accountCode).localeCompare(String(b.accountCode)) || String(a.accountName).localeCompare(String(b.accountName)))
-      })).sort((a, b) => a.department.localeCompare(b.department));
+      const output = [...funds.values()].map((fund) => ({
+        fund: fund.fund,
+        fundNumber: fund.fundNumber,
+        fundName: fund.fundName,
+        department: fund.department,
+        totalBudget: Math.round(fund.totalBudget),
+        expenseTotal: Math.round(fund.expenseTotal),
+        revenueTotal: Math.round(fund.revenueTotal),
+        originalTotalBudget: Math.round([...fund.accounts.values()].filter((account) => account.type !== "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
+        originalExpenseTotal: Math.round([...fund.accounts.values()].filter((account) => account.type !== "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
+        originalRevenueTotal: Math.round([...fund.accounts.values()].filter((account) => account.type === "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
+        netTotal: Math.round(fund.netTotal),
+        accounts: [...fund.accounts.values()]
+          .map(({ originalValues, ...account }) => ({ ...account, amount: Math.round(account.amount), originalAmount: Math.round(account.originalAmount || 0) }))
+          .sort((a, b) => String(a.type).localeCompare(String(b.type)) || String(a.accountCode).localeCompare(String(b.accountCode)) || String(a.accountName).localeCompare(String(b.accountName))),
+        departments: [...fund.departments.values()].map((department) => ({
+          department: department.department,
+          totalBudget: Math.round(department.totalBudget),
+          expenseTotal: Math.round(department.expenseTotal),
+          revenueTotal: Math.round(department.revenueTotal),
+          originalTotalBudget: Math.round([...department.accounts.values()].filter((account) => account.type !== "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
+          originalExpenseTotal: Math.round([...department.accounts.values()].filter((account) => account.type !== "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
+          originalRevenueTotal: Math.round([...department.accounts.values()].filter((account) => account.type === "Revenue").reduce((sum, account) => sum + account.originalAmount, 0)),
+          netTotal: Math.round(department.netTotal),
+          accounts: [...department.accounts.values()]
+            .map(({ originalValues, ...account }) => ({ ...account, amount: Math.round(account.amount), originalAmount: Math.round(account.originalAmount || 0) }))
+            .sort((a, b) => String(a.type).localeCompare(String(b.type)) || String(a.accountCode).localeCompare(String(b.accountCode)) || String(a.accountName).localeCompare(String(b.accountName)))
+        })).sort((a, b) => a.department.localeCompare(b.department))
+      })).sort((a, b) => a.fund.localeCompare(b.fund));
 
       return {
         output,
-        skippedRevenueRows,
+        headerRow: header.index + 1,
+        fundNumberColumn: fundNumberColumn + 1,
+        fundNameColumn: fundNameColumn + 1,
         skippedBlankRows,
-        grandTotal: output.reduce((sum, department) => sum + Number(department.totalBudget || 0), 0)
+        skippedSelfInsuranceRows,
+        grandExpenseTotal: output.reduce((sum, department) => sum + Number(department.expenseTotal || 0), 0),
+        grandRevenueTotal: output.reduce((sum, department) => sum + Number(department.revenueTotal || 0), 0),
+        grandOriginalExpenseTotal: output.reduce((sum, department) => sum + Number(department.originalExpenseTotal || 0), 0),
+        grandOriginalRevenueTotal: output.reduce((sum, department) => sum + Number(department.originalRevenueTotal || 0), 0)
       };
     }
 
@@ -235,9 +377,20 @@
 
         const result = convertRows(rows);
         setGeneratedOutput(jsAssign("wcDepartmentTotalBudget", result.output));
-        document.getElementById("status").textContent = `Converted ${result.output.length} departments from ${file.name}. Grand total: ${result.grandTotal.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}.`;
-        document.getElementById("summary").innerHTML = result.output.slice(0, 10).map((department) => `<div><span>${department.department}</span><strong>${department.totalBudget.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}</strong></div>`).join("");
-        document.getElementById("warnings").innerHTML = `<span class="warning">Skipped revenue rows:</span> ${result.skippedRevenueRows.toLocaleString()} &nbsp; <span class="warning">Skipped blank/excluded department rows:</span> ${result.skippedBlankRows.toLocaleString()}`;
+        const moneyFormat = (value) => Number(value || 0).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+        document.getElementById("status").textContent = `Converted ${result.output.length} funds from ${file.name}. Header row: ${result.headerRow}. Fund number column: ${result.fundNumberColumn}. Fund name column: ${result.fundNameColumn}. Expenses: ${moneyFormat(result.grandExpenseTotal)}. Revenue: ${moneyFormat(result.grandRevenueTotal)}. 2026 Original Revenue: ${moneyFormat(result.grandOriginalRevenueTotal)}.`;
+        document.getElementById("summary").innerHTML = result.output.map((department) => `
+          <article>
+            <strong>${department.fundNumber ? `${department.fundNumber} - ` : ""}${department.fundName || department.fund || department.department}</strong>
+            <dl>
+              <dt>Expense</dt><dd>${moneyFormat(department.expenseTotal)}</dd>
+              <dt>Revenue</dt><dd>${moneyFormat(department.revenueTotal)}</dd>
+              <dt>2026 Original Revenue</dt><dd>${moneyFormat(department.originalRevenueTotal)}</dd>
+            </dl>
+            <p>${department.departments.slice(0, 4).map((item) => item.department).join(", ")}${department.departments.length > 4 ? `, +${department.departments.length - 4} more` : ""}</p>
+          </article>
+        `).join("");
+        document.getElementById("warnings").innerHTML = `<span class="warning">Skipped blank fund rows:</span> ${result.skippedBlankRows.toLocaleString()} &nbsp; <span class="warning">Skipped Self Insurance Fund rows:</span> ${result.skippedSelfInsuranceRows.toLocaleString()}`;
       } catch (error) {
         console.error("Department total budget conversion failed", error);
         document.getElementById("status").textContent = error.message || "Conversion failed.";
