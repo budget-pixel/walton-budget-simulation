@@ -3024,6 +3024,8 @@ function commissionerControlCategoryForDepartment(department) {
     "public-defender",
     "circuit-court",
     "county-court",
+    "guardian-ad-litem",
+    "non-profit-program-funding",
     "south-walton-fire-district",
     "south-walton-fire-and-state-control"
   ]);
@@ -3059,6 +3061,8 @@ function commissionerControlCategoryForDepartment(department) {
     name.includes("public defender") ||
     name.includes("circuit court") ||
     name.includes("county court") ||
+    name.includes("guardian ad litem") ||
+    name.includes("non-profit program") ||
     name.includes("south walton fire")
   ) {
     return commissionerControlCategories[1];
@@ -4031,15 +4035,73 @@ function budgetBriefingOriginalRevenueTotal(fund) {
   if (fundName === "tourist development fund") return 51500000;
   if (fundName === "building fund") return 4200000;
   if (fundName === "mosquito control fund") return 1340000;
+  if (fundName === "capital projects fund") return 20336997;
+  if (fundName === "recreation plat fee fund") return 1000000;
   return budgetAmount(fund.originalRevenueTotal);
+}
+
+function budgetBriefingOriginalExpenseTotal(record, parentFund) {
+  const fundName = String(parentFund?.fundName || record?.fundName || record?.fund || "").trim().toLowerCase();
+  const departmentName = String(record?.department || record?.departmentName || "").trim().toLowerCase();
+  if (fundName === "sheriff fund" || departmentName === "sheriff's office") return 114116228;
+  if (departmentName === "board of county commissioners") return 12839938;
+  if (departmentName === "property appraiser") return 4829596;
+  if (departmentName === "statutory & other agency funding") return 3109643;
+  if (departmentName === "south walton fire & state control") return 919693;
+  if (departmentName === "medical examiner") return 1351698;
+  if (departmentName === "public defender") return 152439;
+  if (departmentName === "state attorney") return 260633;
+  if (departmentName === "building construction and maintenance") return 7731168;
+  if (departmentName === "engineering services") return 2474578;
+  if (departmentName === "planning") return 6689864;
+  if (departmentName === "code compliance") return 4873159;
+  if (departmentName === "county administration") return 2219903;
+  if (departmentName === "libraries") return 1894963;
+  if (departmentName === "office of the county attorney") return 1993475;
+  if (departmentName === "eagle springs golf and recreation center") return 1974044;
+  if (departmentName === "human resources") return 1338994;
+  if (departmentName === "office of management and budget") return 1524708;
+  if (departmentName === "purchasing") return 1188795;
+  if (departmentName === "emergency management") return 804151;
+  if (departmentName === "recreation") return 859309;
+  if (departmentName === "geographic info system") return 801815;
+  if (departmentName === "court technology") return 431858;
+  if (departmentName === "environmental resources") return 840902;
+  if (departmentName === "extension office") return 600710;
+  if (departmentName === "eagle springs grill") return 577844;
+  if (departmentName === "probation") return 364655;
+  if (departmentName === "veteran services") return 236100;
+  if (departmentName === "soil conservation") return 143330;
+  if (departmentName === "public works") return 25201472;
+  if (departmentName === "mossy head wastewater treatment facility") return 1402528;
+  if (departmentName === "building department") return 4200000;
+  if (departmentName === "mosquito control") return 1340000;
+  if (departmentName === "mosquito control state aid") return 61856;
+  if (departmentName === "housing & urban development") return 3082896;
+  if (departmentName === "tdc tourism administration") return 2998667;
+  if (departmentName === "tdc sales and visitors center") return 1790723;
+  if (departmentName === "tdc communications") return 894445;
+  if (departmentName === "tdc marketing") return 13834592;
+  if (departmentName === "tdc north walton") return 323000;
+  if (departmentName === "tdc beach operations") return 10471698;
+  if (departmentName === "tdc beach tram program") return 3516126;
+  if (departmentName === "tdc beach renourishment") return 10000000;
+  if (departmentName === "tdc south walton fire lifeguard services") return 3250749;
+  if (departmentName === "tdc public safety services") return 4420000;
+  return budgetAmount(record?.originalExpenseTotal || record?.originalTotalBudget);
+}
+
+function budgetBriefingExpenseTotal(record) {
+  const departmentName = String(record?.department || record?.departmentName || "").trim().toLowerCase();
+  if (departmentName === "public defender") return 290833;
+  if (departmentName === "state attorney") return 322111;
+  if (departmentName === "court technology") return budgetAmount(record?.expenseTotal || record?.totalBudget) + 80000;
+  return budgetAmount(record?.expenseTotal || record?.totalBudget);
 }
 
 function budgetBriefingHiddenFund(fund) {
   const fundName = String(fund?.fundName || fund?.fund || "").trim().toLowerCase();
-  return fundName === "recreation plat fee fund" ||
-    fundName === "sidewalk fund" ||
-    fundName === "msbu fund" ||
-    fundName === "e911 fund";
+  return fundName === "e911 fund";
 }
 
 function budgetFundLabel(fund) {
@@ -4055,7 +4117,7 @@ function budgetBriefingTotals(funds = budgetBriefingFunds()) {
     sum.departments += departments.length;
     sum.expenseTotal += budgetAmount(fund.expenseTotal || fund.totalBudget);
     sum.revenueTotal += budgetAmount(fund.revenueTotal);
-    sum.originalExpenseTotal += budgetAmount(fund.originalExpenseTotal || fund.originalTotalBudget);
+    sum.originalExpenseTotal += budgetBriefingOriginalExpenseTotal(fund);
     sum.originalRevenueTotal += budgetBriefingOriginalRevenueTotal(fund);
     return sum;
   }, { funds: 0, departments: 0, expenseTotal: 0, revenueTotal: 0, originalExpenseTotal: 0, originalRevenueTotal: 0 });
@@ -4065,7 +4127,9 @@ function budgetBriefingTotals(funds = budgetBriefingFunds()) {
 }
 
 function budgetBriefingHiddenDepartment(name) {
-  return String(name || "").trim().toLowerCase() === "ad valorem taxes interfund transfers";
+  const normalized = String(name || "").trim().toLowerCase();
+  return normalized === "ad valorem taxes interfund transfers" ||
+    normalized === "court innovations";
 }
 
 function budgetDepartmentEntries(funds = budgetBriefingFunds()) {
@@ -4076,11 +4140,11 @@ function budgetDepartmentEntries(funds = budgetBriefingFunds()) {
     department,
     fundLabel: budgetFundLabel(fund),
     departmentName: String(department.department || "Unassigned").trim(),
-    expenseTotal: budgetAmount(department.expenseTotal || department.totalBudget),
+    expenseTotal: budgetBriefingExpenseTotal(department),
     revenueTotal: budgetAmount(department.revenueTotal),
-    originalExpenseTotal: budgetAmount(department.originalExpenseTotal || department.originalTotalBudget),
+    originalExpenseTotal: budgetBriefingOriginalExpenseTotal(department, fund),
     originalRevenueTotal: budgetAmount(department.originalRevenueTotal),
-    netPosition: budgetAmount(department.revenueTotal) - budgetAmount(department.expenseTotal || department.totalBudget)
+    netPosition: budgetAmount(department.revenueTotal) - budgetBriefingExpenseTotal(department)
   })));
 }
 
@@ -4103,22 +4167,23 @@ function budgetDepartmentRowsForFund(fund) {
       .filter((account) => account.type === "Expense" && ["571000", "572000"].includes(String(account.accountCode || "")) && budgetAmount(account.amount))
       .sort((a, b) => String(a.accountCode || "").localeCompare(String(b.accountCode || "")));
     if (projects.length) {
+      const debtServiceRows = debtAccounts.length ? [{
+        label: "Debt Service - Principal and Interest",
+        originalExpense: debtAccounts.reduce((sum, account) => sum + budgetAmount(account.originalAmount), 0),
+        expense: debtAccounts.reduce((sum, account) => sum + budgetAmount(account.amount), 0)
+      }] : [];
       return projects.map((project) => ({
         label: project.description || project.projectName || project.name || project.accountName || "Capital project",
         originalExpense: budgetAmount(project.originalAmount),
         expense: budgetAmount(project.amount)
-      })).concat(debtAccounts.map((account) => ({
-        label: `${account.accountCode} ${account.accountName || "Debt Service"}`,
-        originalExpense: budgetAmount(account.originalAmount),
-        expense: budgetAmount(account.amount)
-      })));
+      })).concat(debtServiceRows);
     }
   }
 
   if (fundName !== "solid waste fund") return departments.map((department) => ({
     label: department.department || "Unassigned",
-    originalExpense: budgetAmount(department.originalExpenseTotal || department.originalTotalBudget),
-    expense: budgetAmount(department.expenseTotal || department.totalBudget)
+    originalExpense: budgetBriefingOriginalExpenseTotal(department, fund),
+    expense: budgetBriefingExpenseTotal(department)
   }));
 
   const solidWasteDepartment = departments.find((department) => String(department.department || "").trim().toLowerCase() === "solid waste") || departments[0];
@@ -4161,7 +4226,7 @@ function budgetBriefingBaseStyles() {
     th{background:var(--green);color:white;text-align:left;padding:7px}
     td{border-bottom:1px solid var(--line);padding:7px;vertical-align:top}
     .grand-total-row td{background:#f3f6f3;border-top:2px solid var(--green);font-weight:800}
-    .cover-page{text-align:center}
+    .cover-page{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box}
     .commissioner-split-logo{display:flex;align-items:center;justify-content:center;gap:5px;margin:0 auto 18px;font-family:Arial,Helvetica,sans-serif}
     .commissioner-logo-left,.commissioner-logo-right{display:flex;flex-direction:column;justify-content:center}
     .commissioner-logo-left{align-items:flex-end}
@@ -4177,6 +4242,11 @@ function budgetBriefingBaseStyles() {
     .budget-focus-note{background:#fff;border:1px solid var(--line);border-left:5px solid var(--green);border-radius:8px;padding:13px 15px;margin:12px 0 16px;color:var(--muted);font-size:14px}
     .budget-line-name strong{display:block;color:var(--ink)}
     .budget-line-name span{display:block;color:var(--muted);font-size:11px;font-weight:800;margin-top:2px}
+    .budget-detail-row td{background:#fbfcfb;color:var(--muted);font-size:12px}
+    .budget-detail-label{padding-left:22px}
+    .budget-detail-label strong{display:block;color:var(--ink);font-size:12px}
+    .budget-detail-label span{display:block;color:var(--muted);font-size:11px;font-weight:800;margin-top:2px}
+    .budget-subtract-row td{background:#fffaf0;color:var(--ink);font-weight:800;border-top:1px solid var(--gold)}
   `;
 }
 
@@ -4187,7 +4257,7 @@ function budgetFundOverviewPages(scenarioName) {
     weight: 1,
     html: `<tr>
       <td><strong>${escapeHtml(budgetFundLabel(fund))}</strong></td>
-      <td>${money(budgetAmount(fund.originalExpenseTotal || fund.originalTotalBudget))}</td>
+      <td>${money(budgetBriefingOriginalExpenseTotal(fund))}</td>
       <td>${money(budgetAmount(fund.expenseTotal || fund.totalBudget))}</td>
     </tr>`
   }));
@@ -4209,10 +4279,15 @@ function budgetFundOverviewPages(scenarioName) {
 function budgetRevenueComparisonPages(scenarioName) {
   const funds = budgetBriefingFunds().slice().sort((a, b) => budgetFundLabel(a).localeCompare(budgetFundLabel(b)));
   const totals = budgetBriefingTotals(funds);
-  const rows = funds.map((fund) => {
+  const interfundTransfers = {
+    originalRevenueTotal: 140404580,
+    revenueTotal: 144336225
+  };
+  const rows = funds.flatMap((fund) => {
+    const fundName = String(fund?.fundName || fund?.fund || "").trim().toLowerCase();
     const originalRevenue = budgetBriefingOriginalRevenueTotal(fund);
     const revenue = budgetAmount(fund.revenueTotal);
-    return {
+    const fundRow = {
       weight: 1,
       html: `<tr>
         <td><strong>${escapeHtml(budgetFundLabel(fund))}</strong></td>
@@ -4220,19 +4295,67 @@ function budgetRevenueComparisonPages(scenarioName) {
         <td>${money(revenue)}</td>
       </tr>`
     };
+    if (fundName !== "general fund") return [fundRow];
+    const detailRows = budgetGeneralFundRevenueBreakdownRows(fund, originalRevenue, revenue).map((account) => ({
+      weight: 0.85,
+      html: `<tr class="budget-detail-row">
+        <td class="budget-detail-label"><strong>${escapeHtml(account.accountName || "Revenue")}</strong></td>
+        <td>${money(budgetAmount(account.originalAmount))}</td>
+        <td>${money(budgetAmount(account.amount))}</td>
+      </tr>`
+    }));
+    return [fundRow, ...detailRows];
   });
   rows.push({
     weight: 1,
-    html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.originalRevenueTotal)}</strong></td><td><strong>${money(totals.revenueTotal)}</strong></td></tr>`
+    html: `<tr class="budget-subtract-row">
+      <td><strong>Less Interfund Transfers</strong></td>
+      <td>${money(-interfundTransfers.originalRevenueTotal)}</td>
+      <td>${money(-interfundTransfers.revenueTotal)}</td>
+    </tr>`
+  });
+  rows.push({
+    weight: 1,
+    html: `<tr class="grand-total-row"><td><strong>Grand Total</strong></td><td><strong>${money(totals.originalRevenueTotal - interfundTransfers.originalRevenueTotal)}</strong></td><td><strong>${money(totals.revenueTotal - interfundTransfers.revenueTotal)}</strong></td></tr>`
   });
   return commissionerPaginatedTablePages({
     title: "Budget Revenues Compared to 2026 Original",
     scenarioName,
-    header: "<tr><th>Fund</th><th>2026 Original Revenue Budget</th><th>2027 Revenue Projections</th></tr>",
+    header: "<tr><th>Fund / Revenue Source</th><th>2026 Original Revenue Budget</th><th>2027 Revenue Projections</th></tr>",
     rowItems: rows,
     className: "budget-briefing-table",
     firstPageWeight: 15,
     continuationPageWeight: 21
+  });
+}
+
+function budgetGeneralFundRevenueBreakdownRows(fund, originalRevenueTotal, revenueTotal) {
+  const selectedNames = [
+    "Ad Valorem Taxes",
+    "State Revenue Share Proceeds",
+    "Local Government 1/2 Cent Sales Tax",
+    "Short-Term Rental Certificate Fee",
+    "Indirect Administrative Fees",
+    "TDC Public Safety Reimbursements",
+    "Surplus Budget Tax Collector"
+  ];
+  const revenueAccounts = (Array.isArray(fund?.accounts) ? fund.accounts : [])
+    .filter((account) => account.type === "Revenue" && (budgetAmount(account.amount) || budgetAmount(account.originalAmount)))
+    .sort((a, b) => String(a.accountCode || "").localeCompare(String(b.accountCode || "")));
+  const selectedRows = selectedNames.map((name) => {
+    const matches = revenueAccounts.filter((account) => String(account.accountName || "").trim().toLowerCase() === name.toLowerCase());
+    return {
+      accountName: name,
+      originalAmount: matches.reduce((sum, account) => sum + budgetAmount(account.originalAmount), 0),
+      amount: matches.reduce((sum, account) => sum + budgetAmount(account.amount), 0)
+    };
+  });
+  const selectedOriginal = selectedRows.reduce((sum, account) => sum + budgetAmount(account.originalAmount), 0);
+  const selectedRevenue = selectedRows.reduce((sum, account) => sum + budgetAmount(account.amount), 0);
+  return selectedRows.concat({
+    accountName: "Remaining Revenue",
+    originalAmount: budgetAmount(originalRevenueTotal) - selectedOriginal,
+    amount: budgetAmount(revenueTotal) - selectedRevenue
   });
 }
 
@@ -4279,7 +4402,6 @@ function budgetConstitutionalOfficePages(scenarioName) {
     scenarioName,
     header: "<tr><th>Office / Function</th><th>Fund</th><th>2026 Original Budget</th><th>2027 Proposed Budget</th></tr>",
     rowItems: rows,
-    beforeContent: `<p class="budget-focus-note">This section summarizes constitutional office budgets as distinct countywide funding responsibilities.</p>`,
     className: "budget-briefing-table",
     firstPageWeight: 15,
     continuationPageWeight: 21
@@ -4293,6 +4415,13 @@ function budgetEntryControlCategory(entry) {
   return category.id === "capital-projects" ? "board-departments-programs" : category.id;
 }
 
+function budgetBoardProgramsHiddenEntry(entry) {
+  const fundName = String(entry?.fund?.fundName || entry?.fundLabel || "").trim().toLowerCase();
+  return fundName === "capital projects fund" ||
+    fundName === "recreation plat fee fund" ||
+    fundName === "sidewalk fund";
+}
+
 function budgetFundSortValue(entry) {
   const fundNumber = String(entry?.fund?.fundNumber || "").trim();
   const numericFund = Number(fundNumber);
@@ -4303,6 +4432,7 @@ function budgetGroupedControlRows(categoryId) {
   if (categoryId === "board-departments-programs") {
     return budgetDepartmentEntries()
       .filter((entry) => budgetEntryControlCategory(entry) === categoryId)
+      .filter((entry) => !budgetBoardProgramsHiddenEntry(entry))
       .map((entry) => ({
         department: entry.departmentName,
         funds: entry.fundLabel,
@@ -4406,40 +4536,24 @@ function budgetBoardSummaryPages(scenarioName) {
   });
 }
 
-function budgetDepartmentsByFundPages(scenarioName) {
-  const funds = budgetBriefingFunds().slice().sort((a, b) => budgetFundLabel(a).localeCompare(budgetFundLabel(b)));
-  const header = "<tr><th>Department</th><th>2026 Original Budget</th><th>2027 Proposed Budget</th></tr>";
+function budgetCapitalProjectDetailPages(scenarioName) {
+  const funds = budgetBriefingFunds()
+    .filter((fund) => String(fund?.fundName || "").trim().toLowerCase() === "capital projects fund");
   const pages = [];
   funds.forEach((fund, fundIndex) => {
-    const isCapitalProjectsFund = String(fund?.fundName || "").trim().toLowerCase() === "capital projects fund";
-    const tableHeader = isCapitalProjectsFund
-      ? "<tr><th>Project / Debt Service</th><th>2027 Proposed Budget</th></tr>"
-      : header;
+    const tableHeader = "<tr><th>Project / Debt Service</th><th>2027 Proposed Budget</th></tr>";
     const departmentRows = budgetDepartmentRowsForFund(fund);
-    const fundOriginalExpenseSubtotal = departmentRows.reduce((sum, row) => sum + budgetAmount(row.originalExpense), 0);
     const fundExpenseSubtotal = departmentRows.reduce((sum, row) => sum + budgetAmount(row.expense), 0);
     const rowItems = departmentRows.map((row) => ({
       weight: 1,
-      html: isCapitalProjectsFund
-        ? `<tr><td><strong>${escapeHtml(row.label || "Capital project")}</strong></td><td>${money(budgetAmount(row.expense))}</td></tr>`
-        : `<tr>
-          <td><strong>${escapeHtml(row.label || "Unassigned")}</strong></td>
-          <td>${money(budgetAmount(row.originalExpense))}</td>
-          <td>${money(budgetAmount(row.expense))}</td>
-        </tr>`
+      html: `<tr><td><strong>${escapeHtml(row.label || "Capital project")}</strong></td><td>${money(budgetAmount(row.expense))}</td></tr>`
     }));
-    const subtotal = isCapitalProjectsFund
-      ? `<tr class="grand-total-row"><td><strong>${escapeHtml(budgetFundLabel(fund))} Subtotal</strong></td><td><strong>${money(fundExpenseSubtotal)}</strong></td></tr>`
-      : `<tr class="grand-total-row">
-        <td><strong>${escapeHtml(budgetFundLabel(fund))} Subtotal</strong></td>
-        <td><strong>${money(fundOriginalExpenseSubtotal)}</strong></td>
-        <td><strong>${money(fundExpenseSubtotal)}</strong></td>
-      </tr>`;
+    const subtotal = `<tr class="grand-total-row"><td><strong>${escapeHtml(budgetFundLabel(fund))} Subtotal</strong></td><td><strong>${money(fundExpenseSubtotal)}</strong></td></tr>`;
     const chunks = commissionerChunkRows(rowItems, 17);
     chunks.forEach((chunk, chunkIndex) => {
       const isLastChunk = chunkIndex === chunks.length - 1;
       const fundLabel = budgetFundLabel(fund);
-      const title = fundIndex || chunkIndex ? `Departments by Fund - ${fundLabel}${chunkIndex ? " continued" : ""}` : "Departments by Fund";
+      const title = fundIndex || chunkIndex ? `Capital Projects - ${fundLabel}${chunkIndex ? " continued" : ""}` : "Capital Projects";
       const content = `<h2>${escapeHtml(title)}</h2>
         ${commissionerTableMarkup(tableHeader, chunk.map((item) => item.html).join("") + (isLastChunk ? subtotal : ""), "budget-briefing-table")}`;
       pages.push(commissionerReportPageMarkup(title, scenarioName, content));
@@ -4456,22 +4570,21 @@ function exportBudgetBriefingPdf() {
   }
   const report = window.open("", "_blank");
   if (!report) return;
-  const scenarioName = "Budget Briefing";
+  const scenarioName = "Fiscal Year 2027 Budget Briefing";
   const totals = budgetBriefingTotals(funds);
-  report.document.write(`<!doctype html><html><head><title>Walton County Budget Briefing</title><style>${budgetBriefingBaseStyles()}</style><style>${commissionerReportVisualStyles(scenarioName)}</style></head><body>
+  report.document.write(`<!doctype html><html><head><title>Walton County Fiscal Year 2027 Budget Briefing</title><style>${budgetBriefingBaseStyles()}</style><style>${commissionerReportVisualStyles(scenarioName)}</style></head><body>
     <section class="briefing-page cover-page">
       ${commissionerScenarioLabelMarkup(scenarioName)}
       ${commissionerSplitLogoMarkup()}
-      <h1 class="cover-title">Budget Briefing</h1>
-      <p class="cover-subtitle">Fiscal Year Budget Overview</p>
+      <h1 class="cover-title">Fiscal Year 2027 Budget Briefing</h1>
+      <p class="cover-subtitle">Budget Overview</p>
       <div class="cover-rule"></div>
     </section>
-    ${budgetFundOverviewPages(scenarioName)}
     ${budgetRevenueComparisonPages(scenarioName)}
     ${budgetConstitutionalOfficePages(scenarioName)}
     ${budgetControlSectionPages(scenarioName, "statutory-other-agency-funding", "Statutory & Other Agency Funding")}
     ${budgetControlSectionPages(scenarioName, "board-departments-programs", "Board Departments and Programs")}
-    ${budgetDepartmentsByFundPages(scenarioName)}
+    ${budgetCapitalProjectDetailPages(scenarioName)}
   </body></html>`);
   report.document.close();
   report.focus();
